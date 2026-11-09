@@ -44,7 +44,6 @@ for (const [i, g] of gangs.entries()) {
   if (!g.name) err(`${at}.name: required`);
   if (!g.color) err(`${at}.color: required`);
   else if (!/^#[0-9a-fA-F]{6}$/.test(g.color)) err(`${at}.color: expected #rrggbb, got "${g.color}"`);
-  if (!g.player) warn(`${at}.player: no player named yet (${g.name})`);
   if (!g.short) warn(`${at}.short: no short map label; the map will fall back to the house name (${g.name})`);
   if (g.rating != null && typeof g.rating !== 'number') err(`${at}.rating: must be a number`);
 }
