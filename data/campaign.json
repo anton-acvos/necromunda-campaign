@@ -7,52 +7,104 @@
     "cycle": 1,
     "phase": "Occupation",
     "lastUpdated": "2026-11-08",
-    "notice": "Cycle 1 is live. Claim territories before the first Downtime."
+    "notice": "Cycle 1 is live. Eight gangs, twenty-two holdings, fourteen of them still unclaimed."
   },
   "gangs": [
     {
-      "id": "goliath",
-      "name": "The Slag Sons",
+      "id": "sumptown",
+      "name": "Sumptown Brawlers",
+      "short": "Sumptown",
       "house": "House Goliath",
-      "player": "PLACEHOLDER",
+      "player": "",
       "color": "#d2652a",
       "rating": 1000,
       "credits": 0,
       "reputation": 1,
-      "motto": "Strength is the only law that holds."
+      "motto": ""
     },
     {
-      "id": "escher",
-      "name": "Daughters of the Vial",
+      "id": "chymist-cult",
+      "name": "'Sola Dosis' Chymist Cult",
+      "short": "Sola Dosis",
       "house": "House Escher",
-      "player": "PLACEHOLDER",
-      "color": "#5fbf6a",
+      "player": "",
+      "color": "#4fbd72",
       "rating": 1000,
       "credits": 0,
       "reputation": 1,
-      "motto": "Every breath you take is ours to end."
+      "motto": ""
     },
     {
-      "id": "vansaar",
-      "name": "The Ninth Iteration",
+      "id": "archeo-3",
+      "name": "Archeo-Acquisitions Team 3",
+      "short": "Archeo-3",
       "house": "House Van Saar",
-      "player": "PLACEHOLDER",
-      "color": "#3fa9c9",
+      "player": "",
+      "color": "#35a9c0",
       "rating": 1000,
       "credits": 0,
       "reputation": 1,
-      "motto": "The archeotech remembers. We merely obey."
+      "motto": ""
     },
     {
-      "id": "delaque",
-      "name": "The Quiet Ledger",
+      "id": "mycelium",
+      "name": "Mycelium Section",
+      "short": "Mycelium",
       "house": "House Delaque",
-      "player": "PLACEHOLDER",
-      "color": "#7a7fc4",
+      "player": "",
+      "color": "#a79ddb",
       "rating": 1000,
       "credits": 0,
       "reputation": 1,
-      "motto": "We already know."
+      "motto": ""
+    },
+    {
+      "id": "precinct-22",
+      "name": "Precinct 22",
+      "short": "Precinct 22",
+      "house": "Palanite Enforcers",
+      "player": "",
+      "color": "#4878d2",
+      "rating": 1000,
+      "credits": 0,
+      "reputation": 1,
+      "motto": ""
+    },
+    {
+      "id": "bjorn-prospectors",
+      "name": "Bjorn \"H.C.L.F\" Prospectors Group",
+      "short": "Bjorn H.C.L.F",
+      "house": "Ironhead Squats",
+      "player": "",
+      "color": "#dfae33",
+      "rating": 1000,
+      "credits": 0,
+      "reputation": 1,
+      "motto": ""
+    },
+    {
+      "id": "resource-extraction",
+      "name": "Resource Extraction LLC",
+      "short": "Resource Ext.",
+      "house": "Ironhead Squats",
+      "player": "",
+      "color": "#9bab3c",
+      "rating": 1000,
+      "credits": 0,
+      "reputation": 1,
+      "motto": ""
+    },
+    {
+      "id": "malstrain",
+      "name": "Malstrain Genestealers",
+      "short": "Malstrain",
+      "house": "Malstrain",
+      "player": "",
+      "color": "#c6529f",
+      "rating": 1000,
+      "credits": 0,
+      "reputation": 1,
+      "motto": ""
     }
   ],
   "territories": [
@@ -60,12 +112,18 @@
       "id": "sump-landing",
       "name": "Sump Landing",
       "type": "Settlement",
-      "owner": "goliath",
+      "owner": "sumptown",
       "income": "D6x10 credits",
       "boon": "Recruit one Juve free each Downtime",
       "contested": false,
-      "x": 200, "y": 95, "r": 78, "seed": 11,
-      "links": ["rustfall-row", "the-chokestack"],
+      "x": 180,
+      "y": 95,
+      "r": 70,
+      "seed": 11,
+      "links": [
+        "rustfall-row",
+        "the-chokestack"
+      ],
       "notes": "Where the sump barges tie up. Everything that enters the Reach passes through here first."
     },
     {
@@ -76,21 +134,35 @@
       "income": "D3x10 credits",
       "boon": "Search the ruins: one free Common item",
       "contested": true,
-      "x": 400, "y": 85, "r": 72, "seed": 23,
-      "links": ["sump-landing", "the-chokestack", "glass-dome"],
+      "x": 400,
+      "y": 95,
+      "r": 70,
+      "seed": 23,
+      "links": [
+        "sump-landing",
+        "glass-dome",
+        "the-pit-market"
+      ],
       "notes": "Collapsed habs stacked nine deep. The footing is a liability and the snipers know it."
     },
     {
       "id": "glass-dome",
       "name": "The Glass Dome",
       "type": "Water Still",
-      "owner": "escher",
+      "owner": "chymist-cult",
       "income": "D6x10 credits",
       "boon": "Clean water: ignore one Lasting Injury roll",
       "contested": false,
-      "x": 605, "y": 100, "r": 76, "seed": 37,
-      "links": ["rustfall-row", "vent-nine", "the-weeping-wall"],
-      "notes": "A cracked crystalflex dome. Condensation runs down the walls and someone is always collecting it."
+      "x": 620,
+      "y": 95,
+      "r": 70,
+      "seed": 37,
+      "links": [
+        "rustfall-row",
+        "vent-nine",
+        "coil-gardens"
+      ],
+      "notes": "A cracked crystalflex dome. Condensation runs down the walls and the Chymists collect every drop."
     },
     {
       "id": "vent-nine",
@@ -100,44 +172,92 @@
       "income": "D3x10 credits",
       "boon": "Infiltrate: one fighter deploys hidden",
       "contested": false,
-      "x": 805, "y": 110, "r": 70, "seed": 41,
-      "links": ["glass-dome", "the-weeping-wall", "cinder-yard"],
+      "x": 840,
+      "y": 95,
+      "r": 70,
+      "seed": 41,
+      "links": [
+        "glass-dome",
+        "the-brass-gallery",
+        "the-weeping-wall"
+      ],
       "notes": "The up-hive draught comes through here. So does anything that wants in quietly."
+    },
+    {
+      "id": "the-brass-gallery",
+      "name": "The Brass Gallery",
+      "type": "Archeotech Vault",
+      "owner": "archeo-3",
+      "income": "D6x10 credits",
+      "boon": "Rare trade roll at +1 when buying archeotech",
+      "contested": false,
+      "x": 1040,
+      "y": 95,
+      "r": 70,
+      "seed": 157,
+      "links": [
+        "vent-nine",
+        "grudgehold"
+      ],
+      "notes": "Three hundred metres of sealed brass doors. Team 3 has opened eleven of them and will not discuss the twelfth."
     },
     {
       "id": "the-chokestack",
       "name": "The Chokestack",
       "type": "Slag Furnace",
-      "owner": "goliath",
+      "owner": null,
       "income": "D6x10 credits",
       "boon": "Free Brute hire this cycle",
       "contested": false,
-      "x": 95, "y": 255, "r": 74, "seed": 53,
-      "links": ["sump-landing", "rustfall-row", "the-pit-market"],
+      "x": 95,
+      "y": 255,
+      "r": 70,
+      "seed": 53,
+      "links": [
+        "sump-landing",
+        "the-pit-market",
+        "sunken-nave"
+      ],
       "notes": "Furnace still runs. Nobody admits to lighting it and nobody dares let it go out."
     },
     {
       "id": "the-pit-market",
       "name": "The Pit Market",
       "type": "Trading Post",
-      "owner": null,
+      "owner": "precinct-22",
       "income": "D6x10 credits",
       "boon": "Rare trade roll at +2",
-      "contested": true,
-      "x": 290, "y": 270, "r": 80, "seed": 67,
-      "links": ["the-chokestack", "coil-gardens", "sunken-nave"],
-      "notes": "Neutral ground by long tradition. Tradition here lasts about as long as the next grudge."
+      "contested": false,
+      "x": 300,
+      "y": 255,
+      "r": 70,
+      "seed": 67,
+      "links": [
+        "rustfall-row",
+        "the-chokestack",
+        "coil-gardens",
+        "the-wire-yard"
+      ],
+      "notes": "Neutral ground by long tradition. Precinct 22 enforces that tradition at gunpoint, which everyone agrees is novel."
     },
     {
       "id": "coil-gardens",
       "name": "The Coil Gardens",
       "type": "Promethium Cache",
-      "owner": "vansaar",
+      "owner": null,
       "income": "D6x10 credits",
       "boon": "One free flamer-class weapon",
       "contested": false,
-      "x": 490, "y": 255, "r": 73, "seed": 79,
-      "links": ["the-pit-market", "the-weeping-wall", "sunken-nave", "black-ledger"],
+      "x": 510,
+      "y": 255,
+      "r": 70,
+      "seed": 79,
+      "links": [
+        "glass-dome",
+        "the-pit-market",
+        "the-weeping-wall",
+        "black-ledger"
+      ],
       "notes": "Pipework grown into a thicket. Van Saar say they understand it. They do not."
     },
     {
@@ -148,8 +268,16 @@
       "income": "D3x10 credits",
       "boon": "Defender gains one extra barricade",
       "contested": false,
-      "x": 690, "y": 265, "r": 71, "seed": 83,
-      "links": ["glass-dome", "vent-nine", "coil-gardens", "cinder-yard", "the-long-drop"],
+      "x": 720,
+      "y": 255,
+      "r": 70,
+      "seed": 83,
+      "links": [
+        "vent-nine",
+        "coil-gardens",
+        "cinder-yard",
+        "the-long-drop"
+      ],
       "notes": "Groundwater bleeds through the rockcrete in sheets. The sound carries for a kilometre."
     },
     {
@@ -158,23 +286,76 @@
       "type": "Mine Workings",
       "owner": null,
       "income": "D6x10 credits",
-      "boon": "Extra D6x10 credits if held two cycles",
+      "boon": "Extra D6x10 credits if held two cycles running",
       "contested": false,
-      "x": 880, "y": 280, "r": 72, "seed": 97,
-      "links": ["vent-nine", "the-weeping-wall", "the-long-drop"],
+      "x": 930,
+      "y": 255,
+      "r": 70,
+      "seed": 97,
+      "links": [
+        "the-weeping-wall",
+        "grudgehold",
+        "scrap-shoals"
+      ],
       "notes": "Ash heaps that shift without warning. Three gangs are still down there somewhere."
+    },
+    {
+      "id": "grudgehold",
+      "name": "Grudgehold",
+      "type": "Fortified Hold",
+      "owner": "bjorn-prospectors",
+      "income": "D3x10 credits",
+      "boon": "Defender deploys one free fortification",
+      "contested": false,
+      "x": 1115,
+      "y": 255,
+      "r": 70,
+      "seed": 163,
+      "links": [
+        "the-brass-gallery",
+        "cinder-yard",
+        "the-stilt-rows"
+      ],
+      "notes": "Cut into the rock and ledgered to the last slate. The Prospectors did not ask whose rock it was."
     },
     {
       "id": "sunken-nave",
       "name": "The Sunken Nave",
       "type": "Shrine",
-      "owner": "delaque",
+      "owner": "mycelium",
       "income": "D3x10 credits",
       "boon": "Reroll one Leadership test per battle",
       "contested": false,
-      "x": 185, "y": 430, "r": 75, "seed": 103,
-      "links": ["the-pit-market", "coil-gardens", "ratgut-tunnels"],
+      "x": 140,
+      "y": 425,
+      "r": 70,
+      "seed": 103,
+      "links": [
+        "the-chokestack",
+        "the-wire-yard",
+        "ratgut-tunnels"
+      ],
       "notes": "Cawdor built it, something else kept it. The candles are always lit and nobody sees who."
+    },
+    {
+      "id": "the-wire-yard",
+      "name": "The Wire Yard",
+      "type": "Workshop",
+      "owner": null,
+      "income": "D6x10 credits",
+      "boon": "One free weapon upgrade each Downtime",
+      "contested": false,
+      "x": 350,
+      "y": 425,
+      "r": 70,
+      "seed": 167,
+      "links": [
+        "the-pit-market",
+        "sunken-nave",
+        "black-ledger",
+        "the-bonepipe"
+      ],
+      "notes": "Spools of cable taller than a Goliath. Whoever untangles it first gets rich or gets cut in half."
     },
     {
       "id": "black-ledger",
@@ -184,8 +365,16 @@
       "income": "D6x10 credits",
       "boon": "Wager credits before a battle",
       "contested": false,
-      "x": 395, "y": 445, "r": 70, "seed": 109,
-      "links": ["coil-gardens", "ratgut-tunnels", "the-bonepipe"],
+      "x": 560,
+      "y": 425,
+      "r": 70,
+      "seed": 109,
+      "links": [
+        "coil-gardens",
+        "the-wire-yard",
+        "the-long-drop",
+        "the-bonepipe"
+      ],
       "notes": "Debts here are recorded in a real book. People have died trying to edit it."
     },
     {
@@ -194,11 +383,58 @@
       "type": "Toll Crossing",
       "owner": null,
       "income": "D6x10 credits",
-      "boon": "Charge 20 credits toll per rival battle",
-      "contested": false,
-      "x": 760, "y": 435, "r": 74, "seed": 127,
-      "links": ["cinder-yard", "the-bonepipe", "the-weeping-wall"],
+      "boon": "Charge a 20 credit toll per rival battle",
+      "contested": true,
+      "x": 775,
+      "y": 425,
+      "r": 70,
+      "seed": 127,
+      "links": [
+        "the-weeping-wall",
+        "black-ledger",
+        "scrap-shoals",
+        "corpse-farm"
+      ],
       "notes": "One gantry across a shaft of unknown depth. Whoever holds the near end holds the Reach."
+    },
+    {
+      "id": "scrap-shoals",
+      "name": "The Scrap Shoals",
+      "type": "Mine Workings",
+      "owner": "resource-extraction",
+      "income": "D6x10 credits",
+      "boon": "Sell scrap: +D3x10 credits each Downtime",
+      "contested": false,
+      "x": 985,
+      "y": 425,
+      "r": 70,
+      "seed": 173,
+      "links": [
+        "cinder-yard",
+        "the-long-drop",
+        "the-stilt-rows",
+        "the-drowned-stair"
+      ],
+      "notes": "Quarterly extraction targets are posted at the entrance. Somebody has been correcting them in blood."
+    },
+    {
+      "id": "the-stilt-rows",
+      "name": "The Stilt Rows",
+      "type": "Settlement",
+      "owner": null,
+      "income": "D6x10 credits",
+      "boon": "Recruit one Ganger at half cost each Downtime",
+      "contested": false,
+      "x": 1140,
+      "y": 425,
+      "r": 70,
+      "seed": 179,
+      "links": [
+        "grudgehold",
+        "scrap-shoals",
+        "holestead"
+      ],
+      "notes": "Habs on girders over the sump. The lowest row floods twice a cycle and is let cheap."
     },
     {
       "id": "ratgut-tunnels",
@@ -206,23 +442,56 @@
       "type": "Tunnels",
       "owner": null,
       "income": "D3x10 credits",
-      "boon": "Move between held territories freely",
+      "boon": "Move freely between territories you hold",
       "contested": false,
-      "x": 285, "y": 595, "r": 72, "seed": 131,
-      "links": ["sunken-nave", "black-ledger", "the-drowned-stair"],
-      "notes": "Not mapped, not mappable. The Delaque claim otherwise and charge for guides."
+      "x": 250,
+      "y": 600,
+      "r": 70,
+      "seed": 131,
+      "links": [
+        "sunken-nave",
+        "the-bonepipe"
+      ],
+      "notes": "Not mapped, not mappable. Mycelium Section claims otherwise and charges for guides."
     },
     {
       "id": "the-bonepipe",
       "name": "The Bonepipe",
       "type": "Rogue Doc",
-      "owner": "delaque",
+      "owner": null,
       "income": "D3x10 credits",
       "boon": "One free medical escort each Downtime",
       "contested": false,
-      "x": 490, "y": 610, "r": 71, "seed": 137,
-      "links": ["black-ledger", "the-long-drop", "the-drowned-stair"],
+      "x": 470,
+      "y": 600,
+      "r": 70,
+      "seed": 137,
+      "links": [
+        "the-wire-yard",
+        "black-ledger",
+        "ratgut-tunnels",
+        "corpse-farm"
+      ],
       "notes": "The doc is good. The doc is also the reason several gangers answer to new names."
+    },
+    {
+      "id": "corpse-farm",
+      "name": "The Corpse Farm",
+      "type": "Corpse Farm",
+      "owner": "malstrain",
+      "income": "D6x10 credits",
+      "boon": "Sell the dead: +10 credits per fighter taken out of action",
+      "contested": false,
+      "x": 690,
+      "y": 600,
+      "r": 70,
+      "seed": 181,
+      "links": [
+        "the-long-drop",
+        "the-bonepipe",
+        "the-drowned-stair"
+      ],
+      "notes": "Production is up. Nobody who audits the Farm comes back to file the report."
     },
     {
       "id": "the-drowned-stair",
@@ -232,9 +501,34 @@
       "income": "D3x10 credits",
       "boon": "Scavenge: D3 free Common items",
       "contested": false,
-      "x": 700, "y": 615, "r": 73, "seed": 149,
-      "links": ["ratgut-tunnels", "the-bonepipe"],
+      "x": 900,
+      "y": 600,
+      "r": 70,
+      "seed": 149,
+      "links": [
+        "scrap-shoals",
+        "corpse-farm",
+        "holestead"
+      ],
       "notes": "The stairs go down into the sump and keep going. Low tide reveals about forty more steps."
+    },
+    {
+      "id": "holestead",
+      "name": "Holestead",
+      "type": "Settlement",
+      "owner": null,
+      "income": "D6x10 credits",
+      "boon": "Hangers-on cost 20 credits less",
+      "contested": false,
+      "x": 1090,
+      "y": 600,
+      "r": 70,
+      "seed": 191,
+      "links": [
+        "the-stilt-rows",
+        "the-drowned-stair"
+      ],
+      "notes": "A dug-out hab cluster at the far edge. Everyone here is from somewhere else and says so often."
     }
   ],
   "battles": [
@@ -242,7 +536,10 @@
       "date": "2026-11-08",
       "scenario": "Stake a Claim",
       "territory": "rustfall-row",
-      "participants": ["goliath", "escher"],
+      "participants": [
+        "sumptown",
+        "chymist-cult"
+      ],
       "winner": null,
       "summary": "Opening skirmish over Rustfall Row ended with both gangs withdrawing. The Row stays contested."
     }

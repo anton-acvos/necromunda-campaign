@@ -125,7 +125,7 @@
 
       labels.appendChild(el('text', { x: t.x, y: t.y - 2, class: 'zone-name' }, t.name));
       labels.appendChild(el('text', { x: t.x, y: t.y + 15, class: 'zone-owner' },
-        g ? g.house.replace(/^House /, '') : 'unclaimed'));
+        g ? (g.short || g.house.replace(/^House /, '')) : 'unclaimed'));
     });
   }
 
@@ -189,7 +189,8 @@
     if (g) {
       var names = h('div');
       names.appendChild(h('div', 'owner-name', g.name));
-      names.appendChild(h('div', 'owner-house', g.house + (g.player && g.player !== 'PLACEHOLDER' ? ' · ' + g.player : '')));
+      names.appendChild(h('div', 'owner-house', g.house + (g.player ? ' · ' + g.player : '')));
+      if (g.motto) names.appendChild(h('div', 'owner-motto', '“' + g.motto + '”'));
       bar.appendChild(names);
     } else {
       bar.appendChild(h('div', 'owner-name', 'Unclaimed'));
@@ -259,7 +260,7 @@
       cell.appendChild(sw);
       var stack = h('div');
       stack.appendChild(h('div', 'gang-name', g.name));
-      if (g.player && g.player !== 'PLACEHOLDER') stack.appendChild(h('div', 'gang-player', g.player));
+      if (g.player) stack.appendChild(h('div', 'gang-player', g.player));
       cell.appendChild(stack);
       td1.appendChild(cell);
       tr.appendChild(td1);
