@@ -299,8 +299,8 @@
       ],
       "discoveredBy": "bjorn-prospectors",
       "contested": false,
-      "x": 692.64,
-      "y": 318.79,
+      "x": 829.42,
+      "y": 343.4,
       "notes": "Found by Ironhead prospectors. Two companies have filed property rights over the shaft, neither claim struck out. Nobody has gone past the first chamber."
     }
   ],
@@ -401,10 +401,6 @@
         [
           829.42,
           343.4
-        ],
-        [
-          692.64,
-          318.79
         ]
       ],
       "notes": "A collapsed transit shaft walked end to end only twice. It comes out at the shaft both Ironhead companies have filed on."
@@ -881,12 +877,12 @@
       "boon": "Defender deploys one free fortification",
       "contested": false,
       "bordersInner": true,
-      "labelX": 785.81,
-      "labelY": 198.16,
+      "labelX": 785.17,
+      "labelY": 201.59,
       "polygon": [
         [
-          697.24,
-          303.36
+          698.49,
+          313.24
         ],
         [
           671.81,
@@ -901,13 +897,11 @@
           147.75
         ],
         [
-          830.55,
-          327.35
+          825.89,
+          336.16
         ]
       ],
-      "tunnels": [
-        "the-deadfall"
-      ],
+      "tunnels": [],
       "links": [
         "cinder-yard",
         "holestead",
@@ -1699,20 +1693,20 @@
       "income": null,
       "boon": null,
       "contested": false,
-      "labelX": 742.56,
-      "labelY": 421.21,
+      "labelX": 743,
+      "labelY": 417.9,
       "polygon": [
         [
           633.06,
           383.06
         ],
         [
-          685.99,
-          333.85
+          694.69,
+          325.76
         ],
         [
-          818.42,
-          357.68
+          813.51,
+          347.14
         ],
         [
           852.56,

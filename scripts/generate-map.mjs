@@ -454,15 +454,26 @@ const tunnels = TUNNEL_ROUTES.map((route) => {
   ];
   const startKey = nearestVert(graphVerts, outward);
 
-  /* the far end sits on the deep's border, out in the direction of the
-     territories the way in was found from */
-  let tx = 0, ty = 0;
-  for (const id of route.toward) { tx += seedOf(id).p[0]; ty += seedOf(id).p[1]; }
-  tx /= route.toward.length; ty /= route.toward.length;
-  const bearing = Math.atan2(ty - CY, tx - CX);
-  const aim = [CX + Math.cos(bearing) * 1e4, CY + Math.sin(bearing) * 1e4];
+  /* The far end sits on the deep's border. Where a way in was found from two
+     territories at once, it comes out on the corner they share, so the mouth
+     sits between them rather than off to one side of both. */
   const reachableDeep = new Set([...deepVerts].filter((k) => graph.has(k)));
-  const goalKey = nearestVert(reachableDeep.size ? reachableDeep : deepVerts, aim);
+  const pool = reachableDeep.size ? reachableDeep : deepVerts;
+  let aim;
+  if (route.toward.length > 1) {
+    const sets = route.toward.map((id) => new Set(seedOf(id).cell.map(ptKey)));
+    const shared = [...sets[0]].filter((k) => sets.every((set) => set.has(k)));
+    const corner = shared.find((k) => deepVerts.has(k)) ?? shared[0];
+    if (!corner) throw new Error(`"${route.id}": ${route.toward.join(" and ")} share no corner`);
+    aim = ptOf.get(corner);
+  } else {
+    let tx = 0, ty = 0;
+    for (const id of route.toward) { tx += seedOf(id).p[0]; ty += seedOf(id).p[1]; }
+    tx /= route.toward.length; ty /= route.toward.length;
+    const bearing = Math.atan2(ty - CY, tx - CX);
+    aim = [CX + Math.cos(bearing) * 1e4, CY + Math.sin(bearing) * 1e4];
+  }
+  const goalKey = nearestVert(pool, aim);
 
   const path = shortestPath(startKey, goalKey);
   if (!path) throw new Error(`no route for tunnel "${route.id}"`);
