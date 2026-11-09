@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Hollow Reach</title>
+<meta name="description" content="Interactive territory map for our Necromunda N26 campaign.">
+<meta property="og:title" content="The Hollow Reach — Underhive Campaign Map">
+<meta property="og:description" content="Live territory holdings, gang standings and battle log for Sector 7-Gamma.">
+<meta property="og:type" content="website">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%231a1613'/%3E%3Cpath d='M6 24l5-14 5 9 4-6 6 11z' fill='%23d2652a'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+
+<header class="topbar">
+  <div class="topbar-main">
+    <h1 id="campaign-name">The Hollow Reach</h1>
+    <p id="campaign-sector" class="sector"></p>
+  </div>
+  <div class="topbar-meta">
+    <div class="chip"><span class="chip-label">Cycle</span><strong id="meta-cycle">—</strong></div>
+    <div class="chip"><span class="chip-label">Phase</span><strong id="meta-phase">—</strong></div>
+    <div class="chip"><span class="chip-label">Edition</span><strong id="meta-edition">—</strong></div>
+    <div class="chip"><span class="chip-label">Updated</span><strong id="meta-updated">—</strong></div>
+  </div>
+</header>
+
+<p id="notice" class="notice" hidden></p>
+
+<main class="layout">
+
+  <section class="map-panel" aria-label="Sector map">
+    <svg id="map" viewBox="0 0 980 710" role="img" aria-labelledby="map-title">
+      <title id="map-title">Territory map of the campaign sector</title>
+      <defs>
+        <pattern id="hatch-contested" width="8" height="8" patternTransform="rotate(45)" patternUnits="userSpaceOnUse">
+          <rect width="8" height="8" fill="transparent"></rect>
+          <line x1="0" y1="0" x2="0" y2="8" stroke="#f0d060" stroke-width="3" opacity="0.5"></line>
+        </pattern>
+        <filter id="glow" x="-40%" y="-40%" width="180%" height="180%">
+          <feGaussianBlur stdDeviation="6" result="b"></feGaussianBlur>
+          <feMerge><feMergeNode in="b"></feMergeNode><feMergeNode in="SourceGraphic"></feMergeNode></feMerge>
+        </filter>
+      </defs>
+      <g id="layer-links"></g>
+      <g id="layer-zones"></g>
+      <g id="layer-labels"></g>
+    </svg>
+
+    <ul id="legend" class="legend"></ul>
+  </section>
+
+  <aside class="side">
+
+    <section id="detail" class="card detail" aria-live="polite">
+      <p class="detail-empty">Select a territory on the map.</p>
+    </section>
+
+    <section class="card">
+      <h2>Standings</h2>
+      <table class="standings">
+        <thead>
+          <tr><th>Gang</th><th class="num">Terr.</th><th class="num">Rating</th><th class="num">Rep</th></tr>
+        </thead>
+        <tbody id="standings-body"></tbody>
+      </table>
+      <p class="hint" id="neutral-count"></p>
+    </section>
+
+    <section class="card">
+      <h2>Battle Log</h2>
+      <ol id="battle-log" class="battle-log"></ol>
+    </section>
+
+  </aside>
+</main>
+
+<footer class="foot">
+  <span id="foot-arbitrator"></span>
+  <span class="dot">·</span>
+  <span>Data: <code>data/campaign.json</code></span>
+  <span class="dot">·</span>
+  <span>Link a territory by adding <code>#territory-id</code> to the URL</span>
+</footer>
+
+<script src="assets/app.js"></script>
+</body>
+</html>

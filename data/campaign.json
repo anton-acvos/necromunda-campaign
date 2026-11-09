@@ -1,0 +1,250 @@
+{
+  "campaign": {
+    "name": "The Hollow Reach",
+    "sector": "Sector 7-Gamma, Hive Primus",
+    "edition": "N26",
+    "arbitrator": "Anton",
+    "cycle": 1,
+    "phase": "Occupation",
+    "lastUpdated": "2026-11-08",
+    "notice": "Cycle 1 is live. Claim territories before the first Downtime."
+  },
+  "gangs": [
+    {
+      "id": "goliath",
+      "name": "The Slag Sons",
+      "house": "House Goliath",
+      "player": "PLACEHOLDER",
+      "color": "#d2652a",
+      "rating": 1000,
+      "credits": 0,
+      "reputation": 1,
+      "motto": "Strength is the only law that holds."
+    },
+    {
+      "id": "escher",
+      "name": "Daughters of the Vial",
+      "house": "House Escher",
+      "player": "PLACEHOLDER",
+      "color": "#5fbf6a",
+      "rating": 1000,
+      "credits": 0,
+      "reputation": 1,
+      "motto": "Every breath you take is ours to end."
+    },
+    {
+      "id": "vansaar",
+      "name": "The Ninth Iteration",
+      "house": "House Van Saar",
+      "player": "PLACEHOLDER",
+      "color": "#3fa9c9",
+      "rating": 1000,
+      "credits": 0,
+      "reputation": 1,
+      "motto": "The archeotech remembers. We merely obey."
+    },
+    {
+      "id": "delaque",
+      "name": "The Quiet Ledger",
+      "house": "House Delaque",
+      "player": "PLACEHOLDER",
+      "color": "#7a7fc4",
+      "rating": 1000,
+      "credits": 0,
+      "reputation": 1,
+      "motto": "We already know."
+    }
+  ],
+  "territories": [
+    {
+      "id": "sump-landing",
+      "name": "Sump Landing",
+      "type": "Settlement",
+      "owner": "goliath",
+      "income": "D6x10 credits",
+      "boon": "Recruit one Juve free each Downtime",
+      "contested": false,
+      "x": 200, "y": 95, "r": 78, "seed": 11,
+      "links": ["rustfall-row", "the-chokestack"],
+      "notes": "Where the sump barges tie up. Everything that enters the Reach passes through here first."
+    },
+    {
+      "id": "rustfall-row",
+      "name": "Rustfall Row",
+      "type": "Old Ruins",
+      "owner": null,
+      "income": "D3x10 credits",
+      "boon": "Search the ruins: one free Common item",
+      "contested": true,
+      "x": 400, "y": 85, "r": 72, "seed": 23,
+      "links": ["sump-landing", "the-chokestack", "glass-dome"],
+      "notes": "Collapsed habs stacked nine deep. The footing is a liability and the snipers know it."
+    },
+    {
+      "id": "glass-dome",
+      "name": "The Glass Dome",
+      "type": "Water Still",
+      "owner": "escher",
+      "income": "D6x10 credits",
+      "boon": "Clean water: ignore one Lasting Injury roll",
+      "contested": false,
+      "x": 605, "y": 100, "r": 76, "seed": 37,
+      "links": ["rustfall-row", "vent-nine", "the-weeping-wall"],
+      "notes": "A cracked crystalflex dome. Condensation runs down the walls and someone is always collecting it."
+    },
+    {
+      "id": "vent-nine",
+      "name": "Vent Nine",
+      "type": "Vents",
+      "owner": null,
+      "income": "D3x10 credits",
+      "boon": "Infiltrate: one fighter deploys hidden",
+      "contested": false,
+      "x": 805, "y": 110, "r": 70, "seed": 41,
+      "links": ["glass-dome", "the-weeping-wall", "cinder-yard"],
+      "notes": "The up-hive draught comes through here. So does anything that wants in quietly."
+    },
+    {
+      "id": "the-chokestack",
+      "name": "The Chokestack",
+      "type": "Slag Furnace",
+      "owner": "goliath",
+      "income": "D6x10 credits",
+      "boon": "Free Brute hire this cycle",
+      "contested": false,
+      "x": 95, "y": 255, "r": 74, "seed": 53,
+      "links": ["sump-landing", "rustfall-row", "the-pit-market"],
+      "notes": "Furnace still runs. Nobody admits to lighting it and nobody dares let it go out."
+    },
+    {
+      "id": "the-pit-market",
+      "name": "The Pit Market",
+      "type": "Trading Post",
+      "owner": null,
+      "income": "D6x10 credits",
+      "boon": "Rare trade roll at +2",
+      "contested": true,
+      "x": 290, "y": 270, "r": 80, "seed": 67,
+      "links": ["the-chokestack", "coil-gardens", "sunken-nave"],
+      "notes": "Neutral ground by long tradition. Tradition here lasts about as long as the next grudge."
+    },
+    {
+      "id": "coil-gardens",
+      "name": "The Coil Gardens",
+      "type": "Promethium Cache",
+      "owner": "vansaar",
+      "income": "D6x10 credits",
+      "boon": "One free flamer-class weapon",
+      "contested": false,
+      "x": 490, "y": 255, "r": 73, "seed": 79,
+      "links": ["the-pit-market", "the-weeping-wall", "sunken-nave", "black-ledger"],
+      "notes": "Pipework grown into a thicket. Van Saar say they understand it. They do not."
+    },
+    {
+      "id": "the-weeping-wall",
+      "name": "The Weeping Wall",
+      "type": "Collapsed Dome",
+      "owner": null,
+      "income": "D3x10 credits",
+      "boon": "Defender gains one extra barricade",
+      "contested": false,
+      "x": 690, "y": 265, "r": 71, "seed": 83,
+      "links": ["glass-dome", "vent-nine", "coil-gardens", "cinder-yard", "the-long-drop"],
+      "notes": "Groundwater bleeds through the rockcrete in sheets. The sound carries for a kilometre."
+    },
+    {
+      "id": "cinder-yard",
+      "name": "Cinder Yard",
+      "type": "Mine Workings",
+      "owner": null,
+      "income": "D6x10 credits",
+      "boon": "Extra D6x10 credits if held two cycles",
+      "contested": false,
+      "x": 880, "y": 280, "r": 72, "seed": 97,
+      "links": ["vent-nine", "the-weeping-wall", "the-long-drop"],
+      "notes": "Ash heaps that shift without warning. Three gangs are still down there somewhere."
+    },
+    {
+      "id": "sunken-nave",
+      "name": "The Sunken Nave",
+      "type": "Shrine",
+      "owner": "delaque",
+      "income": "D3x10 credits",
+      "boon": "Reroll one Leadership test per battle",
+      "contested": false,
+      "x": 185, "y": 430, "r": 75, "seed": 103,
+      "links": ["the-pit-market", "coil-gardens", "ratgut-tunnels"],
+      "notes": "Cawdor built it, something else kept it. The candles are always lit and nobody sees who."
+    },
+    {
+      "id": "black-ledger",
+      "name": "The Black Ledger",
+      "type": "Gambling Den",
+      "owner": null,
+      "income": "D6x10 credits",
+      "boon": "Wager credits before a battle",
+      "contested": false,
+      "x": 395, "y": 445, "r": 70, "seed": 109,
+      "links": ["coil-gardens", "ratgut-tunnels", "the-bonepipe"],
+      "notes": "Debts here are recorded in a real book. People have died trying to edit it."
+    },
+    {
+      "id": "the-long-drop",
+      "name": "The Long Drop",
+      "type": "Toll Crossing",
+      "owner": null,
+      "income": "D6x10 credits",
+      "boon": "Charge 20 credits toll per rival battle",
+      "contested": false,
+      "x": 760, "y": 435, "r": 74, "seed": 127,
+      "links": ["cinder-yard", "the-bonepipe", "the-weeping-wall"],
+      "notes": "One gantry across a shaft of unknown depth. Whoever holds the near end holds the Reach."
+    },
+    {
+      "id": "ratgut-tunnels",
+      "name": "Ratgut Tunnels",
+      "type": "Tunnels",
+      "owner": null,
+      "income": "D3x10 credits",
+      "boon": "Move between held territories freely",
+      "contested": false,
+      "x": 285, "y": 595, "r": 72, "seed": 131,
+      "links": ["sunken-nave", "black-ledger", "the-drowned-stair"],
+      "notes": "Not mapped, not mappable. The Delaque claim otherwise and charge for guides."
+    },
+    {
+      "id": "the-bonepipe",
+      "name": "The Bonepipe",
+      "type": "Rogue Doc",
+      "owner": "delaque",
+      "income": "D3x10 credits",
+      "boon": "One free medical escort each Downtime",
+      "contested": false,
+      "x": 490, "y": 610, "r": 71, "seed": 137,
+      "links": ["black-ledger", "the-long-drop", "the-drowned-stair"],
+      "notes": "The doc is good. The doc is also the reason several gangers answer to new names."
+    },
+    {
+      "id": "the-drowned-stair",
+      "name": "The Drowned Stair",
+      "type": "Sump Sea Edge",
+      "owner": null,
+      "income": "D3x10 credits",
+      "boon": "Scavenge: D3 free Common items",
+      "contested": false,
+      "x": 700, "y": 615, "r": 73, "seed": 149,
+      "links": ["ratgut-tunnels", "the-bonepipe"],
+      "notes": "The stairs go down into the sump and keep going. Low tide reveals about forty more steps."
+    }
+  ],
+  "battles": [
+    {
+      "date": "2026-11-08",
+      "scenario": "Stake a Claim",
+      "territory": "rustfall-row",
+      "participants": ["goliath", "escher"],
+      "winner": null,
+      "summary": "Opening skirmish over Rustfall Row ended with both gangs withdrawing. The Row stays contested."
+    }
+  ]
+}

@@ -1,0 +1,53 @@
+name: Campaign
+
+on:
+  push:
+    branches: ["**"]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    name: Validate campaign data
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+      - name: Validate data/campaign.json
+        run: node scripts/validate.mjs
+
+  notify:
+    name: Announce changes in Discord
+    needs: validate
+    # Only the default branch is canon, so only it announces.
+    if: github.ref == format('refs/heads/{0}', github.event.repository.default_branch) && github.event_name == 'push'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Capture previous campaign state
+        run: |
+          mkdir -p /tmp/prev
+          if git rev-parse HEAD~1 >/dev/null 2>&1 \
+             && git cat-file -e HEAD~1:data/campaign.json 2>/dev/null; then
+            git show HEAD~1:data/campaign.json > /tmp/prev/campaign.json
+          else
+            echo "No previous version of campaign.json; treating this as the first run."
+          fi
+
+      - name: Post changes to Discord
+        env:
+          DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
+          SITE_URL: ${{ vars.SITE_URL }}
+        run: node scripts/discord-notify.mjs /tmp/prev/campaign.json data/campaign.json
