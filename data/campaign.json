@@ -599,22 +599,22 @@
       ],
       "links": [
         "coil-gardens",
-        "glass-dome",
+        "precinct-house-22",
         "rustfall-row",
         "sumptown"
       ],
       "notes": "The furnace still runs. Nobody admits to lighting it and nobody dares let it go out."
     },
     {
-      "id": "glass-dome",
-      "name": "The Glass Dome",
+      "id": "precinct-house-22",
+      "name": "Precinct House 22",
       "section": "outer",
       "ring": "rim",
       "type": "Settlement",
       "settlement": true,
-      "owner": "chymist-cult",
+      "owner": "precinct-22",
       "income": "D6x10 credits",
-      "boon": "Clean water: ignore one Lasting Injury roll",
+      "boon": "One free Palanite patrol escort each Downtime",
       "contested": false,
       "bordersInner": false,
       "labelX": 1323.33,
@@ -660,20 +660,20 @@
       "links": [
         "coil-gardens",
         "the-chokestack",
-        "the-still-rows"
+        "the-pit-market"
       ],
-      "notes": "A cracked crystalflex dome over a working still. The Chymists moved in and the water got stranger."
+      "notes": "Built to hold two hundred. Currently holds nineteen, a vox relay and a great deal of institutional stubbornness."
     },
     {
-      "id": "the-still-rows",
-      "name": "The Still Rows",
+      "id": "the-pit-market",
+      "name": "The Pit Market",
       "section": "outer",
       "ring": "rim",
-      "type": "Chem Works",
+      "type": "Trading Post",
       "settlement": false,
-      "owner": "chymist-cult",
+      "owner": "precinct-22",
       "income": "D6x10 credits",
-      "boon": "One free chem or toxin weapon upgrade",
+      "boon": "Rare trade roll at +2",
       "contested": false,
       "bordersInner": false,
       "labelX": 1456.9,
@@ -722,11 +722,11 @@
       ],
       "links": [
         "coil-gardens",
-        "glass-dome",
+        "precinct-house-22",
         "relay-theta",
         "vent-nine"
       ],
-      "notes": "Condensers in rows the length of a dome. Sola Dosis insists the fumes are therapeutic."
+      "notes": "Neutral ground by long tradition. Precinct 22 enforces that tradition at gunpoint, which everyone agrees is novel."
     },
     {
       "id": "relay-theta",
@@ -786,7 +786,7 @@
       ],
       "links": [
         "the-brass-gallery",
-        "the-still-rows",
+        "the-pit-market",
         "vent-nine"
       ],
       "notes": "The Tech-Acquisitor party staged out of Theta. Their last transmission was a set of coordinates and nothing else."
@@ -1090,21 +1090,21 @@
       ],
       "links": [
         "black-ledger",
-        "holestead",
-        "precinct-house-22"
+        "glass-dome",
+        "holestead"
       ],
       "notes": "Quarterly extraction targets are posted at the gate. Somebody has been correcting them in blood."
     },
     {
-      "id": "precinct-house-22",
-      "name": "Precinct House 22",
+      "id": "glass-dome",
+      "name": "The Glass Dome",
       "section": "outer",
       "ring": "rim",
       "type": "Settlement",
       "settlement": true,
-      "owner": "precinct-22",
+      "owner": "chymist-cult",
       "income": "D6x10 credits",
-      "boon": "One free Palanite patrol escort each Downtime",
+      "boon": "Clean water: ignore one Lasting Injury roll",
       "contested": false,
       "bordersInner": false,
       "labelX": 198.81,
@@ -1155,20 +1155,20 @@
         "black-ledger",
         "scrap-shoals",
         "the-bonepipe",
-        "the-pit-market"
+        "the-still-rows"
       ],
-      "notes": "Built to hold two hundred. Currently holds nineteen, a vox relay and a great deal of institutional stubbornness."
+      "notes": "A cracked crystalflex dome over a working still. The Chymists moved in and the water got stranger."
     },
     {
-      "id": "the-pit-market",
-      "name": "The Pit Market",
+      "id": "the-still-rows",
+      "name": "The Still Rows",
       "section": "outer",
       "ring": "rim",
-      "type": "Trading Post",
+      "type": "Chem Works",
       "settlement": false,
-      "owner": "precinct-22",
+      "owner": "chymist-cult",
       "income": "D6x10 credits",
-      "boon": "Rare trade roll at +2",
+      "boon": "One free chem or toxin weapon upgrade",
       "contested": false,
       "bordersInner": false,
       "labelX": 193.59,
@@ -1212,11 +1212,11 @@
         ]
       ],
       "links": [
-        "precinct-house-22",
+        "glass-dome",
         "sunken-nave",
         "the-bonepipe"
       ],
-      "notes": "Neutral ground by long tradition. Precinct 22 enforces that tradition at gunpoint, which everyone agrees is novel."
+      "notes": "Condensers in rows the length of a dome. Sola Dosis insists the fumes are therapeutic."
     },
     {
       "id": "sunken-nave",
@@ -1278,7 +1278,7 @@
         "i-10",
         "ratgut-tunnels",
         "the-bonepipe",
-        "the-pit-market",
+        "the-still-rows",
         "the-wire-yard"
       ],
       "notes": "Cawdor built it, something else kept it. Mycelium Section took the crypts and left the nave to the candles."
@@ -1438,12 +1438,12 @@
         ]
       ],
       "links": [
-        "glass-dome",
         "i-02",
         "i-03",
+        "precinct-house-22",
         "rustfall-row",
         "the-chokestack",
-        "the-still-rows",
+        "the-pit-market",
         "vent-nine"
       ],
       "notes": "Pipework grown into a thicket. Van Saar say they understand it. They do not."
@@ -1499,7 +1499,7 @@
         "relay-theta",
         "the-brass-gallery",
         "the-drowned-stair",
-        "the-still-rows"
+        "the-pit-market"
       ],
       "notes": "The up-hive draught comes through here. So does anything that wants in quietly."
     },
@@ -1647,11 +1647,11 @@
         ]
       ],
       "links": [
+        "glass-dome",
         "holestead",
         "i-07",
         "i-08",
         "i-09",
-        "precinct-house-22",
         "scrap-shoals",
         "the-bonepipe",
         "the-weeping-wall"
@@ -1700,11 +1700,11 @@
       ],
       "links": [
         "black-ledger",
+        "glass-dome",
         "i-09",
         "i-10",
-        "precinct-house-22",
         "sunken-nave",
-        "the-pit-market"
+        "the-still-rows"
       ],
       "notes": "The doc is good. The doc is also why several gangers answer to new names."
     },
