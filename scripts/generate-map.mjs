@@ -372,13 +372,13 @@ const gateways = [
 /* ---------- gangs ---------- */
 
 const gangs = [
-  { id: 'sumptown',            name: 'Sumptown Brawlers',                 short: 'Sumptown',      house: 'House Goliath',      color: '#d2652a' },
-  { id: 'chymist-cult',        name: "'Sola Dosis' Chymist Cult",         short: 'Sola Dosis',    house: 'House Escher',       color: '#4fbd72' },
+  { id: 'sumptown',            name: 'Sumptown Brawlers',                 short: 'Sumptown',      house: 'House Goliath',      color: '#bf4038' },
+  { id: 'chymist-cult',        name: "'Sola Dosis' Chymist Cult",         short: 'Sola Dosis',    house: 'House Escher',       color: '#9d7ad4' },
   { id: 'archeo-3',            name: 'Archeo-Acquisitions Team 3',        short: 'Archeo-3',      house: 'House Van Saar',     color: '#35a9c0' },
-  { id: 'mycelium',            name: 'Mycelium Section',                  short: 'Mycelium',      house: 'House Delaque',      color: '#a79ddb' },
-  { id: 'precinct-22',         name: 'Precinct 22',                       short: 'Precinct 22',   house: 'Palanite Enforcers', color: '#4878d2' },
-  { id: 'bjorn-prospectors',   name: 'Bjorn "H.C.L.F" Prospectors Group', short: 'Bjorn H.C.L.F', house: 'Ironhead Squats',    color: '#dfae33' },
-  { id: 'resource-extraction', name: 'Resource Extraction LLC',           short: 'Resource Ext.', house: 'Ironhead Squats',    color: '#9bab3c' },
+  { id: 'mycelium',            name: 'Mycelium Section',                  short: 'Mycelium',      house: 'House Delaque',      color: '#7d9683' },
+  { id: 'precinct-22',         name: 'Precinct 22',                       short: 'Precinct 22',   house: 'Palanite Enforcers', color: '#e8c23a' },
+  { id: 'bjorn-prospectors',   name: 'Bjorn "H.C.L.F" Prospectors Group', short: 'Bjorn H.C.L.F', house: 'Ironhead Squats',    color: '#e8822c' },
+  { id: 'resource-extraction', name: 'Resource Extraction LLC',           short: 'Resource Ext.', house: 'Ironhead Squats',    color: '#6f9c33' },
   { id: 'malstrain',           name: 'Malstrain Genestealers',            short: 'Malstrain',     house: 'Malstrain',          color: '#c6529f', hidden: true }
 ].map((g) => ({ ...g, rating: 1100, credits: 0, reputation: 1, motto: '' }));
 
