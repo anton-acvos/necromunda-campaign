@@ -292,10 +292,6 @@
       document.querySelectorAll('.territory, .gateway, .tunnel'),
       function (n) { n.classList.toggle('is-selected', n.getAttribute('data-id') === id); }
     );
-    Array.prototype.forEach.call(document.querySelectorAll('.roster-btn'), function (n) {
-      n.classList.toggle('is-selected', n.getAttribute('data-id') === id);
-    });
-
     if (id === 'uncharted') renderInnerRegionDetail();
     else if (state.gatewaysById[id]) renderGatewayDetail(state.gatewaysById[id]);
     else if ((state.tunnelsById || {})[id]) renderTunnelDetail(state.tunnelsById[id]);
@@ -533,46 +529,6 @@
       ' charted territories unclaimed · ' + innerTerritories().length + ' deep holdings unsurveyed.';
   }
 
-  /* ---------- uncharted roster ---------- */
-
-  function drawRoster() {
-    var card = document.getElementById('uncharted-card');
-    var inner = (state.data.map || {}).inner || {};
-    card.textContent = '';
-
-    var heading = h('h2');
-    var headingBtn = h('button', 'section-btn', inner.label || 'Uncharted Deep');
-    headingBtn.type = 'button';
-    headingBtn.addEventListener('click', function () { select('uncharted', true); });
-    heading.appendChild(headingBtn);
-    card.appendChild(heading);
-    if (inner.blurb) card.appendChild(h('p', 'hint roster-blurb', inner.blurb));
-
-    var ways = h('div', 'neighbours');
-    (state.data.gateways || []).forEach(function (gw) {
-      var b = linkBtn(gw.id, gw.name);
-      if (gw.contested) b.classList.add('is-disputed');
-      ways.appendChild(b);
-    });
-    (state.data.tunnels || []).forEach(function (t) {
-      var b = linkBtn(t.id, t.name);
-      b.classList.add('is-tunnel');
-      ways.appendChild(b);
-    });
-    card.appendChild(ways);
-
-    var grid = h('div', 'roster');
-    innerTerritories().forEach(function (t) {
-      var b = h('button', 'roster-btn', t.designation || t.id);
-      b.type = 'button';
-      b.setAttribute('data-id', t.id);
-      b.title = 'Unsurveyed';
-      b.addEventListener('click', function () { select(t.id, true); });
-      grid.appendChild(b);
-    });
-    card.appendChild(grid);
-  }
-
   /* ---------- battle log ---------- */
 
   function drawBattles() {
@@ -656,7 +612,6 @@
     drawHeader();
     drawMap();
     drawStandings();
-    drawRoster();
     drawBattles();
 
     var fromHash = window.location.hash.replace(/^#/, '');

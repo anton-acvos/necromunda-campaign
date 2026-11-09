@@ -414,39 +414,6 @@ body {
 
 .hint { margin: 10px 0 0; color: var(--ink-faint); font-size: 0.78rem; }
 
-/* ---------- uncharted roster ---------- */
-
-.roster-blurb { margin: 0 0 11px; font-style: italic; line-height: 1.45; }
-
-.roster {
-  margin: 12px 0 0;
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(62px, 1fr));
-  gap: 6px;
-}
-
-.roster-btn {
-  font: inherit;
-  font-family: var(--mono);
-  font-size: 0.78rem;
-  color: var(--deep);
-  background: #151a27;
-  border: 1px dashed #39415c;
-  border-radius: 6px;
-  padding: 6px 0;
-  cursor: pointer;
-  text-align: center;
-}
-
-.roster-btn:hover { color: #cdd5ee; border-color: #5a658c; }
-
-.roster-btn.is-selected {
-  color: #e8ecf8;
-  border-style: solid;
-  border-color: var(--deep);
-  background: #1e2639;
-}
-
 /* ---------- battle log ---------- */
 
 .battle-log { list-style: none; margin: 0; padding: 0; display: grid; gap: 12px; }
@@ -487,19 +454,6 @@ body {
   border-radius: 8px;
   color: #f0c8c8;
 }
-
-.section-btn {
-  font: inherit;
-  color: inherit;
-  letter-spacing: inherit;
-  text-transform: inherit;
-  background: none;
-  border: 0;
-  padding: 0;
-  cursor: pointer;
-}
-
-.section-btn:hover { color: var(--deep); }
 
 /* --- tunnels --- */
 
