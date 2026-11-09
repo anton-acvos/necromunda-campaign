@@ -123,7 +123,7 @@ const edgeKey = (a, b) => {
 const outer = [
   { id: 'sumptown',          name: 'Sumptown',            type: 'Settlement',       owner: 'sumptown',            settlement: true,  income: 'D6x10 credits', boon: 'Recruit one Juve free each Downtime',            notes: 'Barge wharves and a century of silt. Everything coming down from above lands here first.' },
   { id: 'the-chokestack',    name: 'The Chokestack',      type: 'Slag Furnace',     owner: 'sumptown',            settlement: false, income: 'D6x10 credits', boon: 'Free Brute hire this cycle',                     notes: 'The furnace still runs. Nobody admits to lighting it and nobody dares let it go out.' },
-  { id: 'rustfall-row',      name: 'Rustfall Row',        type: 'Old Ruins',        owner: null,                  settlement: false, income: 'D3x10 credits', boon: 'Search the ruins: one free Common item',         notes: 'Collapsed habs stacked nine deep. The footing is a liability and the snipers know it.', contested: true },
+  { id: 'rustfall-row',      name: 'Rustfall Row',        type: 'Old Ruins',        owner: null,                  settlement: false, income: 'D3x10 credits', boon: 'Search the ruins: one free Common item',         notes: 'Collapsed habs stacked nine deep. The footing is a liability and the snipers know it.', contested: false },
   { id: 'precinct-house-22', name: 'Precinct House 22',   type: 'Settlement',       owner: 'precinct-22',         settlement: true,  income: 'D6x10 credits', boon: 'One free Palanite patrol escort each Downtime',  notes: 'Built to hold two hundred. Currently holds nineteen, a vox relay and a great deal of institutional stubbornness.' },
   { id: 'the-pit-market',    name: 'The Pit Market',      type: 'Trading Post',     owner: 'precinct-22',         settlement: false, income: 'D6x10 credits', boon: 'Rare trade roll at +2',                          notes: 'Neutral ground by long tradition. Precinct 22 enforces that tradition at gunpoint, which everyone agrees is novel.' },
   { id: 'coil-gardens',      name: 'The Coil Gardens',    type: 'Promethium Cache', owner: null,                  settlement: false, income: 'D6x10 credits', boon: 'One free flamer-class weapon',                   notes: 'Pipework grown into a thicket. Van Saar say they understand it. They do not.' },
@@ -700,7 +700,7 @@ const gateways = [
     name: "The Prospectors' Cut",
     from: ['grudgehold', 'holestead'],
     discoveredBy: 'bjorn-prospectors',
-    contested: true,
+    contested: false,
     x: gw2[0], y: gw2[1],
     notes: 'Found by Ironhead prospectors. Two companies have filed property rights over the shaft, neither claim struck out. Nobody has gone past the first chamber.'
   }

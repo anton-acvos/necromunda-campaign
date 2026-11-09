@@ -298,7 +298,7 @@
         "holestead"
       ],
       "discoveredBy": "bjorn-prospectors",
-      "contested": true,
+      "contested": false,
       "x": 692.64,
       "y": 318.79,
       "notes": "Found by Ironhead prospectors. Two companies have filed property rights over the shaft, neither claim struck out. Nobody has gone past the first chamber."
@@ -514,7 +514,7 @@
       "owner": null,
       "income": "D3x10 credits",
       "boon": "Search the ruins: one free Common item",
-      "contested": true,
+      "contested": false,
       "bordersInner": true,
       "labelX": 187.51,
       "labelY": 1084.88,

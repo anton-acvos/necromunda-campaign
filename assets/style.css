@@ -246,28 +246,33 @@ body {
 
 .gateway { cursor: pointer; }
 
-.gateway-link {
-  stroke: var(--deep);
-  stroke-width: 2.5;
-  stroke-dasharray: 3 7;
-  stroke-linecap: round;
-  opacity: 0.6;
+.gateway-halo {
+  fill: #0c0a09;
+  fill-opacity: 0.72;
+  stroke: #e9e2d4;
+  stroke-width: 3;
+  stroke-dasharray: 5 6;
+  opacity: 0.95;
 }
 
 .gateway-mark {
-  fill: #e9e2d4;
+  fill: #f3ecde;
   stroke: #0c0a09;
-  stroke-width: 2.5;
+  stroke-width: 3;
   stroke-linejoin: round;
+  filter: url(#glow);
 }
 
-.gateway.is-contested .gateway-mark { fill: var(--warn); }
+.gateway-core { fill: #0c0a09; stroke: none; }
 
-.gateway:hover .gateway-mark,
-.gateway.is-selected .gateway-mark { filter: url(#glow); }
+.gateway.is-contested .gateway-mark { fill: var(--warn); }
+.gateway.is-contested .gateway-halo { stroke: var(--warn); }
+
+.gateway:hover .gateway-halo,
+.gateway.is-selected .gateway-halo { fill-opacity: 0.9; stroke-dasharray: none; }
 
 .gateway-name {
-  font-size: 14px;
+  font-size: 16px;
   font-weight: 600;
   fill: #e4dcce;
   text-anchor: middle;

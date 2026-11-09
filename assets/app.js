@@ -239,32 +239,47 @@
         'aria-label': gw.name + ', entrance to the uncharted deep'
       });
 
-      (gw.from || []).forEach(function (fromId) {
-        var f = state.byId[fromId];
-        if (!f) return;
-        group.appendChild(el('line', {
-          x1: f.labelX, y1: f.labelY, x2: gw.x, y2: gw.y, class: 'gateway-link'
-        }));
-      });
-
-      group.appendChild(el('path', { d: diamond(gw.x, gw.y, 13), class: 'gateway-mark' }));
+      group.appendChild(el('circle', { cx: gw.x, cy: gw.y, r: 26, class: 'gateway-halo' }));
+      group.appendChild(el('path', { d: diamond(gw.x, gw.y, 17), class: 'gateway-mark' }));
+      group.appendChild(el('path', { d: diamond(gw.x, gw.y, 7), class: 'gateway-core' }));
       group.addEventListener('click', function () { select(gw.id, true); });
       group.addEventListener('keydown', function (e) {
         if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); select(gw.id, true); }
       });
       gGates.appendChild(group);
 
-      /* Sit the label just outside the deep border: inward lands on a
-         holding, straight below lands on a marches territory name. */
+      /* Sit the label inside the deep: outside it collides with the name of
+         whichever charted holding the way in opens from. */
       var cxDeep = inner && inner.labelX != null ? inner.labelX : gw.x;
       var cyDeep = inner && inner.labelY != null ? inner.labelY : gw.y;
       var vx = cxDeep - gw.x, vy = cyDeep - gw.y;
       var vlen = Math.sqrt(vx * vx + vy * vy) || 1;
       gLabels.appendChild(el('text', {
-        x: gw.x - (vx / vlen) * 30,
-        y: gw.y - (vy / vlen) * 30 + 4,
+        x: gw.x + (vx / vlen) * 46,
+        y: gw.y + (vy / vlen) * 46 + 5,
         class: 'gateway-name'
       }, gw.name));
+    });
+
+    /* A way in sits on the deep border and its name reaches inside, which can
+       land on the designation of the holding behind it. Nudge the designation
+       clear rather than let the two overlap. */
+    var wayNames = Array.prototype.slice.call(gLabels.querySelectorAll('.gateway-name'));
+    var PAD = 7;
+    Array.prototype.forEach.call(gLabels.querySelectorAll('.deep-name, .deep-sub'), function (n) {
+      wayNames.forEach(function (lab) {
+        var A = lab.getBBox(), B = n.getBBox();
+        var dx = (B.x + B.width / 2) - (A.x + A.width / 2);
+        var dy = (B.y + B.height / 2) - (A.y + A.height / 2);
+        var needX = (A.width + B.width) / 2 + PAD - Math.abs(dx);
+        var needY = (A.height + B.height) / 2 + PAD - Math.abs(dy);
+        if (needX <= 0 || needY <= 0) return;          // boxes already clear
+        if (needX < needY) {
+          n.setAttribute('x', Number(n.getAttribute('x')) + (dx < 0 ? -needX : needX));
+        } else {
+          n.setAttribute('y', Number(n.getAttribute('y')) + (dy < 0 ? -needY : needY));
+        }
+      });
     });
   }
 
