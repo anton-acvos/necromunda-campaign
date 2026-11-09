@@ -6,18 +6,15 @@ build step, no framework: a static page that reads one JSON file.
 - **Map** — territories drawn as regions sharing borders, coloured by holder
 - **Two sections** — the charted ring, and an uncharted deep nobody has surveyed
 - **Standings** — territories held, gang rating, reputation
-- **Battle log** — what happened and where
 - **Discord** — a GitHub Action announces every change to the campaign channel
 
 ## The sector
 
-**The rim (14 territories).** The outermost band. Seven gangs, each holding one
-settlement (marked with a star) plus one more territory alongside it.
-
-**The marches (8 territories).** An unclaimed band between the gangs and the
-deep. It is a loose buffer, not a sealed one — a couple of rim territories
-push through it and reach the uncharted border themselves, which is deliberate.
-Perfectly concentric bands read as a diagram; uneven ones read as ground.
+**The charted ring (22 territories).** One band, one tile deep, running right
+round the uncharted. Seven gangs hold fourteen of it — a settlement (marked
+with a star) plus one more territory alongside it — and the other eight are
+unclaimed ground lying between gangs rather than behind them. Every holding on
+the ring borders the deep, so no gang is further from it than another.
 
 **The Uncharted Deep (16 holdings).** The ground is charted into sixteen
 holdings, `I-01`…`I-16`, but they are blank: no name, type, income or boon.
@@ -136,10 +133,13 @@ without `surveyed: true` still renders blank.
 ### Redraw the whole map
 
 `scripts/generate-map.mjs` rebuilds the map from a list of territories and a
-handful of geometry constants. Territories are Voronoi regions grown from seeds
-on three rings, so they genuinely share borders and the `links` in the data are
-real adjacencies. Border waviness is added at render time, seeded from each edge
-and tapering to zero at its ends, so both neighbours draw the same line. It **overwrites** `data/campaign.json`
+handful of geometry constants. Territories are weighted Voronoi (power) regions
+grown from seeds on two rings, so they genuinely share borders and the `links`
+in the data are real adjacencies. Each region carries a weight that the
+generator nudges until every tile is within a few per cent of the same area —
+shapes stay irregular, sizes do not. The sector wall is the intersection of ten
+half-planes, which is what gives it a district silhouette rather than an oval.
+It **overwrites** `data/campaign.json`
 entirely, losing any ownership changes and battles, so it is for reshaping the
 sector before a campaign rather than during one. Everything it produces is
 plain JSON you can hand-edit afterwards.

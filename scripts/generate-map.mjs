@@ -1,19 +1,15 @@
 /* One-off generator for the two-section sector map.
-   Builds a Voronoi tessellation so territories read as countries sharing
-   borders, not nodes on a graph. Emits data/campaign.json. */
+   Builds a weighted Voronoi (power) tessellation so territories read as
+   countries sharing borders, not nodes on a graph, and so every tile comes
+   out about the same size. Emits data/campaign.json. */
 import { writeFileSync } from 'node:fs';
 
-/* Seeds sit on three rings, outside in: the held rim, the unclaimed marches,
-   and the deep. Voronoi then lets the bands interpenetrate — a rim territory
-   whose seed sits deep enough reaches the uncharted border, while its
-   neighbour does not. That unevenness is the point: clean concentric bands
-   read as a diagram, ragged ones read as ground. */
+/* The charted section is one band: all twenty-two holdings, held and
+   unclaimed alike, sit on a single ring around the deep. Tile sizes are
+   levelled by the relaxation further down, so no territory reads as more
+   important than another just because of where its seed landed. */
 const CX = 820, CY = 720;
 const BOUND_RX = 740, BOUND_RY = 560;   // sector outline
-const HELD_RX = 600, HELD_RY = 450;     // rim seeds: held territories
-const FREE_RX = 430, FREE_RY = 322;     // marches seeds: unclaimed territories
-const INA_RX = 250, INA_RY = 188;       // deep seeds, ring A
-const INB_RX = 100, INB_RY = 75;        // deep seeds, ring B
 
 function mulberry32(seed) {
   let a = seed >>> 0;
@@ -153,75 +149,185 @@ const held = outer.filter((t) => t.owner);
 const free = outer.filter((t) => !t.owner);
 
 if (outer.length !== 22) throw new Error(`charted section is ${outer.length}, expected 22`);
-if (held.length !== 14) throw new Error(`rim is ${held.length} held, expected 14`);
-if (free.length !== 8) throw new Error(`marches are ${free.length} unclaimed, expected 8`);
+if (held.length !== 14) throw new Error(`charted section is ${held.length} held, expected 14`);
+if (free.length !== 8) throw new Error(`charted section is ${free.length} unclaimed, expected 8`);
 
 const RAD = Math.PI / 180;
-const heldAngle = (i) => (-90 + i * (360 / held.length)) * RAD;
-const freeAngle = (i) => (-90 + 11 + i * (360 / free.length)) * RAD;
 
 /* ---------- seeds ---------- */
 
 const seeds = [];   // { kind: 'outer'|'inner', idx }
 
-/* Angles and radii both wander, so the ring reads as geography rather than
-   as a pie chart: territories come out different sizes and the band
-   thickness varies the whole way round. */
-/* Rim angles barely wander, so a settlement keeps its second holding
-   alongside it; radii wander a lot, which is what makes some territories
-   bulge inward to the deep and others fall short. */
-held.forEach((t, i) => {
-  const a = heldAngle(i) + jit(4.5 * RAD);
-  seeds.push({
-    kind: 'outer', ring: 'rim', idx: i, meta: t,
-    p: [CX + Math.cos(a) * (HELD_RX + jit(46)), CY + Math.sin(a) * (HELD_RY + jit(38))]
-  });
-});
+/* One layer. All twenty-two charted holdings sit on a single ring in the
+   order they are listed, so a settlement keeps its second holding alongside
+   it and the unclaimed ground falls between gangs rather than behind them.
+   Angles are near-even and radii barely wander: the relaxation below is what
+   decides the final shapes, and it is working towards equal area. */
+/* Seeds sit on scaled copies of the sector wall, spaced by distance along
+   that wall rather than by angle. A district with a long flat side is wider
+   there than a circle would be, and spacing by angle would bunch tiles up
+   against it; spacing by arc length keeps every tile the same width. */
+function scaledWall(f, dx = 0, dy = 0) {
+  return boundary.map((p) => [CX + dx + (p[0] - CX) * f, CY + dy + (p[1] - CY) * f]);
+}
 
-free.forEach((t, i) => {
-  const a = freeAngle(i) + jit(7 * RAD);
-  seeds.push({
-    kind: 'outer', ring: 'marches', idx: i, meta: t,
-    p: [CX + Math.cos(a) * (FREE_RX + jit(34)), CY + Math.sin(a) * (FREE_RY + jit(26))]
+function spaceAlong(poly, n, startFrac) {
+  const segs = poly.map((a, i) => {
+    const b = poly[(i + 1) % poly.length];
+    return { a, b, len: Math.hypot(b[0] - a[0], b[1] - a[1]) };
   });
-});
+  const total = segs.reduce((t, s) => t + s.len, 0);
+  const pts = [];
+  for (let k = 0; k < n; k++) {
+    let d = ((startFrac + k / n) % 1) * total;
+    for (const s of segs) {
+      if (d <= s.len) {
+        const t = s.len ? d / s.len : 0;
+        pts.push([s.a[0] + (s.b[0] - s.a[0]) * t, s.a[1] + (s.b[1] - s.a[1]) * t]);
+        break;
+      }
+      d -= s.len;
+    }
+  }
+  return pts;
+}
 
+const OUT_F = 0.795;                 // charted ring, as a fraction of the way to the wall
+const INA_F = 0.46, INB_F = 0.17;    // the deep, outer and inner
+const DEEP_DX = -12, DEEP_DY = 8;    // the deep sits a little off-centre
 const INNER_COUNT = 16;
 const RING_A = 11;
 const MALSTRAIN = new Set(['I-13', 'I-16']);
 
-/* The deep sits off-centre and its border is lumpy — nobody surveyed it,
-   so there is no reason for it to be a tidy circle. */
-const DEEP_DX = -34, DEEP_DY = 26;
+const jitPt = (p, amp) => [p[0] + jit(amp), p[1] + jit(amp)];
 
-for (let k = 0; k < INNER_COUNT; k++) {
-  let a, rx, ry;
-  if (k < RING_A) {
-    a = (-90 + 14 + k * (360 / RING_A)) * RAD + jit(8 * RAD);
-    rx = INA_RX + jit(42); ry = INA_RY + jit(32);
-  } else {
-    const j = k - RING_A;
-    a = (-90 + 40 + j * (360 / (INNER_COUNT - RING_A))) * RAD + jit(10 * RAD);
-    rx = INB_RX + jit(24); ry = INB_RY + jit(18);
-  }
+spaceAlong(scaledWall(OUT_F), outer.length, 0.30).forEach((p, i) => {
+  seeds.push({ kind: 'outer', ring: 'ring', idx: i, meta: outer[i], f: OUT_F, p: jitPt(p, 16) });
+});
+
+const ringA = spaceAlong(scaledWall(INA_F, DEEP_DX, DEEP_DY), RING_A, 0.33);
+const ringB = spaceAlong(scaledWall(INB_F, DEEP_DX, DEEP_DY), INNER_COUNT - RING_A, 0.12);
+[...ringA, ...ringB].forEach((p, k) => {
   seeds.push({
-    kind: 'inner', idx: k,
+    kind: 'inner', idx: k, f: k < RING_A ? INA_F : INB_F,
     designation: 'I-' + String(k + 1).padStart(2, '0'),
-    p: [CX + DEEP_DX + Math.cos(a) * rx, CY + DEEP_DY + Math.sin(a) * ry]
+    p: jitPt(p, k < RING_A ? 15 : 12)
   });
+});
+
+/* ---------- power diagram, relaxed towards equal area ----------
+
+   A plain Voronoi makes tiles whose size depends on how the seeds happened to
+   land. Here each seed carries a weight, which slides its borders without
+   moving the seed, and the weights are nudged every pass until every tile is
+   close to its share of the sector. Shapes stay irregular; only the areas are
+   levelled, and each tile gets its own target within a few per cent so the
+   result is even rather than uniform. */
+
+const RELAX_STEPS = Number(process.env.RELAX_STEPS ?? 90);
+const AREA_SPREAD = Number(process.env.AREA_SPREAD ?? 0.09);   // per-tile target wobble
+const LLOYD = Number(process.env.LLOYD ?? 0.3);                // how far a seed chases its centroid
+const BAND_GIVE = Number(process.env.BAND_GIVE ?? 0.1);        // how far it may leave its band
+
+function wallAt(angle, ox, oy) {
+  const dx = Math.cos(angle), dy = Math.sin(angle);
+  let best = Infinity;
+  for (let i = 0; i < boundary.length; i++) {
+    const a = boundary[i], b = boundary[(i + 1) % boundary.length];
+    const ex = b[0] - a[0], ey = b[1] - a[1];
+    const den = dx * ey - dy * ex;
+    if (Math.abs(den) < 1e-9) continue;
+    const t = ((a[0] - ox) * ey - (a[1] - oy) * ex) / den;
+    const u = ((a[0] - ox) * dy - (a[1] - oy) * dx) / den;
+    if (t > 0 && u >= 0 && u <= 1) best = Math.min(best, t);
+  }
+  return best === Infinity ? 1 : best;
+}                // how far a seed chases its centroid
+
+function clipPower(poly, si, wi, sj, wj) {
+  const nx = sj[0] - si[0], ny = sj[1] - si[1];
+  const c = ((sj[0] * sj[0] + sj[1] * sj[1] - wj) - (si[0] * si[0] + si[1] * si[1] - wi)) / 2;
+  const out = [];
+  for (let i = 0; i < poly.length; i++) {
+    const a = poly[i], b = poly[(i + 1) % poly.length];
+    const da = a[0] * nx + a[1] * ny - c, db = b[0] * nx + b[1] * ny - c;
+    if (da <= 0) out.push(a);
+    if ((da < 0 && db > 0) || (da > 0 && db < 0)) {
+      const t = da / (da - db);
+      out.push([a[0] + (b[0] - a[0]) * t, a[1] + (b[1] - a[1]) * t]);
+    }
+  }
+  return out;
 }
 
-/* ---------- Voronoi over every seed, clipped to the sector outline ---------- */
-
-for (const s of seeds) {
-  let cell = boundary.map((p) => [p[0], p[1]]);
-  for (const o of seeds) {
-    if (o === s) continue;
-    cell = clipHalfPlane(cell, s.p, o.p);
-    if (cell.length < 3) break;
+const polyArea = (poly) => {
+  let a = 0;
+  for (let i = 0; i < poly.length; i++) {
+    const p = poly[i], q = poly[(i + 1) % poly.length];
+    a += p[0] * q[1] - q[0] * p[1];
   }
-  s.cell = dedupe(cell);
+  return Math.abs(a) / 2;
+};
+
+function buildCells() {
+  for (const s of seeds) {
+    let cell = boundary.map((p) => [p[0], p[1]]);
+    for (const o of seeds) {
+      if (o === s) continue;
+      cell = clipPower(cell, s.p, s.w, o.p, o.w);
+      if (cell.length < 3) break;
+    }
+    s.raw = cell.length < 3 ? [] : cell;
+  }
+}
+
+const sectorArea = polyArea(boundary);
+for (const s of seeds) {
+  s.w = 0;
+  s.share = 1 + jit(AREA_SPREAD);
+}
+const shareSum = seeds.reduce((t, s) => t + s.share, 0);
+for (const s of seeds) s.target = (sectorArea * s.share) / shareSum;
+
+for (let step = 0; step < RELAX_STEPS; step++) {
+  buildCells();
+  const gain = 1.1 * (1 - step / (RELAX_STEPS * 1.6));
+  for (const s of seeds) {
+    const area = s.raw.length ? polyArea(s.raw) : 0;
+    s.w += gain * (s.target - area);
+    if (s.raw.length && LLOYD > 0) {
+      const c = centroid(s.raw);
+      let x = s.p[0] + (c[0] - s.p[0]) * LLOYD, y = s.p[1] + (c[1] - s.p[1]) * LLOYD;
+      /* a seed may slide round its band but not wander out of it, or the
+         charted ring stops being a ring */
+      const ox = s.kind === 'inner' ? CX + DEEP_DX : CX;
+      const oy = s.kind === 'inner' ? CY + DEEP_DY : CY;
+      const a = Math.atan2(y - oy, x - ox);
+      const wall = wallAt(a, ox, oy);
+      const fr = Math.hypot(x - ox, y - oy) / wall;
+      const lo = s.f * (1 - BAND_GIVE), hi = s.f * (1 + BAND_GIVE);
+      const cl = Math.min(hi, Math.max(lo, fr));
+      if (cl !== fr) { x = ox + Math.cos(a) * wall * cl; y = oy + Math.sin(a) * wall * cl; }
+      s.p = [x, y];
+    }
+  }
+  /* weights only matter relative to one another; keep them centred */
+  const mean = seeds.reduce((t, s) => t + s.w, 0) / seeds.length;
+  for (const s of seeds) s.w -= mean;
+}
+
+buildCells();
+for (const s of seeds) {
+  s.cell = dedupe(s.raw);
   if (s.cell.length < 3) throw new Error(`degenerate cell for ${s.designation ?? s.meta.id}`);
+}
+
+{
+  const areas = seeds.map((s) => polyArea(s.cell));
+  const mean = areas.reduce((a, b) => a + b, 0) / areas.length;
+  const dev = Math.sqrt(areas.reduce((t, a) => t + (a - mean) ** 2, 0) / areas.length) / mean;
+  const lo = Math.min(...areas) / mean, hi = Math.max(...areas) / mean;
+  console.log(`tiles    ${areas.length} cells, spread ${(dev * 100).toFixed(1)}% (smallest ${(lo * 100).toFixed(0)}%, largest ${(hi * 100).toFixed(0)}% of mean)`);
 }
 
 /* ---------- streets and tunnels ----------
