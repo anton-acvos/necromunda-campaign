@@ -201,33 +201,51 @@
       }
     });
 
-    /* the uncharted core: border mapped, interior not */
+    /* The deep: the ground is charted into its holdings, but nothing is known
+       about any of them. The fog and the dashed section edge sit above the
+       cells and ignore the pointer, so clicks land on a holding. */
     var inner = map.inner;
-    if (inner && inner.polygon) {
-      var ig = el('g', {
-        class: 'inner-region',
-        'data-id': 'uncharted',
+    var innerD = inner && inner.polygon ? polygonPath(inner.polygon) : null;
+
+    if (innerD) gInner.appendChild(el('path', { d: innerD, class: 'inner-fill' }));
+
+    innerTerritories().forEach(function (t) {
+      if (!t.polygon) return;
+      var g = ownerOf(t);
+      var group = el('g', {
+        class: 'territory is-deep',
+        'data-id': t.id,
         tabindex: '0',
         role: 'button',
-        'aria-label': inner.label + ', unsurveyed'
+        'aria-label': (t.designation || t.id) + ', unsurveyed'
       });
-      var innerD = polygonPath(inner.polygon);
-      ig.appendChild(el('path', { d: innerD, class: 'inner-fill' }));
-      ig.appendChild(el('path', { d: innerD, class: 'inner-fog' }));
-      ig.appendChild(el('path', { d: innerD, class: 'inner-edge' }));
-      ig.addEventListener('click', function () { select('uncharted', true); });
-      ig.addEventListener('keydown', function (e) {
-        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); select('uncharted', true); }
-      });
-      gInner.appendChild(ig);
 
-      var n = innerTerritories().length;
+      group.appendChild(el('path', {
+        d: polygonPath(t.polygon),
+        class: 'deep-shape',
+        fill: g ? g.color : null,
+        'fill-opacity': g ? 0.5 : null
+      }));
+
+      group.addEventListener('click', function () { select(t.id, true); });
+      group.addEventListener('keydown', function (e) {
+        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); select(t.id, true); }
+      });
+      gInner.appendChild(group);
+
       gLabels.appendChild(el('text', {
-        x: inner.labelX, y: inner.labelY - 10, class: 'inner-label'
-      }, inner.label.toUpperCase()));
-      gLabels.appendChild(el('text', {
-        x: inner.labelX, y: inner.labelY + 16, class: 'inner-sub'
-      }, n + ' holdings · unsurveyed'));
+        x: t.labelX, y: t.labelY - 1, class: 'deep-name'
+      }, t.designation || t.id));
+      if (g) {
+        gLabels.appendChild(el('text', {
+          x: t.labelX, y: t.labelY + 14, class: 'deep-sub'
+        }, g.short || g.house));
+      }
+    });
+
+    if (innerD) {
+      gInner.appendChild(el('path', { d: innerD, class: 'inner-fog' }));
+      gInner.appendChild(el('path', { d: innerD, class: 'inner-edge' }));
     }
 
     /* the two known ways in */
@@ -255,15 +273,15 @@
       });
       gGates.appendChild(group);
 
-      /* Push the label inward over the fog, where nothing else is written —
-         below the marker it collides with the marches territory names. */
+      /* Sit the label just outside the deep border: inward lands on a
+         holding, straight below lands on a marches territory name. */
       var cxDeep = inner && inner.labelX != null ? inner.labelX : gw.x;
       var cyDeep = inner && inner.labelY != null ? inner.labelY : gw.y;
       var vx = cxDeep - gw.x, vy = cyDeep - gw.y;
       var vlen = Math.sqrt(vx * vx + vy * vy) || 1;
       gLabels.appendChild(el('text', {
-        x: gw.x + (vx / vlen) * 46,
-        y: gw.y + (vy / vlen) * 46 + 5,
+        x: gw.x - (vx / vlen) * 30,
+        y: gw.y - (vy / vlen) * 30 + 4,
         class: 'gateway-name'
       }, gw.name));
     });
@@ -290,7 +308,7 @@
     state.selected = id;
 
     Array.prototype.forEach.call(
-      document.querySelectorAll('.territory, .inner-region, .gateway'),
+      document.querySelectorAll('.territory, .gateway'),
       function (n) { n.classList.toggle('is-selected', n.getAttribute('data-id') === id); }
     );
     Array.prototype.forEach.call(document.querySelectorAll('.roster-btn'), function (n) {
@@ -352,7 +370,8 @@
 
     if (t.section === 'inner') {
       box.appendChild(h('p', 'notes',
-        'Nothing is known about this holding beyond that it exists. Its ground, its worth and whatever is already living in it get written down the first time a gang walks it.'));
+        'The ground is charted and nothing else is. What this holding is, what it is worth and whatever already lives in it all get written down the first time a gang walks it.'));
+      box.appendChild(neighbourNav(t));
       return;
     }
 
@@ -371,14 +390,21 @@
 
     if (t.notes) box.appendChild(h('p', 'notes', t.notes));
 
+    var nav = neighbourNav(t);
+    if (nav.childNodes.length) box.appendChild(nav);
+  }
+
+  function neighbourNav(t) {
     var nav = h('div', 'neighbours');
     (t.links || []).forEach(function (nid) {
       var n = state.byId[nid];
       if (!n) return;
       nav.appendChild(linkBtn(n.id, displayName(n)));
     });
-    if (t.bordersInner) nav.appendChild(linkBtn('uncharted', 'Uncharted Deep'));
-    if (nav.childNodes.length) box.appendChild(nav);
+    if (t.section === 'outer' && t.bordersInner) {
+      nav.appendChild(linkBtn('uncharted', 'Uncharted Deep'));
+    }
+    return nav;
   }
 
   function linkBtn(id, label) {
@@ -497,7 +523,12 @@
     var inner = (state.data.map || {}).inner || {};
     card.textContent = '';
 
-    card.appendChild(h('h2', null, inner.label || 'Uncharted Deep'));
+    var heading = h('h2');
+    var headingBtn = h('button', 'section-btn', inner.label || 'Uncharted Deep');
+    headingBtn.type = 'button';
+    headingBtn.addEventListener('click', function () { select('uncharted', true); });
+    heading.appendChild(headingBtn);
+    card.appendChild(heading);
     if (inner.blurb) card.appendChild(h('p', 'hint roster-blurb', inner.blurb));
 
     var ways = h('div', 'neighbours');

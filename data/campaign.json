@@ -969,6 +969,8 @@
       "links": [
         "cinder-yard",
         "holestead",
+        "i-05",
+        "i-06",
         "the-drowned-stair",
         "the-weeping-wall"
       ],
@@ -1273,6 +1275,7 @@
         ]
       ],
       "links": [
+        "i-10",
         "ratgut-tunnels",
         "the-bonepipe",
         "the-pit-market",
@@ -1381,6 +1384,9 @@
       ],
       "links": [
         "coil-gardens",
+        "i-01",
+        "i-02",
+        "i-11",
         "sumptown",
         "the-chokestack",
         "the-wire-yard"
@@ -1433,6 +1439,8 @@
       ],
       "links": [
         "glass-dome",
+        "i-02",
+        "i-03",
         "rustfall-row",
         "the-chokestack",
         "the-still-rows",
@@ -1486,6 +1494,8 @@
       ],
       "links": [
         "coil-gardens",
+        "i-03",
+        "i-04",
         "relay-theta",
         "the-brass-gallery",
         "the-drowned-stair",
@@ -1536,6 +1546,8 @@
       "links": [
         "cinder-yard",
         "grudgehold",
+        "i-04",
+        "i-05",
         "the-brass-gallery",
         "vent-nine"
       ],
@@ -1580,7 +1592,9 @@
       "links": [
         "black-ledger",
         "grudgehold",
-        "holestead"
+        "holestead",
+        "i-06",
+        "i-07"
       ],
       "notes": "Groundwater bleeds through the rockcrete in sheets. The sound carries for a kilometre."
     },
@@ -1634,6 +1648,9 @@
       ],
       "links": [
         "holestead",
+        "i-07",
+        "i-08",
+        "i-09",
         "precinct-house-22",
         "scrap-shoals",
         "the-bonepipe",
@@ -1683,6 +1700,8 @@
       ],
       "links": [
         "black-ledger",
+        "i-09",
+        "i-10",
         "precinct-house-22",
         "sunken-nave",
         "the-pit-market"
@@ -1730,6 +1749,8 @@
         ]
       ],
       "links": [
+        "i-10",
+        "i-11",
         "ratgut-tunnels",
         "rustfall-row",
         "sumptown",
@@ -1749,8 +1770,37 @@
       "income": null,
       "boon": null,
       "contested": false,
-      "polygon": null,
-      "links": [],
+      "labelX": 845.23,
+      "labelY": 532.16,
+      "polygon": [
+        [
+          759.19,
+          451.09
+        ],
+        [
+          961.9,
+          482.44
+        ],
+        [
+          883.41,
+          613.47
+        ],
+        [
+          803.39,
+          618.85
+        ],
+        [
+          773.04,
+          590.84
+        ]
+      ],
+      "links": [
+        "i-02",
+        "i-11",
+        "i-12",
+        "i-16",
+        "rustfall-row"
+      ],
       "notes": null
     },
     {
@@ -1765,8 +1815,42 @@
       "income": null,
       "boon": null,
       "contested": false,
-      "polygon": null,
-      "links": [],
+      "labelX": 973.76,
+      "labelY": 589.71,
+      "polygon": [
+        [
+          961.9,
+          482.44
+        ],
+        [
+          1001.93,
+          467.46
+        ],
+        [
+          1062.25,
+          590.42
+        ],
+        [
+          964.47,
+          712.87
+        ],
+        [
+          957.61,
+          714.58
+        ],
+        [
+          883.41,
+          613.47
+        ]
+      ],
+      "links": [
+        "coil-gardens",
+        "i-01",
+        "i-03",
+        "i-04",
+        "i-12",
+        "rustfall-row"
+      ],
       "notes": null
     },
     {
@@ -1781,8 +1865,32 @@
       "income": null,
       "boon": null,
       "contested": false,
-      "polygon": null,
-      "links": [],
+      "labelX": 1085,
+      "labelY": 689.97,
+      "polygon": [
+        [
+          1062.25,
+          590.42
+        ],
+        [
+          1195.16,
+          649.42
+        ],
+        [
+          1120.41,
+          796.29
+        ],
+        [
+          964.47,
+          712.87
+        ]
+      ],
+      "links": [
+        "coil-gardens",
+        "i-02",
+        "i-04",
+        "vent-nine"
+      ],
       "notes": null
     },
     {
@@ -1797,8 +1905,47 @@
       "income": null,
       "boon": null,
       "contested": false,
-      "polygon": null,
-      "links": [],
+      "labelX": 1023.54,
+      "labelY": 818.2,
+      "polygon": [
+        [
+          1120.41,
+          796.29
+        ],
+        [
+          1128.22,
+          874.47
+        ],
+        [
+          1022.22,
+          907.22
+        ],
+        [
+          923.46,
+          839.51
+        ],
+        [
+          957.19,
+          715.09
+        ],
+        [
+          957.61,
+          714.58
+        ],
+        [
+          964.47,
+          712.87
+        ]
+      ],
+      "links": [
+        "i-02",
+        "i-03",
+        "i-05",
+        "i-12",
+        "i-13",
+        "the-drowned-stair",
+        "vent-nine"
+      ],
       "notes": null
     },
     {
@@ -1813,8 +1960,42 @@
       "income": null,
       "boon": null,
       "contested": false,
-      "polygon": null,
-      "links": [],
+      "labelX": 920.11,
+      "labelY": 952.17,
+      "polygon": [
+        [
+          938.49,
+          1078.52
+        ],
+        [
+          854.27,
+          1046.78
+        ],
+        [
+          845.4,
+          885.43
+        ],
+        [
+          866.62,
+          857.99
+        ],
+        [
+          923.46,
+          839.51
+        ],
+        [
+          1022.22,
+          907.22
+        ]
+      ],
+      "links": [
+        "grudgehold",
+        "i-04",
+        "i-06",
+        "i-13",
+        "i-14",
+        "the-drowned-stair"
+      ],
       "notes": null
     },
     {
@@ -1829,8 +2010,37 @@
       "income": null,
       "boon": null,
       "contested": false,
-      "polygon": null,
-      "links": [],
+      "labelX": 792.74,
+      "labelY": 959.21,
+      "polygon": [
+        [
+          854.27,
+          1046.78
+        ],
+        [
+          799.91,
+          1058.61
+        ],
+        [
+          717.62,
+          959.62
+        ],
+        [
+          732.44,
+          876.28
+        ],
+        [
+          845.4,
+          885.43
+        ]
+      ],
+      "links": [
+        "grudgehold",
+        "i-05",
+        "i-07",
+        "i-14",
+        "the-weeping-wall"
+      ],
       "notes": null
     },
     {
@@ -1845,8 +2055,42 @@
       "income": null,
       "boon": null,
       "contested": false,
-      "polygon": null,
-      "links": [],
+      "labelX": 651.85,
+      "labelY": 913.51,
+      "polygon": [
+        [
+          717.62,
+          959.62
+        ],
+        [
+          571.27,
+          980.94
+        ],
+        [
+          572.27,
+          901.99
+        ],
+        [
+          656.37,
+          841.07
+        ],
+        [
+          708.59,
+          848.52
+        ],
+        [
+          732.44,
+          876.28
+        ]
+      ],
+      "links": [
+        "black-ledger",
+        "i-06",
+        "i-08",
+        "i-14",
+        "i-15",
+        "the-weeping-wall"
+      ],
       "notes": null
     },
     {
@@ -1861,8 +2105,32 @@
       "income": null,
       "boon": null,
       "contested": false,
-      "polygon": null,
-      "links": [],
+      "labelX": 577.3,
+      "labelY": 820.52,
+      "polygon": [
+        [
+          572.27,
+          901.99
+        ],
+        [
+          473.58,
+          803.03
+        ],
+        [
+          627.58,
+          744.36
+        ],
+        [
+          656.37,
+          841.07
+        ]
+      ],
+      "links": [
+        "black-ledger",
+        "i-07",
+        "i-09",
+        "i-15"
+      ],
       "notes": null
     },
     {
@@ -1877,8 +2145,42 @@
       "income": null,
       "boon": null,
       "contested": false,
-      "polygon": null,
-      "links": [],
+      "labelX": 534.94,
+      "labelY": 717.62,
+      "polygon": [
+        [
+          473.58,
+          803.03
+        ],
+        [
+          431.46,
+          783.64
+        ],
+        [
+          498.53,
+          626.77
+        ],
+        [
+          640.44,
+          679.45
+        ],
+        [
+          644.31,
+          691.33
+        ],
+        [
+          627.58,
+          744.36
+        ]
+      ],
+      "links": [
+        "black-ledger",
+        "i-08",
+        "i-10",
+        "i-15",
+        "i-16",
+        "the-bonepipe"
+      ],
       "notes": null
     },
     {
@@ -1893,8 +2195,42 @@
       "income": null,
       "boon": null,
       "contested": false,
-      "polygon": null,
-      "links": [],
+      "labelX": 571.97,
+      "labelY": 581.25,
+      "polygon": [
+        [
+          470.33,
+          526.53
+        ],
+        [
+          479.86,
+          503.45
+        ],
+        [
+          625.9,
+          505.99
+        ],
+        [
+          669.84,
+          634.59
+        ],
+        [
+          640.44,
+          679.45
+        ],
+        [
+          498.53,
+          626.77
+        ]
+      ],
+      "links": [
+        "i-09",
+        "i-11",
+        "i-16",
+        "sunken-nave",
+        "the-bonepipe",
+        "the-wire-yard"
+      ],
       "notes": null
     },
     {
@@ -1909,8 +2245,37 @@
       "income": null,
       "boon": null,
       "contested": false,
-      "polygon": null,
-      "links": [],
+      "labelX": 706.57,
+      "labelY": 538.47,
+      "polygon": [
+        [
+          748.58,
+          439.85
+        ],
+        [
+          759.19,
+          451.09
+        ],
+        [
+          773.04,
+          590.84
+        ],
+        [
+          669.84,
+          634.59
+        ],
+        [
+          625.9,
+          505.99
+        ]
+      ],
+      "links": [
+        "i-01",
+        "i-10",
+        "i-16",
+        "rustfall-row",
+        "the-wire-yard"
+      ],
       "notes": null
     },
     {
@@ -1925,8 +2290,37 @@
       "income": null,
       "boon": null,
       "contested": false,
-      "polygon": null,
-      "links": [],
+      "labelX": 860.24,
+      "labelY": 677.11,
+      "polygon": [
+        [
+          803.39,
+          618.85
+        ],
+        [
+          883.41,
+          613.47
+        ],
+        [
+          957.61,
+          714.58
+        ],
+        [
+          957.19,
+          715.09
+        ],
+        [
+          790.89,
+          734.9
+        ]
+      ],
+      "links": [
+        "i-01",
+        "i-02",
+        "i-04",
+        "i-13",
+        "i-16"
+      ],
       "notes": null
     },
     {
@@ -1941,8 +2335,37 @@
       "income": null,
       "boon": null,
       "contested": false,
-      "polygon": null,
-      "links": [],
+      "labelX": 880.68,
+      "labelY": 777.23,
+      "polygon": [
+        [
+          957.19,
+          715.09
+        ],
+        [
+          923.46,
+          839.51
+        ],
+        [
+          866.62,
+          857.99
+        ],
+        [
+          789.15,
+          737.31
+        ],
+        [
+          790.89,
+          734.9
+        ]
+      ],
+      "links": [
+        "i-04",
+        "i-05",
+        "i-12",
+        "i-14",
+        "i-16"
+      ],
       "notes": null
     },
     {
@@ -1957,8 +2380,42 @@
       "income": null,
       "boon": null,
       "contested": false,
-      "polygon": null,
-      "links": [],
+      "labelX": 786.41,
+      "labelY": 826.23,
+      "polygon": [
+        [
+          866.62,
+          857.99
+        ],
+        [
+          845.4,
+          885.43
+        ],
+        [
+          732.44,
+          876.28
+        ],
+        [
+          708.59,
+          848.52
+        ],
+        [
+          768.86,
+          743.83
+        ],
+        [
+          789.15,
+          737.31
+        ]
+      ],
+      "links": [
+        "i-05",
+        "i-06",
+        "i-07",
+        "i-13",
+        "i-15",
+        "i-16"
+      ],
       "notes": null
     },
     {
@@ -1973,8 +2430,37 @@
       "income": null,
       "boon": null,
       "contested": false,
-      "polygon": null,
-      "links": [],
+      "labelX": 689.06,
+      "labelY": 770.21,
+      "polygon": [
+        [
+          708.59,
+          848.52
+        ],
+        [
+          656.37,
+          841.07
+        ],
+        [
+          627.58,
+          744.36
+        ],
+        [
+          644.31,
+          691.33
+        ],
+        [
+          768.86,
+          743.83
+        ]
+      ],
+      "links": [
+        "i-07",
+        "i-08",
+        "i-09",
+        "i-14",
+        "i-16"
+      ],
       "notes": null
     },
     {
@@ -1989,8 +2475,52 @@
       "income": null,
       "boon": null,
       "contested": false,
-      "polygon": null,
-      "links": [],
+      "labelX": 735.09,
+      "labelY": 668.08,
+      "polygon": [
+        [
+          773.04,
+          590.84
+        ],
+        [
+          803.39,
+          618.85
+        ],
+        [
+          790.89,
+          734.9
+        ],
+        [
+          789.15,
+          737.31
+        ],
+        [
+          768.86,
+          743.83
+        ],
+        [
+          644.31,
+          691.33
+        ],
+        [
+          640.44,
+          679.45
+        ],
+        [
+          669.84,
+          634.59
+        ]
+      ],
+      "links": [
+        "i-01",
+        "i-09",
+        "i-10",
+        "i-11",
+        "i-12",
+        "i-13",
+        "i-14",
+        "i-15"
+      ],
       "notes": null
     }
   ],

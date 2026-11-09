@@ -91,12 +91,15 @@ for (const [i, t] of territories.entries()) {
 
   if (t.section === 'inner') {
     innerCount++;
-    if (!t.designation && !t.name) err(`${at}: an inner holding needs a designation or a name`);
-    if (t.surveyed && !isPolygon(t.polygon)) {
-      err(`${at}: marked surveyed but has no polygon — draw its shape or set surveyed to false`);
+    if (!t.designation && !t.name) err(`${at}: a deep holding needs a designation or a name`);
+    if (!isPolygon(t.polygon)) err(`${at}.polygon: the deep is charted, so every holding needs a shape`);
+    for (const k of ['labelX', 'labelY']) {
+      if (typeof t[k] !== 'number') err(`${at}.${k}: required number (label position)`);
     }
-    if (!t.surveyed && t.polygon) {
-      warn(`${at}: has a polygon but is not marked surveyed; it will not be drawn`);
+    /* surveyed means "we know what it is", not "we know where it is" */
+    if (t.surveyed && !t.name) err(`${at}: marked surveyed but has no name`);
+    if (!t.surveyed && t.name) {
+      warn(`${at}: has the name "${t.name}" but is not marked surveyed, so it still reads as blank`);
     }
   }
 

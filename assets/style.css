@@ -185,50 +185,61 @@ body {
   opacity: 0.9;
 }
 
-/* --- the uncharted core --- */
+/* --- the uncharted deep --- */
 
-.inner-region { cursor: pointer; }
-
-.inner-fill { fill: url(#deep-glow); stroke: none; }
+.inner-fill { fill: url(#deep-glow); stroke: none; pointer-events: none; }
 .inner-fog { fill: url(#fog-deep); stroke: none; pointer-events: none; }
 
 .inner-edge {
   fill: none;
   stroke: var(--deep);
-  stroke-width: 3.5;
-  stroke-dasharray: 14 9;
-  opacity: 0.75;
+  stroke-width: 4;
+  stroke-dasharray: 15 10;
+  opacity: 0.8;
   stroke-linejoin: round;
+  pointer-events: none;
 }
 
-.inner-region:hover .inner-edge { opacity: 1; }
-
-.inner-region.is-selected .inner-edge {
-  opacity: 1;
-  stroke-width: 5;
-  filter: url(#glow);
+.deep-shape {
+  fill: #1a2032;
+  stroke: #333c58;
+  stroke-width: 2;
+  stroke-linejoin: round;
+  transition: fill 120ms ease;
 }
 
-.inner-label {
-  font-size: 26px;
-  font-weight: 700;
-  letter-spacing: 0.22em;
+.territory.is-deep:hover .deep-shape { fill: #232c44; }
+
+.territory.is-deep.is-selected .deep-shape {
+  stroke: #cdd5ee;
+  stroke-width: 3.5;
+  fill: #273150;
+}
+
+.deep-name {
+  font-size: 15px;
+  font-weight: 650;
   fill: #b9c2e0;
   text-anchor: middle;
+  font-family: var(--mono);
+  letter-spacing: 0.06em;
   pointer-events: none;
   paint-order: stroke;
   stroke: #10131c;
-  stroke-width: 5;
+  stroke-width: 4;
   stroke-linejoin: round;
 }
 
-.inner-sub {
-  font-size: 14px;
+.deep-sub {
+  font-size: 11px;
   fill: #7e88ab;
   text-anchor: middle;
-  pointer-events: none;
   font-family: var(--mono);
-  letter-spacing: 0.08em;
+  pointer-events: none;
+  paint-order: stroke;
+  stroke: #10131c;
+  stroke-width: 3.5;
+  stroke-linejoin: round;
 }
 
 /* --- ways in --- */
@@ -476,3 +487,16 @@ body {
   border-radius: 8px;
   color: #f0c8c8;
 }
+
+.section-btn {
+  font: inherit;
+  color: inherit;
+  letter-spacing: inherit;
+  text-transform: inherit;
+  background: none;
+  border: 0;
+  padding: 0;
+  cursor: pointer;
+}
+
+.section-btn:hover { color: var(--deep); }

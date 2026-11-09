@@ -19,10 +19,11 @@ deep. It is a loose buffer, not a sealed one — a couple of rim territories
 push through it and reach the uncharted border themselves, which is deliberate.
 Perfectly concentric bands read as a diagram; uneven ones read as ground.
 
-**The Uncharted Deep (16 holdings).** Only its border is mapped. The sixteen
-holdings inside are known to exist but have no shape, type, income or boon
-yet — they get filled in as gangs push in and survey them. Rendered as one
-fogged region, listed as `I-01`…`I-16` in the sidebar.
+**The Uncharted Deep (16 holdings).** The ground is charted into sixteen
+holdings, `I-01`…`I-16`, but they are blank: no name, type, income or boon.
+Those get filled in as gangs push in and survey them. `surveyed` means "we
+know what it is", not "we know where it is" — every holding already has a
+shape.
 
 **Two ways in.** `The Theta Breach`, cut by the Tech-Acquisitor party that
 stopped transmitting, reached from Relay Station Theta. `The Prospectors' Cut`,
@@ -114,14 +115,14 @@ shape:
   "owner": null,
   "income": "D3x10 credits",
   "boon": "Reroll one Willpower test per battle",
-  "polygon": [[x, y], [x, y], ...],
-  "labelX": 0, "labelY": 0,
-  "links": []
+  "notes": "The candles were lit when the first gang arrived."
 }
 ```
 
-The validator enforces the pairing: `surveyed: true` requires a polygon, and a
-polygon without `surveyed: true` will not be drawn.
+Keep the existing `polygon`, `labelX` and `labelY` — the ground is already
+mapped, so surveying only fills in what the place turns out to be. The
+validator enforces the pairing: `surveyed: true` requires a name, and a name
+without `surveyed: true` still renders blank.
 
 ### Advance the campaign
 

@@ -243,19 +243,26 @@ if (innerPolygon.length !== border.length) {
 const innerEdgeKeys = new Set(border.map(([a, b]) => edgeKey(a, b)));
 const outerSeeds = seeds.filter((s) => s.kind === 'outer');
 
-const adjacency = new Map(outerSeeds.map((s) => [s.meta.id, new Set()]));
-for (const s of outerSeeds) {
+/* Every cell is charted ground now, deep ones included, so adjacency runs
+   across the whole sector rather than just the outer section. */
+const cellId = (s) => (s.kind === 'outer' ? s.meta.id : s.designation.toLowerCase());
+
+const edgeSets = new Map();
+for (const s of seeds) {
   const keys = new Set();
   for (let i = 0; i < s.cell.length; i++) {
     keys.add(edgeKey(s.cell[i], s.cell[(i + 1) % s.cell.length]));
   }
-  for (const o of outerSeeds) {
+  edgeSets.set(s, keys);
+}
+
+const adjacency = new Map(seeds.map((s) => [cellId(s), new Set()]));
+for (const s of seeds) {
+  const mine = edgeSets.get(s);
+  for (const o of seeds) {
     if (o === s) continue;
-    for (let i = 0; i < o.cell.length; i++) {
-      if (keys.has(edgeKey(o.cell[i], o.cell[(i + 1) % o.cell.length]))) {
-        adjacency.get(s.meta.id).add(o.meta.id);
-        break;
-      }
+    for (const k of edgeSets.get(o)) {
+      if (mine.has(k)) { adjacency.get(cellId(s)).add(cellId(o)); break; }
     }
   }
 }
@@ -285,10 +292,14 @@ const territories = outerSeeds.map((s) => {
   };
 });
 
-/* inner holdings exist but have no mapped shape yet */
+/* The deep is now divided into its sixteen holdings: the ground is drawn,
+   but nothing is known about any of it. `surveyed` flips to true once a
+   holding has a name and a type, not when it gains a shape. */
 for (const s of innerSeeds) {
+  const id = s.designation.toLowerCase();
+  const [lx, ly] = centroid(s.cell);
   territories.push({
-    id: s.designation.toLowerCase(),
+    id,
     name: null,
     designation: s.designation,
     section: 'inner',
@@ -299,8 +310,10 @@ for (const s of innerSeeds) {
     income: null,
     boon: null,
     contested: false,
-    polygon: null,
-    links: [],
+    labelX: lx,
+    labelY: ly,
+    polygon: s.cell,
+    links: [...adjacency.get(id)].sort(),
     notes: null
   });
 }
@@ -413,4 +426,4 @@ console.log(`inner ${territories.filter(t => t.section === 'inner').length}: ${t
 console.log(`inner border: ${innerPolygon.length} vertices; outer cells touching it: ${o.filter(t => t.bordersInner).length}`);
 const reach = territories.filter((t) => t.bordersInner && t.owner);
 console.log(`reach    ${reach.length} held territories touch the deep: ${reach.map((t) => t.name).join(", ") || "none"}`);
-console.log(`borders  ${o.reduce((n, t) => n + t.links.length, 0) / 2} shared`);
+console.log(`borders  ${territories.reduce((n, t) => n + t.links.length, 0) / 2} shared across the whole sector`);
