@@ -26,7 +26,7 @@ know what it is", not "we know where it is" — every holding already has a
 shape.
 
 **Two ways in.** `The Theta Breach`, cut by the Tech-Acquisitor party that
-stopped transmitting, reached from Relay Station Theta. `The Prospectors' Cut`,
+stopped transmitting, reached from Reclaimers' Breach. `The Prospectors' Cut`,
 found by Ironhead prospectors and disputed between both Ironhead companies,
 reached from Grudgehold or Holestead.
 

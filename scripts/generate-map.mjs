@@ -104,8 +104,8 @@ const outer = [
   { id: 'precinct-house-22', name: 'Precinct House 22',   type: 'Settlement',       owner: 'precinct-22',         settlement: true,  income: 'D6x10 credits', boon: 'One free Palanite patrol escort each Downtime',  notes: 'Built to hold two hundred. Currently holds nineteen, a vox relay and a great deal of institutional stubbornness.' },
   { id: 'the-pit-market',    name: 'The Pit Market',      type: 'Trading Post',     owner: 'precinct-22',         settlement: false, income: 'D6x10 credits', boon: 'Rare trade roll at +2',                          notes: 'Neutral ground by long tradition. Precinct 22 enforces that tradition at gunpoint, which everyone agrees is novel.' },
   { id: 'coil-gardens',      name: 'The Coil Gardens',    type: 'Promethium Cache', owner: null,                  settlement: false, income: 'D6x10 credits', boon: 'One free flamer-class weapon',                   notes: 'Pipework grown into a thicket. Van Saar say they understand it. They do not.' },
-  { id: 'relay-theta',       name: 'Relay Station Theta', type: 'Settlement',       owner: 'archeo-3',            settlement: true,  income: 'D6x10 credits', boon: 'Reroll one Intelligence test per battle',        notes: 'The Tech-Acquisitor party staged out of Theta. Their last transmission was a set of coordinates and nothing else.' },
-  { id: 'the-brass-gallery', name: 'The Brass Gallery',   type: 'Archeotech Vault', owner: 'archeo-3',            settlement: false, income: 'D6x10 credits', boon: 'Rare trade roll at +1 when buying archeotech',   notes: 'Three hundred metres of sealed brass doors. Team 3 has opened eleven and will not discuss the twelfth.' },
+  { id: 'reclaimers-breach', name: "Reclaimers' Breach", type: 'Settlement',       owner: 'archeo-3',            settlement: true,  income: 'D6x10 credits', boon: 'Reroll one Intelligence test per battle',        notes: 'Team 3 cut their way in here and named it for the work. The Tech-Acquisitor party staged out of this hold; their last transmission was a set of coordinates and nothing else.' },
+  { id: 'generatorium',      name: 'The Generatorium',    type: 'Generatorium',     owner: 'archeo-3',            settlement: false, income: 'D6x10 credits', boon: 'Repair one damaged item free each Downtime',     notes: 'Plasma conduits that have not gone cold in ten thousand years. Team 3 metered the output before they posted a single guard.' },
   { id: 'vent-nine',         name: 'Vent Nine',           type: 'Vents',            owner: null,                  settlement: false, income: 'D3x10 credits', boon: 'Infiltrate: one fighter deploys hidden',         notes: 'The up-hive draught comes through here. So does anything that wants in quietly.' },
   { id: 'cinder-yard',       name: 'Cinder Yard',         type: 'Mine Workings',    owner: 'bjorn-prospectors',   settlement: false, income: 'D6x10 credits', boon: 'Extra D6x10 credits if held two cycles running', notes: 'Ash heaps that shift without warning. Three gangs are still down there somewhere.' },
   { id: 'grudgehold',        name: 'Grudgehold',          type: 'Settlement',       owner: 'bjorn-prospectors',   settlement: true,  income: 'D6x10 credits', boon: 'Defender deploys one free fortification',        notes: 'Cut into the rock and ledgered to the last slate. Bjorn filed the claim first and has the paperwork to prove it.' },
@@ -306,7 +306,7 @@ function nearestVert(set, target) {
    far side, so the gangs nearest an entrance are not the only ones who can
    reach it. */
 const TUNNEL_ROUTES = [
-  { id: 'theta-run',    name: 'The Theta Run',  mouth: 'sumptown',       toward: ['relay-theta'],             gateway: 'theta-breach',
+  { id: 'theta-run',    name: 'The Theta Run',  mouth: 'sumptown',       toward: ['reclaimers-breach'],             gateway: 'theta-breach',
     notes: 'A maintenance bore running the width of the Reach. It was cut to service the relay and it still ends at the breach the Tech-Acquisitors made.' },
   { id: 'the-deadfall', name: 'The Deadfall',   mouth: 'glass-dome',     toward: ['grudgehold', 'holestead'], gateway: 'prospectors-cut',
     notes: 'A collapsed transit shaft walked end to end only twice. It comes out at the shaft both Ironhead companies have filed on.' }
@@ -549,14 +549,14 @@ const tunnelEnd = (gatewayId) => {
   const t = tunnels.find((x) => x.gateway === gatewayId);
   return t ? t.end : null;
 };
-const gw1 = tunnelEnd("theta-breach") ?? pointOnInnerBorderAt(bearingFrom(["relay-theta"]));
+const gw1 = tunnelEnd("theta-breach") ?? pointOnInnerBorderAt(bearingFrom(["reclaimers-breach"]));
 const gw2 = tunnelEnd("prospectors-cut") ?? pointOnInnerBorderAt(bearingFrom(["grudgehold", "holestead"]));
 
 const gateways = [
   {
     id: 'theta-breach',
     name: 'The Theta Breach',
-    from: ['relay-theta'],
+    from: ['reclaimers-breach'],
     discoveredBy: 'archeo-3',
     contested: false,
     x: gw1[0], y: gw1[1],

@@ -314,7 +314,7 @@
       "id": "theta-breach",
       "name": "The Theta Breach",
       "from": [
-        "relay-theta"
+        "reclaimers-breach"
       ],
       "discoveredBy": "archeo-3",
       "contested": false,
@@ -641,14 +641,14 @@
       "links": [
         "coil-gardens",
         "precinct-house-22",
-        "relay-theta",
+        "reclaimers-breach",
         "vent-nine"
       ],
       "notes": "Neutral ground by long tradition. Precinct 22 enforces that tradition at gunpoint, which everyone agrees is novel."
     },
     {
-      "id": "relay-theta",
-      "name": "Relay Station Theta",
+      "id": "reclaimers-breach",
+      "name": "Reclaimers' Breach",
       "section": "outer",
       "ring": "rim",
       "type": "Settlement",
@@ -688,22 +688,22 @@
       ],
       "tunnels": [],
       "links": [
-        "the-brass-gallery",
+        "generatorium",
         "the-pit-market",
         "vent-nine"
       ],
-      "notes": "The Tech-Acquisitor party staged out of Theta. Their last transmission was a set of coordinates and nothing else."
+      "notes": "Team 3 cut their way in here and named it for the work. The Tech-Acquisitor party staged out of this hold; their last transmission was a set of coordinates and nothing else."
     },
     {
-      "id": "the-brass-gallery",
-      "name": "The Brass Gallery",
+      "id": "generatorium",
+      "name": "The Generatorium",
       "section": "outer",
       "ring": "rim",
-      "type": "Archeotech Vault",
+      "type": "Generatorium",
       "settlement": false,
       "owner": "archeo-3",
       "income": "D6x10 credits",
-      "boon": "Rare trade roll at +1 when buying archeotech",
+      "boon": "Repair one damaged item free each Downtime",
       "contested": false,
       "bordersInner": false,
       "labelX": 1276.79,
@@ -741,11 +741,11 @@
       "tunnels": [],
       "links": [
         "cinder-yard",
-        "relay-theta",
+        "reclaimers-breach",
         "the-drowned-stair",
         "vent-nine"
       ],
-      "notes": "Three hundred metres of sealed brass doors. Team 3 has opened eleven and will not discuss the twelfth."
+      "notes": "Plasma conduits that have not gone cold in ten thousand years. Team 3 metered the output before they posted a single guard."
     },
     {
       "id": "cinder-yard",
@@ -789,8 +789,8 @@
       ],
       "tunnels": [],
       "links": [
+        "generatorium",
         "grudgehold",
-        "the-brass-gallery",
         "the-drowned-stair"
       ],
       "notes": "Ash heaps that shift without warning. Three gangs are still down there somewhere."
@@ -1339,10 +1339,10 @@
       ],
       "links": [
         "coil-gardens",
+        "generatorium",
         "i-03",
         "i-04",
-        "relay-theta",
-        "the-brass-gallery",
+        "reclaimers-breach",
         "the-drowned-stair",
         "the-pit-market"
       ],
@@ -1391,10 +1391,10 @@
       "tunnels": [],
       "links": [
         "cinder-yard",
+        "generatorium",
         "grudgehold",
         "i-04",
         "i-05",
-        "the-brass-gallery",
         "vent-nine"
       ],
       "notes": "The stairs go down into the sump and keep going. Low tide reveals about forty more steps."
