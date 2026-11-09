@@ -414,20 +414,6 @@ body {
 
 .hint { margin: 10px 0 0; color: var(--ink-faint); font-size: 0.78rem; }
 
-/* ---------- battle log ---------- */
-
-.battle-log { list-style: none; margin: 0; padding: 0; display: grid; gap: 12px; }
-
-.battle-log li { padding-left: 11px; border-left: 2px solid var(--line-bright); }
-.battle-log li.hint { border-left: 0; padding-left: 0; margin: 0; }
-
-.battle-head { display: flex; gap: 8px; align-items: baseline; flex-wrap: wrap; }
-.battle-date { font-family: var(--mono); font-size: 0.72rem; color: var(--ink-faint); }
-.battle-scenario { font-weight: 620; font-size: 0.9rem; }
-.battle-body { margin: 3px 0 0; font-size: 0.84rem; color: var(--ink-dim); }
-.battle-body .win { color: var(--ink); font-weight: 600; }
-.battle-link { color: inherit; }
-
 /* ---------- footer ---------- */
 
 .foot {

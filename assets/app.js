@@ -1,6 +1,6 @@
 /* The Hollow Reach — read-only campaign map.
    Reads data/campaign.json and renders the sector as filled territories
-   sharing borders, plus standings, the uncharted deep and the battle log.
+   sharing borders, plus standings and the detail panel.
    No build step, no dependencies. */
 
 (function () {
@@ -529,53 +529,6 @@
       ' charted territories unclaimed · ' + innerTerritories().length + ' deep holdings unsurveyed.';
   }
 
-  /* ---------- battle log ---------- */
-
-  function drawBattles() {
-    var list = document.getElementById('battle-log');
-    list.textContent = '';
-    var battles = (state.data.battles || []).slice().reverse();
-
-    if (!battles.length) {
-      list.appendChild(h('li', 'hint', 'No battles fought yet.'));
-      return;
-    }
-
-    battles.forEach(function (b) {
-      var li = h('li');
-      var head = h('div', 'battle-head');
-      head.appendChild(h('span', 'battle-date', b.date || ''));
-      head.appendChild(h('span', 'battle-scenario', b.scenario || 'Battle'));
-      li.appendChild(head);
-
-      var names = (b.participants || []).map(function (id) {
-        var g = gangOf(id);
-        return g ? g.name : 'Unknown';
-      }).join(' vs ');
-
-      var p = h('p', 'battle-body');
-      p.appendChild(h('span', null, names));
-      var w = b.winner ? gangOf(b.winner) : null;
-      p.appendChild(h('span', null, ' — '));
-      p.appendChild(h('span', 'win', w ? w.name + ' won' : 'no decisive result'));
-
-      var terr = b.territory ? state.byId[b.territory] : null;
-      if (terr) {
-        p.appendChild(h('span', null, ' over '));
-        var a = document.createElement('a');
-        a.href = '#' + terr.id;
-        a.textContent = displayName(terr);
-        a.className = 'battle-link';
-        a.addEventListener('click', function () { select(terr.id, true); });
-        p.appendChild(a);
-      }
-      li.appendChild(p);
-
-      if (b.summary) li.appendChild(h('p', 'battle-body', b.summary));
-      list.appendChild(li);
-    });
-  }
-
   /* ---------- chrome ---------- */
 
   function drawHeader() {
@@ -612,7 +565,6 @@
     drawHeader();
     drawMap();
     drawStandings();
-    drawBattles();
 
     var fromHash = window.location.hash.replace(/^#/, '');
     if (fromHash) select(fromHash, false);
