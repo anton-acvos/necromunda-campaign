@@ -439,7 +439,7 @@ function nearestVert(set, target) {
    far side, so the gangs nearest an entrance are not the only ones who can
    reach it. */
 const TUNNEL_ROUTES = [
-  { id: 'theta-run',    name: 'The Theta Run',  mouth: 'sumptown',       toward: ['reclaimers-breach'],             gateway: 'theta-breach',
+  { id: 'theta-run',    name: 'The Theta Run',  mouth: 'sumptown',       toward: ['coil-gardens'],                  gateway: 'theta-breach',
     notes: 'A maintenance bore running the width of the Reach. It was cut to service the relay and it still ends at the breach the Tech-Acquisitors made.' },
   { id: 'the-deadfall', name: 'The Deadfall',   mouth: 'glass-dome',     toward: ['grudgehold', 'holestead'], gateway: 'prospectors-cut',
     notes: 'A collapsed transit shaft walked end to end only twice. It comes out at the shaft both Ironhead companies have filed on.' }
@@ -467,11 +467,17 @@ const tunnels = TUNNEL_ROUTES.map((route) => {
     if (!corner) throw new Error(`"${route.id}": ${route.toward.join(" and ")} share no corner`);
     aim = ptOf.get(corner);
   } else {
-    let tx = 0, ty = 0;
-    for (const id of route.toward) { tx += seedOf(id).p[0]; ty += seedOf(id).p[1]; }
-    tx /= route.toward.length; ty /= route.toward.length;
-    const bearing = Math.atan2(ty - CY, tx - CX);
-    aim = [CX + Math.cos(bearing) * 1e4, CY + Math.sin(bearing) * 1e4];
+    /* one finder: come out at that territory's tip — the corner of it that
+       reaches furthest into the deep */
+    const cellVerts = seedOf(route.toward[0]).cell.map(ptKey).filter((k) => deepVerts.has(k));
+    if (!cellVerts.length) throw new Error(`"${route.id}": ${route.toward[0]} does not touch the deep`);
+    let best = null, bestD = Infinity;
+    for (const k of cellVerts) {
+      const p = ptOf.get(k);
+      const d = Math.hypot(p[0] - CX, p[1] - CY);
+      if (d < bestD) { bestD = d; best = p; }
+    }
+    aim = best;
   }
   const goalKey = nearestVert(pool, aim);
 
@@ -700,11 +706,11 @@ const gateways = [
   {
     id: 'theta-breach',
     name: 'The Theta Breach',
-    from: ['reclaimers-breach'],
+    from: ['coil-gardens'],
     discoveredBy: 'archeo-3',
     contested: false,
     x: gw1[0], y: gw1[1],
-    notes: 'A Tech-Acquisitor party cut through here and went in. Contact was lost on the second day. The coordinates were the last thing anyone sent up.'
+    notes: "A Tech-Acquisitor party staged out of Reclaimers' Breach, cut through at the tip of the Coil Gardens and went in. Contact was lost on the second day. The coordinates were the last thing anyone sent up."
   },
   {
     id: 'prospectors-cut',

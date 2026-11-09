@@ -282,13 +282,13 @@
       "id": "theta-breach",
       "name": "The Theta Breach",
       "from": [
-        "reclaimers-breach"
+        "coil-gardens"
       ],
       "discoveredBy": "archeo-3",
       "contested": false,
-      "x": 344.57,
-      "y": 566.9,
-      "notes": "A Tech-Acquisitor party cut through here and went in. Contact was lost on the second day. The coordinates were the last thing anyone sent up."
+      "x": 361.03,
+      "y": 673.03,
+      "notes": "A Tech-Acquisitor party staged out of Reclaimers' Breach, cut through at the tip of the Coil Gardens and went in. Contact was lost on the second day. The coordinates were the last thing anyone sent up."
     },
     {
       "id": "prospectors-cut",
@@ -347,10 +347,6 @@
         [
           361.03,
           673.03
-        ],
-        [
-          344.57,
-          566.9
         ]
       ],
       "notes": "A maintenance bore running the width of the Reach. It was cut to service the relay and it still ends at the breach the Tech-Acquisitors made."
@@ -647,8 +643,8 @@
       "boon": "One free flamer-class weapon",
       "contested": false,
       "bordersInner": true,
-      "labelX": 210.87,
-      "labelY": 623.24,
+      "labelX": 213.75,
+      "labelY": 623.1,
       "polygon": [
         [
           76.05,
@@ -659,12 +655,12 @@
           514
         ],
         [
-          328.79,
-          569.58
+          338.8,
+          572.14
         ],
         [
-          344.2,
-          668.93
+          352.14,
+          658.1
         ],
         [
           305.17,
@@ -1589,16 +1585,16 @@
       "income": null,
       "boon": null,
       "contested": false,
-      "labelX": 451.19,
-      "labelY": 595.87,
+      "labelX": 447.98,
+      "labelY": 596.58,
       "polygon": [
         [
-          376.44,
-          667.99
+          366.68,
+          667.04
         ],
         [
-          359.37,
-          557.94
+          351.41,
+          568.6
         ],
         [
           416.69,
@@ -1617,9 +1613,7 @@
           681.19
         ]
       ],
-      "tunnels": [
-        "theta-run"
-      ],
+      "tunnels": [],
       "links": [
         "coil-gardens",
         "i-03",
