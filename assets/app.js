@@ -301,6 +301,12 @@
   /* ---------- selection ---------- */
 
   function select(id, updateHash) {
+    if (id === 'campaign') {
+      showTab('campaign');
+      if (updateHash && window.location.hash !== '#campaign') history.replaceState(null, '', '#campaign');
+      return;
+    }
+    showTab('map');
     state.selected = id;
 
     Array.prototype.forEach.call(
@@ -544,6 +550,92 @@
       ' charted territories unclaimed · ' + innerTerritories().length + ' deep holdings unsurveyed.';
   }
 
+  /* ---------- the campaign plan ----------
+
+     One number moves the campaign on: campaign.cycle. Which phase that falls
+     in is worked out from campaign.phases, so the two can never disagree. */
+
+  function phasePlan() {
+    var phases = (state.data.campaign || {}).phases || [];
+    var n = 0;
+    return phases.map(function (p) {
+      var from = n + 1;
+      n += Math.max(1, p.cycles || 1);
+      return { phase: p, from: from, to: n };
+    });
+  }
+
+  function totalCycles() {
+    var plan = phasePlan();
+    return plan.length ? plan[plan.length - 1].to : 0;
+  }
+
+  function phaseOfCycle(cycle) {
+    var hit = phasePlan().filter(function (b) { return cycle >= b.from && cycle <= b.to; })[0];
+    return hit ? hit.phase : null;
+  }
+
+  function drawTimeline() {
+    var c = state.data.campaign || {};
+    var host = document.getElementById('panel-campaign');
+    var plan = phasePlan();
+    var cur = c.cycle;
+    host.textContent = '';
+    if (!plan.length) {
+      host.appendChild(h('p', 'detail-empty', 'No campaign plan in the data yet.'));
+      return;
+    }
+
+    var head = h('div', 'plan-head');
+    var now = phaseOfCycle(cur);
+    head.appendChild(h('h2', null, now ? now.name : 'Campaign'));
+    var into = now ? (cur - plan.filter(function (b) { return b.phase === now; })[0].from + 1) : 0;
+    var span = now ? Math.max(1, now.cycles || 1) : 0;
+    head.appendChild(h('p', 'plan-where',
+      'Cycle ' + cur + ' of ' + totalCycles() + (now ? ' — cycle ' + into + ' of ' + span + ' in this phase' : '')));
+    host.appendChild(head);
+
+    var track = h('div', 'track');
+    plan.forEach(function (b) {
+      var where = cur > b.to ? 'is-past' : (cur < b.from ? 'is-ahead' : 'is-now');
+      var band = h('div', 'band ' + where + (b.phase.kind ? ' is-' + b.phase.kind : ''));
+
+      band.appendChild(h('h3', 'band-name', b.phase.name));
+      band.appendChild(h('p', 'band-span',
+        b.from === b.to ? 'Cycle ' + b.from : 'Cycles ' + b.from + '–' + b.to));
+
+      var chips = h('div', 'band-cycles');
+      for (var n = b.from; n <= b.to; n++) {
+        var mark = n < cur ? 'is-past' : (n === cur ? 'is-now' : 'is-ahead');
+        var chip = h('span', 'cyc ' + mark, String(n));
+        chip.title = 'Cycle ' + n + (n === cur ? ' — where we are' : (n < cur ? ' — done' : ' — to come'));
+        chips.appendChild(chip);
+      }
+      band.appendChild(chips);
+      if (b.phase.blurb) band.appendChild(h('p', 'band-blurb', b.phase.blurb));
+      track.appendChild(band);
+    });
+    host.appendChild(track);
+
+    var foot = h('p', 'hint plan-hint',
+      'Each player may issue one challenge per cycle. The arbitrator moves the campaign on by ' +
+      'raising "cycle" in data/campaign.json.');
+    host.appendChild(foot);
+  }
+
+  /* ---------- tabs ---------- */
+
+  function showTab(name) {
+    var campaign = name === 'campaign';
+    document.getElementById('panel-map').hidden = campaign;
+    document.getElementById('panel-campaign').hidden = !campaign;
+    [['tab-map', !campaign], ['tab-campaign', campaign]].forEach(function (pair) {
+      var btn = document.getElementById(pair[0]);
+      btn.classList.toggle('is-active', pair[1]);
+      btn.setAttribute('aria-selected', pair[1] ? 'true' : 'false');
+    });
+  }
+
   /* ---------- chrome ---------- */
 
   function drawHeader() {
@@ -554,7 +646,8 @@
     }
     document.getElementById('campaign-sector').textContent = c.sector || '';
     document.getElementById('meta-cycle').textContent = c.cycle != null ? c.cycle : '—';
-    document.getElementById('meta-phase').textContent = c.phase || '—';
+    var nowPhase = phaseOfCycle(c.cycle);
+    document.getElementById('meta-phase').textContent = nowPhase ? nowPhase.name.replace(/ Phase$/, '') : (c.phase || '—');
     document.getElementById('meta-edition').textContent = c.edition || '—';
     document.getElementById('meta-updated').textContent = c.lastUpdated || '—';
     document.getElementById('foot-arbitrator').textContent =
@@ -580,6 +673,15 @@
     drawHeader();
     drawMap();
     drawStandings();
+    drawTimeline();
+
+    document.getElementById('tab-map').addEventListener('click', function () {
+      showTab('map');
+      if (window.location.hash === '#campaign') {
+        history.replaceState(null, '', state.selected ? '#' + state.selected : window.location.pathname);
+      }
+    });
+    document.getElementById('tab-campaign').addEventListener('click', function () { select('campaign', true); });
 
     var fromHash = window.location.hash.replace(/^#/, '');
     if (fromHash) select(fromHash, false);

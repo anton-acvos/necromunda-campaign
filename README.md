@@ -7,6 +7,7 @@ build step, no framework: a static page that reads one JSON file.
 - **Two sections** — the charted ring, and an uncharted deep nobody has surveyed
 - **Forty territories** — two starting and three unclaimed per player
 - **Standings** — territories held, gang rating, reputation
+- **Campaign tab** — the phase plan, with past, current and coming cycles marked
 - **Discord** — a GitHub Action announces every change to the campaign channel
 
 ## The sector
@@ -27,6 +28,25 @@ shape.
 stopped transmitting, reached from Reclaimers' Breach. `The Prospectors' Cut`,
 found by Ironhead prospectors and disputed between both Ironhead companies,
 reached from Grudgehold or Holestead.
+
+## Running the campaign
+
+The campaign moves on one number: `campaign.cycle` in `data/campaign.json`.
+Which phase that cycle falls in is worked out from `campaign.phases`, so the
+two can never contradict each other — there is no phase to update by hand.
+
+```
+Exploration Phase   cycles 1–3
+Downtime            cycle  4
+Occupation Phase    cycles 5–7
+Downtime            cycle  8
+Takeover Phase      cycles 9–11
+Campaign Wrap-up    cycle  12
+```
+
+Each player may issue one challenge per cycle. The validator fails the build if
+`cycle` runs past the end of the plan, and the Discord notifier announces both
+a new cycle and a new phase.
 
 ## Arbitrator's secrets
 

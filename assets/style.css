@@ -18,6 +18,9 @@
 
 * { box-sizing: border-box; }
 
+/* a panel set to hidden stays hidden, whatever display its own rule gives it */
+[hidden] { display: none !important; }
+
 html, body { margin: 0; }
 
 body {
@@ -282,6 +285,133 @@ body {
   stroke-width: 4.5;
   stroke-linejoin: round;
 }
+
+/* ---------- tabs ---------- */
+
+.tabs {
+  max-width: 1820px;
+  margin: 0 auto;
+  padding: 0 16px;
+  display: flex;
+  gap: 4px;
+  border-bottom: 1px solid var(--line);
+}
+
+.tab {
+  font: inherit;
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+  background: none;
+  border: 0;
+  border-bottom: 2px solid transparent;
+  padding: 11px 16px 9px;
+  margin-bottom: -1px;
+  cursor: pointer;
+}
+
+.tab:hover { color: var(--ink-dim); }
+
+.tab.is-active {
+  color: var(--ink);
+  border-bottom-color: var(--accent);
+}
+
+/* ---------- the campaign plan ---------- */
+
+.campaign-panel {
+  max-width: 1820px;
+  margin: 0 auto;
+  padding: 20px 16px 8px;
+}
+
+.plan-head h2 { margin: 0; font-size: 1.3rem; }
+
+.plan-where {
+  margin: 5px 0 0;
+  color: var(--ink-dim);
+  font-size: 0.92rem;
+  max-width: 70ch;
+}
+
+.track {
+  margin: 20px 0 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(168px, 1fr));
+  gap: 12px;
+  align-items: stretch;
+}
+
+.band {
+  position: relative;
+  padding: 14px 15px 15px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: var(--bg-raised);
+}
+
+.band.is-downtime { background: #15120f; }
+
+.band.is-past { opacity: 0.55; }
+
+.band.is-now {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 1px var(--accent) inset;
+  background: #1d1713;
+}
+
+.band.is-ahead { border-style: dashed; opacity: 0.8; }
+
+.band-name {
+  margin: 0;
+  font-size: 0.95rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.band.is-now .band-name { color: var(--accent); }
+
+.band-span {
+  margin: 3px 0 0;
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  color: var(--ink-faint);
+}
+
+.band-cycles { margin: 11px 0 0; display: flex; gap: 6px; flex-wrap: wrap; }
+
+.cyc {
+  width: 30px;
+  height: 30px;
+  display: grid;
+  place-items: center;
+  font-family: var(--mono);
+  font-size: 0.82rem;
+  border-radius: 7px;
+  border: 1px solid var(--line-bright);
+  color: var(--ink-faint);
+}
+
+.cyc.is-past { background: #241f1b; color: var(--ink-dim); border-style: solid; }
+.cyc.is-ahead { border-style: dashed; }
+
+.cyc.is-now {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #140f0c;
+  font-weight: 700;
+}
+
+.band-blurb {
+  margin: 11px 0 0;
+  font-size: 0.84rem;
+  line-height: 1.45;
+  color: var(--ink-dim);
+}
+
+.plan-hint { max-width: 70ch; }
 
 /* ---------- swatches (standings, detail) ---------- */
 

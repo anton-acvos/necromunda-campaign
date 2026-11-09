@@ -28,7 +28,12 @@
 
 <p id="notice" class="notice" hidden></p>
 
-<main class="layout">
+<nav class="tabs" role="tablist" aria-label="Sections">
+  <button id="tab-map" class="tab is-active" type="button" role="tab" aria-selected="true" aria-controls="panel-map">Map</button>
+  <button id="tab-campaign" class="tab" type="button" role="tab" aria-selected="false" aria-controls="panel-campaign">Campaign</button>
+</nav>
+
+<main class="layout" id="panel-map" role="tabpanel" aria-labelledby="tab-map">
 
   <section class="map-panel" aria-label="Sector map">
     <svg id="map" viewBox="0 0 1360 1200" role="img" aria-labelledby="map-title">
@@ -83,6 +88,8 @@
 
   </aside>
 </main>
+
+<section class="campaign-panel" id="panel-campaign" role="tabpanel" aria-labelledby="tab-campaign" hidden></section>
 
 <footer class="foot">
   <span id="foot-arbitrator"></span>

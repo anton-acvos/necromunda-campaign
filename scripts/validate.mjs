@@ -30,6 +30,35 @@ else {
   }
 }
 
+/* --- the campaign plan: named phases, each lasting whole cycles --- */
+{
+  const phases = Array.isArray(c?.phases) ? c.phases : [];
+  if (!phases.length) warn('campaign.phases: no plan, so the Campaign tab has nothing to show');
+
+  const phaseIds = new Set();
+  let planned = 0;
+  for (const [i, p] of phases.entries()) {
+    const at = `campaign.phases[${i}]`;
+    if (!p.id) err(`${at}.id: required`);
+    else if (phaseIds.has(p.id)) err(`${at}.id: duplicate "${p.id}"`);
+    else phaseIds.add(p.id);
+    if (!p.name) err(`${at}.name: required`);
+    if (!Number.isInteger(p.cycles) || p.cycles < 1) {
+      err(`${at}.cycles: expected a whole number of cycles, got ${JSON.stringify(p.cycles)}`);
+    } else planned += p.cycles;
+  }
+
+  if (planned && Number.isInteger(c?.cycle)) {
+    if (c.cycle < 1) err(`campaign.cycle: ${c.cycle} is before the campaign starts`);
+    else if (c.cycle > planned) {
+      err(`campaign.cycle: ${c.cycle} is past the end of the plan (${planned} cycles)`);
+    }
+  }
+  if (c?.phase) {
+    warn('campaign.phase: no longer read; the phase comes from campaign.cycle and campaign.phases');
+  }
+}
+
 /* --- map block --- */
 const isPolygon = (p) =>
   Array.isArray(p) && p.length >= 3 &&
@@ -193,8 +222,9 @@ if (errors.length) {
   process.exit(1);
 }
 
+const planned = (data.campaign?.phases ?? []).reduce((t, p) => t + (p.cycles ?? 0), 0);
 console.log(
-  `OK    ${path}: ${gangs.length} gangs, ${outerCount} charted (${settlements} settlements), ` +
+  `OK    ${path}: cycle ${data.campaign?.cycle ?? '?'} of ${planned}, ${gangs.length} gangs, ${outerCount} charted (${settlements} settlements), ` +
   `${innerCount} deep holdings, ${(data.gateways ?? []).length} ways in, ` +
   `${(data.battles ?? []).length} battles` +
   (warnings.length ? ` (${warnings.length} warning(s))` : '')

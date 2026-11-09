@@ -37,6 +37,18 @@ const gangsBefore = index(before?.gangs);
 const gangName = (id) => (id ? (gangsNow[id]?.name ?? gangsBefore[id]?.name ?? id) : null);
 const terrLink = (t) => (SITE_URL ? `[${t.name}](${SITE_URL}/#${t.id})` : `**${t.name}**`);
 
+/* The phase is not stored: it is whichever band of campaign.phases the
+   current cycle falls in. */
+function phaseOf(snapshot) {
+  const c = snapshot?.campaign ?? {};
+  let n = 0;
+  for (const p of c.phases ?? []) {
+    n += Math.max(1, p.cycles ?? 1);
+    if (c.cycle <= n) return p.name;
+  }
+  return c.phase ?? '';
+}
+
 const lines = [];
 
 /* --- first run: announce the map rather than diffing against nothing --- */
@@ -47,7 +59,7 @@ if (!before) {
   const cb = before.campaign ?? {};
   const ca = after.campaign ?? {};
   if (cb.cycle !== ca.cycle) lines.push(`**Cycle ${ca.cycle}** begins.`);
-  if (cb.phase !== ca.phase) lines.push(`Phase is now **${ca.phase}**.`);
+  if (phaseOf(before) !== phaseOf(after)) lines.push(`Phase is now **${phaseOf(after)}**.`);
 
   /* --- territory ownership --- */
   for (const t of after.territories ?? []) {
@@ -127,7 +139,7 @@ const payload = {
     color: 0xd2652a,
     fields: standings ? [{ name: 'Territories held', value: standings.slice(0, 1024) }] : undefined,
     footer: {
-      text: `Cycle ${after.campaign?.cycle ?? '?'} · ${after.campaign?.phase ?? ''}`.trim()
+      text: `Cycle ${after.campaign?.cycle ?? '?'} · ${phaseOf(after)}`.trim()
     },
     timestamp: new Date().toISOString()
   }]

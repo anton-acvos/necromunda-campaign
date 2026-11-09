@@ -5,8 +5,48 @@
     "edition": "N26",
     "arbitrator": "Anton",
     "cycle": 1,
-    "phase": "Occupation",
     "lastUpdated": "2026-11-08",
+    "phases": [
+      {
+        "id": "exploration",
+        "name": "Exploration Phase",
+        "cycles": 3,
+        "blurb": "Gangs push out from what they hold and find out what is actually down here."
+      },
+      {
+        "id": "downtime-1",
+        "name": "Downtime",
+        "cycles": 1,
+        "kind": "downtime",
+        "blurb": "No challenges. Recovery, trade and hiring before the next push."
+      },
+      {
+        "id": "occupation",
+        "name": "Occupation Phase",
+        "cycles": 3,
+        "blurb": "Ground is claimed and held. Territory changes hands in earnest."
+      },
+      {
+        "id": "downtime-2",
+        "name": "Downtime",
+        "cycles": 1,
+        "kind": "downtime",
+        "blurb": "No challenges. Recovery, trade and hiring before the last push."
+      },
+      {
+        "id": "takeover",
+        "name": "Takeover Phase",
+        "cycles": 3,
+        "blurb": "The last fight over who runs the Reach."
+      },
+      {
+        "id": "wrap-up",
+        "name": "Campaign Wrap-up",
+        "cycles": 1,
+        "kind": "finale",
+        "blurb": "Final standings, the deep is tallied, and the Reach is called."
+      }
+    ],
     "notice": "Two ways into the deep section are known. Neither has been walked all the way in."
   },
   "map": {
