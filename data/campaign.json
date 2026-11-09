@@ -7,7 +7,400 @@
     "cycle": 1,
     "phase": "Occupation",
     "lastUpdated": "2026-11-08",
-    "notice": "Cycle 1 is live. Eight gangs, twenty-two holdings, fourteen of them still unclaimed."
+    "notice": "Two ways into the deep section are known. Neither has been walked all the way in."
+  },
+  "map": {
+    "viewBox": "10 37 1385 1089",
+    "boundary": [
+      [
+        1376.8,
+        600
+      ],
+      [
+        1373.75,
+        658.72
+      ],
+      [
+        1362.89,
+        716.73
+      ],
+      [
+        1344.22,
+        773.16
+      ],
+      [
+        1317.16,
+        826.81
+      ],
+      [
+        1281.41,
+        876.25
+      ],
+      [
+        1237.77,
+        920.28
+      ],
+      [
+        1188.24,
+        958.45
+      ],
+      [
+        1135.37,
+        991.34
+      ],
+      [
+        1081.27,
+        1020.19
+      ],
+      [
+        1026.86,
+        1046.12
+      ],
+      [
+        971.85,
+        1069.22
+      ],
+      [
+        915.39,
+        1088.37
+      ],
+      [
+        857.08,
+        1101.66
+      ],
+      [
+        797.48,
+        1107.58
+      ],
+      [
+        738.01,
+        1106.12
+      ],
+      [
+        680,
+        1099.27
+      ],
+      [
+        623.79,
+        1090.45
+      ],
+      [
+        568.19,
+        1083.05
+      ],
+      [
+        510.99,
+        1078.8
+      ],
+      [
+        450.19,
+        1076.78
+      ],
+      [
+        385.47,
+        1073.54
+      ],
+      [
+        318.92,
+        1064.4
+      ],
+      [
+        254.67,
+        1045.38
+      ],
+      [
+        197.47,
+        1014.68
+      ],
+      [
+        150.83,
+        973.2
+      ],
+      [
+        115.78,
+        923.99
+      ],
+      [
+        90.65,
+        870.71
+      ],
+      [
+        72.24,
+        816.34
+      ],
+      [
+        57.44,
+        762.29
+      ],
+      [
+        44.71,
+        708.6
+      ],
+      [
+        34.57,
+        654.63
+      ],
+      [
+        28.97,
+        600
+      ],
+      [
+        30.05,
+        544.99
+      ],
+      [
+        38.95,
+        490.42
+      ],
+      [
+        55.35,
+        437.16
+      ],
+      [
+        77.98,
+        385.7
+      ],
+      [
+        105.5,
+        336.11
+      ],
+      [
+        137.44,
+        288.45
+      ],
+      [
+        174.28,
+        243.33
+      ],
+      [
+        216.96,
+        202.07
+      ],
+      [
+        265.93,
+        166.4
+      ],
+      [
+        320.49,
+        137.62
+      ],
+      [
+        378.84,
+        115.81
+      ],
+      [
+        438.82,
+        99.61
+      ],
+      [
+        498.85,
+        86.8
+      ],
+      [
+        558.59,
+        75.46
+      ],
+      [
+        618.7,
+        65.17
+      ],
+      [
+        680,
+        57.57
+      ],
+      [
+        742.37,
+        55.79
+      ],
+      [
+        804.28,
+        63.08
+      ],
+      [
+        863.14,
+        81.16
+      ],
+      [
+        916.58,
+        109.17
+      ],
+      [
+        963.71,
+        143.85
+      ],
+      [
+        1005.96,
+        180.77
+      ],
+      [
+        1046.58,
+        216.13
+      ],
+      [
+        1089.25,
+        248.3
+      ],
+      [
+        1136.24,
+        278.23
+      ],
+      [
+        1187.18,
+        308.77
+      ],
+      [
+        1238.94,
+        343.25
+      ],
+      [
+        1286.82,
+        383.99
+      ],
+      [
+        1326.29,
+        431.52
+      ],
+      [
+        1354.52,
+        484.7
+      ],
+      [
+        1370.96,
+        541.52
+      ]
+    ],
+    "inner": {
+      "label": "Uncharted Deep",
+      "blurb": "Sealed until a Tech-Acquisitor party cut their way in and stopped transmitting. Only the border is mapped; what lies inside gets surveyed as gangs push into it.",
+      "polygon": [
+        [
+          614.18,
+          286.7
+        ],
+        [
+          712.48,
+          265.45
+        ],
+        [
+          833.16,
+          320.88
+        ],
+        [
+          837.97,
+          332.99
+        ],
+        [
+          945.28,
+          422.84
+        ],
+        [
+          950,
+          433.14
+        ],
+        [
+          999.77,
+          465.81
+        ],
+        [
+          1029.35,
+          518.33
+        ],
+        [
+          1015.67,
+          691.99
+        ],
+        [
+          1016.97,
+          695
+        ],
+        [
+          1009.53,
+          721.86
+        ],
+        [
+          934.5,
+          829.38
+        ],
+        [
+          933.76,
+          857.66
+        ],
+        [
+          829.29,
+          931.36
+        ],
+        [
+          711.67,
+          919.56
+        ],
+        [
+          676.18,
+          947.82
+        ],
+        [
+          674.46,
+          947.82
+        ],
+        [
+          574.67,
+          892.68
+        ],
+        [
+          505.67,
+          908.92
+        ],
+        [
+          426.1,
+          796.67
+        ],
+        [
+          399.52,
+          793.08
+        ],
+        [
+          326.87,
+          685.95
+        ],
+        [
+          324.99,
+          684.61
+        ],
+        [
+          300.63,
+          569.32
+        ],
+        [
+          315.72,
+          517.13
+        ],
+        [
+          343.16,
+          492.85
+        ],
+        [
+          356.71,
+          412.88
+        ],
+        [
+          370.26,
+          360.8
+        ],
+        [
+          475.2,
+          328.43
+        ],
+        [
+          541,
+          275.76
+        ],
+        [
+          602.39,
+          281.8
+        ]
+      ],
+      "labelX": 669.74,
+      "labelY": 602.72
+    }
   },
   "gangs": [
     {
@@ -93,353 +486,1061 @@
       "short": "Malstrain",
       "house": "Malstrain",
       "color": "#c6529f",
+      "hidden": true,
       "rating": 1100,
       "credits": 0,
       "reputation": 1,
       "motto": ""
     }
   ],
+  "gateways": [
+    {
+      "id": "theta-breach",
+      "name": "The Theta Breach",
+      "from": [
+        "relay-theta"
+      ],
+      "discoveredBy": "archeo-3",
+      "contested": false,
+      "x": 1015.67,
+      "y": 691.99,
+      "notes": "A Tech-Acquisitor party cut through here and went in. Contact was lost on the second day. The coordinates were the last thing anyone sent up."
+    },
+    {
+      "id": "prospectors-cut",
+      "name": "The Prospectors' Cut",
+      "from": [
+        "grudgehold",
+        "holestead"
+      ],
+      "discoveredBy": "bjorn-prospectors",
+      "contested": true,
+      "x": 711.67,
+      "y": 919.56,
+      "notes": "Found by Ironhead prospectors. Two companies have filed property rights over the shaft, neither claim struck out. Nobody has gone past the first chamber."
+    }
+  ],
   "territories": [
     {
-      "id": "sump-landing",
-      "name": "Sump Landing",
+      "id": "sumptown",
+      "name": "Sumptown",
+      "section": "outer",
       "type": "Settlement",
+      "settlement": true,
       "owner": "sumptown",
       "income": "D6x10 credits",
       "boon": "Recruit one Juve free each Downtime",
       "contested": false,
-      "x": 180,
-      "y": 95,
-      "r": 70,
-      "seed": 11,
+      "bordersInner": true,
+      "labelX": 673.35,
+      "labelY": 164.49,
+      "polygon": [
+        [
+          624.84,
+          64.41
+        ],
+        [
+          680,
+          57.57
+        ],
+        [
+          742.37,
+          55.79
+        ],
+        [
+          754.65,
+          57.24
+        ],
+        [
+          712.48,
+          265.45
+        ],
+        [
+          614.18,
+          286.7
+        ],
+        [
+          602.39,
+          281.8
+        ]
+      ],
+      "links": [
+        "the-chokestack",
+        "the-wire-yard"
+      ],
+      "notes": "Barge wharves and a century of silt. Everything coming down from above lands here first."
+    },
+    {
+      "id": "the-chokestack",
+      "name": "The Chokestack",
+      "section": "outer",
+      "type": "Slag Furnace",
+      "settlement": false,
+      "owner": "sumptown",
+      "income": "D6x10 credits",
+      "boon": "Free Brute hire this cycle",
+      "contested": false,
+      "bordersInner": true,
+      "labelX": 819.83,
+      "labelY": 181.64,
+      "polygon": [
+        [
+          712.48,
+          265.45
+        ],
+        [
+          754.65,
+          57.24
+        ],
+        [
+          804.28,
+          63.08
+        ],
+        [
+          863.14,
+          81.16
+        ],
+        [
+          916.58,
+          109.17
+        ],
+        [
+          954.41,
+          137
+        ],
+        [
+          833.16,
+          320.88
+        ]
+      ],
       "links": [
         "rustfall-row",
-        "the-chokestack"
+        "sumptown"
       ],
-      "notes": "Where the sump barges tie up. Everything that enters the Reach passes through here first."
+      "notes": "The furnace still runs. Nobody admits to lighting it and nobody dares let it go out."
     },
     {
       "id": "rustfall-row",
       "name": "Rustfall Row",
+      "section": "outer",
       "type": "Old Ruins",
+      "settlement": false,
       "owner": null,
       "income": "D3x10 credits",
       "boon": "Search the ruins: one free Common item",
       "contested": true,
-      "x": 400,
-      "y": 95,
-      "r": 70,
-      "seed": 23,
+      "bordersInner": true,
+      "labelX": 953.25,
+      "labelY": 280.81,
+      "polygon": [
+        [
+          833.16,
+          320.88
+        ],
+        [
+          954.41,
+          137
+        ],
+        [
+          963.71,
+          143.85
+        ],
+        [
+          1005.96,
+          180.77
+        ],
+        [
+          1046.58,
+          216.13
+        ],
+        [
+          1080.53,
+          241.72
+        ],
+        [
+          945.28,
+          422.84
+        ],
+        [
+          837.97,
+          332.99
+        ]
+      ],
       "links": [
-        "sump-landing",
         "glass-dome",
-        "the-pit-market"
+        "the-chokestack"
       ],
       "notes": "Collapsed habs stacked nine deep. The footing is a liability and the snipers know it."
     },
     {
       "id": "glass-dome",
       "name": "The Glass Dome",
-      "type": "Water Still",
+      "section": "outer",
+      "type": "Settlement",
+      "settlement": true,
       "owner": "chymist-cult",
       "income": "D6x10 credits",
       "boon": "Clean water: ignore one Lasting Injury roll",
       "contested": false,
-      "x": 620,
-      "y": 95,
-      "r": 70,
-      "seed": 37,
+      "bordersInner": true,
+      "labelX": 1073.96,
+      "labelY": 356,
+      "polygon": [
+        [
+          945.28,
+          422.84
+        ],
+        [
+          1080.53,
+          241.72
+        ],
+        [
+          1089.25,
+          248.3
+        ],
+        [
+          1136.24,
+          278.23
+        ],
+        [
+          1187.18,
+          308.77
+        ],
+        [
+          1222.89,
+          332.56
+        ],
+        [
+          999.77,
+          465.81
+        ],
+        [
+          950,
+          433.14
+        ]
+      ],
       "links": [
         "rustfall-row",
-        "vent-nine",
-        "coil-gardens"
+        "the-still-rows"
       ],
-      "notes": "A cracked crystalflex dome. Condensation runs down the walls and the Chymists collect every drop."
+      "notes": "A cracked crystalflex dome over a working still. The Chymists moved in and the water got stranger."
     },
     {
-      "id": "vent-nine",
-      "name": "Vent Nine",
-      "type": "Vents",
-      "owner": null,
-      "income": "D3x10 credits",
-      "boon": "Infiltrate: one fighter deploys hidden",
-      "contested": false,
-      "x": 840,
-      "y": 95,
-      "r": 70,
-      "seed": 41,
-      "links": [
-        "glass-dome",
-        "the-brass-gallery",
-        "the-weeping-wall"
-      ],
-      "notes": "The up-hive draught comes through here. So does anything that wants in quietly."
-    },
-    {
-      "id": "the-brass-gallery",
-      "name": "The Brass Gallery",
-      "type": "Archeotech Vault",
-      "owner": "archeo-3",
+      "id": "the-still-rows",
+      "name": "The Still Rows",
+      "section": "outer",
+      "type": "Chem Works",
+      "settlement": false,
+      "owner": "chymist-cult",
       "income": "D6x10 credits",
-      "boon": "Rare trade roll at +1 when buying archeotech",
+      "boon": "One free chem or toxin weapon upgrade",
       "contested": false,
-      "x": 1040,
-      "y": 95,
-      "r": 70,
-      "seed": 157,
-      "links": [
-        "vent-nine",
-        "grudgehold"
+      "bordersInner": true,
+      "labelX": 1188.68,
+      "labelY": 451.05,
+      "polygon": [
+        [
+          999.77,
+          465.81
+        ],
+        [
+          1222.89,
+          332.56
+        ],
+        [
+          1238.94,
+          343.25
+        ],
+        [
+          1286.82,
+          383.99
+        ],
+        [
+          1326.29,
+          431.52
+        ],
+        [
+          1354.52,
+          484.7
+        ],
+        [
+          1358.98,
+          500.11
+        ],
+        [
+          1267.3,
+          525.45
+        ],
+        [
+          1029.35,
+          518.33
+        ]
       ],
-      "notes": "Three hundred metres of sealed brass doors. Team 3 has opened eleven of them and will not discuss the twelfth."
-    },
-    {
-      "id": "the-chokestack",
-      "name": "The Chokestack",
-      "type": "Slag Furnace",
-      "owner": null,
-      "income": "D6x10 credits",
-      "boon": "Free Brute hire this cycle",
-      "contested": false,
-      "x": 95,
-      "y": 255,
-      "r": 70,
-      "seed": 53,
       "links": [
-        "sump-landing",
-        "the-pit-market",
-        "sunken-nave"
-      ],
-      "notes": "Furnace still runs. Nobody admits to lighting it and nobody dares let it go out."
-    },
-    {
-      "id": "the-pit-market",
-      "name": "The Pit Market",
-      "type": "Trading Post",
-      "owner": "precinct-22",
-      "income": "D6x10 credits",
-      "boon": "Rare trade roll at +2",
-      "contested": false,
-      "x": 300,
-      "y": 255,
-      "r": 70,
-      "seed": 67,
-      "links": [
-        "rustfall-row",
-        "the-chokestack",
         "coil-gardens",
-        "the-wire-yard"
+        "glass-dome",
+        "relay-theta"
       ],
-      "notes": "Neutral ground by long tradition. Precinct 22 enforces that tradition at gunpoint, which everyone agrees is novel."
+      "notes": "Condensers in rows the length of a dome. Sola Dosis insists the fumes are therapeutic."
     },
     {
       "id": "coil-gardens",
       "name": "The Coil Gardens",
+      "section": "outer",
       "type": "Promethium Cache",
+      "settlement": false,
       "owner": null,
       "income": "D6x10 credits",
       "boon": "One free flamer-class weapon",
       "contested": false,
-      "x": 510,
-      "y": 255,
-      "r": 70,
-      "seed": 79,
+      "bordersInner": true,
+      "labelX": 1105.81,
+      "labelY": 587.66,
+      "polygon": [
+        [
+          1029.35,
+          518.33
+        ],
+        [
+          1267.3,
+          525.45
+        ],
+        [
+          1067.03,
+          688.04
+        ],
+        [
+          1016.97,
+          695
+        ],
+        [
+          1015.67,
+          691.99
+        ]
+      ],
       "links": [
-        "glass-dome",
-        "the-pit-market",
-        "the-weeping-wall",
-        "black-ledger"
+        "relay-theta",
+        "the-brass-gallery",
+        "the-still-rows"
       ],
       "notes": "Pipework grown into a thicket. Van Saar say they understand it. They do not."
     },
     {
-      "id": "the-weeping-wall",
-      "name": "The Weeping Wall",
-      "type": "Collapsed Dome",
-      "owner": null,
-      "income": "D3x10 credits",
-      "boon": "Defender gains one extra barricade",
+      "id": "relay-theta",
+      "name": "Relay Station Theta",
+      "section": "outer",
+      "type": "Settlement",
+      "settlement": true,
+      "owner": "archeo-3",
+      "income": "D6x10 credits",
+      "boon": "Reroll one Intelligence test per battle",
       "contested": false,
-      "x": 720,
-      "y": 255,
-      "r": 70,
-      "seed": 83,
-      "links": [
-        "vent-nine",
-        "coil-gardens",
-        "cinder-yard",
-        "the-long-drop"
+      "bordersInner": false,
+      "labelX": 1263.86,
+      "labelY": 640.89,
+      "polygon": [
+        [
+          1376.8,
+          600
+        ],
+        [
+          1373.75,
+          658.72
+        ],
+        [
+          1362.89,
+          716.73
+        ],
+        [
+          1346.83,
+          765.27
+        ],
+        [
+          1067.03,
+          688.04
+        ],
+        [
+          1267.3,
+          525.45
+        ],
+        [
+          1358.98,
+          500.11
+        ],
+        [
+          1370.96,
+          541.52
+        ]
       ],
-      "notes": "Groundwater bleeds through the rockcrete in sheets. The sound carries for a kilometre."
+      "links": [
+        "coil-gardens",
+        "the-brass-gallery",
+        "the-still-rows"
+      ],
+      "notes": "The Tech-Acquisitor party staged out of Theta. Their last transmission was a set of coordinates and nothing else."
     },
     {
-      "id": "cinder-yard",
-      "name": "Cinder Yard",
-      "type": "Mine Workings",
-      "owner": null,
+      "id": "the-brass-gallery",
+      "name": "The Brass Gallery",
+      "section": "outer",
+      "type": "Archeotech Vault",
+      "settlement": false,
+      "owner": "archeo-3",
       "income": "D6x10 credits",
-      "boon": "Extra D6x10 credits if held two cycles running",
+      "boon": "Rare trade roll at +1 when buying archeotech",
       "contested": false,
-      "x": 930,
-      "y": 255,
-      "r": 70,
-      "seed": 97,
-      "links": [
-        "the-weeping-wall",
-        "grudgehold",
-        "scrap-shoals"
+      "bordersInner": true,
+      "labelX": 1188.92,
+      "labelY": 786.23,
+      "polygon": [
+        [
+          1346.83,
+          765.27
+        ],
+        [
+          1344.22,
+          773.16
+        ],
+        [
+          1317.16,
+          826.81
+        ],
+        [
+          1281.41,
+          876.25
+        ],
+        [
+          1242.2,
+          915.81
+        ],
+        [
+          1009.53,
+          721.86
+        ],
+        [
+          1016.97,
+          695
+        ],
+        [
+          1067.03,
+          688.04
+        ]
       ],
-      "notes": "Ash heaps that shift without warning. Three gangs are still down there somewhere."
+      "links": [
+        "coil-gardens",
+        "relay-theta",
+        "vent-nine"
+      ],
+      "notes": "Three hundred metres of sealed brass doors. Team 3 has opened eleven and will not discuss the twelfth."
+    },
+    {
+      "id": "vent-nine",
+      "name": "Vent Nine",
+      "section": "outer",
+      "type": "Vents",
+      "settlement": false,
+      "owner": null,
+      "income": "D3x10 credits",
+      "boon": "Infiltrate: one fighter deploys hidden",
+      "contested": false,
+      "bordersInner": true,
+      "labelX": 1071.4,
+      "labelY": 880.21,
+      "polygon": [
+        [
+          1242.2,
+          915.81
+        ],
+        [
+          1237.77,
+          920.28
+        ],
+        [
+          1188.24,
+          958.45
+        ],
+        [
+          1135.37,
+          991.34
+        ],
+        [
+          1081.27,
+          1020.19
+        ],
+        [
+          1074.06,
+          1023.63
+        ],
+        [
+          933.76,
+          857.66
+        ],
+        [
+          934.5,
+          829.38
+        ],
+        [
+          1009.53,
+          721.86
+        ]
+      ],
+      "links": [
+        "grudgehold",
+        "the-brass-gallery"
+      ],
+      "notes": "The up-hive draught comes through here. So does anything that wants in quietly."
     },
     {
       "id": "grudgehold",
       "name": "Grudgehold",
-      "type": "Fortified Hold",
+      "section": "outer",
+      "type": "Settlement",
+      "settlement": true,
       "owner": "bjorn-prospectors",
-      "income": "D3x10 credits",
+      "income": "D6x10 credits",
       "boon": "Defender deploys one free fortification",
       "contested": false,
-      "x": 1115,
-      "y": 255,
-      "r": 70,
-      "seed": 163,
+      "bordersInner": true,
+      "labelX": 927.59,
+      "labelY": 990.77,
+      "polygon": [
+        [
+          1074.06,
+          1023.63
+        ],
+        [
+          1026.86,
+          1046.12
+        ],
+        [
+          971.85,
+          1069.22
+        ],
+        [
+          915.39,
+          1088.37
+        ],
+        [
+          857.08,
+          1101.66
+        ],
+        [
+          837.26,
+          1103.63
+        ],
+        [
+          829.29,
+          931.36
+        ],
+        [
+          933.76,
+          857.66
+        ]
+      ],
       "links": [
-        "the-brass-gallery",
         "cinder-yard",
-        "the-stilt-rows"
+        "vent-nine"
       ],
-      "notes": "Cut into the rock and ledgered to the last slate. The Prospectors did not ask whose rock it was."
+      "notes": "Cut into the rock and ledgered to the last slate. Bjorn filed the claim first and has the paperwork to prove it."
     },
     {
-      "id": "sunken-nave",
-      "name": "The Sunken Nave",
-      "type": "Shrine",
-      "owner": "mycelium",
-      "income": "D3x10 credits",
-      "boon": "Reroll one Leadership test per battle",
-      "contested": false,
-      "x": 140,
-      "y": 425,
-      "r": 70,
-      "seed": 103,
-      "links": [
-        "the-chokestack",
-        "the-wire-yard",
-        "ratgut-tunnels"
-      ],
-      "notes": "Cawdor built it, something else kept it. The candles are always lit and nobody sees who."
-    },
-    {
-      "id": "the-wire-yard",
-      "name": "The Wire Yard",
-      "type": "Workshop",
-      "owner": null,
+      "id": "cinder-yard",
+      "name": "Cinder Yard",
+      "section": "outer",
+      "type": "Mine Workings",
+      "settlement": false,
+      "owner": "bjorn-prospectors",
       "income": "D6x10 credits",
-      "boon": "One free weapon upgrade each Downtime",
+      "boon": "Extra D6x10 credits if held two cycles running",
       "contested": false,
-      "x": 350,
-      "y": 425,
-      "r": 70,
-      "seed": 167,
-      "links": [
-        "the-pit-market",
-        "sunken-nave",
-        "black-ledger",
-        "the-bonepipe"
+      "bordersInner": true,
+      "labelX": 764.52,
+      "labelY": 1012.02,
+      "polygon": [
+        [
+          837.26,
+          1103.63
+        ],
+        [
+          797.48,
+          1107.58
+        ],
+        [
+          738.01,
+          1106.12
+        ],
+        [
+          722.3,
+          1104.26
+        ],
+        [
+          676.18,
+          947.82
+        ],
+        [
+          711.67,
+          919.56
+        ],
+        [
+          829.29,
+          931.36
+        ]
       ],
-      "notes": "Spools of cable taller than a Goliath. Whoever untangles it first gets rich or gets cut in half."
+      "links": [
+        "grudgehold",
+        "holestead"
+      ],
+      "notes": "Ash heaps that shift without warning. Three gangs are still down there somewhere."
     },
     {
-      "id": "black-ledger",
-      "name": "The Black Ledger",
-      "type": "Gambling Den",
-      "owner": null,
+      "id": "holestead",
+      "name": "Holestead",
+      "section": "outer",
+      "type": "Settlement",
+      "settlement": true,
+      "owner": "resource-extraction",
       "income": "D6x10 credits",
-      "boon": "Wager credits before a battle",
+      "boon": "Hangers-on cost 20 credits less",
       "contested": false,
-      "x": 560,
-      "y": 425,
-      "r": 70,
-      "seed": 109,
-      "links": [
-        "coil-gardens",
-        "the-wire-yard",
-        "the-long-drop",
-        "the-bonepipe"
+      "bordersInner": true,
+      "labelX": 639.01,
+      "labelY": 1042.75,
+      "polygon": [
+        [
+          722.3,
+          1104.26
+        ],
+        [
+          680,
+          1099.27
+        ],
+        [
+          623.79,
+          1090.45
+        ],
+        [
+          568.19,
+          1083.05
+        ],
+        [
+          516.8,
+          1079.23
+        ],
+        [
+          674.46,
+          947.82
+        ],
+        [
+          676.18,
+          947.82
+        ]
       ],
-      "notes": "Debts here are recorded in a real book. People have died trying to edit it."
-    },
-    {
-      "id": "the-long-drop",
-      "name": "The Long Drop",
-      "type": "Toll Crossing",
-      "owner": null,
-      "income": "D6x10 credits",
-      "boon": "Charge a 20 credit toll per rival battle",
-      "contested": true,
-      "x": 775,
-      "y": 425,
-      "r": 70,
-      "seed": 127,
       "links": [
-        "the-weeping-wall",
-        "black-ledger",
-        "scrap-shoals",
-        "corpse-farm"
+        "cinder-yard",
+        "scrap-shoals"
       ],
-      "notes": "One gantry across a shaft of unknown depth. Whoever holds the near end holds the Reach."
+      "notes": "Company housing, company store, company arbitration. Resource Extraction filed second and disputes that it matters."
     },
     {
       "id": "scrap-shoals",
       "name": "The Scrap Shoals",
+      "section": "outer",
       "type": "Mine Workings",
+      "settlement": false,
       "owner": "resource-extraction",
       "income": "D6x10 credits",
       "boon": "Sell scrap: +D3x10 credits each Downtime",
       "contested": false,
-      "x": 985,
-      "y": 425,
-      "r": 70,
-      "seed": 173,
+      "bordersInner": true,
+      "labelX": 545.47,
+      "labelY": 983.64,
+      "polygon": [
+        [
+          516.8,
+          1079.23
+        ],
+        [
+          510.99,
+          1078.8
+        ],
+        [
+          450.19,
+          1076.78
+        ],
+        [
+          438,
+          1076.17
+        ],
+        [
+          505.67,
+          908.92
+        ],
+        [
+          574.67,
+          892.68
+        ],
+        [
+          674.46,
+          947.82
+        ]
+      ],
       "links": [
-        "cinder-yard",
-        "the-long-drop",
-        "the-stilt-rows",
+        "holestead",
         "the-drowned-stair"
       ],
-      "notes": "Quarterly extraction targets are posted at the entrance. Somebody has been correcting them in blood."
+      "notes": "Quarterly extraction targets are posted at the gate. Somebody has been correcting them in blood."
     },
     {
-      "id": "the-stilt-rows",
-      "name": "The Stilt Rows",
+      "id": "the-drowned-stair",
+      "name": "The Drowned Stair",
+      "section": "outer",
+      "type": "Sump Sea Edge",
+      "settlement": false,
+      "owner": null,
+      "income": "D3x10 credits",
+      "boon": "Scavenge: D3 free Common items",
+      "contested": false,
+      "bordersInner": true,
+      "labelX": 432.75,
+      "labelY": 933.88,
+      "polygon": [
+        [
+          438,
+          1076.17
+        ],
+        [
+          392.48,
+          1073.89
+        ],
+        [
+          388.14,
+          807.68
+        ],
+        [
+          399.52,
+          793.08
+        ],
+        [
+          426.1,
+          796.67
+        ],
+        [
+          505.67,
+          908.92
+        ]
+      ],
+      "links": [
+        "precinct-house-22",
+        "scrap-shoals",
+        "the-weeping-wall"
+      ],
+      "notes": "The stairs go down into the sump and keep going. Low tide reveals about forty more steps."
+    },
+    {
+      "id": "the-weeping-wall",
+      "name": "The Weeping Wall",
+      "section": "outer",
+      "type": "Collapsed Dome",
+      "settlement": false,
+      "owner": null,
+      "income": "D3x10 credits",
+      "boon": "Defender gains one extra barricade",
+      "contested": false,
+      "bordersInner": false,
+      "labelX": 305.55,
+      "labelY": 961.59,
+      "polygon": [
+        [
+          392.48,
+          1073.89
+        ],
+        [
+          385.47,
+          1073.54
+        ],
+        [
+          318.92,
+          1064.4
+        ],
+        [
+          254.67,
+          1045.38
+        ],
+        [
+          197.47,
+          1014.68
+        ],
+        [
+          152.4,
+          974.6
+        ],
+        [
+          388.14,
+          807.68
+        ]
+      ],
+      "links": [
+        "precinct-house-22",
+        "the-drowned-stair"
+      ],
+      "notes": "Groundwater bleeds through the rockcrete in sheets. The sound carries for a kilometre."
+    },
+    {
+      "id": "precinct-house-22",
+      "name": "Precinct House 22",
+      "section": "outer",
       "type": "Settlement",
+      "settlement": true,
+      "owner": "precinct-22",
+      "income": "D6x10 credits",
+      "boon": "One free Palanite patrol escort each Downtime",
+      "contested": false,
+      "bordersInner": true,
+      "labelX": 229.9,
+      "labelY": 823.7,
+      "polygon": [
+        [
+          152.4,
+          974.6
+        ],
+        [
+          150.83,
+          973.2
+        ],
+        [
+          115.78,
+          923.99
+        ],
+        [
+          90.65,
+          870.71
+        ],
+        [
+          72.24,
+          816.34
+        ],
+        [
+          71.73,
+          814.46
+        ],
+        [
+          324.99,
+          684.61
+        ],
+        [
+          326.87,
+          685.95
+        ],
+        [
+          399.52,
+          793.08
+        ],
+        [
+          388.14,
+          807.68
+        ]
+      ],
+      "links": [
+        "the-drowned-stair",
+        "the-pit-market",
+        "the-weeping-wall"
+      ],
+      "notes": "Built to hold two hundred. Currently holds nineteen, a vox relay and a great deal of institutional stubbornness."
+    },
+    {
+      "id": "the-pit-market",
+      "name": "The Pit Market",
+      "section": "outer",
+      "type": "Trading Post",
+      "settlement": false,
+      "owner": "precinct-22",
+      "income": "D6x10 credits",
+      "boon": "Rare trade roll at +2",
+      "contested": false,
+      "bordersInner": true,
+      "labelX": 170.86,
+      "labelY": 678.72,
+      "polygon": [
+        [
+          71.73,
+          814.46
+        ],
+        [
+          57.44,
+          762.29
+        ],
+        [
+          44.71,
+          708.6
+        ],
+        [
+          34.57,
+          654.63
+        ],
+        [
+          32.06,
+          630.12
+        ],
+        [
+          300.63,
+          569.32
+        ],
+        [
+          324.99,
+          684.61
+        ]
+      ],
+      "links": [
+        "black-ledger",
+        "precinct-house-22"
+      ],
+      "notes": "Neutral ground by long tradition. Precinct 22 enforces that tradition at gunpoint, which everyone agrees is novel."
+    },
+    {
+      "id": "black-ledger",
+      "name": "The Black Ledger",
+      "section": "outer",
+      "type": "Gambling Den",
+      "settlement": false,
       "owner": null,
       "income": "D6x10 credits",
-      "boon": "Recruit one Ganger at half cost each Downtime",
+      "boon": "Wager credits before a battle",
       "contested": false,
-      "x": 1140,
-      "y": 425,
-      "r": 70,
-      "seed": 179,
-      "links": [
-        "grudgehold",
-        "scrap-shoals",
-        "holestead"
+      "bordersInner": true,
+      "labelX": 146,
+      "labelY": 526.67,
+      "polygon": [
+        [
+          32.06,
+          630.12
+        ],
+        [
+          28.97,
+          600
+        ],
+        [
+          30.05,
+          544.99
+        ],
+        [
+          38.95,
+          490.42
+        ],
+        [
+          55.35,
+          437.16
+        ],
+        [
+          69.44,
+          405.12
+        ],
+        [
+          315.72,
+          517.13
+        ],
+        [
+          300.63,
+          569.32
+        ]
       ],
-      "notes": "Habs on girders over the sump. The lowest row floods twice a cycle and is let cheap."
+      "links": [
+        "sunken-nave",
+        "the-pit-market"
+      ],
+      "notes": "Debts here are recorded in a real book. People have died trying to edit it."
+    },
+    {
+      "id": "sunken-nave",
+      "name": "The Sunken Nave",
+      "section": "outer",
+      "type": "Settlement",
+      "settlement": true,
+      "owner": "mycelium",
+      "income": "D6x10 credits",
+      "boon": "Reroll one Leadership test per battle",
+      "contested": false,
+      "bordersInner": true,
+      "labelX": 230.52,
+      "labelY": 432.33,
+      "polygon": [
+        [
+          69.44,
+          405.12
+        ],
+        [
+          77.98,
+          385.7
+        ],
+        [
+          90.09,
+          363.88
+        ],
+        [
+          356.71,
+          412.88
+        ],
+        [
+          343.16,
+          492.85
+        ],
+        [
+          315.72,
+          517.13
+        ]
+      ],
+      "links": [
+        "black-ledger",
+        "ratgut-tunnels"
+      ],
+      "notes": "Cawdor built it, something else kept it. Mycelium Section took the crypts and left the nave to the candles."
     },
     {
       "id": "ratgut-tunnels",
       "name": "Ratgut Tunnels",
+      "section": "outer",
       "type": "Tunnels",
-      "owner": null,
+      "settlement": false,
+      "owner": "mycelium",
       "income": "D3x10 credits",
       "boon": "Move freely between territories you hold",
       "contested": false,
-      "x": 250,
-      "y": 600,
-      "r": 70,
-      "seed": 131,
+      "bordersInner": true,
+      "labelX": 235.09,
+      "labelY": 321.67,
+      "polygon": [
+        [
+          90.09,
+          363.88
+        ],
+        [
+          105.5,
+          336.11
+        ],
+        [
+          137.44,
+          288.45
+        ],
+        [
+          174.28,
+          243.33
+        ],
+        [
+          216.96,
+          202.07
+        ],
+        [
+          225.73,
+          195.68
+        ],
+        [
+          370.26,
+          360.8
+        ],
+        [
+          356.71,
+          412.88
+        ]
+      ],
       "links": [
         "sunken-nave",
         "the-bonepipe"
@@ -449,91 +1550,365 @@
     {
       "id": "the-bonepipe",
       "name": "The Bonepipe",
+      "section": "outer",
       "type": "Rogue Doc",
+      "settlement": false,
       "owner": null,
       "income": "D3x10 credits",
       "boon": "One free medical escort each Downtime",
       "contested": false,
-      "x": 470,
-      "y": 600,
-      "r": 70,
-      "seed": 137,
+      "bordersInner": true,
+      "labelX": 391.13,
+      "labelY": 230,
+      "polygon": [
+        [
+          225.73,
+          195.68
+        ],
+        [
+          265.93,
+          166.4
+        ],
+        [
+          320.49,
+          137.62
+        ],
+        [
+          378.84,
+          115.81
+        ],
+        [
+          438.82,
+          99.61
+        ],
+        [
+          439.11,
+          99.55
+        ],
+        [
+          541,
+          275.76
+        ],
+        [
+          475.2,
+          328.43
+        ],
+        [
+          370.26,
+          360.8
+        ]
+      ],
       "links": [
-        "the-wire-yard",
-        "black-ledger",
         "ratgut-tunnels",
-        "corpse-farm"
+        "the-wire-yard"
       ],
-      "notes": "The doc is good. The doc is also the reason several gangers answer to new names."
+      "notes": "The doc is good. The doc is also why several gangers answer to new names."
     },
     {
-      "id": "corpse-farm",
-      "name": "The Corpse Farm",
-      "type": "Corpse Farm",
+      "id": "the-wire-yard",
+      "name": "The Wire Yard",
+      "section": "outer",
+      "type": "Workshop",
+      "settlement": false,
+      "owner": null,
+      "income": "D6x10 credits",
+      "boon": "One free weapon upgrade each Downtime",
+      "contested": false,
+      "bordersInner": true,
+      "labelX": 549.6,
+      "labelY": 162.4,
+      "polygon": [
+        [
+          439.11,
+          99.55
+        ],
+        [
+          498.85,
+          86.8
+        ],
+        [
+          558.59,
+          75.46
+        ],
+        [
+          618.7,
+          65.17
+        ],
+        [
+          624.84,
+          64.41
+        ],
+        [
+          602.39,
+          281.8
+        ],
+        [
+          541,
+          275.76
+        ]
+      ],
+      "links": [
+        "sumptown",
+        "the-bonepipe"
+      ],
+      "notes": "Spools of cable taller than a Goliath. Whoever untangles it first gets rich or gets cut in half."
+    },
+    {
+      "id": "i-01",
+      "name": null,
+      "designation": "I-01",
+      "section": "inner",
+      "surveyed": false,
+      "type": null,
+      "owner": null,
+      "hidden": false,
+      "income": null,
+      "boon": null,
+      "contested": false,
+      "polygon": null,
+      "links": [],
+      "notes": null
+    },
+    {
+      "id": "i-02",
+      "name": null,
+      "designation": "I-02",
+      "section": "inner",
+      "surveyed": false,
+      "type": null,
+      "owner": null,
+      "hidden": false,
+      "income": null,
+      "boon": null,
+      "contested": false,
+      "polygon": null,
+      "links": [],
+      "notes": null
+    },
+    {
+      "id": "i-03",
+      "name": null,
+      "designation": "I-03",
+      "section": "inner",
+      "surveyed": false,
+      "type": null,
+      "owner": null,
+      "hidden": false,
+      "income": null,
+      "boon": null,
+      "contested": false,
+      "polygon": null,
+      "links": [],
+      "notes": null
+    },
+    {
+      "id": "i-04",
+      "name": null,
+      "designation": "I-04",
+      "section": "inner",
+      "surveyed": false,
+      "type": null,
+      "owner": null,
+      "hidden": false,
+      "income": null,
+      "boon": null,
+      "contested": false,
+      "polygon": null,
+      "links": [],
+      "notes": null
+    },
+    {
+      "id": "i-05",
+      "name": null,
+      "designation": "I-05",
+      "section": "inner",
+      "surveyed": false,
+      "type": null,
+      "owner": null,
+      "hidden": false,
+      "income": null,
+      "boon": null,
+      "contested": false,
+      "polygon": null,
+      "links": [],
+      "notes": null
+    },
+    {
+      "id": "i-06",
+      "name": null,
+      "designation": "I-06",
+      "section": "inner",
+      "surveyed": false,
+      "type": null,
+      "owner": null,
+      "hidden": false,
+      "income": null,
+      "boon": null,
+      "contested": false,
+      "polygon": null,
+      "links": [],
+      "notes": null
+    },
+    {
+      "id": "i-07",
+      "name": null,
+      "designation": "I-07",
+      "section": "inner",
+      "surveyed": false,
+      "type": null,
+      "owner": null,
+      "hidden": false,
+      "income": null,
+      "boon": null,
+      "contested": false,
+      "polygon": null,
+      "links": [],
+      "notes": null
+    },
+    {
+      "id": "i-08",
+      "name": null,
+      "designation": "I-08",
+      "section": "inner",
+      "surveyed": false,
+      "type": null,
+      "owner": null,
+      "hidden": false,
+      "income": null,
+      "boon": null,
+      "contested": false,
+      "polygon": null,
+      "links": [],
+      "notes": null
+    },
+    {
+      "id": "i-09",
+      "name": null,
+      "designation": "I-09",
+      "section": "inner",
+      "surveyed": false,
+      "type": null,
+      "owner": null,
+      "hidden": false,
+      "income": null,
+      "boon": null,
+      "contested": false,
+      "polygon": null,
+      "links": [],
+      "notes": null
+    },
+    {
+      "id": "i-10",
+      "name": null,
+      "designation": "I-10",
+      "section": "inner",
+      "surveyed": false,
+      "type": null,
+      "owner": null,
+      "hidden": false,
+      "income": null,
+      "boon": null,
+      "contested": false,
+      "polygon": null,
+      "links": [],
+      "notes": null
+    },
+    {
+      "id": "i-11",
+      "name": null,
+      "designation": "I-11",
+      "section": "inner",
+      "surveyed": false,
+      "type": null,
+      "owner": null,
+      "hidden": false,
+      "income": null,
+      "boon": null,
+      "contested": false,
+      "polygon": null,
+      "links": [],
+      "notes": null
+    },
+    {
+      "id": "i-12",
+      "name": null,
+      "designation": "I-12",
+      "section": "inner",
+      "surveyed": false,
+      "type": null,
+      "owner": null,
+      "hidden": false,
+      "income": null,
+      "boon": null,
+      "contested": false,
+      "polygon": null,
+      "links": [],
+      "notes": null
+    },
+    {
+      "id": "i-13",
+      "name": null,
+      "designation": "I-13",
+      "section": "inner",
+      "surveyed": false,
+      "type": null,
       "owner": "malstrain",
-      "income": "D6x10 credits",
-      "boon": "Sell the dead: +10 credits per fighter taken out of action",
+      "hidden": true,
+      "income": null,
+      "boon": null,
       "contested": false,
-      "x": 690,
-      "y": 600,
-      "r": 70,
-      "seed": 181,
-      "links": [
-        "the-long-drop",
-        "the-bonepipe",
-        "the-drowned-stair"
-      ],
-      "notes": "Production is up. Nobody who audits the Farm comes back to file the report."
+      "polygon": null,
+      "links": [],
+      "notes": null
     },
     {
-      "id": "the-drowned-stair",
-      "name": "The Drowned Stair",
-      "type": "Sump Sea Edge",
+      "id": "i-14",
+      "name": null,
+      "designation": "I-14",
+      "section": "inner",
+      "surveyed": false,
+      "type": null,
       "owner": null,
-      "income": "D3x10 credits",
-      "boon": "Scavenge: D3 free Common items",
+      "hidden": false,
+      "income": null,
+      "boon": null,
       "contested": false,
-      "x": 900,
-      "y": 600,
-      "r": 70,
-      "seed": 149,
-      "links": [
-        "scrap-shoals",
-        "corpse-farm",
-        "holestead"
-      ],
-      "notes": "The stairs go down into the sump and keep going. Low tide reveals about forty more steps."
+      "polygon": null,
+      "links": [],
+      "notes": null
     },
     {
-      "id": "holestead",
-      "name": "Holestead",
-      "type": "Settlement",
+      "id": "i-15",
+      "name": null,
+      "designation": "I-15",
+      "section": "inner",
+      "surveyed": false,
+      "type": null,
       "owner": null,
-      "income": "D6x10 credits",
-      "boon": "Hangers-on cost 20 credits less",
+      "hidden": false,
+      "income": null,
+      "boon": null,
       "contested": false,
-      "x": 1090,
-      "y": 600,
-      "r": 70,
-      "seed": 191,
-      "links": [
-        "the-stilt-rows",
-        "the-drowned-stair"
-      ],
-      "notes": "A dug-out hab cluster at the far edge. Everyone here is from somewhere else and says so often."
+      "polygon": null,
+      "links": [],
+      "notes": null
+    },
+    {
+      "id": "i-16",
+      "name": null,
+      "designation": "I-16",
+      "section": "inner",
+      "surveyed": false,
+      "type": null,
+      "owner": "malstrain",
+      "hidden": true,
+      "income": null,
+      "boon": null,
+      "contested": false,
+      "polygon": null,
+      "links": [],
+      "notes": null
     }
   ],
-  "battles": [
-    {
-      "date": "2026-11-08",
-      "scenario": "Stake a Claim",
-      "territory": "rustfall-row",
-      "participants": [
-        "sumptown",
-        "chymist-cult"
-      ],
-      "winner": null,
-      "summary": "Opening skirmish over Rustfall Row ended with both gangs withdrawing. The Row stays contested."
-    }
-  ]
+  "battles": []
 }

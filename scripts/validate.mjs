@@ -30,6 +30,20 @@ else {
   }
 }
 
+/* --- map block --- */
+const isPolygon = (p) =>
+  Array.isArray(p) && p.length >= 3 &&
+  p.every((pt) => Array.isArray(pt) && pt.length === 2 && pt.every((n) => typeof n === 'number'));
+
+const map = data.map;
+if (!map || typeof map !== 'object') err('map: missing object');
+else {
+  if (!map.viewBox) err('map.viewBox: required');
+  if (!isPolygon(map.boundary)) err('map.boundary: expected an array of at least 3 [x, y] points');
+  if (!map.inner || typeof map.inner !== 'object') err('map.inner: missing object');
+  else if (!isPolygon(map.inner.polygon)) err('map.inner.polygon: expected an array of [x, y] points');
+}
+
 /* --- gangs --- */
 const gangs = Array.isArray(data.gangs) ? data.gangs : [];
 if (!gangs.length) err('gangs: expected at least one gang');
@@ -44,7 +58,7 @@ for (const [i, g] of gangs.entries()) {
   if (!g.name) err(`${at}.name: required`);
   if (!g.color) err(`${at}.color: required`);
   else if (!/^#[0-9a-fA-F]{6}$/.test(g.color)) err(`${at}.color: expected #rrggbb, got "${g.color}"`);
-  if (!g.short) warn(`${at}.short: no short map label; the map will fall back to the house name (${g.name})`);
+  if (!g.short) warn(`${at}.short: no short map label; the map falls back to the house name (${g.name})`);
   if (g.rating != null && typeof g.rating !== 'number') err(`${at}.rating: must be a number`);
 }
 
@@ -53,16 +67,39 @@ const territories = Array.isArray(data.territories) ? data.territories : [];
 if (!territories.length) err('territories: expected at least one territory');
 
 const terrIds = new Set();
+let outerCount = 0, innerCount = 0, settlements = 0;
+
 for (const [i, t] of territories.entries()) {
   const at = `territories[${i}]`;
   if (!t.id) err(`${at}.id: required`);
   else if (terrIds.has(t.id)) err(`${at}.id: duplicate "${t.id}"`);
   else terrIds.add(t.id);
 
-  if (!t.name) err(`${at}.name: required`);
-  for (const k of ['x', 'y']) {
-    if (typeof t[k] !== 'number') err(`${at}.${k}: required number (map coordinate)`);
+  if (t.section !== 'outer' && t.section !== 'inner') {
+    err(`${at}.section: expected "outer" or "inner", got ${JSON.stringify(t.section)}`);
   }
+
+  if (t.section === 'outer') {
+    outerCount++;
+    if (!t.name) err(`${at}.name: required for a charted territory`);
+    if (!isPolygon(t.polygon)) err(`${at}.polygon: a charted territory needs a shape`);
+    for (const k of ['labelX', 'labelY']) {
+      if (typeof t[k] !== 'number') err(`${at}.${k}: required number (label position)`);
+    }
+    if (t.settlement) settlements++;
+  }
+
+  if (t.section === 'inner') {
+    innerCount++;
+    if (!t.designation && !t.name) err(`${at}: an inner holding needs a designation or a name`);
+    if (t.surveyed && !isPolygon(t.polygon)) {
+      err(`${at}: marked surveyed but has no polygon — draw its shape or set surveyed to false`);
+    }
+    if (!t.surveyed && t.polygon) {
+      warn(`${at}: has a polygon but is not marked surveyed; it will not be drawn`);
+    }
+  }
+
   if (t.owner != null && !gangIds.has(t.owner)) {
     err(`${at}.owner: "${t.owner}" is not a known gang id`);
   }
@@ -71,7 +108,7 @@ for (const [i, t] of territories.entries()) {
   }
 }
 
-/* --- link integrity (must be symmetrical, or the map draws odd gaps) --- */
+/* --- link integrity (shared borders are mutual) --- */
 const linkSet = new Set();
 for (const t of territories) {
   for (const other of t.links ?? []) {
@@ -86,7 +123,28 @@ for (const t of territories) {
 for (const key of linkSet) {
   const [a, b] = key.split('>');
   if (!linkSet.has(`${b}>${a}`)) {
-    warn(`link "${a}" -> "${b}" is one-way; add "${a}" to "${b}".links for a symmetrical map`);
+    warn(`border "${a}" -> "${b}" is one-way; add "${a}" to "${b}".links`);
+  }
+}
+
+/* --- gateways --- */
+const gatewayIds = new Set();
+for (const [i, gw] of (data.gateways ?? []).entries()) {
+  const at = `gateways[${i}]`;
+  if (!gw.id) err(`${at}.id: required`);
+  else if (gatewayIds.has(gw.id) || terrIds.has(gw.id)) err(`${at}.id: duplicate "${gw.id}"`);
+  else gatewayIds.add(gw.id);
+
+  if (!gw.name) err(`${at}.name: required`);
+  for (const k of ['x', 'y']) {
+    if (typeof gw[k] !== 'number') err(`${at}.${k}: required number (map position)`);
+  }
+  if (!Array.isArray(gw.from) || !gw.from.length) err(`${at}.from: expected at least one territory id`);
+  for (const f of gw.from ?? []) {
+    if (!terrIds.has(f)) err(`${at}.from: "${f}" is not a known territory id`);
+  }
+  if (gw.discoveredBy && !gangIds.has(gw.discoveredBy)) {
+    err(`${at}.discoveredBy: "${gw.discoveredBy}" is not a known gang id`);
   }
 }
 
@@ -101,6 +159,15 @@ for (const [i, b] of (data.battles ?? []).entries()) {
   }
 }
 
+/* --- campaign shape: one settlement per non-hidden gang --- */
+const openGangs = gangs.filter((g) => !g.hidden);
+for (const g of openGangs) {
+  const owned = territories.filter((t) => t.owner === g.id && t.section === 'outer');
+  if (!owned.some((t) => t.settlement)) {
+    warn(`gang "${g.id}" holds no settlement in the charted section`);
+  }
+}
+
 /* --- report --- */
 for (const w of warnings) console.warn(`WARN  ${w}`);
 for (const e of errors) console.error(`FAIL  ${e}`);
@@ -111,7 +178,8 @@ if (errors.length) {
 }
 
 console.log(
-  `OK    ${path}: ${gangs.length} gangs, ${territories.length} territories, ` +
+  `OK    ${path}: ${gangs.length} gangs, ${outerCount} charted (${settlements} settlements), ` +
+  `${innerCount} deep holdings, ${(data.gateways ?? []).length} ways in, ` +
   `${(data.battles ?? []).length} battles` +
   (warnings.length ? ` (${warnings.length} warning(s))` : '')
 );

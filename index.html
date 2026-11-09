@@ -31,20 +31,33 @@
 <main class="layout">
 
   <section class="map-panel" aria-label="Sector map">
-    <svg id="map" viewBox="0 0 1230 710" role="img" aria-labelledby="map-title">
+    <svg id="map" viewBox="0 0 1360 1200" role="img" aria-labelledby="map-title">
       <title id="map-title">Territory map of the campaign sector</title>
       <defs>
-        <pattern id="hatch-contested" width="8" height="8" patternTransform="rotate(45)" patternUnits="userSpaceOnUse">
-          <rect width="8" height="8" fill="transparent"></rect>
-          <line x1="0" y1="0" x2="0" y2="8" stroke="#f0d060" stroke-width="3" opacity="0.5"></line>
+        <pattern id="hatch-contested" width="9" height="9" patternTransform="rotate(45)" patternUnits="userSpaceOnUse">
+          <rect width="9" height="9" fill="transparent"></rect>
+          <line x1="0" y1="0" x2="0" y2="9" stroke="#f0d060" stroke-width="3.5" opacity="0.45"></line>
         </pattern>
-        <filter id="glow" x="-40%" y="-40%" width="180%" height="180%">
-          <feGaussianBlur stdDeviation="6" result="b"></feGaussianBlur>
+        <pattern id="fog-deep" width="26" height="26" patternUnits="userSpaceOnUse">
+          <rect width="26" height="26" fill="transparent"></rect>
+          <circle cx="6" cy="6" r="1.4" fill="#6f7ba4" opacity="0.30"></circle>
+          <circle cx="19" cy="14" r="1.1" fill="#6f7ba4" opacity="0.22"></circle>
+          <circle cx="11" cy="21" r="1.2" fill="#6f7ba4" opacity="0.26"></circle>
+        </pattern>
+        <radialGradient id="deep-glow" cx="50%" cy="50%" r="50%">
+          <stop offset="0%" stop-color="#1d2436"></stop>
+          <stop offset="70%" stop-color="#151a27"></stop>
+          <stop offset="100%" stop-color="#0f121b"></stop>
+        </radialGradient>
+        <filter id="glow" x="-30%" y="-30%" width="160%" height="160%">
+          <feGaussianBlur stdDeviation="7" result="b"></feGaussianBlur>
           <feMerge><feMergeNode in="b"></feMergeNode><feMergeNode in="SourceGraphic"></feMergeNode></feMerge>
         </filter>
       </defs>
-      <g id="layer-links"></g>
-      <g id="layer-zones"></g>
+      <g id="layer-boundary"></g>
+      <g id="layer-land"></g>
+      <g id="layer-inner"></g>
+      <g id="layer-gateways"></g>
       <g id="layer-labels"></g>
     </svg>
 
@@ -67,6 +80,8 @@
       </table>
       <p class="hint" id="neutral-count"></p>
     </section>
+
+    <section id="uncharted-card" class="card"></section>
 
     <section class="card">
       <h2>Battle Log</h2>
