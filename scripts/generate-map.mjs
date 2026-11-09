@@ -29,18 +29,45 @@ const rnd = mulberry32(20261108);
 const jit = (amp) => (rnd() - 0.5) * 2 * amp;
 const r2 = (n) => Math.round(n * 100) / 100;
 
-/* ---------- sector outline: an irregular but convex closed ring ---------- */
+/* ---------- sector outline: a district, not an oval ----------
 
-const boundary = [];
-for (let i = 0; i < 28; i++) {
-  const a = (i / 28) * Math.PI * 2;
-  const f = 1
-    + Math.sin(a * 2 + 1.3) * 0.055
-    + Math.sin(a * 3 + 0.7) * 0.042
-    + Math.sin(a * 5 + 2.1) * 0.026
-    + Math.sin(a * 7 + 4.3) * 0.015;
-  boundary.push([r2(CX + Math.cos(a) * BOUND_RX * f), r2(CY + Math.sin(a) * BOUND_RY * f)]);
+   The outline is the intersection of sixteen half-planes whose normals sit on
+   sixteenths of a turn. Every wall therefore runs on one of sixteen bearings
+   and the perimeter comes out as long straight runs meeting at blunt corners,
+   which reads as a district boundary rather than a circle. Some half-planes
+   are pushed out of reach, so their neighbours merge into one long wall and
+   the sector loses its even, rounded sides. */
+
+const WALLS = Number(process.env.WALLS ?? 10);
+const WALL_PHASE = 0.21;      // rotate the whole set off the axes
+const WALL_SLACK = Number(process.env.WALL_SLACK ?? 0.24);     // how much a wall may sit in or out
+const WALL_DROP = Number(process.env.WALL_DROP ?? 0.14);       // chance a wall is pushed out of reach entirely
+
+function clipLine(poly, nx, ny, h) {
+  /* keep the side where p . n <= h */
+  const out = [];
+  for (let i = 0; i < poly.length; i++) {
+    const a = poly[i], b = poly[(i + 1) % poly.length];
+    const da = a[0] * nx + a[1] * ny - h, db = b[0] * nx + b[1] * ny - h;
+    if (da <= 0) out.push(a);
+    if ((da < 0 && db > 0) || (da > 0 && db < 0)) {
+      const t = da / (da - db);
+      out.push([a[0] + (b[0] - a[0]) * t, a[1] + (b[1] - a[1]) * t]);
+    }
+  }
+  return out;
 }
+
+let hull = [[CX - 3000, CY - 3000], [CX + 3000, CY - 3000], [CX + 3000, CY + 3000], [CX - 3000, CY + 3000]];
+for (let i = 0; i < WALLS; i++) {
+  const a = (i / WALLS) * Math.PI * 2 + WALL_PHASE;
+  const nx = Math.cos(a), ny = Math.sin(a);
+  const support = Math.hypot(BOUND_RX * nx, BOUND_RY * ny);
+  const gain = 1 / Math.cos(Math.PI / WALLS);   // keep the area the corners would cost
+  const f = rnd() < WALL_DROP ? 1.9 : gain * (1 - WALL_SLACK + rnd() * WALL_SLACK * 1.6);
+  hull = clipLine(hull, nx, ny, CX * nx + CY * ny + support * f);
+}
+const boundary = dedupe(hull);
 
 /* ---------- polygon helpers ---------- */
 
@@ -212,8 +239,8 @@ const TUNNEL = 16;    // gap where a tunnel runs
    can be pushed outward without breaking a border. Each rim block reaches out
    its own distance, which gives the sector a ragged edge rather than the
    silhouette of the circle it was clipped to. */
-const REACH_MIN = 4;
-const REACH_VAR = 48;
+const REACH_MIN = -22;
+const REACH_VAR = 74;
 
 /* planar graph of every cell edge */
 const edgeUse = new Map();
