@@ -171,6 +171,19 @@ for (const g of openGangs) {
   }
 }
 
+/* --- campaign shape: two starting and three unclaimed territories per player --- */
+{
+  const players = gangs.length;
+  const held = territories.filter((t) => t.owner).length;
+  const open = territories.length - held;
+  if (held !== players * 2) {
+    warn(`${held} held territories for ${players} players; two each would be ${players * 2}`);
+  }
+  if (open !== players * 3) {
+    warn(`${open} unclaimed territories for ${players} players; three each would be ${players * 3}`);
+  }
+}
+
 /* --- report --- */
 for (const w of warnings) console.warn(`WARN  ${w}`);
 for (const e of errors) console.error(`FAIL  ${e}`);

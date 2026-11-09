@@ -5,6 +5,7 @@ build step, no framework: a static page that reads one JSON file.
 
 - **Map** — territories drawn as regions sharing borders, coloured by holder
 - **Two sections** — the charted ring, and an uncharted deep nobody has surveyed
+- **Forty territories** — two starting and three unclaimed per player
 - **Standings** — territories held, gang rating, reputation
 - **Discord** — a GitHub Action announces every change to the campaign channel
 
@@ -16,8 +17,8 @@ with a star) plus one more territory alongside it — and the other eight are
 unclaimed ground lying between gangs rather than behind them. Every holding on
 the ring borders the deep, so no gang is further from it than another.
 
-**The Uncharted Deep (16 holdings).** The ground is charted into sixteen
-holdings, `I-01`…`I-16`, but they are blank: no name, type, income or boon.
+**The Uncharted Deep (18 holdings).** The ground is charted into eighteen
+holdings, `I-01`…`I-18`, but they are blank: no name, type, income or boon.
 Those get filled in as gangs push in and survey them. `surveyed` means "we
 know what it is", not "we know where it is" — every holding already has a
 shape.
@@ -30,10 +31,10 @@ reached from Grudgehold or Holestead.
 ## Arbitrator's secrets
 
 Anything with `"hidden": true` is invisible to players: it never appears on the
-map, in the standings, in the legend or in the battle log.
+map, in the standings or in the legend.
 
 The Malstrain Genestealers are hidden, and so are the two deep holdings they
-start on (`I-13` and `I-16`). Players see sixteen identical unsurveyed
+start on (`I-14` and `I-17`). Players see eighteen identical unsurveyed
 holdings. When you want the reveal, delete `"hidden": true` from the gang and
 from those territories, and they appear everywhere at once.
 

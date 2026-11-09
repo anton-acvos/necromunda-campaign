@@ -193,11 +193,11 @@ function spaceAlong(poly, n, startFrac) {
 }
 
 const OUT_F = 0.795;                 // charted ring, as a fraction of the way to the wall
-const INA_F = 0.46, INB_F = 0.17;    // the deep, outer and inner
+const INA_F = 0.50, INB_F = 0.21;    // the deep, outer and inner
 const DEEP_DX = -12, DEEP_DY = 8;    // the deep sits a little off-centre
-const INNER_COUNT = 16;
-const RING_A = 11;
-const MALSTRAIN = new Set(['I-13', 'I-16']);
+const INNER_COUNT = 18;   /* two unclaimed per player, plus the two Malstrain holdings */
+const RING_A = 12;
+const MALSTRAIN = new Set(['I-14', 'I-17']);
 
 const jitPt = (p, amp) => [p[0] + jit(amp), p[1] + jit(amp)];
 

@@ -10,7 +10,7 @@
     "notice": "Two ways into the deep section are known. Neither has been walked all the way in."
   },
   "map": {
-    "viewBox": "10 85 1641 1309",
+    "viewBox": "-29 68 1681 1356",
     "boundary": [
       [
         1632.83,
@@ -50,128 +50,140 @@
       "blurb": "Sealed until a Tech-Acquisitor party cut their way in and stopped transmitting. Only the border is mapped; what lies inside gets surveyed as gangs push into it.",
       "polygon": [
         [
-          558.51,
-          1139.7
+          559.83,
+          1129.32
         ],
         [
-          514.48,
-          1117.43
+          488.71,
+          1114.49
         ],
         [
-          473.31,
-          975.52
+          434.09,
+          1041.18
         ],
         [
-          289.11,
-          945.46
+          310.3,
+          1026.59
         ],
         [
-          283.31,
-          928.56
+          274.09,
+          980.99
         ],
         [
-          328.91,
-          789.97
+          269.99,
+          893.47
         ],
         [
-          318.14,
-          754.71
+          325.22,
+          824.59
         ],
         [
-          369.87,
-          635.51
+          318.33,
+          731.3
         ],
         [
-          353.15,
-          581.06
+          361.03,
+          673.03
         ],
         [
-          410.38,
-          451.01
+          344.57,
+          566.9
         ],
         [
-          488.73,
-          438.17
+          415.44,
+          471.95
         ],
         [
-          545.2,
-          363.47
+          415.46,
+          451.76
         ],
         [
-          712.21,
-          351.05
+          550.1,
+          363.92
         ],
         [
-          713.76,
-          352.36
+          625.76,
+          380.97
         ],
         [
-          858.3,
-          333.4
+          692.64,
+          318.79
         ],
         [
-          962.82,
-          483.14
+          829.42,
+          343.4
         ],
         [
-          999.13,
-          467.82
+          864.74,
+          419.24
         ],
         [
-          1183.84,
-          544.54
+          1017.83,
+          411.91
         ],
         [
-          1198.83,
-          621.21
+          1077.53,
+          532.06
         ],
         [
-          1300.95,
-          668.31
+          1171.7,
+          527.48
         ],
         [
-          1334.65,
-          741.17
+          1263.89,
+          651.43
         ],
         [
-          1258.44,
-          841.5
+          1290.04,
+          654.47
         ],
         [
-          1242.18,
-          847.49
+          1376.59,
+          750.91
         ],
         [
-          1175.15,
-          976.45
+          1375.86,
+          768.09
         ],
         [
-          1092.43,
-          1002.19
+          1282.49,
+          875.57
         ],
         [
-          1057.09,
-          1084.07
+          1212.14,
+          882.12
         ],
         [
-          923.33,
-          1126.49
+          1156.15,
+          1003.01
         ],
         [
-          880.32,
-          1099.84
+          1059.43,
+          1032.17
         ],
         [
-          739.29,
-          1153.97
+          1036.65,
+          1093.35
         ],
         [
-          660.55,
-          1108.29
+          925.59,
+          1147.71
+        ],
+        [
+          834.38,
+          1098.55
+        ],
+        [
+          745.99,
+          1158.12
+        ],
+        [
+          607.48,
+          1104.41
         ]
       ],
-      "labelX": 778.72,
-      "labelY": 750.85
+      "labelX": 776.12,
+      "labelY": 756.96
     }
   },
   "gangs": [
@@ -274,8 +286,8 @@
       ],
       "discoveredBy": "archeo-3",
       "contested": false,
-      "x": 410.38,
-      "y": 451.01,
+      "x": 344.57,
+      "y": 566.9,
       "notes": "A Tech-Acquisitor party cut through here and went in. Contact was lost on the second day. The coordinates were the last thing anyone sent up."
     },
     {
@@ -287,8 +299,8 @@
       ],
       "discoveredBy": "bjorn-prospectors",
       "contested": true,
-      "x": 858.3,
-      "y": 333.4,
+      "x": 692.64,
+      "y": 318.79,
       "notes": "Found by Ironhead prospectors. Two companies have filed property rights over the shaft, neither claim struck out. Nobody has gone past the first chamber."
     }
   ],
@@ -301,44 +313,44 @@
       "gateway": "theta-breach",
       "path": [
         [
-          315.34,
-          1253.82
+          360.41,
+          1279.87
         ],
         [
-          354.69,
-          1185.75
+          488.71,
+          1114.49
         ],
         [
-          281.71,
-          966.74
+          434.09,
+          1041.18
         ],
         [
-          289.11,
-          945.46
+          310.3,
+          1026.59
         ],
         [
-          283.31,
-          928.56
+          274.09,
+          980.99
         ],
         [
-          328.91,
-          789.97
+          269.99,
+          893.47
         ],
         [
-          318.14,
-          754.71
+          325.22,
+          824.59
         ],
         [
-          369.87,
-          635.51
+          318.33,
+          731.3
         ],
         [
-          353.15,
-          581.06
+          361.03,
+          673.03
         ],
         [
-          410.38,
-          451.01
+          344.57,
+          566.9
         ]
       ],
       "notes": "A maintenance bore running the width of the Reach. It was cut to service the relay and it still ends at the breach the Tech-Acquisitors made."
@@ -351,40 +363,48 @@
       "gateway": "prospectors-cut",
       "path": [
         [
-          1550.08,
-          647.8
+          1539.93,
+          917.5
         ],
         [
-          1384.82,
-          747.36
+          1375.86,
+          768.09
         ],
         [
-          1334.65,
-          741.17
+          1376.59,
+          750.91
         ],
         [
-          1300.95,
-          668.31
+          1290.04,
+          654.47
         ],
         [
-          1198.83,
-          621.21
+          1263.89,
+          651.43
         ],
         [
-          1183.84,
-          544.54
+          1171.7,
+          527.48
         ],
         [
-          999.13,
-          467.82
+          1077.53,
+          532.06
         ],
         [
-          962.82,
-          483.14
+          1017.83,
+          411.91
         ],
         [
-          858.3,
-          333.4
+          864.74,
+          419.24
+        ],
+        [
+          829.42,
+          343.4
+        ],
+        [
+          692.64,
+          318.79
         ]
       ],
       "notes": "A collapsed transit shaft walked end to end only twice. It comes out at the shaft both Ironhead companies have filed on."
@@ -403,32 +423,28 @@
       "boon": "Recruit one Juve free each Downtime",
       "contested": false,
       "bordersInner": true,
-      "labelX": 468.36,
-      "labelY": 1238.89,
+      "labelX": 484.25,
+      "labelY": 1282.39,
       "polygon": [
         [
-          558.64,
-          1340.4
+          576.03,
+          1395.26
         ],
         [
-          489.02,
-          1347.68
+          476.67,
+          1405.64
         ],
         [
-          332.03,
-          1256.92
+          343.02,
+          1328.39
         ],
         [
-          373.81,
-          1184.64
+          501.71,
+          1123.84
         ],
         [
-          514.25,
-          1124.6
-        ],
-        [
-          552.14,
-          1143.76
+          553.77,
+          1134.7
         ]
       ],
       "tunnels": [
@@ -436,7 +452,6 @@
       ],
       "links": [
         "i-01",
-        "rustfall-row",
         "the-chokestack",
         "the-wire-yard"
       ],
@@ -454,28 +469,28 @@
       "boon": "Free Brute hire this cycle",
       "contested": false,
       "bordersInner": true,
-      "labelX": 402.49,
-      "labelY": 1055.48,
+      "labelX": 343.48,
+      "labelY": 1162.9,
       "polygon": [
         [
-          506.63,
-          1113.72
+          319.16,
+          1306.95
         ],
         [
-          367.39,
-          1173.25
+          231.06,
+          1256.02
         ],
         [
-          298.61,
-          966.85
+          311.15,
+          1042.8
         ],
         [
-          302.97,
-          954.31
+          425.38,
+          1056.26
         ],
         [
-          468.21,
-          981.27
+          468.61,
+          1114.29
         ]
       ],
       "tunnels": [
@@ -484,7 +499,6 @@
       "links": [
         "i-01",
         "i-02",
-        "precinct-house-22",
         "rustfall-row",
         "sumptown"
       ],
@@ -501,33 +515,37 @@
       "income": "D3x10 credits",
       "boon": "Search the ruins: one free Common item",
       "contested": true,
-      "bordersInner": false,
-      "labelX": 222.68,
-      "labelY": 1139.31,
+      "bordersInner": true,
+      "labelX": 187.51,
+      "labelY": 1084.88,
       "polygon": [
         [
-          282.42,
-          1278.79
+          238.53,
+          1199.16
         ],
         [
-          56.21,
-          1148.02
+          42.69,
+          1085.95
         ],
         [
-          270.45,
-          983.57
+          49.07,
+          1056
         ],
         [
-          337.23,
-          1183.98
+          261.97,
+          991.46
+        ],
+        [
+          299.03,
+          1038.12
         ]
       ],
       "tunnels": [
         "theta-run"
       ],
       "links": [
+        "i-02",
         "precinct-house-22",
-        "sumptown",
         "the-chokestack"
       ],
       "notes": "Collapsed habs stacked nine deep. The footing is a liability and the snipers know it."
@@ -544,32 +562,24 @@
       "boon": "One free Palanite patrol escort each Downtime",
       "contested": false,
       "bordersInner": true,
-      "labelX": 133.58,
-      "labelY": 982.04,
+      "labelX": 116.13,
+      "labelY": 939.19,
       "polygon": [
         [
-          73.84,
-          1118.1
+          -10.38,
+          1060.44
         ],
         [
-          28.86,
-          1092.1
+          41.93,
+          815
         ],
         [
-          78.69,
-          858.33
+          254.02,
+          894.43
         ],
         [
-          266.62,
-          929.21
-        ],
-        [
-          272.18,
-          945.43
-        ],
-        [
-          262.49,
-          973.3
+          257.98,
+          979.08
         ]
       ],
       "tunnels": [
@@ -578,7 +588,6 @@
       "links": [
         "i-02",
         "rustfall-row",
-        "the-chokestack",
         "the-pit-market"
       ],
       "notes": "Built to hold two hundred. Currently holds nineteen, a vox relay and a great deal of institutional stubbornness."
@@ -595,28 +604,28 @@
       "boon": "Rare trade roll at +2",
       "contested": false,
       "bordersInner": true,
-      "labelX": 208.84,
-      "labelY": 814.4,
+      "labelX": 198.99,
+      "labelY": 785.45,
       "polygon": [
         [
-          103.46,
-          853.78
+          81.1,
+          815.79
         ],
         [
-          131.14,
-          723.91
+          106.26,
+          697.77
         ],
         [
-          302.48,
-          758.2
+          302.55,
+          734.93
         ],
         [
-          312.13,
-          789.79
+          308.8,
+          819.49
         ],
         [
-          270.36,
-          916.73
+          258.5,
+          882.23
         ]
       ],
       "tunnels": [
@@ -642,28 +651,28 @@
       "boon": "One free flamer-class weapon",
       "contested": false,
       "bordersInner": true,
-      "labelX": 234.19,
-      "labelY": 645.86,
+      "labelX": 210.87,
+      "labelY": 623.24,
       "polygon": [
         [
-          117.8,
-          707.99
+          76.05,
+          678.82
         ],
         [
-          152.89,
-          543.32
+          111.17,
+          514
         ],
         [
-          337.38,
-          584.22
+          328.79,
+          569.58
         ],
         [
-          352.84,
-          634.56
+          344.2,
+          668.93
         ],
         [
-          304.74,
-          745.4
+          305.17,
+          722.19
         ]
       ],
       "tunnels": [
@@ -689,37 +698,40 @@
       "boon": "Reroll one Intelligence test per battle",
       "contested": false,
       "bordersInner": true,
-      "labelX": 246.94,
-      "labelY": 472.1,
+      "labelX": 260.41,
+      "labelY": 466.43,
       "polygon": [
         [
-          102.64,
-          518.87
+          114.9,
+          501.53
         ],
         [
-          132,
-          381.12
+          139.97,
+          383.9
         ],
         [
-          364.77,
-          412.05
+          366.7,
+          410.56
         ],
         [
-          395.62,
-          444.82
+          408.96,
+          454.38
         ],
         [
-          339.89,
-          571.46
+          408.94,
+          469.79
+        ],
+        [
+          341.96,
+          559.53
         ]
       ],
-      "tunnels": [
-        "theta-run"
-      ],
+      "tunnels": [],
       "links": [
         "coil-gardens",
         "generatorium",
         "i-04",
+        "i-05",
         "vent-nine"
       ],
       "notes": "Team 3 cut their way in here and named it for the work. The Tech-Acquisitor party staged out of this hold; their last transmission was a set of coordinates and nothing else."
@@ -736,28 +748,28 @@
       "boon": "Repair one damaged item free each Downtime",
       "contested": false,
       "bordersInner": false,
-      "labelX": 277.19,
-      "labelY": 274.52,
+      "labelX": 275.96,
+      "labelY": 279.95,
       "polygon": [
         [
-          141.3,
-          369.24
+          147.96,
+          371.75
         ],
         [
-          169.67,
-          236.14
+          176.07,
+          239.84
         ],
         [
-          262.44,
-          152.7
+          265.44,
+          159.46
         ],
         [
-          389.58,
-          139.41
+          374.55,
+          148.05
         ],
         [
-          362.16,
-          398.59
+          363.58,
+          397.11
         ]
       ],
       "tunnels": [],
@@ -779,39 +791,34 @@
       "boon": "Infiltrate: one fighter deploys hidden",
       "contested": false,
       "bordersInner": true,
-      "labelX": 447.27,
-      "labelY": 321.68,
+      "labelX": 445.4,
+      "labelY": 300.68,
       "polygon": [
         [
-          397.1,
-          191.87
+          386.6,
+          170
         ],
         [
-          467.97,
-          184.47
+          473.27,
+          160.94
         ],
         [
-          537.82,
-          362.46
+          542.3,
+          361.25
         ],
         [
-          485.11,
-          432.18
+          416.41,
+          443.38
         ],
         [
-          412.74,
-          444.04
-        ],
-        [
-          374.7,
-          403.63
+          376.39,
+          401.88
         ]
       ],
       "tunnels": [],
       "links": [
         "cinder-yard",
         "generatorium",
-        "i-04",
         "i-05",
         "reclaimers-breach"
       ],
@@ -829,30 +836,35 @@
       "boon": "Extra D6x10 credits if held two cycles running",
       "contested": false,
       "bordersInner": true,
-      "labelX": 599.38,
-      "labelY": 225.75,
+      "labelX": 599.8,
+      "labelY": 262.81,
       "polygon": [
         [
-          549.5,
-          356.63
+          555.06,
+          358.38
         ],
         [
-          459.69,
-          127.8
+          495.47,
+          185.46
         ],
         [
-          688.43,
-          103.88
+          666.99,
+          167.52
         ],
         [
-          705.27,
-          345.05
+          685.77,
+          316.3
+        ],
+        [
+          623.84,
+          373.88
         ]
       ],
       "tunnels": [],
       "links": [
         "grudgehold",
         "i-05",
+        "i-06",
         "vent-nine"
       ],
       "notes": "Ash heaps that shift without warning. Three gangs are still down there somewhere."
@@ -869,39 +881,36 @@
       "boon": "Defender deploys one free fortification",
       "contested": false,
       "bordersInner": true,
-      "labelX": 798.73,
-      "labelY": 233.71,
+      "labelX": 785.81,
+      "labelY": 198.16,
       "polygon": [
         [
-          718.5,
-          347.86
+          697.24,
+          303.36
         ],
         [
-          704.05,
-          140.94
+          671.81,
+          101.97
         ],
         [
-          810.29,
-          129.83
+          819.53,
+          86.54
         ],
         [
-          927.33,
-          197.49
+          925.4,
+          147.75
         ],
         [
-          854.23,
-          327.38
-        ],
-        [
-          715.76,
-          345.54
+          830.55,
+          327.35
         ]
       ],
-      "tunnels": [],
+      "tunnels": [
+        "the-deadfall"
+      ],
       "links": [
         "cinder-yard",
         "holestead",
-        "i-05",
         "i-06"
       ],
       "notes": "Cut into the rock and ledgered to the last slate. Bjorn filed the claim first and has the paperwork to prove it."
@@ -918,28 +927,28 @@
       "boon": "Hangers-on cost 20 credits less",
       "contested": false,
       "bordersInner": true,
-      "labelX": 981.67,
-      "labelY": 313.2,
+      "labelX": 956.74,
+      "labelY": 306.85,
       "polygon": [
         [
-          871.14,
-          323.84
+          842.24,
+          333.04
         ],
         [
-          955.01,
-          174.8
+          922.86,
+          180.39
         ],
         [
-          1102,
-          259.78
+          1086.37,
+          274.91
         ],
         [
-          1001.51,
-          449.45
+          1019.32,
+          395.82
         ],
         [
-          968.53,
-          463.37
+          874.71,
+          402.74
         ]
       ],
       "tunnels": [
@@ -965,24 +974,28 @@
       "boon": "Sell scrap: +D3x10 credits each Downtime",
       "contested": false,
       "bordersInner": true,
-      "labelX": 1151.34,
-      "labelY": 403.51,
+      "labelX": 1134.72,
+      "labelY": 408.28,
       "polygon": [
         [
-          1012.68,
-          456.12
+          1030.77,
+          401.99
         ],
         [
-          1112.77,
-          267.21
+          1095.49,
+          285.28
         ],
         [
-          1296.14,
-          373.21
+          1257.58,
+          378.99
         ],
         [
-          1187.11,
-          528.57
+          1174.19,
+          511.34
+        ],
+        [
+          1087.2,
+          515.57
         ]
       ],
       "tunnels": [
@@ -991,6 +1004,7 @@
       "links": [
         "holestead",
         "i-07",
+        "i-08",
         "the-drowned-stair"
       ],
       "notes": "Quarterly extraction targets are posted at the gate. Somebody has been correcting them in blood."
@@ -1007,36 +1021,36 @@
       "boon": "Scavenge: D3 free Common items",
       "contested": false,
       "bordersInner": true,
-      "labelX": 1307.28,
-      "labelY": 518.02,
+      "labelX": 1283.4,
+      "labelY": 524.14,
       "polygon": [
         [
-          1198.32,
-          535.22
+          1185,
+          518.56
         ],
         [
-          1304.4,
-          384.08
+          1249.7,
+          415.88
         ],
         [
-          1439.05,
-          461.92
+          1395.12,
+          499.95
         ],
         [
-          1304.35,
-          652.26
+          1293.48,
+          638.76
         ],
         [
-          1212.96,
-          610.11
+          1272.6,
+          636.34
         ]
       ],
       "tunnels": [
         "the-deadfall"
       ],
       "links": [
-        "i-07",
         "i-08",
+        "i-09",
         "scrap-shoals",
         "the-weeping-wall"
       ],
@@ -1054,32 +1068,28 @@
       "boon": "Defender gains one extra barricade",
       "contested": false,
       "bordersInner": true,
-      "labelX": 1432.65,
-      "labelY": 615.87,
+      "labelX": 1447.85,
+      "labelY": 598.19,
       "polygon": [
         [
-          1314.76,
-          660.05
+          1304.14,
+          646.22
         ],
         [
-          1436.96,
-          487.37
+          1446.96,
+          451.16
         ],
         [
-          1513.8,
-          531.79
+          1542.22,
+          506.23
         ],
         [
-          1555.6,
-          625.8
+          1591.18,
+          616.36
         ],
         [
-          1381.3,
-          730.8
-        ],
-        [
-          1345.44,
-          726.38
+          1386.2,
+          737.67
         ]
       ],
       "tunnels": [
@@ -1087,9 +1097,8 @@
       ],
       "links": [
         "glass-dome",
-        "i-08",
-        "the-drowned-stair",
-        "the-still-rows"
+        "i-09",
+        "the-drowned-stair"
       ],
       "notes": "Groundwater bleeds through the rockcrete in sheets. The sound carries for a kilometre."
     },
@@ -1104,31 +1113,36 @@
       "income": "D6x10 credits",
       "boon": "Clean water: ignore one Lasting Injury roll",
       "contested": false,
-      "bordersInner": false,
-      "labelX": 1516.39,
-      "labelY": 792.23,
+      "bordersInner": true,
+      "labelX": 1524.02,
+      "labelY": 780.38,
       "polygon": [
         [
-          1617.46,
-          830.66
+          1633.98,
+          834.19
         ],
         [
-          1516.9,
-          921.11
+          1552.59,
+          907.39
         ],
         [
-          1399.73,
-          757.06
+          1392.16,
+          761.3
         ],
         [
-          1545.65,
-          669.15
+          1392.69,
+          748.94
+        ],
+        [
+          1553.72,
+          653.64
         ]
       ],
       "tunnels": [
         "the-deadfall"
       ],
       "links": [
+        "i-09",
         "the-still-rows",
         "the-weeping-wall"
       ],
@@ -1146,28 +1160,24 @@
       "boon": "One free chem or toxin weapon upgrade",
       "contested": false,
       "bordersInner": true,
-      "labelX": 1406.01,
-      "labelY": 892.63,
+      "labelX": 1418.21,
+      "labelY": 925.07,
       "polygon": [
         [
-          1545.01,
-          982.84
+          1557.83,
+          955.44
         ],
         [
-          1475.92,
-          1044.97
+          1433.64,
+          1067.12
         ],
         [
-          1267.09,
-          840.86
+          1290.83,
+          875.88
         ],
         [
-          1330.92,
-          756.83
-        ],
-        [
-          1388.69,
-          763.96
+          1370.17,
+          784.55
         ]
       ],
       "tunnels": [
@@ -1176,8 +1186,7 @@
       "links": [
         "black-ledger",
         "glass-dome",
-        "i-08",
-        "the-weeping-wall"
+        "i-09"
       ],
       "notes": "Condensers in rows the length of a dome. Sola Dosis insists the fumes are therapeutic."
     },
@@ -1193,34 +1202,34 @@
       "boon": "Wager credits before a battle",
       "contested": false,
       "bordersInner": true,
-      "labelX": 1306.92,
-      "labelY": 990.74,
+      "labelX": 1287.75,
+      "labelY": 1014.91,
       "polygon": [
         [
-          1445.08,
-          1033
+          1420.78,
+          1071.62
         ],
         [
-          1346.09,
-          1122.03
+          1325.68,
+          1157.15
         ],
         [
-          1183.23,
-          974.99
+          1163.99,
+          1001.54
         ],
         [
-          1246.79,
-          852.72
+          1216.47,
+          888.25
         ],
         [
-          1256.83,
-          849.02
+          1279.46,
+          882.38
         ]
       ],
       "tunnels": [],
       "links": [
-        "i-08",
         "i-09",
+        "i-10",
         "sunken-nave",
         "the-still-rows"
       ],
@@ -1238,35 +1247,35 @@
       "boon": "Reroll one Leadership test per battle",
       "contested": false,
       "bordersInner": true,
-      "labelX": 1187.66,
-      "labelY": 1111.49,
+      "labelX": 1163.37,
+      "labelY": 1129.78,
       "polygon": [
         [
-          1333.08,
-          1127.79
+          1300.1,
+          1150.57
         ],
         [
-          1186.5,
-          1259.61
+          1166.03,
+          1271.15
         ],
         [
-          1064.49,
-          1083.34
+          1043.92,
+          1092.46
         ],
         [
-          1097.21,
-          1007.51
+          1064.4,
+          1037.46
         ],
         [
-          1173.54,
-          983.76
+          1154.38,
+          1010.33
         ]
       ],
       "tunnels": [],
       "links": [
         "black-ledger",
-        "i-09",
         "i-10",
+        "i-11",
         "ratgut-tunnels"
       ],
       "notes": "Cawdor built it, something else kept it. Mycelium Section took the crypts and left the nave to the candles."
@@ -1283,33 +1292,33 @@
       "boon": "Move freely between territories you hold",
       "contested": false,
       "bordersInner": true,
-      "labelX": 1028.1,
-      "labelY": 1199.19,
+      "labelX": 1028.92,
+      "labelY": 1240.3,
       "polygon": [
         [
-          1156.16,
-          1238.62
+          1170.91,
+          1301.33
         ],
         [
-          1122.13,
-          1269.23
+          1146.26,
+          1323.5
         ],
         [
-          941.82,
-          1288.08
+          937.94,
+          1345.28
         ],
         [
-          930.19,
-          1131.13
+          932.21,
+          1151.71
         ],
         [
-          1054.48,
-          1091.72
+          1034.46,
+          1101.66
         ]
       ],
       "tunnels": [],
       "links": [
-        "i-10",
+        "i-11",
         "sunken-nave",
         "the-bonepipe"
       ],
@@ -1327,34 +1336,34 @@
       "boon": "One free medical escort each Downtime",
       "contested": false,
       "bordersInner": true,
-      "labelX": 840.41,
-      "labelY": 1248.04,
+      "labelX": 839.48,
+      "labelY": 1246.95,
       "polygon": [
         [
-          933.92,
-          1357.46
+          925.26,
+          1356.45
         ],
         [
-          759.99,
-          1375.65
+          764.75,
+          1373.22
         ],
         [
-          746.08,
-          1158.33
+          752.69,
+          1161.44
         ],
         [
-          879.64,
-          1107.06
+          834.75,
+          1106.14
         ],
         [
-          917.09,
-          1130.27
+          919.2,
+          1151.65
         ]
       ],
       "tunnels": [],
       "links": [
-        "i-10",
         "i-11",
+        "i-12",
         "ratgut-tunnels",
         "the-wire-yard"
       ],
@@ -1372,34 +1381,34 @@
       "boon": "One free weapon upgrade each Downtime",
       "contested": false,
       "bordersInner": true,
-      "labelX": 651.25,
-      "labelY": 1235.12,
+      "labelX": 656.27,
+      "labelY": 1243.17,
       "polygon": [
         [
-          743.89,
-          1327.69
+          750.21,
+          1346.6
         ],
         [
-          571.82,
-          1345.68
+          586.39,
+          1363.73
         ],
         [
-          565.17,
-          1144.45
+          566.67,
+          1133.08
         ],
         [
-          659.75,
-          1115.34
+          607.88,
+          1111.54
         ],
         [
-          733.02,
-          1157.85
+          739.74,
+          1162.67
         ]
       ],
       "tunnels": [],
       "links": [
         "i-01",
-        "i-11",
+        "i-12",
         "sumptown",
         "the-bonepipe"
       ],
@@ -1417,39 +1426,46 @@
       "income": null,
       "boon": null,
       "contested": false,
-      "labelX": 579.84,
-      "labelY": 1011.88,
+      "labelX": 543.3,
+      "labelY": 1009.51,
       "polygon": [
         [
-          559.1,
-          1132.72
+          558.88,
+          1122.48
         ],
         [
-          519.94,
-          1112.91
+          506.48,
+          1111.55
         ],
         [
-          480.48,
-          976.89
+          446.59,
+          1031.17
         ],
         [
-          552.82,
-          883.77
+          520.39,
+          888.53
         ],
         [
-          674.7,
-          946.45
+          544.49,
+          877.84
         ],
         [
-          654.63,
-          1103.31
+          630.3,
+          971.49
+        ],
+        [
+          601.79,
+          1100.05
         ]
       ],
-      "tunnels": [],
+      "tunnels": [
+        "theta-run"
+      ],
       "links": [
         "i-02",
-        "i-11",
-        "i-13",
+        "i-03",
+        "i-12",
+        "i-14",
         "sumptown",
         "the-chokestack",
         "the-wire-yard"
@@ -1468,32 +1484,32 @@
       "income": null,
       "boon": null,
       "contested": false,
-      "labelX": 417.07,
-      "labelY": 886.08,
+      "labelX": 383.9,
+      "labelY": 932.34,
       "polygon": [
         [
-          470.55,
-          968.48
+          435.05,
+          1025.18
         ],
         [
-          304.64,
-          941.41
+          318.73,
+          1011.47
         ],
         [
-          300.19,
-          928.45
+          289.83,
+          975.08
         ],
         [
-          342.61,
-          799.54
+          286.26,
+          898.76
         ],
         [
-          534.39,
-          840.41
+          337.28,
+          835.13
         ],
         [
-          543.86,
-          874.12
+          506.33,
+          887.42
         ]
       ],
       "tunnels": [
@@ -1502,8 +1518,8 @@
       "links": [
         "i-01",
         "i-03",
-        "i-13",
         "precinct-house-22",
+        "rustfall-row",
         "the-chokestack",
         "the-pit-market"
       ],
@@ -1521,32 +1537,36 @@
       "income": null,
       "boon": null,
       "contested": false,
-      "labelX": 453.33,
-      "labelY": 736.67,
+      "labelX": 440.31,
+      "labelY": 774.57,
       "polygon": [
         [
-          344.63,
-          786.67
+          341.12,
+          822.71
         ],
         [
-          335.16,
-          755.67
+          334.72,
+          736
         ],
         [
-          383.2,
-          645
+          375.09,
+          680.92
         ],
         [
-          548.25,
-          680.17
+          511.1,
+          694.04
         ],
         [
-          564.74,
-          730.24
+          544.33,
+          853.87
         ],
         [
-          535.11,
-          827.27
+          540.8,
+          865.25
+        ],
+        [
+          515.26,
+          876.58
         ]
       ],
       "tunnels": [
@@ -1554,10 +1574,11 @@
       ],
       "links": [
         "coil-gardens",
+        "i-01",
         "i-02",
         "i-04",
-        "i-13",
         "i-14",
+        "i-15",
         "the-pit-market"
       ],
       "notes": null
@@ -1574,32 +1595,32 @@
       "income": null,
       "boon": null,
       "contested": false,
-      "labelX": 478.96,
-      "labelY": 562.96,
+      "labelX": 451.19,
+      "labelY": 595.87,
       "polygon": [
         [
-          385.6,
-          632.22
+          376.44,
+          667.99
         ],
         [
-          370.19,
-          582.05
+          359.37,
+          557.94
         ],
         [
-          426.1,
-          455.02
+          416.69,
+          481.14
         ],
         [
-          486.29,
-          445.16
+          570.12,
+          600
         ],
         [
-          594.23,
-          564.37
+          570.17,
+          596.86
         ],
         [
-          549.42,
-          667.13
+          513.27,
+          681.19
         ]
       ],
       "tunnels": [
@@ -1609,9 +1630,9 @@
         "coil-gardens",
         "i-03",
         "i-05",
-        "i-14",
-        "reclaimers-breach",
-        "vent-nine"
+        "i-15",
+        "i-16",
+        "reclaimers-breach"
       ],
       "notes": null
     },
@@ -1627,41 +1648,41 @@
       "income": null,
       "boon": null,
       "contested": false,
-      "labelX": 620.73,
-      "labelY": 447.91,
+      "labelX": 549.54,
+      "labelY": 469.7,
       "polygon": [
         [
-          497.16,
-          437.8
+          421.94,
+          468.77
         ],
         [
-          548.61,
-          369.73
+          421.96,
+          455.28
         ],
         [
-          710.04,
-          357.73
+          551.35,
+          370.86
         ],
         [
-          707.38,
-          355.48
+          620.51,
+          386.45
         ],
         [
-          713.69,
-          518.07
+          648.72,
+          491.02
         ],
         [
-          603.82,
-          555.59
+          575.46,
+          587.69
         ]
       ],
       "tunnels": [],
       "links": [
         "cinder-yard",
-        "grudgehold",
         "i-04",
         "i-06",
-        "i-14",
+        "i-16",
+        "reclaimers-breach",
         "vent-nine"
       ],
       "notes": null
@@ -1678,44 +1699,44 @@
       "income": null,
       "boon": null,
       "contested": false,
-      "labelX": 816.43,
-      "labelY": 443.5,
+      "labelX": 742.56,
+      "labelY": 421.21,
       "polygon": [
         [
-          720.49,
-          358.03
+          633.06,
+          383.06
         ],
         [
-          844.62,
-          341.75
+          685.99,
+          333.85
         ],
         [
-          949.96,
-          492.67
+          818.42,
+          357.68
         ],
         [
-          939.6,
-          510.95
+          852.56,
+          430.98
         ],
         [
-          748.57,
-          531.91
+          819.99,
+          506.04
         ],
         [
-          726.73,
-          518.88
+          660.97,
+          486.49
         ]
       ],
       "tunnels": [
         "the-deadfall"
       ],
       "links": [
+        "cinder-yard",
         "grudgehold",
         "holestead",
         "i-05",
         "i-07",
-        "i-14",
-        "i-15"
+        "i-16"
       ],
       "notes": null
     },
@@ -1731,36 +1752,36 @@
       "income": null,
       "boon": null,
       "contested": false,
-      "labelX": 1065.45,
-      "labelY": 587.56,
+      "labelX": 952.4,
+      "labelY": 512.64,
       "polygon": [
         [
-          959.72,
-          501.82
+          864.88,
+          435.25
         ],
         [
-          999.18,
-          485.17
+          1008.15,
+          428.39
         ],
         [
-          1169.78,
-          556.03
+          1063.84,
+          540.46
         ],
         [
-          1183.5,
-          626.18
+          1008.86,
+          620.12
         ],
         [
-          1100.06,
-          700.6
+          1003.54,
+          621.01
         ],
         [
-          974.16,
-          615.33
+          837.38,
+          528.88
         ],
         [
-          950.54,
-          518.02
+          831.06,
+          513.18
         ]
       ],
       "tunnels": [
@@ -1770,10 +1791,10 @@
         "holestead",
         "i-06",
         "i-08",
-        "i-15",
         "i-16",
-        "scrap-shoals",
-        "the-drowned-stair"
+        "i-17",
+        "i-18",
+        "scrap-shoals"
       ],
       "notes": null
     },
@@ -1789,49 +1810,39 @@
       "income": null,
       "boon": null,
       "contested": false,
-      "labelX": 1214.28,
-      "labelY": 735.85,
+      "labelX": 1132.5,
+      "labelY": 636.82,
       "polygon": [
         [
-          1192.25,
-          635.79
+          1074.26,
+          548.24
         ],
         [
-          1288.9,
-          680.37
+          1163.95,
+          543.88
         ],
         [
-          1320.6,
-          748.92
+          1247.8,
+          656.61
         ],
         [
-          1254.41,
-          836.06
+          1133.54,
+          754.12
         ],
         [
-          1242.87,
-          840.31
-        ],
-        [
-          1109.59,
-          759.68
-        ],
-        [
-          1107.25,
-          711.6
+          1020.87,
+          625.6
         ]
       ],
       "tunnels": [
         "the-deadfall"
       ],
       "links": [
-        "black-ledger",
         "i-07",
         "i-09",
-        "i-16",
-        "the-drowned-stair",
-        "the-still-rows",
-        "the-weeping-wall"
+        "i-18",
+        "scrap-shoals",
+        "the-drowned-stair"
       ],
       "notes": null
     },
@@ -1847,37 +1858,54 @@
       "income": null,
       "boon": null,
       "contested": false,
-      "labelX": 1117.72,
-      "labelY": 885.46,
+      "labelX": 1250.6,
+      "labelY": 775.32,
       "polygon": [
         [
-          1233.6,
-          849.9
+          1256.09,
+          666.63
         ],
         [
-          1170.63,
-          971.05
+          1282.18,
+          669.66
         ],
         [
-          1094.5,
-          994.74
+          1360.33,
+          756.74
         ],
         [
-          998.94,
-          887.61
+          1359.46,
+          777.05
         ],
         [
-          1104.48,
-          771.78
+          1279.29,
+          869.34
+        ],
+        [
+          1214.76,
+          875.35
+        ],
+        [
+          1137.61,
+          790.83
+        ],
+        [
+          1139.19,
+          766.39
         ]
       ],
-      "tunnels": [],
+      "tunnels": [
+        "the-deadfall"
+      ],
       "links": [
         "black-ledger",
+        "glass-dome",
         "i-08",
         "i-10",
-        "i-16",
-        "sunken-nave"
+        "i-18",
+        "the-drowned-stair",
+        "the-still-rows",
+        "the-weeping-wall"
       ],
       "notes": null
     },
@@ -1893,47 +1921,42 @@
       "income": null,
       "boon": null,
       "contested": false,
-      "labelX": 970.61,
-      "labelY": 1013.26,
+      "labelX": 1096.44,
+      "labelY": 915.95,
       "polygon": [
         [
-          1084.82,
-          1003.42
+          1204.43,
+          883.31
         ],
         [
-          1052.3,
-          1078.77
+          1151.48,
+          997.63
         ],
         [
-          924.21,
-          1119.39
+          1061.83,
+          1024.66
         ],
         [
-          886.45,
-          1095.99
+          985.45,
+          925.93
         ],
         [
-          873.45,
-          971.65
+          996.09,
+          884.18
         ],
         [
-          977.54,
-          894.47
-        ],
-        [
-          987.36,
-          894.15
+          1129.77,
+          801.53
         ]
       ],
       "tunnels": [],
       "links": [
+        "black-ledger",
         "i-09",
         "i-11",
-        "i-12",
-        "i-16",
-        "ratgut-tunnels",
-        "sunken-nave",
-        "the-bonepipe"
+        "i-13",
+        "i-18",
+        "sunken-nave"
       ],
       "notes": null
     },
@@ -1949,42 +1972,42 @@
       "income": null,
       "boon": null,
       "contested": false,
-      "labelX": 766.61,
-      "labelY": 1038.14,
+      "labelX": 937.48,
+      "labelY": 1039.3,
       "polygon": [
         [
-          873.34,
-          1095.56
+          1052.08,
+          1033.29
         ],
         [
-          739.86,
-          1146.79
+          1031.46,
+          1088.65
         ],
         [
-          667.55,
-          1104.83
+          925.73,
+          1140.4
         ],
         [
-          687.68,
-          947.48
+          840.68,
+          1094.56
         ],
         [
-          738.36,
-          928.76
+          834.96,
+          987.95
         ],
         [
-          860.56,
-          973.35
+          976.16,
+          935.17
         ]
       ],
       "tunnels": [],
       "links": [
-        "i-01",
         "i-10",
         "i-12",
         "i-13",
-        "the-bonepipe",
-        "the-wire-yard"
+        "ratgut-tunnels",
+        "sunken-nave",
+        "the-bonepipe"
       ],
       "notes": null
     },
@@ -2000,42 +2023,42 @@
       "income": null,
       "boon": null,
       "contested": false,
-      "labelX": 842.67,
-      "labelY": 853.53,
+      "labelX": 727.02,
+      "labelY": 1050.51,
       "polygon": [
         [
-          966.18,
-          886.71
+          827.69,
+          1095.22
         ],
         [
-          865.54,
-          961.33
+          745.17,
+          1150.83
         ],
         [
-          745.68,
-          917.6
+          615.03,
+          1100.37
         ],
         [
-          775.98,
-          742.47
+          642.7,
+          975.62
         ],
         [
-          776.36,
-          742.15
+          788.49,
+          962
         ],
         [
-          858.88,
-          743.58
+          821.88,
+          986.92
         ]
       ],
       "tunnels": [],
       "links": [
-        "i-10",
+        "i-01",
         "i-11",
         "i-13",
         "i-14",
-        "i-15",
-        "i-16"
+        "the-bonepipe",
+        "the-wire-yard"
       ],
       "notes": null
     },
@@ -2046,47 +2069,47 @@
       "section": "inner",
       "surveyed": false,
       "type": null,
-      "owner": "malstrain",
-      "hidden": true,
+      "owner": null,
+      "hidden": false,
       "income": null,
       "boon": null,
       "contested": false,
-      "labelX": 657.17,
-      "labelY": 825.55,
+      "labelX": 872.84,
+      "labelY": 869.17,
       "polygon": [
         [
-          682.16,
-          935.66
+          983.33,
+          881.6
         ],
         [
-          556.49,
-          871.04
+          972.91,
+          922.5
         ],
         [
-          546.36,
-          834.95
+          829.26,
+          976.2
         ],
         [
-          576.3,
-          736.89
+          796.9,
+          952.06
         ],
         [
-          762.32,
-          745.18
+          798.61,
+          765.14
         ],
         [
-          732.58,
-          917.04
+          890.28,
+          767.32
         ]
       ],
       "tunnels": [],
       "links": [
-        "i-01",
-        "i-02",
-        "i-03",
+        "i-10",
         "i-11",
         "i-12",
-        "i-14"
+        "i-14",
+        "i-17",
+        "i-18"
       ],
       "notes": null
     },
@@ -2097,52 +2120,47 @@
       "section": "inner",
       "surveyed": false,
       "type": null,
-      "owner": null,
-      "hidden": false,
+      "owner": "malstrain",
+      "hidden": true,
       "income": null,
       "boon": null,
       "contested": false,
-      "labelX": 670.08,
-      "labelY": 643.61,
+      "labelX": 693.84,
+      "labelY": 872.19,
       "polygon": [
         [
-          576.33,
-          723.88
+          639.99,
+          962.82
         ],
         [
-          560.21,
-          674.91
+          553.44,
+          868.36
         ],
         [
-          606.68,
-          568.35
+          556.4,
+          858.85
         ],
         [
-          719.62,
-          529.78
+          777.57,
+          754.87
         ],
         [
-          741.09,
-          542.59
+          785.64,
+          761.52
         ],
         [
-          767.13,
-          732.92
-        ],
-        [
-          767.75,
-          732.4
+          783.92,
+          949.37
         ]
       ],
       "tunnels": [],
       "links": [
+        "i-01",
         "i-03",
-        "i-04",
-        "i-05",
-        "i-06",
         "i-12",
         "i-13",
-        "i-15"
+        "i-15",
+        "i-17"
       ],
       "notes": null
     },
@@ -2158,37 +2176,37 @@
       "income": null,
       "boon": null,
       "contested": false,
-      "labelX": 851.69,
-      "labelY": 620.23,
+      "labelX": 624.54,
+      "labelY": 726.37,
       "polygon": [
         [
-          754.45,
-          544.34
+          555.73,
+          844.8
         ],
         [
-          938.65,
-          524.13
+          523.41,
+          689.39
         ],
         [
-          961.31,
-          617.5
+          578.58,
+          607.64
         ],
         [
-          859.32,
-          730.59
+          762.28,
+          718.19
         ],
         [
-          779.74,
-          729.21
+          770.58,
+          743.8
         ]
       ],
       "tunnels": [],
       "links": [
-        "i-06",
-        "i-07",
-        "i-12",
+        "i-03",
+        "i-04",
         "i-14",
-        "i-16"
+        "i-16",
+        "i-17"
       ],
       "notes": null
     },
@@ -2199,37 +2217,139 @@
       "section": "inner",
       "surveyed": false,
       "type": null,
+      "owner": null,
+      "hidden": false,
+      "income": null,
+      "boon": null,
+      "contested": false,
+      "labelX": 715.22,
+      "labelY": 585.82,
+      "polygon": [
+        [
+          583.19,
+          595.25
+        ],
+        [
+          583.14,
+          599.08
+        ],
+        [
+          658.75,
+          499.32
+        ],
+        [
+          819.42,
+          519.06
+        ],
+        [
+          825.26,
+          533.59
+        ],
+        [
+          764.26,
+          704.21
+        ]
+      ],
+      "tunnels": [],
+      "links": [
+        "i-04",
+        "i-05",
+        "i-06",
+        "i-07",
+        "i-15",
+        "i-17"
+      ],
+      "notes": null
+    },
+    {
+      "id": "i-17",
+      "name": null,
+      "designation": "I-17",
+      "section": "inner",
+      "surveyed": false,
+      "type": null,
       "owner": "malstrain",
       "hidden": true,
       "income": null,
       "boon": null,
       "contested": false,
-      "labelX": 987.82,
-      "labelY": 749.76,
+      "labelX": 870.28,
+      "labelY": 660.63,
       "polygon": [
         [
-          969.48,
-          627.85
+          835.75,
+          542.85
         ],
         [
-          1094.28,
-          712.38
+          992.41,
+          629.7
         ],
         [
-          1096.65,
-          761.07
+          890.41,
+          754.32
         ],
         [
-          987.24,
-          881.15
+          794.57,
+          752.04
         ],
         [
-          978.47,
-          881.43
+          784.13,
+          743.43
         ],
         [
-          870.58,
-          737.52
+          774.58,
+          713.97
+        ]
+      ],
+      "tunnels": [],
+      "links": [
+        "i-07",
+        "i-13",
+        "i-14",
+        "i-15",
+        "i-16",
+        "i-18"
+      ],
+      "notes": null
+    },
+    {
+      "id": "i-18",
+      "name": null,
+      "designation": "I-18",
+      "section": "inner",
+      "surveyed": false,
+      "type": null,
+      "owner": null,
+      "hidden": false,
+      "income": null,
+      "boon": null,
+      "contested": false,
+      "labelX": 1013.43,
+      "labelY": 758.18,
+      "polygon": [
+        [
+          1005.85,
+          633.8
+        ],
+        [
+          1010.14,
+          633.09
+        ],
+        [
+          1126.22,
+          765.49
+        ],
+        [
+          1124.67,
+          789.4
+        ],
+        [
+          991.88,
+          871.5
+        ],
+        [
+          901.82,
+          760.9
         ]
       ],
       "tunnels": [],
@@ -2238,8 +2358,8 @@
         "i-08",
         "i-09",
         "i-10",
-        "i-12",
-        "i-15"
+        "i-13",
+        "i-17"
       ],
       "notes": null
     }
