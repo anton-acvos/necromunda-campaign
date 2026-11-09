@@ -27,62 +27,21 @@
     return n;
   }
 
-  function mulberry32(seed) {
-    var a = seed >>> 0;
-    return function () {
-      a = (a + 0x6D2B79F5) >>> 0;
-      var t = a;
-      t = Math.imul(t ^ (t >>> 15), t | 1);
-      t ^= t + Math.imul(t ^ (t >>> 7), t | 61);
-      return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
-    };
-  }
-
-  function hashStr(s) {
-    var hsh = 2166136261;
-    for (var i = 0; i < s.length; i++) {
-      hsh ^= s.charCodeAt(i);
-      hsh = Math.imul(hsh, 16777619);
-    }
-    return hsh >>> 0;
-  }
-
-  var ptKey = function (p) { return p[0].toFixed(2) + ',' + p[1].toFixed(2); };
-
-  /* A border is drawn identically by both territories that share it:
-     the wiggle is seeded from the edge itself and tapers to zero at each
-     vertex, so neighbouring regions never show a seam. */
-  function wiggledEdge(a, b) {
-    var ka = ptKey(a), kb = ptKey(b);
-    var flip = ka > kb;
-    var p0 = flip ? b : a, p1 = flip ? a : b;
-    var rand = mulberry32(hashStr(flip ? kb + '|' + ka : ka + '|' + kb));
-    var dx = p1[0] - p0[0], dy = p1[1] - p0[1];
-    var len = Math.sqrt(dx * dx + dy * dy) || 1;
-    var nx = -dy / len, ny = dx / len;
-    var amp = Math.min(13, len * 0.09);
-    var steps = 7;
-    var pts = [];
-    for (var s = 1; s < steps; s++) {
-      var t = s / steps;
-      var off = (rand() - 0.5) * 2 * amp * Math.sin(Math.PI * t);
-      pts.push([p0[0] + dx * t + nx * off, p0[1] + dy * t + ny * off]);
-    }
-    return flip ? pts.reverse() : pts;
-  }
-
+  /* Blocks are straight-edged convex polygons separated by streets, so the
+     path is just the points. Nothing is shared between neighbours any more,
+     which is why no seam-matching wiggle is needed. */
   function polygonPath(poly) {
-    if (!poly || poly.length < 3) return '';
-    var d = 'M' + poly[0][0].toFixed(1) + ' ' + poly[0][1].toFixed(1);
-    for (var i = 0; i < poly.length; i++) {
-      var a = poly[i], b = poly[(i + 1) % poly.length];
-      var mids = wiggledEdge(a, b);
-      for (var j = 0; j < mids.length; j++) {
-        d += ' L' + mids[j][0].toFixed(1) + ' ' + mids[j][1].toFixed(1);
-      }
-      d += ' L' + b[0].toFixed(1) + ' ' + b[1].toFixed(1);
-    }
-    return d + ' Z';
+    if (!poly || poly.length < 3) return "";
+    var d = "M" + poly[0][0] + " " + poly[0][1];
+    for (var i = 1; i < poly.length; i++) d += "L" + poly[i][0] + " " + poly[i][1];
+    return d + "Z";
+  }
+
+  function polylinePath(pts) {
+    if (!pts || pts.length < 2) return "";
+    var d = "M" + pts[0][0] + " " + pts[0][1];
+    for (var i = 1; i < pts.length; i++) d += "L" + pts[i][0] + " " + pts[i][1];
+    return d;
   }
 
   /* ---------- data accessors (hidden things stay hidden) ---------- */
@@ -135,19 +94,41 @@
     if (map.viewBox) svg.setAttribute('viewBox', map.viewBox);
 
     var gBound = document.getElementById('layer-boundary');
+    var gTunnels = document.getElementById('layer-tunnels');
     var gLand = document.getElementById('layer-land');
     var gInner = document.getElementById('layer-inner');
     var gGates = document.getElementById('layer-gateways');
     var gLabels = document.getElementById('layer-labels');
-    [gBound, gLand, gInner, gGates, gLabels].forEach(function (n) { n.textContent = ''; });
+    [gBound, gTunnels, gLand, gInner, gGates, gLabels].forEach(function (n) { n.textContent = ''; });
 
-    /* sector outline, sitting under everything as a faint coastline */
-    if (map.boundary) {
-      gBound.appendChild(el('path', {
-        d: polygonPath(map.boundary),
-        class: 'sector-outline'
+    /* No sector outline is drawn: the blocks jut out past the circle they
+       were clipped to, so their own edges are the silhouette. */
+
+    /* Tunnels run under the blocks and show through the gaps the inset
+       leaves, so a channel reads as a space between buildings rather than a
+       line drawn over them. */
+    (state.data.tunnels || []).forEach(function (t) {
+      var d = polylinePath(t.path);
+      if (!d) return;
+      var group = el('g', {
+        class: 'tunnel',
+        'data-id': t.id,
+        tabindex: '0',
+        role: 'button',
+        'aria-label': t.name + ', tunnel'
+      });
+      group.appendChild(el('path', {
+        d: d, class: 'tunnel-channel', 'stroke-width': t.width || 22
       }));
-    }
+      group.appendChild(el('path', {
+        d: d, class: 'tunnel-spine', 'stroke-width': Math.max(2, (t.width || 22) * 0.16)
+      }));
+      group.addEventListener('click', function () { select(t.id, true); });
+      group.addEventListener('keydown', function (e) {
+        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); select(t.id, true); }
+      });
+      gTunnels.appendChild(group);
+    });
 
     /* the charted ring */
     outerTerritories().forEach(function (t) {
@@ -308,7 +289,7 @@
     state.selected = id;
 
     Array.prototype.forEach.call(
-      document.querySelectorAll('.territory, .gateway'),
+      document.querySelectorAll('.territory, .gateway, .tunnel'),
       function (n) { n.classList.toggle('is-selected', n.getAttribute('data-id') === id); }
     );
     Array.prototype.forEach.call(document.querySelectorAll('.roster-btn'), function (n) {
@@ -317,6 +298,7 @@
 
     if (id === 'uncharted') renderInnerRegionDetail();
     else if (state.gatewaysById[id]) renderGatewayDetail(state.gatewaysById[id]);
+    else if ((state.tunnelsById || {})[id]) renderTunnelDetail(state.tunnelsById[id]);
     else if (state.byId[id]) renderTerritoryDetail(state.byId[id]);
     else return;
 
@@ -396,6 +378,13 @@
 
   function neighbourNav(t) {
     var nav = h('div', 'neighbours');
+    (t.tunnels || []).forEach(function (tid) {
+      var tun = (state.tunnelsById || {})[tid];
+      if (!tun) return;
+      var b = linkBtn(tid, tun.name);
+      b.classList.add('is-tunnel');
+      nav.appendChild(b);
+    });
     (t.links || []).forEach(function (nid) {
       var n = state.byId[nid];
       if (!n) return;
@@ -433,6 +422,34 @@
 
     var nav = h('div', 'neighbours');
     (state.data.gateways || []).forEach(function (gw) { nav.appendChild(linkBtn(gw.id, gw.name)); });
+    box.appendChild(nav);
+  }
+
+  function renderTunnelDetail(t) {
+    var box = detailBox();
+
+    var head = h('div', 'detail-head');
+    head.appendChild(h('h3', null, t.name));
+    head.appendChild(h('span', 'tag tunnel-tag', 'Tunnel'));
+    box.appendChild(head);
+
+    var mouth = t.mouth ? state.byId[t.mouth] : null;
+    var gw = t.gateway ? state.gatewaysById[t.gateway] : null;
+    var along = (state.data.territories || []).filter(function (x) {
+      return (x.tunnels || []).indexOf(t.id) !== -1;
+    });
+
+    box.appendChild(kvList([
+      ['Runs from', mouth ? displayName(mouth) : null],
+      ['Comes out at', gw ? gw.name : null],
+      ['Territories on it', along.length + ' along its length']
+    ]));
+
+    if (t.notes) box.appendChild(h('p', 'notes', t.notes));
+
+    var nav = h('div', 'neighbours');
+    along.forEach(function (x) { nav.appendChild(linkBtn(x.id, displayName(x))); });
+    if (gw) nav.appendChild(linkBtn(gw.id, gw.name));
     box.appendChild(nav);
   }
 
@@ -537,6 +554,11 @@
       if (gw.contested) b.classList.add('is-disputed');
       ways.appendChild(b);
     });
+    (state.data.tunnels || []).forEach(function (t) {
+      var b = linkBtn(t.id, t.name);
+      b.classList.add('is-tunnel');
+      ways.appendChild(b);
+    });
     card.appendChild(ways);
 
     var grid = h('div', 'roster');
@@ -628,6 +650,8 @@
     (data.territories || []).forEach(function (t) { state.byId[t.id] = t; });
     (data.gangs || []).forEach(function (g) { state.gangsById[g.id] = g; });
     (data.gateways || []).forEach(function (gw) { state.gatewaysById[gw.id] = gw; });
+    state.tunnelsById = {};
+    (data.tunnels || []).forEach(function (t) { state.tunnelsById[t.id] = t; });
 
     drawHeader();
     drawMap();

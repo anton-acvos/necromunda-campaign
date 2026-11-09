@@ -500,3 +500,38 @@ body {
 }
 
 .section-btn:hover { color: var(--deep); }
+
+/* --- tunnels --- */
+
+.tunnel { cursor: pointer; }
+
+.tunnel-channel {
+  fill: none;
+  stroke: #554a33;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.tunnel-spine {
+  fill: none;
+  stroke: #a8966c;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-dasharray: 2 10;
+  opacity: 0.8;
+  pointer-events: none;
+}
+
+.tunnel:hover .tunnel-channel { stroke: #6b5d3f; }
+.tunnel.is-selected .tunnel-channel { stroke: #6d5f3f; }
+.tunnel.is-selected .tunnel-spine { stroke: #d8c79a; opacity: 1; }
+
+.tag.tunnel-tag { border-color: #5b5133; background: #211d14; color: #c9b887; }
+.neighbour-btn.is-tunnel { border-color: #4a4230; color: #c0b08a; }
+
+.territory:focus,
+.territory:focus-visible,
+.tunnel:focus,
+.tunnel:focus-visible,
+.gateway:focus,
+.gateway:focus-visible { outline: none; }

@@ -32,8 +32,8 @@ const r2 = (n) => Math.round(n * 100) / 100;
 /* ---------- sector outline: an irregular but convex closed ring ---------- */
 
 const boundary = [];
-for (let i = 0; i < 64; i++) {
-  const a = (i / 64) * Math.PI * 2;
+for (let i = 0; i < 28; i++) {
+  const a = (i / 28) * Math.PI * 2;
   const f = 1
     + Math.sin(a * 2 + 1.3) * 0.055
     + Math.sin(a * 3 + 0.7) * 0.042
@@ -197,6 +197,204 @@ for (const s of seeds) {
   if (s.cell.length < 3) throw new Error(`degenerate cell for ${s.designation ?? s.meta.id}`);
 }
 
+/* ---------- streets and tunnels ----------
+
+   Blocks do not touch. Every cell is pulled back from its own edges, which
+   turns the shared borders into a network of gaps — streets between blocks,
+   and wider channels where a tunnel runs. A tunnel is a chain of those gaps
+   picked by shortest path, so it threads between territories rather than
+   cutting through them, and it gives a gang a way to the deep even when
+   nothing it holds borders the entrance. */
+
+const STREET = 6.5;   // ordinary gap between two blocks
+const TUNNEL = 16;    // gap where a tunnel runs
+/* An edge on the sector outline belongs to one block and nobody else, so it
+   can be pushed outward without breaking a border. Each rim block reaches out
+   its own distance, which gives the sector a ragged edge rather than the
+   silhouette of the circle it was clipped to. */
+const REACH_MIN = 4;
+const REACH_VAR = 48;
+
+/* planar graph of every cell edge */
+const edgeUse = new Map();
+for (const s of seeds) {
+  for (let i = 0; i < s.cell.length; i++) {
+    const a = s.cell[i], b = s.cell[(i + 1) % s.cell.length];
+    const k = edgeKey(a, b);
+    if (!edgeUse.has(k)) edgeUse.set(k, { a, b, cells: [] });
+    edgeUse.get(k).cells.push(s);
+  }
+}
+
+const ptOf = new Map();
+for (const { a, b } of edgeUse.values()) { ptOf.set(ptKey(a), a); ptOf.set(ptKey(b), b); }
+
+/* Tunnels may only follow gaps that touch the charted section: the deep is
+   unsurveyed, so no route is known through its middle. */
+const graph = new Map();
+const DEEP_DETOUR = 4;   // how strongly a tunnel avoids skirting the deep
+for (const [k, e] of edgeUse) {
+  if (e.cells.length !== 2) continue;                     // not a gap between two blocks
+  if (!e.cells.some((c) => c.kind === 'outer')) continue;
+  const skirtsDeep = e.cells.some((c) => c.kind === 'inner');
+  const w = Math.hypot(e.a[0] - e.b[0], e.a[1] - e.b[1]) * (skirtsDeep ? DEEP_DETOUR : 1);
+  for (const [p, q] of [[e.a, e.b], [e.b, e.a]]) {
+    const kp = ptKey(p);
+    if (!graph.has(kp)) graph.set(kp, []);
+    graph.get(kp).push({ to: ptKey(q), w, edge: k });
+  }
+}
+
+function shortestPath(startKey, goalKey) {
+  const dist = new Map([[startKey, 0]]);
+  const prev = new Map();
+  const done = new Set();
+  for (;;) {
+    let best = null, bestD = Infinity;
+    for (const [k, d] of dist) if (!done.has(k) && d < bestD) { bestD = d; best = k; }
+    if (best === null) return null;
+    if (best === goalKey) break;
+    done.add(best);
+    for (const arc of graph.get(best) ?? []) {
+      const nd = bestD + arc.w;
+      if (nd < (dist.get(arc.to) ?? Infinity)) {
+        dist.set(arc.to, nd);
+        prev.set(arc.to, { from: best, edge: arc.edge });
+      }
+    }
+  }
+  const edges = [], pts = [];
+  let cur = goalKey;
+  while (cur !== startKey) {
+    const step = prev.get(cur);
+    if (!step) return null;
+    edges.push(step.edge);
+    pts.push(ptOf.get(cur));
+    cur = step.from;
+  }
+  pts.push(ptOf.get(startKey));
+  return { edges, pts: pts.reverse(), length: dist.get(goalKey) };
+}
+
+/* vertices on the sector outline, and on the deep's border */
+const rimVerts = new Set();
+const deepVerts = new Set();
+for (const e of edgeUse.values()) {
+  if (e.cells.length === 1) { rimVerts.add(ptKey(e.a)); rimVerts.add(ptKey(e.b)); }
+  else if (e.cells.some((c) => c.kind === 'inner') && e.cells.some((c) => c.kind === 'outer')) {
+    deepVerts.add(ptKey(e.a)); deepVerts.add(ptKey(e.b));
+  }
+}
+
+const seedOf = (id) => {
+  const s = seeds.find((q) => q.kind === 'outer' && q.meta.id === id);
+  if (!s) throw new Error(`unknown territory "${id}"`);
+  return s;
+};
+
+function nearestVert(set, target) {
+  let best = null, bestD = Infinity;
+  for (const k of set) {
+    const p = ptOf.get(k);
+    const d = Math.hypot(p[0] - target[0], p[1] - target[1]);
+    if (d < bestD) { bestD = d; best = k; }
+  }
+  return best;
+}
+
+/* Each tunnel runs from a mouth out on the rim to a way into the deep on the
+   far side, so the gangs nearest an entrance are not the only ones who can
+   reach it. */
+const TUNNEL_ROUTES = [
+  { id: 'theta-run',    name: 'The Theta Run',  mouth: 'sumptown',       toward: ['relay-theta'],             gateway: 'theta-breach',
+    notes: 'A maintenance bore running the width of the Reach. It was cut to service the relay and it still ends at the breach the Tech-Acquisitors made.' },
+  { id: 'the-deadfall', name: 'The Deadfall',   mouth: 'glass-dome',     toward: ['grudgehold', 'holestead'], gateway: 'prospectors-cut',
+    notes: 'A collapsed transit shaft walked end to end only twice. It comes out at the shaft both Ironhead companies have filed on.' }
+];
+
+const tunnels = TUNNEL_ROUTES.map((route) => {
+  const mouthSeed = seedOf(route.mouth);
+  const graphVerts = new Set(graph.keys());
+  const outward = [
+    mouthSeed.p[0] + (mouthSeed.p[0] - CX) * 0.35,
+    mouthSeed.p[1] + (mouthSeed.p[1] - CY) * 0.35
+  ];
+  const startKey = nearestVert(graphVerts, outward);
+
+  /* the far end sits on the deep's border, out in the direction of the
+     territories the way in was found from */
+  let tx = 0, ty = 0;
+  for (const id of route.toward) { tx += seedOf(id).p[0]; ty += seedOf(id).p[1]; }
+  tx /= route.toward.length; ty /= route.toward.length;
+  const bearing = Math.atan2(ty - CY, tx - CX);
+  const aim = [CX + Math.cos(bearing) * 1e4, CY + Math.sin(bearing) * 1e4];
+  const reachableDeep = new Set([...deepVerts].filter((k) => graph.has(k)));
+  const goalKey = nearestVert(reachableDeep.size ? reachableDeep : deepVerts, aim);
+
+  const path = shortestPath(startKey, goalKey);
+  if (!path) throw new Error(`no route for tunnel "${route.id}"`);
+  return { ...route, ...path, end: ptOf.get(goalKey), mouthPt: ptOf.get(startKey) };
+});
+
+const tunnelEdges = new Set();
+for (const t of tunnels) for (const k of t.edges) tunnelEdges.add(k);
+
+/* ---------- pull every block back from its edges ---------- */
+
+function insetPolygon(poly, dists) {
+  const n = poly.length;
+  let area = 0;
+  for (let i = 0; i < n; i++) {
+    const a = poly[i], b = poly[(i + 1) % n];
+    area += a[0] * b[1] - b[0] * a[1];
+  }
+  const sign = area > 0 ? 1 : -1;
+
+  const lines = poly.map((a, i) => {
+    const b = poly[(i + 1) % n];
+    let dx = b[0] - a[0], dy = b[1] - a[1];
+    const len = Math.hypot(dx, dy) || 1;
+    const nx = (-dy / len) * sign, ny = (dx / len) * sign;
+    return { px: a[0] + nx * dists[i], py: a[1] + ny * dists[i], dx, dy };
+  });
+
+  const out = [];
+  for (let i = 0; i < n; i++) {
+    const l1 = lines[(i - 1 + n) % n], l2 = lines[i];
+    const den = l1.dx * l2.dy - l1.dy * l2.dx;
+    if (Math.abs(den) < 1e-9) { out.push([r2(l2.px), r2(l2.py)]); continue; }
+    const t = ((l2.px - l1.px) * l2.dy - (l2.py - l1.py) * l2.dx) / den;
+    let x = l1.px + l1.dx * t, y = l1.py + l1.dy * t;
+
+    const v = poly[i];
+    const cap = 2.2 * Math.max(Math.abs(dists[(i - 1 + n) % n]), Math.abs(dists[i]));
+    const moved = Math.hypot(x - v[0], y - v[1]);
+    if (moved > cap) {
+      const f = cap / moved;
+      x = v[0] + (x - v[0]) * f;
+      y = v[1] + (y - v[1]) * f;
+    }
+    out.push([r2(x), r2(y)]);
+  }
+  return dedupe(out);
+}
+
+for (const s of seeds) {
+  const reach = REACH_MIN + rnd() * REACH_VAR;   // this block's own extent
+  const dists = s.cell.map((a, i) => {
+    const b = s.cell[(i + 1) % s.cell.length];
+    const k = edgeKey(a, b);
+    if (tunnelEdges.has(k)) return TUNNEL;
+    if (edgeUse.get(k).cells.length === 1) return -reach;
+    return STREET;
+  });
+  s.block = insetPolygon(s.cell, dists);
+  if (s.block.length < 3) throw new Error(`block collapsed for ${s.designation ?? s.meta.id}`);
+  s.onTunnels = tunnels
+    .filter((t) => s.cell.some((a, i) => t.edges.includes(edgeKey(a, s.cell[(i + 1) % s.cell.length]))))
+    .map((t) => t.id);
+}
+
 /* ---------- union outline of the inner cells: edges used only once ---------- */
 
 const innerSeeds = seeds.filter((s) => s.kind === 'inner');
@@ -271,7 +469,7 @@ const territories = outerSeeds.map((s) => {
   const t = s.meta;
   const bordersInner = s.cell.some((_, i) =>
     innerEdgeKeys.has(edgeKey(s.cell[i], s.cell[(i + 1) % s.cell.length])));
-  const [lx, ly] = centroid(s.cell);
+  const [lx, ly] = centroid(s.block);
   return {
     id: t.id,
     name: t.name,
@@ -286,7 +484,8 @@ const territories = outerSeeds.map((s) => {
     bordersInner,
     labelX: lx,
     labelY: ly,
-    polygon: s.cell,
+    polygon: s.block,
+    tunnels: s.onTunnels,
     links: [...adjacency.get(t.id)].sort(),
     notes: t.notes
   };
@@ -297,7 +496,7 @@ const territories = outerSeeds.map((s) => {
    holding has a name and a type, not when it gains a shape. */
 for (const s of innerSeeds) {
   const id = s.designation.toLowerCase();
-  const [lx, ly] = centroid(s.cell);
+  const [lx, ly] = centroid(s.block);
   territories.push({
     id,
     name: null,
@@ -312,7 +511,8 @@ for (const s of innerSeeds) {
     contested: false,
     labelX: lx,
     labelY: ly,
-    polygon: s.cell,
+    polygon: s.block,
+    tunnels: s.onTunnels,
     links: [...adjacency.get(id)].sort(),
     notes: null
   });
@@ -345,8 +545,12 @@ function bearingFrom(ids) {
   return Math.atan2(sy, sx);
 }
 
-const gw1 = pointOnInnerBorderAt(bearingFrom(["relay-theta"]));
-const gw2 = pointOnInnerBorderAt(bearingFrom(["grudgehold", "holestead"]));
+const tunnelEnd = (gatewayId) => {
+  const t = tunnels.find((x) => x.gateway === gatewayId);
+  return t ? t.end : null;
+};
+const gw1 = tunnelEnd("theta-breach") ?? pointOnInnerBorderAt(bearingFrom(["relay-theta"]));
+const gw2 = tunnelEnd("prospectors-cut") ?? pointOnInnerBorderAt(bearingFrom(["grudgehold", "holestead"]));
 
 const gateways = [
   {
@@ -397,7 +601,8 @@ const data = {
   },
   map: {
     viewBox: (() => {
-      const xs = boundary.map((p) => p[0]), ys = boundary.map((p) => p[1]);
+      const drawn = [...territories.filter((t) => t.polygon).flatMap((t) => t.polygon), ...boundary];
+const xs = drawn.map((p) => p[0]), ys = drawn.map((p) => p[1]);
       const pad = 18;
       const minX = Math.floor(Math.min(...xs) - pad), minY = Math.floor(Math.min(...ys) - pad);
       const maxX = Math.ceil(Math.max(...xs) + pad), maxY = Math.ceil(Math.max(...ys) + pad);
@@ -414,6 +619,15 @@ const data = {
   },
   gangs,
   gateways,
+  tunnels: tunnels.map((t) => ({
+    id: t.id,
+    name: t.name,
+    width: TUNNEL * 2,
+    mouth: t.mouth,
+    gateway: t.gateway,
+    path: t.pts,
+    notes: t.notes
+  })),
   territories,
   battles: []
 };
