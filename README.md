@@ -11,10 +11,12 @@ build step, no framework: a static page that reads one JSON file.
 
 ## The sector
 
-**The charted ring (22 territories).** Seven gangs, each holding one settlement
-(marked with a star) plus one more territory. Eight territories are unclaimed.
-Territories are Voronoi regions, so they genuinely share borders and the
-`links` in the data are the real adjacencies.
+**The rim (14 territories).** The outermost band. Seven gangs, each holding one
+settlement (marked with a star) plus one more territory alongside it.
+
+**The marches (8 territories).** An unclaimed buffer between the gangs and the
+deep. No held territory touches the deep: the bands are built geometrically, so
+that buffer is exact rather than something the layout happens to produce.
 
 **The Uncharted Deep (16 holdings).** Only its border is mapped. The sixteen
 holdings inside are known to exist but have no shape, type, income or boon
@@ -131,8 +133,10 @@ polygon without `surveyed: true` will not be drawn.
 
 ### Redraw the whole map
 
-`scripts/generate-map.mjs` rebuilds the tessellation from a list of territories
-and a handful of geometry constants. It **overwrites** `data/campaign.json`
+`scripts/generate-map.mjs` rebuilds the map from a list of territories and a
+handful of geometry constants. Each band is bounded by two shared noise curves,
+and all waviness is baked into the emitted polygons, so neighbours read the same
+points and borders coincide exactly. It **overwrites** `data/campaign.json`
 entirely, losing any ownership changes and battles, so it is for reshaping the
 sector before a campaign rather than during one. Everything it produces is
 plain JSON you can hand-edit afterwards.

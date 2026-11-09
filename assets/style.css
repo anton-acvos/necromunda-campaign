@@ -267,20 +267,7 @@ body {
   stroke-linejoin: round;
 }
 
-/* ---------- legend ---------- */
-
-.legend {
-  list-style: none;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 6px 18px;
-  margin: 8px 0 2px;
-  padding: 10px 4px 2px;
-  border-top: 1px solid var(--line);
-  font-size: 0.82rem;
-}
-
-.legend li { display: flex; align-items: center; gap: 7px; color: var(--ink-dim); }
+/* ---------- swatches (standings, detail) ---------- */
 
 .swatch {
   width: 13px; height: 13px;

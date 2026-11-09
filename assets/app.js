@@ -27,62 +27,14 @@
     return n;
   }
 
-  function mulberry32(seed) {
-    var a = seed >>> 0;
-    return function () {
-      a = (a + 0x6D2B79F5) >>> 0;
-      var t = a;
-      t = Math.imul(t ^ (t >>> 15), t | 1);
-      t ^= t + Math.imul(t ^ (t >>> 7), t | 61);
-      return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
-    };
-  }
-
-  function hashStr(s) {
-    var hsh = 2166136261;
-    for (var i = 0; i < s.length; i++) {
-      hsh ^= s.charCodeAt(i);
-      hsh = Math.imul(hsh, 16777619);
-    }
-    return hsh >>> 0;
-  }
-
-  var ptKey = function (p) { return p[0].toFixed(2) + ',' + p[1].toFixed(2); };
-
-  /* A border is drawn identically by both territories that share it:
-     the wiggle is seeded from the edge itself and tapers to zero at each
-     vertex, so neighbouring regions never show a seam. */
-  function wiggledEdge(a, b) {
-    var ka = ptKey(a), kb = ptKey(b);
-    var flip = ka > kb;
-    var p0 = flip ? b : a, p1 = flip ? a : b;
-    var rand = mulberry32(hashStr(flip ? kb + '|' + ka : ka + '|' + kb));
-    var dx = p1[0] - p0[0], dy = p1[1] - p0[1];
-    var len = Math.sqrt(dx * dx + dy * dy) || 1;
-    var nx = -dy / len, ny = dx / len;
-    var amp = Math.min(13, len * 0.09);
-    var steps = 7;
-    var pts = [];
-    for (var s = 1; s < steps; s++) {
-      var t = s / steps;
-      var off = (rand() - 0.5) * 2 * amp * Math.sin(Math.PI * t);
-      pts.push([p0[0] + dx * t + nx * off, p0[1] + dy * t + ny * off]);
-    }
-    return flip ? pts.reverse() : pts;
-  }
-
+  /* Territory outlines already carry their waviness: the generator bakes it
+     into the shared curves, so neighbours read the same points and borders
+     coincide exactly. Nothing to do here but draw them. */
   function polygonPath(poly) {
-    if (!poly || poly.length < 3) return '';
-    var d = 'M' + poly[0][0].toFixed(1) + ' ' + poly[0][1].toFixed(1);
-    for (var i = 0; i < poly.length; i++) {
-      var a = poly[i], b = poly[(i + 1) % poly.length];
-      var mids = wiggledEdge(a, b);
-      for (var j = 0; j < mids.length; j++) {
-        d += ' L' + mids[j][0].toFixed(1) + ' ' + mids[j][1].toFixed(1);
-      }
-      d += ' L' + b[0].toFixed(1) + ' ' + b[1].toFixed(1);
-    }
-    return d + ' Z';
+    if (!poly || poly.length < 3) return "";
+    var d = "M" + poly[0][0] + " " + poly[0][1];
+    for (var i = 1; i < poly.length; i++) d += "L" + poly[i][0] + " " + poly[i][1];
+    return d + "Z";
   }
 
   /* ---------- data accessors (hidden things stay hidden) ---------- */
@@ -255,7 +207,17 @@
       });
       gGates.appendChild(group);
 
-      gLabels.appendChild(el('text', { x: gw.x, y: gw.y + 30, class: 'gateway-name' }, gw.name));
+      /* Push the label inward over the fog, where nothing else is written —
+         below the marker it collides with the marches territory names. */
+      var cxDeep = inner && inner.labelX != null ? inner.labelX : gw.x;
+      var cyDeep = inner && inner.labelY != null ? inner.labelY : gw.y;
+      var vx = cxDeep - gw.x, vy = cyDeep - gw.y;
+      var vlen = Math.sqrt(vx * vx + vy * vy) || 1;
+      gLabels.appendChild(el('text', {
+        x: gw.x + (vx / vlen) * 46,
+        y: gw.y + (vy / vlen) * 46 + 5,
+        class: 'gateway-name'
+      }, gw.name));
     });
   }
 
@@ -272,27 +234,6 @@
       d += (i ? 'L' : 'M') + (x + Math.cos(a) * rad).toFixed(1) + ' ' + (y + Math.sin(a) * rad).toFixed(1);
     }
     return d + 'Z';
-  }
-
-  /* ---------- legend ---------- */
-
-  function drawLegend() {
-    var ul = document.getElementById('legend');
-    ul.textContent = '';
-
-    var add = function (bg, label) {
-      var li = h('li');
-      var sw = h('span', 'swatch');
-      sw.style.background = bg;
-      li.appendChild(sw);
-      li.appendChild(h('span', null, label));
-      ul.appendChild(li);
-    };
-
-    visibleGangs().forEach(function (g) { add(g.color, g.name); });
-    add(NEUTRAL, 'Unclaimed');
-    add('repeating-linear-gradient(45deg, #f0d060 0 3px, transparent 3px 7px)', 'Contested');
-    add('#191c27', 'Uncharted');
   }
 
   /* ---------- selection ---------- */
@@ -611,7 +552,6 @@
 
     drawHeader();
     drawMap();
-    drawLegend();
     drawStandings();
     drawRoster();
     drawBattles();
