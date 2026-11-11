@@ -735,7 +735,7 @@ const gangs = [
   { id: 'precinct-22',         name: 'Precinct 22',                       short: 'Precinct 22',   house: 'Palanite Enforcers', color: '#e8c23a' },
   { id: 'bjorn-prospectors',   name: 'Bjorn "H.C.L.F" Prospectors Group', short: 'Bjorn H.C.L.F', house: 'Ironhead Squats',    color: '#e8822c' },
   { id: 'resource-extraction', name: 'Resource Extraction LLC',           short: 'Resource Ext.', house: 'Ironhead Squats',    color: '#6f9c33' },
-  { id: 'malstrain',           name: 'Malstrain Genestealers',            short: 'Malstrain',     house: 'Malstrain',          color: '#c6529f', hidden: true }
+  { id: 'malstrain',           name: 'Malstrain Genestealers',            short: 'Malstrain',     house: 'Malstrain',          color: '#c6529f', rules: 'Plays by the campaign\u2019s Malstrain rules: no settlement, no charted ground, and a hold in the deep that nobody else has walked.' }
 ].map((g) => ({ ...g, rating: 1100, credits: 0, reputation: 1, motto: '' }));
 
 /* ---------- emit ---------- */

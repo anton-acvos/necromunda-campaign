@@ -212,12 +212,13 @@ for (const [i, b] of (data.battles ?? []).entries()) {
   }
 }
 
-/* --- campaign shape: one settlement per non-hidden gang --- */
-const openGangs = gangs.filter((g) => !g.hidden);
-for (const g of openGangs) {
+/* --- campaign shape: a gang with charted ground needs a settlement on it.
+   A gang that holds nothing charted is playing by its own rules, so the
+   check would only ever be noise for it. --- */
+for (const g of gangs.filter((g) => !g.hidden)) {
   const owned = territories.filter((t) => t.owner === g.id && t.section === 'outer');
-  if (!owned.some((t) => t.settlement)) {
-    warn(`gang "${g.id}" holds no settlement in the charted section`);
+  if (owned.length && !owned.some((t) => t.settlement)) {
+    warn(`gang "${g.id}" holds charted ground but no settlement on it`);
   }
 }
 

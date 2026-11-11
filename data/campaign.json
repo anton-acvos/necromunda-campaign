@@ -311,7 +311,7 @@
       "short": "Malstrain",
       "house": "Malstrain",
       "color": "#c6529f",
-      "hidden": true,
+      "rules": "Plays by the campaign’s Malstrain rules: no settlement, no charted ground, and a hold in the deep that nobody else has walked.",
       "rating": 1100,
       "credits": 0,
       "reputation": 1,

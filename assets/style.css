@@ -456,6 +456,18 @@ body {
 
 .holding-boon.is-standing { color: var(--warn); opacity: 0.8; }
 
+.gang-card-rules {
+  margin: 0;
+  padding: 7px 9px;
+  border-left: 2px solid var(--deep);
+  background: rgba(140, 153, 198, 0.07);
+  border-radius: 0 4px 4px 0;
+  color: var(--deep);
+  font-size: 0.8rem;
+  line-height: 1.45;
+}
+
+/* a gang playing by its own rules reads differently without hiding itself */
 .gang-card.is-unseen {
   border-style: dashed;
   border-left-style: solid;

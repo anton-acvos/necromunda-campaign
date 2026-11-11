@@ -647,14 +647,14 @@
     });
   }
 
-  /* One card. A gang marked hidden is not a player gang: it keeps its row
-     here so the roster is complete, but it shows no income and its deep
-     holdings are counted rather than named, because the deep is unsurveyed. */
+  /* One card. Every gang here is a player; some play by their own rules,
+     which the card states. Holdings in the deep are counted rather than
+     named, because the deep stays unsurveyed until a gang walks it. */
   function gangCard(g) {
     var held = holdingsOf(g);
     var deep = deepHoldingsOf(g);
 
-    var card = h('article', 'gang-card' + (g.hidden ? ' is-unseen' : ''));
+    var card = h('article', 'gang-card' + (g.rules ? ' is-unseen' : ''));
     card.style.borderLeftColor = g.color;
 
     var side = h('div', 'gang-side');
@@ -665,20 +665,21 @@
     var titles = h('div');
     titles.appendChild(h('h3', 'gang-card-name', g.name));
     titles.appendChild(h('p', 'gang-card-house',
-      g.house + (g.player ? ' \u00b7 ' + g.player : (g.hidden ? ' \u00b7 no player' : ''))));
+      g.house + (g.player ? ' \u00b7 ' + g.player : '')));
     top.appendChild(titles);
     side.appendChild(top);
 
     if (g.motto) {
       side.appendChild(h('p', 'gang-card-motto', '“' + g.motto + '”'));
     }
+    if (g.rules) side.appendChild(h('p', 'gang-card-rules', g.rules));
 
     var stats = h('div', 'gang-stats');
     [
       ['Rating', g.rating != null ? g.rating : '\u2014'],
-      ['Credits', g.hidden ? '\u2014' : (g.credits != null ? g.credits : '\u2014')],
+      ['Credits', g.credits != null ? g.credits : '\u2014'],
       ['Rep', g.reputation != null ? g.reputation : '\u2014'],
-      ['Income', g.hidden ? '\u2014' : incomeOf(g) + '/cycle']
+      ['Income', incomeOf(g) + '/cycle']
     ].forEach(function (pair) {
       var cell = h('div', 'gang-stat');
       cell.appendChild(h('span', 'gang-stat-label', pair[0]));
@@ -735,7 +736,7 @@
       host.appendChild(h('p', 'detail-empty', 'No gangs in the data yet.'));
       return;
     }
-    var players = visibleGangs();
+    var players = all;
 
     var head = h('div', 'plan-head');
     head.appendChild(h('h2', null, 'The gangs of the Hollow Reach'));
@@ -751,19 +752,6 @@
       return incomeOf(b) - incomeOf(a) || a.name.localeCompare(b.name);
     }).forEach(function (g) { grid.appendChild(gangCard(g)); });
     host.appendChild(grid);
-
-    var unseen = all.filter(function (g) { return g.hidden; });
-    if (unseen.length) {
-      var sub = h('div', 'plan-head unseen-head');
-      sub.appendChild(h('h2', null, 'Down there already'));
-      sub.appendChild(h('p', 'plan-where',
-        'Not player gangs. They hold ground nobody has charted, and they do not ' +
-        'appear in the standings or on the map.'));
-      host.appendChild(sub);
-      var unseenGrid = h('div', 'gang-grid');
-      unseen.forEach(function (g) { unseenGrid.appendChild(gangCard(g)); });
-      host.appendChild(unseenGrid);
-    }
 
     host.appendChild(h('p', 'hint plan-hint',
       'Rating, credits and reputation are whatever the arbitrator last wrote into ' +
