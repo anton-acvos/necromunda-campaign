@@ -655,8 +655,9 @@
     var deep = deepHoldingsOf(g);
 
     var card = h('article', 'gang-card' + (g.hidden ? ' is-unseen' : ''));
-    card.style.borderTopColor = g.color;
+    card.style.borderLeftColor = g.color;
 
+    var side = h('div', 'gang-side');
     var top = h('div', 'gang-card-head');
     var sw = h('span', 'swatch');
     sw.style.background = g.color;
@@ -666,10 +667,10 @@
     titles.appendChild(h('p', 'gang-card-house',
       g.house + (g.player ? ' \u00b7 ' + g.player : (g.hidden ? ' \u00b7 no player' : ''))));
     top.appendChild(titles);
-    card.appendChild(top);
+    side.appendChild(top);
 
     if (g.motto) {
-      card.appendChild(h('p', 'gang-card-motto', '“' + g.motto + '”'));
+      side.appendChild(h('p', 'gang-card-motto', '“' + g.motto + '”'));
     }
 
     var stats = h('div', 'gang-stats');
@@ -684,7 +685,8 @@
       cell.appendChild(h('strong', null, String(pair[1])));
       stats.appendChild(cell);
     });
-    card.appendChild(stats);
+    side.appendChild(stats);
+    card.appendChild(side);
 
     var list = h('ul', 'holdings');
     held.forEach(function (t) {
