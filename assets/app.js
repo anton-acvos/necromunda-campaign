@@ -374,7 +374,12 @@
       return;
     }
 
-    var dl = kvList([['Income', t.income], ['Boon', t.boon]]);
+    var dl = kvList([
+      ['Income', t.income == null ? null : t.income + ' credits a cycle'],
+      ['Boon', t.boon],
+      ['Standing', t.standing],
+      ['Battlefield effect', t.effect]
+    ]);
 
     var fought = (state.data.battles || []).filter(function (b) { return b.territory === t.id; });
     if (fought.length) {

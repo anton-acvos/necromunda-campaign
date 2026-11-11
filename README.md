@@ -129,10 +129,12 @@ shape:
   "designation": "I-07",
   "section": "inner",
   "surveyed": true,
-  "type": "Shrine",
+  "type": "Bone Shrine",
   "owner": null,
-  "income": "D3x10 credits",
-  "boon": "Reroll one Willpower test per battle",
+  "income": 25,
+  "boon": "Or recruit a ganger at a 25 credit discount",
+  "standing": "+1 Reputation",
+  "effect": "Battlefield effect, once you know it",
   "notes": "The candles were lit when the first gang arrived."
 }
 ```
@@ -192,6 +194,13 @@ Then open `http://localhost:8000`. The page fetches the JSON, so opening
 
 ## Notes on edition
 
-Territory types, income and boons are generic underhive placeholders, not
-transcribed N26 territories — swap them for the real list out of the Core
-Rulebook. Nothing in the code depends on their values; they are free text.
+Territory types come from the N26 Territory Selection Table and the three
+house journals, and the validator rejects a type outside that list. `income`
+is whole credits a cycle, `boon` is the alternative you may take instead of
+the income, and `standing` is an effect that applies the whole time you hold
+the place.
+
+`effect` is the Battlefield Effect, which applies in a battle where the
+territory is the Stake. Only The Still Rows has one so far: the rest need
+transcribing out of the Core Rulebook, because no published source carries
+them. The boon wording here is paraphrased, not GW's text.

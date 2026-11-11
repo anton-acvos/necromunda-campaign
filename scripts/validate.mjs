@@ -91,6 +91,23 @@ for (const [i, g] of gangs.entries()) {
   if (g.rating != null && typeof g.rating !== 'number') err(`${at}.rating: must be a number`);
 }
 
+/* The N26 territory types: the core D66 table, plus the house journal holdings.
+   Names come from the published Territory Selection Table; a type outside this
+   list is almost always a typo or a leftover from the invented placeholders. */
+const N26_TYPES = new Set([
+  'Settlement',
+  'Bullet Den', 'Rogue Doc Shop', 'Mess Shack', 'Drinking Hole', 'Fence Hangout',
+  'Bounty Den', 'Generatorium', 'Corpse Farm', 'Tunnels', 'Tech Bazaar',
+  'Promethium Cache', 'Collapsed Dome', 'Bone Shrine', 'Mine Workings',
+  'Gambling Den', 'Synth Still', 'Old Ruins', 'Fighting Pit',
+  /* House of Chains (Goliath) */
+  'Slug House', 'Flesh-makers Theatre', 'Fight Arena', 'Amneo-vats', 'Feasting Hall', 'Badzone Smelter',
+  /* House of Blades (Escher) */
+  'Phelynx Pen', 'Bio-lab', 'Wyld Den', 'Rogue Las Factoria', 'Chem Arena', 'Shivver Den',
+  /* House of Iron (Orlock) */
+  'Ammo Factoria', 'Vehicle Workshop', 'Wild Snake Distillery', 'Scrap Mine', 'Toll Road', 'Container Stacks'
+]);
+
 /* --- territories --- */
 const territories = Array.isArray(data.territories) ? data.territories : [];
 if (!territories.length) err('territories: expected at least one territory');
@@ -114,6 +131,10 @@ for (const [i, t] of territories.entries()) {
     if (!isPolygon(t.polygon)) err(`${at}.polygon: a charted territory needs a shape`);
     for (const k of ['labelX', 'labelY']) {
       if (typeof t[k] !== 'number') err(`${at}.${k}: required number (label position)`);
+    }
+    if (!N26_TYPES.has(t.type)) err(`${at}.type: "${t.type}" is not an N26 territory type`);
+    if (!Number.isInteger(t.income) || t.income < 0) {
+      err(`${at}.income: expected whole credits a cycle, got ${JSON.stringify(t.income)}`);
     }
     if (t.settlement) settlements++;
   }
