@@ -5,7 +5,7 @@
     "edition": "N26",
     "arbitrator": "Anton",
     "cycle": 1,
-    "lastUpdated": "2026-11-08",
+    "lastUpdated": "2026-11-10",
     "phases": [
       {
         "id": "exploration",
@@ -629,11 +629,11 @@
       "name": "The Pit Market",
       "section": "outer",
       "ring": "ring",
-      "type": "Trading Post",
+      "type": "Mine Workings",
       "settlement": false,
       "owner": "precinct-22",
       "income": "D6x10 credits",
-      "boon": "Rare trade roll at +2",
+      "boon": "Extra D6x10 credits if held two cycles running",
       "contested": false,
       "bordersInner": true,
       "labelX": 198.99,
@@ -669,7 +669,7 @@
         "i-03",
         "precinct-house-22"
       ],
-      "notes": "Neutral ground by long tradition. Precinct 22 enforces that tradition at gunpoint, which everyone agrees is novel."
+      "notes": "A worked-out pit the Enforcers reopened and now run themselves. The market that gave it its name trades on the spoil heap at the top."
     },
     {
       "id": "coil-gardens",

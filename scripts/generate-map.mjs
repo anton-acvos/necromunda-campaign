@@ -125,7 +125,7 @@ const outer = [
   { id: 'the-chokestack',    name: 'The Chokestack',      type: 'Slag Furnace',     owner: 'sumptown',            settlement: false, income: 'D6x10 credits', boon: 'Free Brute hire this cycle',                     notes: 'The furnace still runs. Nobody admits to lighting it and nobody dares let it go out.' },
   { id: 'rustfall-row',      name: 'Rustfall Row',        type: 'Old Ruins',        owner: null,                  settlement: false, income: 'D3x10 credits', boon: 'Search the ruins: one free Common item',         notes: 'Collapsed habs stacked nine deep. The footing is a liability and the snipers know it.', contested: false },
   { id: 'precinct-house-22', name: 'Precinct House 22',   type: 'Settlement',       owner: 'precinct-22',         settlement: true,  income: 'D6x10 credits', boon: 'One free Palanite patrol escort each Downtime',  notes: 'Built to hold two hundred. Currently holds nineteen, a vox relay and a great deal of institutional stubbornness.' },
-  { id: 'the-pit-market',    name: 'The Pit Market',      type: 'Trading Post',     owner: 'precinct-22',         settlement: false, income: 'D6x10 credits', boon: 'Rare trade roll at +2',                          notes: 'Neutral ground by long tradition. Precinct 22 enforces that tradition at gunpoint, which everyone agrees is novel.' },
+  { id: 'the-pit-market',    name: 'The Pit Market',      type: 'Mine Workings',    owner: 'precinct-22',         settlement: false, income: 'D6x10 credits', boon: 'Extra D6x10 credits if held two cycles running', notes: 'A worked-out pit the Enforcers reopened and now run themselves. The market that gave it its name trades on the spoil heap at the top.' },
   { id: 'coil-gardens',      name: 'The Coil Gardens',    type: 'Promethium Cache', owner: null,                  settlement: false, income: 'D6x10 credits', boon: 'One free flamer-class weapon',                   notes: 'Pipework grown into a thicket. Van Saar say they understand it. They do not.' },
   { id: 'reclaimers-breach', name: "Reclaimers' Breach", type: 'Settlement',       owner: 'archeo-3',            settlement: true,  income: 'D6x10 credits', boon: 'Reroll one Intelligence test per battle',        notes: 'Team 3 cut their way in here and named it for the work. The Tech-Acquisitor party staged out of this hold; their last transmission was a set of coordinates and nothing else.' },
   { id: 'generatorium',      name: 'The Generatorium',    type: 'Generatorium',     owner: 'archeo-3',            settlement: false, income: 'D6x10 credits', boon: 'Repair one damaged item free each Downtime',     notes: 'Plasma conduits that have not gone cold in ten thousand years. Team 3 metered the output before they posted a single guard.' },
@@ -745,7 +745,7 @@ const data = {
     edition: 'N26',
     arbitrator: 'Anton',
     cycle: 1,
-    lastUpdated: '2026-11-08',
+    lastUpdated: '2026-11-10',
     /* The phase a cycle falls in is worked out from this plan, so there is
        only ever one number to change when the campaign moves on. */
     phases: [
