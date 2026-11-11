@@ -438,6 +438,22 @@ body {
 
 .holding-boon.is-standing { color: var(--warn); opacity: 0.8; }
 
+.gang-card.is-unseen {
+  border-style: dashed;
+  background:
+    repeating-linear-gradient(135deg, transparent 0 7px, rgba(140, 153, 198, 0.045) 7px 14px),
+    var(--bg-raised);
+}
+
+.unseen-head { margin-top: 26px; }
+
+.holding.is-deep {
+  border-left-color: var(--deep);
+  color: var(--deep);
+}
+
+.holding.is-deep .holding-row { font-size: 0.93rem; font-weight: 600; }
+
 @media (max-width: 520px) {
   .gang-stats { grid-template-columns: repeat(2, 1fr); row-gap: 10px; }
 }

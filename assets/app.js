@@ -641,88 +641,127 @@
     return holdingsOf(g).reduce(function (n, t) { return n + (t.income || 0); }, 0);
   }
 
+  function deepHoldingsOf(g) {
+    return (state.data.territories || []).filter(function (t) {
+      return t.owner === g.id && t.section === 'inner';
+    });
+  }
+
+  /* One card. A gang marked hidden is not a player gang: it keeps its row
+     here so the roster is complete, but it shows no income and its deep
+     holdings are counted rather than named, because the deep is unsurveyed. */
+  function gangCard(g) {
+    var held = holdingsOf(g);
+    var deep = deepHoldingsOf(g);
+
+    var card = h('article', 'gang-card' + (g.hidden ? ' is-unseen' : ''));
+    card.style.borderTopColor = g.color;
+
+    var top = h('div', 'gang-card-head');
+    var sw = h('span', 'swatch');
+    sw.style.background = g.color;
+    top.appendChild(sw);
+    var titles = h('div');
+    titles.appendChild(h('h3', 'gang-card-name', g.name));
+    titles.appendChild(h('p', 'gang-card-house',
+      g.house + (g.player ? ' \u00b7 ' + g.player : (g.hidden ? ' \u00b7 no player' : ''))));
+    top.appendChild(titles);
+    card.appendChild(top);
+
+    if (g.motto) {
+      card.appendChild(h('p', 'gang-card-motto', '“' + g.motto + '”'));
+    }
+
+    var stats = h('div', 'gang-stats');
+    [
+      ['Rating', g.rating != null ? g.rating : '\u2014'],
+      ['Credits', g.hidden ? '\u2014' : (g.credits != null ? g.credits : '\u2014')],
+      ['Rep', g.reputation != null ? g.reputation : '\u2014'],
+      ['Income', g.hidden ? '\u2014' : incomeOf(g) + '/cycle']
+    ].forEach(function (pair) {
+      var cell = h('div', 'gang-stat');
+      cell.appendChild(h('span', 'gang-stat-label', pair[0]));
+      cell.appendChild(h('strong', null, String(pair[1])));
+      stats.appendChild(cell);
+    });
+    card.appendChild(stats);
+
+    var list = h('ul', 'holdings');
+    held.forEach(function (t) {
+      var li = h('li', 'holding');
+      var row = h('div', 'holding-row');
+      var link = h('button', 'holding-name');
+      link.type = 'button';
+      link.textContent = t.name;
+      link.title = 'Show ' + t.name + ' on the map';
+      link.addEventListener('click', function () { select(t.id, true); });
+      row.appendChild(link);
+      if (t.settlement) row.appendChild(h('span', 'tag settlement', 'Settlement'));
+      row.appendChild(h('span', 'holding-income', (t.income || 0) + ' cr'));
+      li.appendChild(row);
+      li.appendChild(h('p', 'holding-type', t.type || 'Unknown type'));
+      if (t.boon) li.appendChild(h('p', 'holding-boon', t.boon));
+      if (t.standing) {
+        li.appendChild(h('p', 'holding-boon is-standing', t.standing + ', the whole time it is held'));
+      }
+      list.appendChild(li);
+    });
+
+    if (deep.length) {
+      var unsurveyed = deep.filter(function (t) { return !t.surveyed; });
+      var li = h('li', 'holding is-deep');
+      li.appendChild(h('div', 'holding-row',
+        deep.length === 1 ? 'One holding in the deep' : deep.length + ' holdings in the deep'));
+      li.appendChild(h('p', 'holding-type', unsurveyed.length === deep.length
+        ? 'Nobody has walked them, so nobody has charted which they are.'
+        : 'Some of them have been walked.'));
+      list.appendChild(li);
+    }
+
+    if (!held.length && !deep.length) {
+      list.appendChild(h('li', 'holding is-empty', 'Holds nothing on the charted map.'));
+    }
+    card.appendChild(list);
+    return card;
+  }
+
   function drawGangs() {
     var host = document.getElementById('panel-gangs');
     host.textContent = '';
-    var gangs = visibleGangs();
-    if (!gangs.length) {
+    var all = state.data.gangs || [];
+    if (!all.length) {
       host.appendChild(h('p', 'detail-empty', 'No gangs in the data yet.'));
       return;
     }
+    var players = visibleGangs();
 
     var head = h('div', 'plan-head');
     head.appendChild(h('h2', null, 'The gangs of the Hollow Reach'));
-    var holdings = gangs.reduce(function (n, g) { return n + holdingsOf(g).length; }, 0);
-    var purse = gangs.reduce(function (n, g) { return n + incomeOf(g); }, 0);
+    var holdings = players.reduce(function (n, g) { return n + holdingsOf(g).length; }, 0);
+    var purse = players.reduce(function (n, g) { return n + incomeOf(g); }, 0);
     head.appendChild(h('p', 'plan-where',
-      gangs.length + ' gangs hold ' + holdings + ' charted territories between them, ' +
+      players.length + ' gangs hold ' + holdings + ' charted territories between them, ' +
       'worth ' + purse + ' credits a cycle.'));
     host.appendChild(head);
 
     var grid = h('div', 'gang-grid');
-    gangs.slice().sort(function (a, b) {
+    players.slice().sort(function (a, b) {
       return incomeOf(b) - incomeOf(a) || a.name.localeCompare(b.name);
-    }).forEach(function (g) {
-      var held = holdingsOf(g);
-
-      var card = h('article', 'gang-card');
-      card.style.borderTopColor = g.color;
-
-      var top = h('div', 'gang-card-head');
-      var sw = h('span', 'swatch');
-      sw.style.background = g.color;
-      top.appendChild(sw);
-      var titles = h('div');
-      titles.appendChild(h('h3', 'gang-card-name', g.name));
-      titles.appendChild(h('p', 'gang-card-house', g.house + (g.player ? ' \u00b7 ' + g.player : '')));
-      top.appendChild(titles);
-      card.appendChild(top);
-
-      if (g.motto) {
-        card.appendChild(h('p', 'gang-card-motto', '“' + g.motto + '”'));
-      }
-
-      var stats = h('div', 'gang-stats');
-      [
-        ['Rating', g.rating != null ? g.rating : '\u2014'],
-        ['Credits', g.credits != null ? g.credits : '\u2014'],
-        ['Rep', g.reputation != null ? g.reputation : '\u2014'],
-        ['Income', incomeOf(g) + '/cycle']
-      ].forEach(function (pair) {
-        var cell = h('div', 'gang-stat');
-        cell.appendChild(h('span', 'gang-stat-label', pair[0]));
-        cell.appendChild(h('strong', null, String(pair[1])));
-        stats.appendChild(cell);
-      });
-      card.appendChild(stats);
-
-      var list = h('ul', 'holdings');
-      if (!held.length) {
-        list.appendChild(h('li', 'holding is-empty', 'Holds nothing on the charted map.'));
-      }
-      held.forEach(function (t) {
-        var li = h('li', 'holding');
-        var row = h('div', 'holding-row');
-        var link = h('button', 'holding-name');
-        link.type = 'button';
-        link.textContent = t.name;
-        link.title = 'Show ' + t.name + ' on the map';
-        link.addEventListener('click', function () { select(t.id, true); });
-        row.appendChild(link);
-        if (t.settlement) row.appendChild(h('span', 'tag settlement', 'Settlement'));
-        row.appendChild(h('span', 'holding-income', (t.income || 0) + ' cr'));
-        li.appendChild(row);
-        li.appendChild(h('p', 'holding-type', t.type || 'Unknown type'));
-        if (t.boon) li.appendChild(h('p', 'holding-boon', t.boon));
-        if (t.standing) {
-          li.appendChild(h('p', 'holding-boon is-standing', t.standing + ', the whole time it is held'));
-        }
-        list.appendChild(li);
-      });
-      card.appendChild(list);
-      grid.appendChild(card);
-    });
+    }).forEach(function (g) { grid.appendChild(gangCard(g)); });
     host.appendChild(grid);
+
+    var unseen = all.filter(function (g) { return g.hidden; });
+    if (unseen.length) {
+      var sub = h('div', 'plan-head unseen-head');
+      sub.appendChild(h('h2', null, 'Down there already'));
+      sub.appendChild(h('p', 'plan-where',
+        'Not player gangs. They hold ground nobody has charted, and they do not ' +
+        'appear in the standings or on the map.'));
+      host.appendChild(sub);
+      var unseenGrid = h('div', 'gang-grid');
+      unseen.forEach(function (g) { unseenGrid.appendChild(gangCard(g)); });
+      host.appendChild(unseenGrid);
+    }
 
     host.appendChild(h('p', 'hint plan-hint',
       'Rating, credits and reputation are whatever the arbitrator last wrote into ' +
