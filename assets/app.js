@@ -301,9 +301,9 @@
   /* ---------- selection ---------- */
 
   function select(id, updateHash) {
-    if (id === 'campaign') {
-      showTab('campaign');
-      if (updateHash && window.location.hash !== '#campaign') history.replaceState(null, '', '#campaign');
+    if (id === 'campaign' || id === 'gangs') {
+      showTab(id);
+      if (updateHash && window.location.hash !== '#' + id) history.replaceState(null, '', '#' + id);
       return;
     }
     showTab('map');
@@ -628,16 +628,118 @@
     host.appendChild(foot);
   }
 
+  /* ---------- the gangs tab ---------- */
+
+  /* What a gang draws each cycle is the income on every charted holding it
+     owns. Standing boons are listed beside the holding rather than folded
+     into the total, because several only pay out for the right House. */
+  function holdingsOf(g) {
+    return outerTerritories().filter(function (t) { return t.owner === g.id; });
+  }
+
+  function incomeOf(g) {
+    return holdingsOf(g).reduce(function (n, t) { return n + (t.income || 0); }, 0);
+  }
+
+  function drawGangs() {
+    var host = document.getElementById('panel-gangs');
+    host.textContent = '';
+    var gangs = visibleGangs();
+    if (!gangs.length) {
+      host.appendChild(h('p', 'detail-empty', 'No gangs in the data yet.'));
+      return;
+    }
+
+    var head = h('div', 'plan-head');
+    head.appendChild(h('h2', null, 'The gangs of the Hollow Reach'));
+    var holdings = gangs.reduce(function (n, g) { return n + holdingsOf(g).length; }, 0);
+    var purse = gangs.reduce(function (n, g) { return n + incomeOf(g); }, 0);
+    head.appendChild(h('p', 'plan-where',
+      gangs.length + ' gangs hold ' + holdings + ' charted territories between them, ' +
+      'worth ' + purse + ' credits a cycle.'));
+    host.appendChild(head);
+
+    var grid = h('div', 'gang-grid');
+    gangs.slice().sort(function (a, b) {
+      return incomeOf(b) - incomeOf(a) || a.name.localeCompare(b.name);
+    }).forEach(function (g) {
+      var held = holdingsOf(g);
+
+      var card = h('article', 'gang-card');
+      card.style.borderTopColor = g.color;
+
+      var top = h('div', 'gang-card-head');
+      var sw = h('span', 'swatch');
+      sw.style.background = g.color;
+      top.appendChild(sw);
+      var titles = h('div');
+      titles.appendChild(h('h3', 'gang-card-name', g.name));
+      titles.appendChild(h('p', 'gang-card-house', g.house + (g.player ? ' \u00b7 ' + g.player : '')));
+      top.appendChild(titles);
+      card.appendChild(top);
+
+      if (g.motto) {
+        card.appendChild(h('p', 'gang-card-motto', '“' + g.motto + '”'));
+      }
+
+      var stats = h('div', 'gang-stats');
+      [
+        ['Rating', g.rating != null ? g.rating : '\u2014'],
+        ['Credits', g.credits != null ? g.credits : '\u2014'],
+        ['Rep', g.reputation != null ? g.reputation : '\u2014'],
+        ['Income', incomeOf(g) + '/cycle']
+      ].forEach(function (pair) {
+        var cell = h('div', 'gang-stat');
+        cell.appendChild(h('span', 'gang-stat-label', pair[0]));
+        cell.appendChild(h('strong', null, String(pair[1])));
+        stats.appendChild(cell);
+      });
+      card.appendChild(stats);
+
+      var list = h('ul', 'holdings');
+      if (!held.length) {
+        list.appendChild(h('li', 'holding is-empty', 'Holds nothing on the charted map.'));
+      }
+      held.forEach(function (t) {
+        var li = h('li', 'holding');
+        var row = h('div', 'holding-row');
+        var link = h('button', 'holding-name');
+        link.type = 'button';
+        link.textContent = t.name;
+        link.title = 'Show ' + t.name + ' on the map';
+        link.addEventListener('click', function () { select(t.id, true); });
+        row.appendChild(link);
+        if (t.settlement) row.appendChild(h('span', 'tag settlement', 'Settlement'));
+        row.appendChild(h('span', 'holding-income', (t.income || 0) + ' cr'));
+        li.appendChild(row);
+        li.appendChild(h('p', 'holding-type', t.type || 'Unknown type'));
+        if (t.boon) li.appendChild(h('p', 'holding-boon', t.boon));
+        if (t.standing) {
+          li.appendChild(h('p', 'holding-boon is-standing', t.standing + ', the whole time it is held'));
+        }
+        list.appendChild(li);
+      });
+      card.appendChild(list);
+      grid.appendChild(card);
+    });
+    host.appendChild(grid);
+
+    host.appendChild(h('p', 'hint plan-hint',
+      'Rating, credits and reputation are whatever the arbitrator last wrote into ' +
+      'data/campaign.json. Income is worked out from the holdings listed here.'));
+  }
+
   /* ---------- tabs ---------- */
 
   function showTab(name) {
-    var campaign = name === 'campaign';
-    document.getElementById('panel-map').hidden = campaign;
-    document.getElementById('panel-campaign').hidden = !campaign;
-    [['tab-map', !campaign], ['tab-campaign', campaign]].forEach(function (pair) {
-      var btn = document.getElementById(pair[0]);
-      btn.classList.toggle('is-active', pair[1]);
-      btn.setAttribute('aria-selected', pair[1] ? 'true' : 'false');
+    var panels = { map: 'panel-map', campaign: 'panel-campaign', gangs: 'panel-gangs' };
+    var tabs = { map: 'tab-map', campaign: 'tab-campaign', gangs: 'tab-gangs' };
+    Object.keys(panels).forEach(function (key) {
+      var on = key === name;
+      document.getElementById(panels[key]).hidden = !on;
+      var btn = document.getElementById(tabs[key]);
+      btn.classList.toggle('is-active', on);
+      btn.setAttribute('aria-selected', on ? 'true' : 'false');
     });
   }
 
@@ -679,6 +781,7 @@
     drawMap();
     drawStandings();
     drawTimeline();
+    drawGangs();
 
     document.getElementById('tab-map').addEventListener('click', function () {
       showTab('map');
@@ -687,6 +790,7 @@
       }
     });
     document.getElementById('tab-campaign').addEventListener('click', function () { select('campaign', true); });
+    document.getElementById('tab-gangs').addEventListener('click', function () { select('gangs', true); });
 
     var fromHash = window.location.hash.replace(/^#/, '');
     if (fromHash) select(fromHash, false);

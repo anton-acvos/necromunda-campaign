@@ -8,6 +8,8 @@ build step, no framework: a static page that reads one JSON file.
 - **Forty territories** — two starting and three unclaimed per player
 - **Standings** — territories held, gang rating, reputation
 - **Campaign tab** — the phase plan, with past, current and coming cycles marked
+- **Gangs tab** — one card per gang: rating, credits, reputation, income a cycle,
+  and every holding it owns with that holding's type and boon
 - **Discord** — a GitHub Action announces every change to the campaign channel
 
 ## The sector

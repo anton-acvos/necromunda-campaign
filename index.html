@@ -11,7 +11,7 @@
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%231a1613'/%3E%3Cpath d='M6 24l5-14 5 9 4-6 6 11z' fill='%23d2652a'/%3E%3C/svg%3E">
 <!-- ?v= is a cache buster: bump the date whenever style.css or app.js changes,
      so a player never gets yesterday's script against today's map. -->
-<link rel="stylesheet" href="assets/style.css?v=20261111">
+<link rel="stylesheet" href="assets/style.css?v=20261112">
 </head>
 <body>
 
@@ -33,6 +33,7 @@
 <nav class="tabs" role="tablist" aria-label="Sections">
   <button id="tab-map" class="tab is-active" type="button" role="tab" aria-selected="true" aria-controls="panel-map">Map</button>
   <button id="tab-campaign" class="tab" type="button" role="tab" aria-selected="false" aria-controls="panel-campaign">Campaign</button>
+  <button id="tab-gangs" class="tab" type="button" role="tab" aria-selected="false" aria-controls="panel-gangs">Gangs</button>
 </nav>
 
 <main class="layout" id="panel-map" role="tabpanel" aria-labelledby="tab-map">
@@ -93,6 +94,8 @@
 
 <section class="campaign-panel" id="panel-campaign" role="tabpanel" aria-labelledby="tab-campaign" hidden></section>
 
+<section class="gangs-panel" id="panel-gangs" role="tabpanel" aria-labelledby="tab-gangs" hidden></section>
+
 <footer class="foot">
   <span id="foot-arbitrator"></span>
   <span class="dot">·</span>
@@ -101,6 +104,6 @@
   <span>Link a territory by adding <code>#territory-id</code> to the URL</span>
 </footer>
 
-<script src="assets/app.js?v=20261111"></script>
+<script src="assets/app.js?v=20261112"></script>
 </body>
 </html>
