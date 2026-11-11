@@ -1311,10 +1311,10 @@
       "name": "Ratgut Tunnels",
       "section": "outer",
       "ring": "ring",
-      "type": "Tunnels",
+      "type": "Bounty Den",
       "settlement": false,
       "owner": "mycelium",
-      "income": 20,
+      "income": 25,
       "contested": false,
       "bordersInner": true,
       "labelX": 1028.92,
@@ -1347,7 +1347,7 @@
         "sunken-nave",
         "the-bonepipe"
       ],
-      "notes": "Not mapped, not mappable. Mycelium Section claims otherwise and charges for guides."
+      "notes": "Not mapped, not mappable. Mycelium Section charges for guides and keeps a second ledger of who is worth money to somebody up-hive."
     },
     {
       "id": "the-bonepipe",
