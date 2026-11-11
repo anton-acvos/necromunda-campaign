@@ -483,9 +483,9 @@
         "theta-run"
       ],
       "links": [
+        "harvest-yard",
         "i-01",
-        "the-chokestack",
-        "the-wire-yard"
+        "the-chokestack"
       ],
       "notes": "Barge wharves and a century of silt. Everything coming down from above lands here first."
     },
@@ -540,10 +540,11 @@
       "name": "Rustfall Row",
       "section": "outer",
       "ring": "ring",
-      "type": "Old Ruins",
+      "type": "Mess Shack",
       "settlement": false,
       "owner": null,
-      "income": 20,
+      "income": 15,
+      "boon": "Or recruit a Slopper at a 30 credit discount, if you have none",
       "contested": false,
       "bordersInner": true,
       "labelX": 187.51,
@@ -578,7 +579,7 @@
         "precinct-house-22",
         "the-chokestack"
       ],
-      "notes": "Collapsed habs stacked nine deep. The footing is a liability and the snipers know it."
+      "notes": "Collapsed habs stacked nine deep with one kitchen still lit at the bottom. The queue forms before the shift horn and nobody skips it."
     },
     {
       "id": "precinct-house-22",
@@ -674,11 +675,11 @@
       "name": "The Coil Gardens",
       "section": "outer",
       "ring": "ring",
-      "type": "Promethium Cache",
+      "type": "Fence Hangout",
       "settlement": false,
       "owner": null,
       "income": 15,
-      "boon": "Or take three hazard suits",
+      "boon": "Or recruit a Dome Runner at a 30 credit discount, if you have none",
       "contested": false,
       "bordersInner": true,
       "labelX": 213.75,
@@ -714,7 +715,7 @@
         "reclaimers-breach",
         "the-pit-market"
       ],
-      "notes": "Pipework grown into a thicket. Van Saar say they understand it. They do not."
+      "notes": "Pipework grown into a thicket, and a dozen quiet doors inside it. Whatever leaves the sector by the back way goes through here first."
     },
     {
       "id": "reclaimers-breach",
@@ -758,11 +759,11 @@
       ],
       "tunnels": [],
       "links": [
+        "cog-market",
         "coil-gardens",
         "generatorium",
         "i-04",
-        "i-05",
-        "vent-nine"
+        "i-05"
       ],
       "notes": "Team 3 cut their way in here and named it for the work. The Tech-Acquisitor party staged out of this hold; their last transmission was a set of coordinates and nothing else."
     },
@@ -804,20 +805,20 @@
       ],
       "tunnels": [],
       "links": [
-        "reclaimers-breach",
-        "vent-nine"
+        "cog-market",
+        "reclaimers-breach"
       ],
       "notes": "Plasma conduits that have not gone cold in ten thousand years. Team 3 metered the output before they posted a single guard."
     },
     {
-      "id": "vent-nine",
-      "name": "Vent Nine",
+      "id": "cog-market",
+      "name": "The Cog Market",
       "section": "outer",
       "ring": "ring",
-      "type": "Tunnels",
+      "type": "Tech Bazaar",
       "settlement": false,
       "owner": null,
-      "income": 20,
+      "income": 15,
       "contested": false,
       "bordersInner": true,
       "labelX": 445.4,
@@ -851,7 +852,7 @@
         "i-05",
         "reclaimers-breach"
       ],
-      "notes": "The up-hive draught comes through here. So does anything that wants in quietly."
+      "notes": "The up-hive draught comes down the old vent and keeps the stalls cool. Half the tech on the tables was still working when somebody pulled it out."
     },
     {
       "id": "cinder-yard",
@@ -891,10 +892,10 @@
       ],
       "tunnels": [],
       "links": [
+        "cog-market",
         "grudgehold",
         "i-05",
-        "i-06",
-        "vent-nine"
+        "i-06"
       ],
       "notes": "Ash heaps that shift without warning. Three gangs are still down there somewhere."
     },
@@ -1029,22 +1030,23 @@
         "the-deadfall"
       ],
       "links": [
+        "brass-stair",
         "holestead",
         "i-07",
-        "i-08",
-        "the-drowned-stair"
+        "i-08"
       ],
       "notes": "Quarterly extraction targets are posted at the gate. Somebody has been correcting them in blood."
     },
     {
-      "id": "the-drowned-stair",
-      "name": "The Drowned Stair",
+      "id": "brass-stair",
+      "name": "The Brass Stair",
       "section": "outer",
       "ring": "ring",
-      "type": "Collapsed Dome",
+      "type": "Bullet Den",
       "settlement": false,
       "owner": null,
-      "income": 20,
+      "income": 15,
+      "boon": "Or recruit an Ammo-Jack at a 30 credit discount, if you have none",
       "contested": false,
       "bordersInner": true,
       "labelX": 1283.4,
@@ -1078,16 +1080,16 @@
         "i-08",
         "i-09",
         "scrap-shoals",
-        "the-weeping-wall"
+        "weeping-still"
       ],
-      "notes": "The stairs go down into the sump and keep going. Low tide reveals about forty more steps."
+      "notes": "The steps go down into the sump and keep going. Somebody has been stacking crates on the dry landings for a very long time."
     },
     {
-      "id": "the-weeping-wall",
-      "name": "The Weeping Wall",
+      "id": "weeping-still",
+      "name": "The Weeping Still",
       "section": "outer",
       "ring": "ring",
-      "type": "Collapsed Dome",
+      "type": "Synth Still",
       "settlement": false,
       "owner": null,
       "income": 20,
@@ -1121,11 +1123,11 @@
         "the-deadfall"
       ],
       "links": [
+        "brass-stair",
         "glass-dome",
-        "i-09",
-        "the-drowned-stair"
+        "i-09"
       ],
-      "notes": "Groundwater bleeds through the rockcrete in sheets. The sound carries for a kilometre."
+      "notes": "Groundwater bleeds through the rockcrete in sheets and the condensers underneath catch every drop. What comes out the other end is sold as medicine."
     },
     {
       "id": "glass-dome",
@@ -1169,7 +1171,7 @@
       "links": [
         "i-09",
         "the-still-rows",
-        "the-weeping-wall"
+        "weeping-still"
       ],
       "notes": "A cracked crystalflex dome over a working still. The Chymists moved in and the water got stranger."
     },
@@ -1387,22 +1389,22 @@
       ],
       "tunnels": [],
       "links": [
+        "harvest-yard",
         "i-11",
         "i-12",
-        "ratgut-tunnels",
-        "the-wire-yard"
+        "ratgut-tunnels"
       ],
       "notes": "The doc is good. The doc is also why several gangers answer to new names."
     },
     {
-      "id": "the-wire-yard",
-      "name": "The Wire Yard",
+      "id": "harvest-yard",
+      "name": "The Harvest Yard",
       "section": "outer",
       "ring": "ring",
-      "type": "Tech Bazaar",
+      "type": "Corpse Farm",
       "settlement": false,
       "owner": null,
-      "income": 15,
+      "income": 25,
       "contested": false,
       "bordersInner": true,
       "labelX": 656.27,
@@ -1436,7 +1438,7 @@
         "sumptown",
         "the-bonepipe"
       ],
-      "notes": "Spools of cable taller than a Goliath. Whoever untangles it first gets rich or gets cut in half."
+      "notes": "Spools of cable taller than a Goliath, and the vats behind them. The yard takes what the Underhive has finished with and sends it up-hive as protein."
     },
     {
       "id": "i-01",
@@ -1486,13 +1488,13 @@
         "theta-run"
       ],
       "links": [
+        "harvest-yard",
         "i-02",
         "i-03",
         "i-12",
         "i-14",
         "sumptown",
-        "the-chokestack",
-        "the-wire-yard"
+        "the-chokestack"
       ],
       "notes": null
     },
@@ -1701,11 +1703,11 @@
       "tunnels": [],
       "links": [
         "cinder-yard",
+        "cog-market",
         "i-04",
         "i-06",
         "i-16",
-        "reclaimers-breach",
-        "vent-nine"
+        "reclaimers-breach"
       ],
       "notes": null
     },
@@ -1860,11 +1862,11 @@
         "the-deadfall"
       ],
       "links": [
+        "brass-stair",
         "i-07",
         "i-09",
         "i-18",
-        "scrap-shoals",
-        "the-drowned-stair"
+        "scrap-shoals"
       ],
       "notes": null
     },
@@ -1921,13 +1923,13 @@
       ],
       "links": [
         "black-ledger",
+        "brass-stair",
         "glass-dome",
         "i-08",
         "i-10",
         "i-18",
-        "the-drowned-stair",
         "the-still-rows",
-        "the-weeping-wall"
+        "weeping-still"
       ],
       "notes": null
     },
@@ -2075,12 +2077,12 @@
       ],
       "tunnels": [],
       "links": [
+        "harvest-yard",
         "i-01",
         "i-11",
         "i-13",
         "i-14",
-        "the-bonepipe",
-        "the-wire-yard"
+        "the-bonepipe"
       ],
       "notes": null
     },
