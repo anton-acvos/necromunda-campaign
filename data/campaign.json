@@ -486,19 +486,20 @@
       "links": [
         "harvest-yard",
         "i-01",
-        "the-chokestack"
+        "the-brood-vats"
       ],
       "notes": "Barge wharves and a century of silt. Everything coming down from above lands here first."
     },
     {
-      "id": "the-chokestack",
-      "name": "The Chokestack",
+      "id": "the-brood-vats",
+      "name": "The Brood Vats",
       "section": "outer",
       "ring": "ring",
-      "type": "Badzone Smelter",
+      "type": "Amneo-vats",
       "settlement": false,
       "owner": "sumptown",
-      "income": 20,
+      "income": 25,
+      "standing": "Goliath hold it, so it pays 25 a cycle instead of the 15 it would pay anyone else",
       "contested": false,
       "bordersInner": true,
       "labelX": 343.48,
@@ -534,7 +535,7 @@
         "rustfall-row",
         "sumptown"
       ],
-      "notes": "The furnace still runs. Nobody admits to lighting it and nobody dares let it go out."
+      "notes": "Amneotic tanks in rows under the sump, lidded and bubbling. Sumptown grows its own, and the ones that come out wrong go back in."
     },
     {
       "id": "rustfall-row",
@@ -578,7 +579,7 @@
       "links": [
         "i-02",
         "precinct-house-22",
-        "the-chokestack"
+        "the-brood-vats"
       ],
       "notes": "Collapsed habs stacked nine deep with one kitchen still lit at the bottom. The queue forms before the shift horn and nobody skips it."
     },
@@ -1495,7 +1496,7 @@
         "i-12",
         "i-14",
         "sumptown",
-        "the-chokestack"
+        "the-brood-vats"
       ],
       "notes": null
     },
@@ -1547,7 +1548,7 @@
         "i-03",
         "precinct-house-22",
         "rustfall-row",
-        "the-chokestack",
+        "the-brood-vats",
         "the-pit-market"
       ],
       "notes": null
