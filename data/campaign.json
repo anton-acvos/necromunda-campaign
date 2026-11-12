@@ -396,7 +396,7 @@
       "id": "the-deadfall",
       "name": "The Deadfall",
       "width": 32,
-      "mouth": "glass-dome",
+      "mouth": "quarantines-end",
       "gateway": "prospectors-cut",
       "path": [
         [
@@ -1126,14 +1126,14 @@
       ],
       "links": [
         "brass-stair",
-        "glass-dome",
-        "i-09"
+        "i-09",
+        "quarantines-end"
       ],
       "notes": "Groundwater bleeds through the rockcrete in sheets and the condensers underneath catch every drop. What comes out the other end is sold as medicine."
     },
     {
-      "id": "glass-dome",
-      "name": "The Glass Dome",
+      "id": "quarantines-end",
+      "name": "Quarantine's End",
       "section": "outer",
       "ring": "ring",
       "type": "Settlement",
@@ -1175,7 +1175,7 @@
         "the-still-rows",
         "weeping-still"
       ],
-      "notes": "A cracked crystalflex dome over a working still. The Chymists moved in and the water got stranger."
+      "notes": "A cracked crystalflex dome, sealed off for something nobody will name and unsealed by the Chymists, who insist the air is clean now."
     },
     {
       "id": "the-still-rows",
@@ -1215,8 +1215,8 @@
       ],
       "links": [
         "black-ledger",
-        "glass-dome",
-        "i-09"
+        "i-09",
+        "quarantines-end"
       ],
       "notes": "Condensers in rows the length of a dome, half of them re-tooled to stamp power cells. Sola Dosis insists the fumes are therapeutic and the lasguns are legal."
     },
@@ -1926,10 +1926,10 @@
       "links": [
         "black-ledger",
         "brass-stair",
-        "glass-dome",
         "i-08",
         "i-10",
         "i-18",
+        "quarantines-end",
         "the-still-rows",
         "weeping-still"
       ],
