@@ -659,9 +659,23 @@
 
     var side = h('div', 'gang-side');
     var top = h('div', 'gang-card-head');
-    var sw = h('span', 'swatch');
-    sw.style.background = g.color;
-    top.appendChild(sw);
+    /* A gang with a badge shows it instead of the colour chip. The badge
+       carries the colour anyway, and a gang without one is not made to
+       look like it is missing something. */
+    if (g.logo) {
+      var badge = document.createElement('img');
+      badge.className = 'gang-logo';
+      badge.src = g.logo;
+      badge.alt = '';
+      badge.width = 52;
+      badge.height = 52;
+      badge.loading = 'lazy';
+      top.appendChild(badge);
+    } else {
+      var sw = h('span', 'swatch');
+      sw.style.background = g.color;
+      top.appendChild(sw);
+    }
     var titles = h('div');
     titles.appendChild(h('h3', 'gang-card-name', g.name));
     titles.appendChild(h('p', 'gang-card-house',

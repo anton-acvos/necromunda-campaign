@@ -1,0 +1,104 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" role="img"
+     aria-label="Sola Dosis Chymist Cult: a skull growing a cap, on a root network">
+  <title>'Sola Dosis' Chymist Cult</title>
+  <!--
+    The cap is the cranium: it overhangs a deadhead the way a brim overhangs
+    a stem, and the gills carry on round the front as the teeth. Something
+    still lights the sockets.
+
+    The hyphae are drawn uneven on purpose. A root network that forks at equal
+    angles reads as a diagram; this one reads as something that grew.
+
+    Ink is fixed light rather than following prefers-color-scheme. The page is
+    dark whatever the reader's machine thinks, and an <img> cannot inherit the
+    page's colours — a media query here would hand a reader on a light desktop
+    a dark logo on a dark card. Spore is #9d7ad4, the colour the map already
+    gives this gang.
+  -->
+  <style>
+    svg { --ink: #e8e0d4; --spore: #9d7ad4; --void: #04070a; }
+  </style>
+
+  <g stroke-linecap="round" stroke-linejoin="round">
+
+    <!-- an arch over the top, the way a reliquary holds a skull -->
+    <path d="M 14 70 A 50 50 0 1 1 106 70"
+          fill="none" stroke="var(--ink)" stroke-width="4"/>
+
+    <!-- the cap, which is also the cranium: higher on the left, the way they
+         grow towards a vent -->
+    <path d="M 14 58
+             C 14 30, 37 15, 60 15
+             C 84 15, 106 31, 106 59
+             C 95 67, 79 70, 60 70
+             C 40 70, 23 66, 14 58 Z"
+          fill="var(--ink)" stroke="none"/>
+
+    <!-- gills, hanging under the brim either side of the face -->
+    <g stroke="var(--spore)" stroke-width="1.5" opacity="0.55" fill="none">
+      <path d="M 21 63 L 22 70"/>
+      <path d="M 28 66 L 29 73"/>
+      <path d="M 34 68 L 35 74"/>
+      <path d="M 86 68 L 85 74"/>
+      <path d="M 92 66 L 91 72"/>
+      <path d="M 99 63 L 98 69"/>
+    </g>
+
+    <!-- the face, hung from under the brim and narrowing to a jaw -->
+    <path d="M 40 65
+             C 38 78, 39 86, 44 90
+             C 46 98, 52 103, 60 103
+             C 68 103, 74 98, 76 90
+             C 81 86, 82 78, 80 65 Z"
+          fill="var(--ink)" stroke="none"/>
+
+    <!-- sockets, not a matched pair -->
+    <g fill="var(--void)">
+      <ellipse cx="50" cy="77" rx="7.6" ry="6.4" transform="rotate(-11 50 77)"/>
+      <ellipse cx="70.5" cy="77.5" rx="7.1" ry="6.9" transform="rotate(13 70.5 77.5)"/>
+    </g>
+    <!-- what is still lit in them -->
+    <g fill="var(--spore)">
+      <circle cx="51.5" cy="78.5" r="1.9"/>
+      <circle cx="69.2" cy="78.8" r="1.6"/>
+    </g>
+
+    <!-- nose -->
+    <path d="M 60 83 C 62 86, 64 89, 63.5 91 L 56.5 91 C 56 89, 58 86, 60 83 Z"
+          fill="var(--void)"/>
+
+    <!-- the gills carry on round the front -->
+    <g stroke="var(--void)" stroke-width="1.8" fill="none">
+      <path d="M 50 93 L 50.4 99"/>
+      <path d="M 55 94 L 55 100.5"/>
+      <path d="M 60 94 L 60 101"/>
+      <path d="M 65 94 L 64.8 100.5"/>
+      <path d="M 69.6 93 L 69.4 99"/>
+    </g>
+    <path d="M 47 93 C 53 95, 67 95, 73 93" fill="none"
+          stroke="var(--void)" stroke-width="1.6"/>
+
+    <!-- the stem, short, with the joints showing -->
+    <path d="M 55 103 L 55 108 C 57 110, 63 110, 65 108 L 65 103 Z"
+          fill="var(--ink)" stroke="none"/>
+
+    <!-- hyphae: no two the same length, no two the same angle -->
+    <g fill="none" stroke="var(--ink)" stroke-width="2.4">
+      <path d="M 56 109 C 48 111, 41 110, 32 113"/>
+      <path d="M 41 110.5 C 38 113, 35 114, 30 117"/>
+      <path d="M 58 110 C 55 113, 51 115, 48 119"/>
+      <path d="M 62 110 C 63 113, 62 116, 64 119"/>
+      <path d="M 64 109 C 72 111, 78 110, 86 114"/>
+      <path d="M 78 112 C 82 114, 84 116, 85 118"/>
+      <path d="M 66 107 C 75 106, 84 105, 93 107"/>
+      <path d="M 54 107 C 45 106, 38 107, 31 105"/>
+    </g>
+    <g fill="var(--spore)">
+      <circle cx="30" cy="117.4" r="1.9"/>
+      <circle cx="64.3" cy="119" r="1.5"/>
+      <circle cx="85.3" cy="118.2" r="2.1"/>
+      <circle cx="30.7" cy="105" r="1.5"/>
+      <circle cx="93.3" cy="107" r="1.7"/>
+    </g>
+  </g>
+</svg>

@@ -354,6 +354,7 @@ body {
 
 .gang-card-head { display: flex; align-items: flex-start; gap: 10px; }
 .gang-card-head .swatch { margin-top: 5px; flex: none; }
+.gang-logo { width: 52px; height: 52px; flex: none; margin: -2px 0 -4px; }
 .gang-card-name { margin: 0; font-size: 1.08rem; line-height: 1.25; }
 
 .gang-card-house {
