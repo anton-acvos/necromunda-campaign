@@ -667,8 +667,8 @@
       badge.className = 'gang-logo';
       badge.src = g.logo;
       badge.alt = '';
-      badge.width = 52;
-      badge.height = 52;
+      badge.width = 96;
+      badge.height = 96;
       badge.loading = 'lazy';
       top.appendChild(badge);
     } else {

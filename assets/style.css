@@ -354,7 +354,11 @@ body {
 
 .gang-card-head { display: flex; align-items: flex-start; gap: 10px; }
 .gang-card-head .swatch { margin-top: 5px; flex: none; }
-.gang-logo { width: 52px; height: 52px; flex: none; margin: -2px 0 -4px; }
+/* Big enough for a drawn badge to read. A gang's own artwork carries
+   detail a 50px chip would throw away, so the head wraps rather than
+   squeezing the name into what is left. */
+.gang-logo { width: 96px; height: 96px; flex: none; margin: -4px 0 -6px; object-fit: contain; }
+.gang-card-head { flex-wrap: wrap; }
 .gang-card-name { margin: 0; font-size: 1.08rem; line-height: 1.25; }
 
 .gang-card-house {
