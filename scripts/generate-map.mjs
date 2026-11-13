@@ -439,8 +439,8 @@ function nearestVert(set, target) {
    far side, so the gangs nearest an entrance are not the only ones who can
    reach it. */
 const TUNNEL_ROUTES = [
-  { id: 'theta-run',    name: 'The Theta Run',  mouth: 'sumptown',       toward: ['coil-gardens'],                  gateway: 'theta-breach',
-    notes: 'A maintenance bore running the width of the Reach. It was cut to service the relay and it still ends at the breach the Tech-Acquisitors made.' },
+  { id: 'theta-run',    name: 'The Theta Run',  mouth: 'sumptown',       toward: ['reclaimers-breach'], gateway: 'theta-breach',
+    notes: 'A maintenance bore running the width of the Reach, from the Sumptown wharves to the tip of Reclaimers’ Breach. It was cut to service the relay, and it ends where the Tech-Acquisitors cut their way in.' },
   { id: 'the-deadfall', name: 'The Deadfall',   mouth: 'quarantines-end', toward: ['grudgehold', 'holestead'], gateway: 'prospectors-cut',
     notes: 'A collapsed transit shaft walked end to end only twice. It comes out at the shaft both Ironhead companies have filed on.' }
 ];
@@ -708,11 +708,11 @@ const gateways = [
   {
     id: 'theta-breach',
     name: 'The Theta Breach',
-    from: ['coil-gardens'],
+    from: ['reclaimers-breach'],
     discoveredBy: 'archeo-3',
     contested: false,
     x: gw1[0], y: gw1[1],
-    notes: "A Tech-Acquisitor party staged out of Reclaimers' Breach, cut through at the tip of the Coil Gardens and went in. Contact was lost on the second day. The coordinates were the last thing anyone sent up."
+    notes: "A Tech-Acquisitor party cut through at the tip of Reclaimers' Breach and went in. Contact was lost on the second day. The coordinates were the last thing anyone sent up."
   },
   {
     id: 'prospectors-cut',

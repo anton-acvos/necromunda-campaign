@@ -323,13 +323,13 @@
       "id": "theta-breach",
       "name": "The Theta Breach",
       "from": [
-        "coil-gardens"
+        "reclaimers-breach"
       ],
       "discoveredBy": "archeo-3",
       "contested": false,
-      "x": 361.03,
-      "y": 673.03,
-      "notes": "A Tech-Acquisitor party staged out of Reclaimers' Breach, cut through at the tip of the Coil Gardens and went in. Contact was lost on the second day. The coordinates were the last thing anyone sent up."
+      "x": 415.44,
+      "y": 471.95,
+      "notes": "A Tech-Acquisitor party cut through at the tip of Reclaimers' Breach and went in. Contact was lost on the second day. The coordinates were the last thing anyone sent up."
     },
     {
       "id": "prospectors-cut",
@@ -388,9 +388,17 @@
         [
           361.03,
           673.03
+        ],
+        [
+          344.57,
+          566.9
+        ],
+        [
+          415.44,
+          471.95
         ]
       ],
-      "notes": "A maintenance bore running the width of the Reach. It was cut to service the relay and it still ends at the breach the Tech-Acquisitors made."
+      "notes": "A maintenance bore running the width of the Reach, from the Sumptown wharves to the tip of Reclaimers’ Breach. It was cut to service the relay, and it ends where the Tech-Acquisitors cut their way in."
     },
     {
       "id": "the-deadfall",
@@ -684,8 +692,8 @@
       "boon": "Or recruit a Dome Runner at a 30 credit discount, if you have none",
       "contested": false,
       "bordersInner": true,
-      "labelX": 213.75,
-      "labelY": 623.1,
+      "labelX": 210.87,
+      "labelY": 623.24,
       "polygon": [
         [
           76.05,
@@ -696,12 +704,12 @@
           514
         ],
         [
-          338.8,
-          572.14
+          328.79,
+          569.58
         ],
         [
-          352.14,
-          658.1
+          344.2,
+          668.93
         ],
         [
           305.17,
@@ -731,8 +739,8 @@
       "boon": "Or recruit a ganger at a 25 credit discount",
       "contested": false,
       "bordersInner": true,
-      "labelX": 260.41,
-      "labelY": 466.43,
+      "labelX": 256.67,
+      "labelY": 464.98,
       "polygon": [
         [
           114.9,
@@ -751,15 +759,17 @@
           454.38
         ],
         [
-          408.94,
-          469.79
+          408.96,
+          453.89
         ],
         [
-          341.96,
-          559.53
+          332.01,
+          556.98
         ]
       ],
-      "tunnels": [],
+      "tunnels": [
+        "theta-run"
+      ],
       "links": [
         "cog-market",
         "coil-gardens",
@@ -1623,20 +1633,20 @@
       "income": null,
       "boon": null,
       "contested": false,
-      "labelX": 447.98,
-      "labelY": 596.58,
+      "labelX": 453.47,
+      "labelY": 598.55,
       "polygon": [
         [
-          366.68,
-          667.04
+          376.44,
+          667.99
         ],
         [
-          351.41,
-          568.6
+          361.41,
+          571.09
         ],
         [
-          416.69,
-          481.14
+          424.2,
+          486.96
         ],
         [
           570.12,
@@ -1651,7 +1661,9 @@
           681.19
         ]
       ],
-      "tunnels": [],
+      "tunnels": [
+        "theta-run"
+      ],
       "links": [
         "coil-gardens",
         "i-03",
