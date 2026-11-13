@@ -55,13 +55,13 @@ a new cycle and a new phase.
 A territory with `"hidden": true` is invisible to players: it never appears on
 the map, in the standings or in the legend.
 
-The Malstrain Genestealers are a player gang like any other, with their own
-campaign rules written in the gang's `rules` field, which the Gangs tab shows
-on their card. What is hidden is the ground: the two deep holdings they start
-on (`I-14` and `I-17`) carry `"hidden": true`, so players see eighteen
-identical unsurveyed holdings and a card saying only how many of them the
-Malstrain hold. Delete `"hidden": true` from those two territories for the
-reveal.
+Nothing is hidden at the moment. The deep is eighteen identical unsurveyed
+holdings, none of them owned, and the Gangs tab counts a gang's deep holdings
+rather than naming them, so a gang that takes one does not show the others
+where it went.
+
+A gang's `rules` field, if it has one, is campaign rules of its own, and the
+Gangs tab prints it on that gang's card.
 
 ## How it works
 

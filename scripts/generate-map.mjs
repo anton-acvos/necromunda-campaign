@@ -195,9 +195,8 @@ function spaceAlong(poly, n, startFrac) {
 const OUT_F = 0.795;                 // charted ring, as a fraction of the way to the wall
 const INA_F = 0.50, INB_F = 0.21;    // the deep, outer and inner
 const DEEP_DX = -12, DEEP_DY = 8;    // the deep sits a little off-centre
-const INNER_COUNT = 18;   /* two unclaimed per player, plus the two Malstrain holdings */
+const INNER_COUNT = 18;   /* the deep, none of it claimed by anyone yet */
 const RING_A = 12;
-const MALSTRAIN = new Set(['I-14', 'I-17']);
 
 const jitPt = (p, amp) => [p[0] + jit(amp), p[1] + jit(amp)];
 
@@ -681,8 +680,8 @@ for (const s of innerSeeds) {
     section: 'inner',
     surveyed: false,
     type: null,
-    owner: MALSTRAIN.has(s.designation) ? 'malstrain' : null,
-    hidden: MALSTRAIN.has(s.designation),
+    owner: null,
+    hidden: false,
     income: null,
     boon: null,
     contested: false,
@@ -760,8 +759,7 @@ const gangs = [
   { id: 'mycelium',            name: 'Mycelium Section',                  short: 'Mycelium',      house: 'House Delaque',      color: '#7d9683', player: 'Anton' },
   { id: 'precinct-22',         name: 'Precinct 22',                       short: 'Precinct 22',   house: 'Palanite Enforcers', color: '#e8c23a' },
   { id: 'bjorn-prospectors',   name: 'Bjorn "H.C.L.F" Prospectors Group', short: 'Bjorn H.C.L.F', house: 'Ironhead Squats',    color: '#e8822c' },
-  { id: 'resource-extraction', name: 'Resource Extraction LLC',           short: 'Resource Ext.', house: 'Ironhead Squats',    color: '#6f9c33' },
-  { id: 'malstrain',           name: 'Malstrain Genestealers',            short: 'Malstrain',     house: 'Malstrain',          color: '#c6529f', rules: 'Plays by the campaign\u2019s Malstrain rules: no settlement, no charted ground, and a hold in the deep that nobody else has walked.' }
+  { id: 'resource-extraction', name: 'Resource Extraction LLC',           short: 'Resource Ext.', house: 'Ironhead Squats',    color: '#6f9c33' }
 ].map((g) => ({ ...g, rating: 1100, credits: 0, reputation: 1, motto: '' }));
 
 /* ---------- emit ---------- */
@@ -829,7 +827,7 @@ writeFileSync('data/campaign.json', JSON.stringify(data, null, 2) + '\n');
 
 const o = territories.filter((t) => t.section === 'outer');
 console.log(`outer ${o.length}: ${o.filter(t => t.owner).length} held, ${o.filter(t => !t.owner).length} unclaimed, ${o.filter(t => t.settlement).length} settlements`);
-console.log(`inner ${territories.filter(t => t.section === 'inner').length}: ${territories.filter(t => t.section === 'inner' && t.owner).length} malstrain (hidden), rest unclaimed`);
+console.log(`inner ${territories.filter(t => t.section === 'inner').length}: all unclaimed`);
 console.log(`inner border: ${innerPolygon.length} vertices; outer cells touching it: ${o.filter(t => t.bordersInner).length}`);
 const reach = territories.filter((t) => t.bordersInner && t.owner);
 console.log(`reach    ${reach.length} held territories touch the deep: ${reach.map((t) => t.name).join(", ") || "none"}`);

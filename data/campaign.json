@@ -304,18 +304,6 @@
       "credits": 0,
       "reputation": 1,
       "motto": ""
-    },
-    {
-      "id": "malstrain",
-      "name": "Malstrain Genestealers",
-      "short": "Malstrain",
-      "house": "Malstrain",
-      "color": "#c6529f",
-      "rules": "Plays by the campaign’s Malstrain rules: no settlement, no charted ground, and a hold in the deep that nobody else has walked.",
-      "rating": 1100,
-      "credits": 0,
-      "reputation": 1,
-      "motto": ""
     }
   ],
   "gateways": [
@@ -2152,8 +2140,8 @@
       "section": "inner",
       "surveyed": false,
       "type": null,
-      "owner": "malstrain",
-      "hidden": true,
+      "owner": null,
+      "hidden": false,
       "income": null,
       "boon": null,
       "contested": false,
@@ -2300,8 +2288,8 @@
       "section": "inner",
       "surveyed": false,
       "type": null,
-      "owner": "malstrain",
-      "hidden": true,
+      "owner": null,
+      "hidden": false,
       "income": null,
       "boon": null,
       "contested": false,
