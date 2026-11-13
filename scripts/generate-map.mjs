@@ -207,6 +207,7 @@ spaceAlong(scaledWall(OUT_F), outer.length, 0.30).forEach((p, i) => {
 
 const ringA = spaceAlong(scaledWall(INA_F, DEEP_DX, DEEP_DY), RING_A, 0.33);
 const ringB = spaceAlong(scaledWall(INB_F, DEEP_DX, DEEP_DY), INNER_COUNT - RING_A, 0.12);
+
 [...ringA, ...ringB].forEach((p, k) => {
   seeds.push({
     kind: 'inner', idx: k, f: k < RING_A ? INA_F : INB_F,
@@ -314,6 +315,25 @@ for (let step = 0; step < RELAX_STEPS; step++) {
   /* weights only matter relative to one another; keep them centred */
   const mean = seeds.reduce((t, s) => t + s.w, 0) / seeds.length;
   for (const s of seeds) s.w -= mean;
+}
+
+/* The Prospectors' Cut comes out on the corner Grudgehold and Holestead share,
+   which is where both Ironhead companies want it. On the deep side of that
+   corner there was one holding, not two, so the way in sat against I-06 rather
+   than between anything.
+
+   Sliding the I-06/I-07 border on its own would leave a T-junction where it
+   used to end, and the deep's outline is walked from edges that have to match
+   exactly, so I-07's seed moves instead: 88 units along the line towards the
+   corner, which carries its border up to meet it. It happens after the
+   relaxation, because the area pass would only pull the seed back.
+
+   The figure is hand-found. Much less and I-07 stops short; much more and the
+   corner itself starts to drift, taking the way in with it. */
+const SEED_SLIDE = { 'I-07': [-47.08, -74.36] };
+for (const s of seeds) {
+  const d = s.designation && SEED_SLIDE[s.designation];
+  if (d) s.p = [s.p[0] + d[0], s.p[1] + d[1]];
 }
 
 buildCells();

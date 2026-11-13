@@ -150,20 +150,20 @@
           318.79
         ],
         [
-          829.42,
-          343.4
+          829.37,
+          343.39
         ],
         [
-          864.74,
-          419.24
+          829.46,
+          343.33
         ],
         [
-          1017.83,
-          411.91
+          1019.13,
+          409.56
         ],
         [
-          1077.53,
-          532.06
+          1025.04,
+          534.61
         ],
         [
           1171.7,
@@ -222,8 +222,8 @@
           1104.41
         ]
       ],
-      "labelX": 776.12,
-      "labelY": 756.96
+      "labelX": 776.08,
+      "labelY": 754.64
     }
   },
   "gangs": [
@@ -340,8 +340,8 @@
       ],
       "discoveredBy": "bjorn-prospectors",
       "contested": false,
-      "x": 829.42,
-      "y": 343.4,
+      "x": 829.46,
+      "y": 343.33,
       "notes": "Found by Ironhead prospectors. Two companies have filed property rights over the shaft, neither claim struck out. Nobody has gone past the first chamber."
     }
   ],
@@ -432,20 +432,16 @@
           527.48
         ],
         [
-          1077.53,
-          532.06
+          1025.04,
+          534.61
         ],
         [
-          1017.83,
-          411.91
+          1019.13,
+          409.56
         ],
         [
-          864.74,
-          419.24
-        ],
-        [
-          829.42,
-          343.4
+          829.46,
+          343.33
         ]
       ],
       "notes": "A collapsed transit shaft walked end to end only twice. It comes out at the shaft both Ironhead companies have filed on."
@@ -943,15 +939,20 @@
           147.75
         ],
         [
-          825.89,
-          336.16
+          824.48,
+          338.84
+        ],
+        [
+          827.94,
+          336.53
         ]
       ],
       "tunnels": [],
       "links": [
         "cinder-yard",
         "holestead",
-        "i-06"
+        "i-06",
+        "i-07"
       ],
       "notes": "Cut into the rock and ledgered to the last slate. Bjorn filed the claim first and has the paperwork to prove it."
     },
@@ -967,12 +968,12 @@
       "boon": "Or recruit a ganger at a 25 credit discount",
       "contested": false,
       "bordersInner": true,
-      "labelX": 956.74,
-      "labelY": 306.85,
+      "labelX": 965.11,
+      "labelY": 293.22,
       "polygon": [
         [
-          842.24,
-          333.04
+          843.22,
+          331.19
         ],
         [
           922.86,
@@ -983,12 +984,8 @@
           274.91
         ],
         [
-          1019.32,
-          395.82
-        ],
-        [
-          874.71,
-          402.74
+          1020.78,
+          393.19
         ]
       ],
       "tunnels": [
@@ -996,7 +993,6 @@
       ],
       "links": [
         "grudgehold",
-        "i-06",
         "i-07",
         "scrap-shoals"
       ],
@@ -1014,12 +1010,12 @@
       "boon": "Or take two respirators",
       "contested": false,
       "bordersInner": true,
-      "labelX": 1134.72,
-      "labelY": 408.28,
+      "labelX": 1128.87,
+      "labelY": 413.68,
       "polygon": [
         [
-          1030.77,
-          401.99
+          1034.47,
+          395.3
         ],
         [
           1095.49,
@@ -1034,8 +1030,8 @@
           511.34
         ],
         [
-          1087.2,
-          515.57
+          1040.27,
+          517.85
         ]
       ],
       "tunnels": [
@@ -1737,8 +1733,8 @@
       "income": null,
       "boon": null,
       "contested": false,
-      "labelX": 743,
-      "labelY": 417.9,
+      "labelX": 732.75,
+      "labelY": 414.91,
       "polygon": [
         [
           633.06,
@@ -1749,29 +1745,22 @@
           325.76
         ],
         [
-          813.51,
-          347.14
+          822.3,
+          348.72
         ],
         [
-          852.56,
-          430.98
-        ],
-        [
-          819.99,
-          506.04
+          806.58,
+          504.39
         ],
         [
           660.97,
           486.49
         ]
       ],
-      "tunnels": [
-        "the-deadfall"
-      ],
+      "tunnels": [],
       "links": [
         "cinder-yard",
         "grudgehold",
-        "holestead",
         "i-05",
         "i-07",
         "i-16"
@@ -1790,48 +1779,48 @@
       "income": null,
       "boon": null,
       "contested": false,
-      "labelX": 952.4,
-      "labelY": 512.64,
+      "labelX": 913.31,
+      "labelY": 466.1,
       "polygon": [
         [
-          864.88,
-          435.25
+          835.53,
+          347.1
         ],
         [
-          1008.15,
-          428.39
+          820.47,
+          357.14
         ],
         [
-          1063.84,
-          540.46
+          1003.66,
+          421.1
         ],
         [
-          1008.86,
-          620.12
+          1009.4,
+          542.62
         ],
         [
-          1003.54,
-          621.01
+          1000.33,
+          553
         ],
         [
-          837.38,
-          528.88
+          835.47,
+          527.42
         ],
         [
-          831.06,
-          513.18
+          819.14,
+          509.42
         ]
       ],
       "tunnels": [
         "the-deadfall"
       ],
       "links": [
+        "grudgehold",
         "holestead",
         "i-06",
         "i-08",
         "i-16",
         "i-17",
-        "i-18",
         "scrap-shoals"
       ],
       "notes": null
@@ -1848,12 +1837,12 @@
       "income": null,
       "boon": null,
       "contested": false,
-      "labelX": 1132.5,
-      "labelY": 636.82,
+      "labelX": 1124.03,
+      "labelY": 631.73,
       "polygon": [
         [
-          1074.26,
-          548.24
+          1019.43,
+          550.9
         ],
         [
           1163.95,
@@ -1868,8 +1857,12 @@
           754.12
         ],
         [
-          1020.87,
-          625.6
+          1014.35,
+          618.17
+        ],
+        [
+          1009.58,
+          562.17
         ]
       ],
       "tunnels": [
@@ -1879,6 +1872,7 @@
         "brass-stair",
         "i-07",
         "i-09",
+        "i-17",
         "i-18",
         "scrap-shoals"
       ],
@@ -2260,8 +2254,8 @@
       "income": null,
       "boon": null,
       "contested": false,
-      "labelX": 715.22,
-      "labelY": 585.82,
+      "labelX": 714.92,
+      "labelY": 586,
       "polygon": [
         [
           583.19,
@@ -2276,12 +2270,12 @@
           499.32
         ],
         [
-          819.42,
-          519.06
+          809.19,
+          517.81
         ],
         [
-          825.26,
-          533.59
+          824.77,
+          534.97
         ],
         [
           764.26,
@@ -2311,16 +2305,20 @@
       "income": null,
       "boon": null,
       "contested": false,
-      "labelX": 870.28,
-      "labelY": 660.63,
+      "labelX": 882.7,
+      "labelY": 646.72,
       "polygon": [
         [
-          835.75,
-          542.85
+          836.51,
+          540.74
         ],
         [
-          992.41,
-          629.7
+          996.83,
+          565.61
+        ],
+        [
+          1001.35,
+          618.77
         ],
         [
           890.41,
@@ -2342,6 +2340,7 @@
       "tunnels": [],
       "links": [
         "i-07",
+        "i-08",
         "i-13",
         "i-14",
         "i-15",
@@ -2363,15 +2362,11 @@
       "boon": null,
       "contested": false,
       "labelX": 1013.43,
-      "labelY": 758.18,
+      "labelY": 758.15,
       "polygon": [
         [
-          1005.85,
-          633.8
-        ],
-        [
-          1010.14,
-          633.09
+          1008.22,
+          630.9
         ],
         [
           1126.22,
@@ -2392,7 +2387,6 @@
       ],
       "tunnels": [],
       "links": [
-        "i-07",
         "i-08",
         "i-09",
         "i-10",
