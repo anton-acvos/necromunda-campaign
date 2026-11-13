@@ -323,13 +323,13 @@
       "id": "theta-breach",
       "name": "The Theta Breach",
       "from": [
-        "reclaimers-breach"
+        "coil-gardens"
       ],
       "discoveredBy": "archeo-3",
       "contested": false,
-      "x": 415.44,
-      "y": 471.95,
-      "notes": "A Tech-Acquisitor party cut through at the tip of Reclaimers' Breach and went in. Contact was lost on the second day. The coordinates were the last thing anyone sent up."
+      "x": 361.03,
+      "y": 673.03,
+      "notes": "A Tech-Acquisitor party staged out of Reclaimers' Breach, cut through at the tip of the Coil Gardens and went in. Contact was lost on the second day. The coordinates were the last thing anyone sent up."
     },
     {
       "id": "prospectors-cut",
@@ -398,7 +398,7 @@
           471.95
         ]
       ],
-      "notes": "A maintenance bore running the width of the Reach, from the Sumptown wharves to the tip of Reclaimers’ Breach. It was cut to service the relay, and it ends where the Tech-Acquisitors cut their way in."
+      "notes": "A maintenance bore running the width of the Reach, from the Sumptown wharves to Reclaimers’ Breach. It was cut to service the relay, and it runs on past the hole the Tech-Acquisitors made in its wall."
     },
     {
       "id": "the-deadfall",

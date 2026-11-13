@@ -439,11 +439,26 @@ function nearestVert(set, target) {
    far side, so the gangs nearest an entrance are not the only ones who can
    reach it. */
 const TUNNEL_ROUTES = [
-  { id: 'theta-run',    name: 'The Theta Run',  mouth: 'sumptown',       toward: ['reclaimers-breach'], gateway: 'theta-breach',
-    notes: 'A maintenance bore running the width of the Reach, from the Sumptown wharves to the tip of Reclaimers’ Breach. It was cut to service the relay, and it ends where the Tech-Acquisitors cut their way in.' },
+  { id: 'theta-run',    name: 'The Theta Run',  mouth: 'sumptown',       toward: ['reclaimers-breach'], gateway: 'theta-breach', breachAt: 'coil-gardens',
+    notes: 'A maintenance bore running the width of the Reach, from the Sumptown wharves to Reclaimers’ Breach. It was cut to service the relay, and it runs on past the hole the Tech-Acquisitors made in its wall.' },
   { id: 'the-deadfall', name: 'The Deadfall',   mouth: 'quarantines-end', toward: ['grudgehold', 'holestead'], gateway: 'prospectors-cut',
     notes: 'A collapsed transit shaft walked end to end only twice. It comes out at the shaft both Ironhead companies have filed on.' }
 ];
+
+/* A territory's tip: the corner of it that reaches furthest into the deep.
+   A tunnel aims at one, and a gateway can be pinned to one the corridor only
+   passes through, so extending a corridor does not drag its way in along. */
+function deepTip(id, why) {
+  const cellVerts = seedOf(id).cell.map(ptKey).filter((k) => deepVerts.has(k));
+  if (!cellVerts.length) throw new Error(`"${why}": ${id} does not touch the deep`);
+  let best = null, bestD = Infinity;
+  for (const k of cellVerts) {
+    const p = ptOf.get(k);
+    const d = Math.hypot(p[0] - CX, p[1] - CY);
+    if (d < bestD) { bestD = d; best = p; }
+  }
+  return best;
+}
 
 const tunnels = TUNNEL_ROUTES.map((route) => {
   const mouthSeed = seedOf(route.mouth);
@@ -467,17 +482,7 @@ const tunnels = TUNNEL_ROUTES.map((route) => {
     if (!corner) throw new Error(`"${route.id}": ${route.toward.join(" and ")} share no corner`);
     aim = ptOf.get(corner);
   } else {
-    /* one finder: come out at that territory's tip — the corner of it that
-       reaches furthest into the deep */
-    const cellVerts = seedOf(route.toward[0]).cell.map(ptKey).filter((k) => deepVerts.has(k));
-    if (!cellVerts.length) throw new Error(`"${route.id}": ${route.toward[0]} does not touch the deep`);
-    let best = null, bestD = Infinity;
-    for (const k of cellVerts) {
-      const p = ptOf.get(k);
-      const d = Math.hypot(p[0] - CX, p[1] - CY);
-      if (d < bestD) { bestD = d; best = p; }
-    }
-    aim = best;
+    aim = deepTip(route.toward[0], route.id);
   }
   const goalKey = nearestVert(pool, aim);
 
@@ -699,7 +704,8 @@ function bearingFrom(ids) {
 
 const tunnelEnd = (gatewayId) => {
   const t = tunnels.find((x) => x.gateway === gatewayId);
-  return t ? t.end : null;
+  if (!t) return null;
+  return t.breachAt ? deepTip(t.breachAt, t.id) : t.end;
 };
 const gw1 = tunnelEnd("theta-breach") ?? pointOnInnerBorderAt(bearingFrom(["reclaimers-breach"]));
 const gw2 = tunnelEnd("prospectors-cut") ?? pointOnInnerBorderAt(bearingFrom(["grudgehold", "holestead"]));
@@ -708,11 +714,11 @@ const gateways = [
   {
     id: 'theta-breach',
     name: 'The Theta Breach',
-    from: ['reclaimers-breach'],
+    from: ['coil-gardens'],
     discoveredBy: 'archeo-3',
     contested: false,
     x: gw1[0], y: gw1[1],
-    notes: "A Tech-Acquisitor party cut through at the tip of Reclaimers' Breach and went in. Contact was lost on the second day. The coordinates were the last thing anyone sent up."
+    notes: "A Tech-Acquisitor party staged out of Reclaimers' Breach, cut through at the tip of the Coil Gardens and went in. Contact was lost on the second day. The coordinates were the last thing anyone sent up."
   },
   {
     id: 'prospectors-cut',
