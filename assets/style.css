@@ -340,7 +340,7 @@ body {
 
 .gang-card {
   display: grid;
-  grid-template-columns: minmax(220px, 290px) 1fr;
+  grid-template-columns: minmax(250px, 330px) 1fr;
   gap: 20px 26px;
   align-items: start;
   background: var(--bg-raised);
@@ -358,7 +358,15 @@ body {
    detail a 50px chip would throw away, so the head wraps rather than
    squeezing the name into what is left. */
 .gang-logo { width: 96px; height: 96px; flex: none; margin: -4px 0 -6px; object-fit: contain; }
-.gang-card-head { flex-wrap: wrap; }
+
+/* The name belongs next to the mark, never under it. Wrapping was letting
+   a long name drop below a 96px badge on a narrow card, so the heads came
+   out at different heights down the column. It shrinks and wraps its own
+   words instead, which needs min-width: 0 — a flex item will not go below
+   the width of its longest word otherwise. */
+.gang-card-head { flex-wrap: nowrap; }
+.gang-card-titles { min-width: 0; flex: 1 1 auto; }
+.gang-card-name { overflow-wrap: anywhere; }
 .gang-card-name { margin: 0; font-size: 1.08rem; line-height: 1.25; }
 
 .gang-card-house {

@@ -676,7 +676,7 @@
       sw.style.background = g.color;
       top.appendChild(sw);
     }
-    var titles = h('div');
+    var titles = h('div', 'gang-card-titles');
     titles.appendChild(h('h3', 'gang-card-name', g.name));
     titles.appendChild(h('p', 'gang-card-house',
       g.house + (g.player ? ' \u00b7 ' + g.player : '')));
