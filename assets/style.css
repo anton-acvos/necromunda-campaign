@@ -595,6 +595,38 @@ body {
 
 .plan-hint { max-width: 70ch; }
 
+/* ---------- the slate ---------- */
+
+.slate { margin: 26px 0 0; }
+
+.slate-list { margin: 0; padding: 0; list-style: none; display: grid; gap: 8px; }
+
+.slate-row {
+  display: grid;
+  grid-template-columns: 26px 1fr;
+  gap: 10px;
+  align-items: start;
+  padding: 10px 14px;
+  border: 1px solid var(--line);
+  border-left: 2px solid var(--line-bright);
+  border-radius: 10px;
+  background: var(--bg-sunk);
+}
+
+.slate-no {
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  color: var(--ink-faint);
+  padding-top: 3px;
+}
+
+.slate-body > * { margin: 0; }
+.slate-body > * + * { margin-top: 4px; }
+
+.slate-what { font-size: 0.92rem; display: flex; align-items: center; gap: 7px; flex-wrap: wrap; }
+.slate-what .swatch { margin: 0; }
+.slate-who { font-size: 0.8rem; color: var(--ink-faint); }
+
 /* ---------- the log ---------- */
 
 .log { margin: 26px 0 0; }

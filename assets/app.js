@@ -622,12 +622,71 @@
     });
     host.appendChild(track);
 
+    host.appendChild(renderSlate());
     host.appendChild(renderLog());
 
     var foot = h('p', 'hint plan-hint',
       'Each player may issue one challenge per cycle. The arbitrator moves the campaign on by ' +
       'raising "cycle" in data/campaign.json.');
     host.appendChild(foot);
+  }
+
+  /* The slate: what has been called and not yet settled, in the order the
+     challenges were issued.
+
+     An expedition prints "expedition into the deep" and nothing more. The
+     data knows which tile, because it has to resolve to a real one, but
+     naming it here would hand every other player a map of where the gangs
+     are going — which is the one thing the deep is meant to withhold. */
+  function renderSlate() {
+    var open = (state.data.challenges || []).filter(function (c) {
+      return (c.status || 'open') === 'open';
+    });
+
+    var wrap = h('section', 'slate');
+    wrap.appendChild(h('h3', 'log-head', 'Called this cycle'));
+
+    if (!open.length) {
+      wrap.appendChild(h('p', 'hint', 'Nothing called yet this cycle.'));
+      return wrap;
+    }
+
+    var list = h('ol', 'slate-list');
+    open.forEach(function (c, i) {
+      var row = h('li', 'slate-row');
+      row.appendChild(h('span', 'slate-no', String(i + 1)));
+
+      var body = h('div', 'slate-body');
+      var what = h('p', 'slate-what');
+
+      var g = gangOf(c.challenger);
+      if (g) {
+        var sw = h('span', 'swatch');
+        sw.style.background = g.color;
+        what.appendChild(sw);
+      }
+      what.appendChild(h('strong', null, g ? (g.short || g.name) : c.challenger));
+
+      if (c.kind === 'expedition') {
+        what.appendChild(document.createTextNode('expedition into the deep'));
+      } else {
+        var t = state.byId[c.territory];
+        what.appendChild(document.createTextNode('for'));
+        what.appendChild(t ? linkBtn(t.id, displayName(t))
+                           : document.createTextNode('ground off the map'));
+      }
+      body.appendChild(what);
+
+      var d = c.defender ? gangOf(c.defender) : null;
+      body.appendChild(h('p', 'slate-who',
+        d ? 'Defended by ' + (d.short || d.name) : 'Defender to be decided'));
+
+      row.appendChild(body);
+      list.appendChild(row);
+    });
+
+    wrap.appendChild(list);
+    return wrap;
   }
 
   /* The log, under the phase track. Brief on purpose: when, what, who,

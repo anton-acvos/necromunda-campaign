@@ -229,7 +229,7 @@
   "gangs": [
     {
       "id": "sumptown",
-      "name": "Sumptown Brawlers",
+      "name": "Sumptown Industries",
       "short": "Sumptown",
       "house": "House Goliath",
       "color": "#e03131",
@@ -1404,7 +1404,7 @@
       "settlement": false,
       "owner": null,
       "income": 25,
-      "contested": false,
+      "contested": true,
       "bordersInner": true,
       "labelX": 656.27,
       "labelY": 1243.17,
@@ -2385,6 +2385,53 @@
         "i-17"
       ],
       "notes": null
+    }
+  ],
+  "challenges": [
+    {
+      "id": "c1-bjorn-deep",
+      "cycle": 1,
+      "kind": "expedition",
+      "challenger": "bjorn-prospectors",
+      "target": "i-06",
+      "defender": null,
+      "status": "open"
+    },
+    {
+      "id": "c1-sumptown-yard",
+      "cycle": 1,
+      "kind": "challenge",
+      "challenger": "sumptown",
+      "territory": "harvest-yard",
+      "defender": null,
+      "status": "open"
+    },
+    {
+      "id": "c1-archeo-deep",
+      "cycle": 1,
+      "kind": "expedition",
+      "challenger": "archeo-3",
+      "target": "i-04",
+      "defender": null,
+      "status": "open"
+    },
+    {
+      "id": "c1-precinct-deep",
+      "cycle": 1,
+      "kind": "expedition",
+      "challenger": "precinct-22",
+      "target": "i-03",
+      "defender": null,
+      "status": "open"
+    },
+    {
+      "id": "c1-mycelium-deep",
+      "cycle": 1,
+      "kind": "expedition",
+      "challenger": "mycelium",
+      "target": "i-07",
+      "defender": null,
+      "status": "open"
     }
   ],
   "battles": [

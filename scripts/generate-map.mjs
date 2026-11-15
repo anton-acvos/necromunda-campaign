@@ -142,7 +142,7 @@ const outer = [
   { id: 'sunken-nave',        name: 'The Sunken Nave',        type: 'Settlement',            owner: 'mycelium',             settlement: true,   income: 15, boon: 'Or recruit a ganger at a 25 credit discount', notes: 'Cawdor built it, something else kept it. Mycelium Section took the crypts and left the nave to the candles.' },
   { id: 'ratgut-tunnels',    name: 'Ratgut Tunnels',         type: 'Bounty Den',            owner: 'mycelium',             settlement: false,  income: 25, notes: 'Not mapped, not mappable. Mycelium Section charges for guides and keeps a second ledger of who is worth money to somebody up-hive.' },
   { id: 'the-bonepipe',       name: 'The Bonepipe',           type: 'Rogue Doc Shop',        owner: 'chymist-cult',         settlement: false,  income: 10, boon: 'Or recruit a Rogue Doc at a 30 credit discount, if you have none', standing: 'Cut off from the rest of the Chymist Cult’s ground, so it pays 10 a cycle instead of the 15 it is worth. It goes back up the cycle they hold something next to it', notes: 'The doc is good. The doc is also why several gangers answer to new names.' },
-  { id: 'harvest-yard',       name: 'The Harvest Yard',       type: 'Corpse Farm',           owner: null,                   settlement: false,  income: 25, notes: 'Spools of cable taller than a Goliath, and the vats behind them. The yard takes what the Underhive has finished with and sends it up-hive as protein.' },
+  { id: 'harvest-yard',       name: 'The Harvest Yard',       type: 'Corpse Farm',           owner: null,                   settlement: false,  income: 25, contested: true, notes: 'Spools of cable taller than a Goliath, and the vats behind them. The yard takes what the Underhive has finished with and sends it up-hive as protein.' },
 ];
 
 /* Twenty-two is structural: the ring below is laid out from this list, and
@@ -751,7 +751,7 @@ const gateways = [
 /* ---------- gangs ---------- */
 
 const gangs = [
-  { id: 'sumptown',            name: 'Sumptown Brawlers',                 short: 'Sumptown',      house: 'House Goliath',      color: '#e03131' },
+  { id: 'sumptown',            name: 'Sumptown Industries',               short: 'Sumptown',      house: 'House Goliath',      color: '#e03131' },
   { id: 'chymist-cult',        name: "'Sola Dosis' Chymist Cult",         short: 'Sola Dosis',    house: 'House Escher',       color: '#9d7ad4', logo: 'assets/gangs/chymist-cult.webp' },
   { id: 'archeo-3',            name: 'Archeo-Acquisitions Team 3',        short: 'Archeo-3',      house: 'House Van Saar',     color: '#35a9c0' },
   { id: 'mycelium',            name: 'Mycelium Section',                  short: 'Mycelium',      house: 'House Delaque',      color: '#7d9683', player: 'Anton', logo: 'assets/gangs/mycelium.svg' },
@@ -818,6 +818,22 @@ const xs = drawn.map((p) => p[0]), ys = drawn.map((p) => p[1]);
     notes: t.notes
   })),
   territories,
+  /* Challenges issued for the cycle and not yet settled, in the order they
+     were issued. A settled one moves to the log below and comes out of here.
+
+     An expedition names no holding. The deep is unsurveyed and the campaign
+     keeps it that way: the arbitrator knows which tile a gang is walking
+     into, the other players do not, and the tab prints "into the deep". The
+     designation is here because the data has to resolve to a real tile for
+     the validator; the page never shows it. */
+  challenges: [
+    { id: 'c1-bjorn-deep',   cycle: 1, kind: 'expedition', challenger: 'bjorn-prospectors', target: 'i-06',         defender: null,   status: 'open' },
+    { id: 'c1-sumptown-yard', cycle: 1, kind: 'challenge',  challenger: 'sumptown',          territory: 'harvest-yard', defender: null, status: 'open' },
+    { id: 'c1-archeo-deep',  cycle: 1, kind: 'expedition', challenger: 'archeo-3',          target: 'i-04',         defender: null,   status: 'open' },
+    { id: 'c1-precinct-deep', cycle: 1, kind: 'expedition', challenger: 'precinct-22',      target: 'i-03',         defender: null,   status: 'open' },
+    { id: 'c1-mycelium-deep', cycle: 1, kind: 'expedition', challenger: 'mycelium',         target: 'i-07',         defender: null,   status: 'open' }
+  ],
+
   /* The log. A challenge that nobody turned up for is still how ground
      changed hands, so it goes in here with the games. */
   battles: [

@@ -201,6 +201,20 @@ for (const [i, gw] of (data.gateways ?? []).entries()) {
   }
 }
 
+/* --- challenges: issued, not yet settled --- */
+const innerIds = new Set(territories.filter((t) => t.section === 'inner').map((t) => t.id));
+for (const [i, c] of (data.challenges ?? []).entries()) {
+  const at = `challenges[${i}]`;
+  if (!gangIds.has(c.challenger)) err(`${at}.challenger: unknown gang id "${c.challenger}"`);
+  if (c.defender != null && !gangIds.has(c.defender)) err(`${at}.defender: unknown gang id "${c.defender}"`);
+  const stake = c.kind === 'expedition' ? c.target : c.territory;
+  if (!stake) err(`${at}: no stake — an expedition needs a target, a challenge needs a territory`);
+  else if (!terrIds.has(stake)) err(`${at}: unknown territory id "${stake}"`);
+  if (c.kind === 'expedition' && stake && !innerIds.has(stake)) {
+    err(`${at}.target: "${stake}" is not in the deep`);
+  }
+}
+
 /* --- battles --- */
 for (const [i, b] of (data.battles ?? []).entries()) {
   const at = `battles[${i}]`;
