@@ -622,10 +622,71 @@
     });
     host.appendChild(track);
 
+    host.appendChild(renderLog());
+
     var foot = h('p', 'hint plan-hint',
       'Each player may issue one challenge per cycle. The arbitrator moves the campaign on by ' +
       'raising "cycle" in data/campaign.json.');
     host.appendChild(foot);
+  }
+
+  /* The log, under the phase track. Brief on purpose: when, what, who,
+     and who walked away with the ground. Newest first, because the thing
+     that just happened is the thing anyone is here to read.
+
+     The territory is a button into the map rather than a name repeated,
+     and it goes through displayName, so a fight in the deep is logged
+     without naming a holding nobody has surveyed. */
+  function logDate(s) {
+    var m = /^(\d{4})-(\d{2})-(\d{2})$/.exec(s || '');
+    if (!m) return s || '';
+    var months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
+                  'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+    return Number(m[3]) + ' ' + months[Number(m[2]) - 1];
+  }
+
+  function renderLog() {
+    var wrap = h('section', 'log');
+    wrap.appendChild(h('h3', 'log-head', 'The log'));
+
+    var rows = (state.data.battles || []).slice().reverse();
+    if (!rows.length) {
+      wrap.appendChild(h('p', 'hint', 'Nothing settled yet. Results land here as they are called.'));
+      return wrap;
+    }
+
+    var list = h('ol', 'log-list');
+    rows.forEach(function (b) {
+      var row = h('li', 'log-row');
+      row.appendChild(h('span', 'log-when', logDate(b.date)));
+
+      var body = h('div', 'log-body');
+
+      var what = h('p', 'log-what');
+      what.appendChild(h('strong', null, b.scenario || 'Battle'));
+      var t = state.byId[b.territory];
+      if (t) {
+        what.appendChild(document.createTextNode(' at '));
+        what.appendChild(linkBtn(t.id, displayName(t)));
+      }
+      body.appendChild(what);
+
+      var who = (b.participants || []).map(function (id) {
+        var g = gangOf(id);
+        return g ? (g.short || g.name) : id;
+      }).join(' vs ');
+      var w = b.winner ? gangOf(b.winner) : null;
+      var outcome = w ? (w.short || w.name) + ' took it' : 'no decisive result';
+      body.appendChild(h('p', 'log-who', who ? who + ' — ' + outcome : outcome));
+
+      if (b.summary) body.appendChild(h('p', 'log-sum', b.summary));
+
+      row.appendChild(body);
+      list.appendChild(row);
+    });
+
+    wrap.appendChild(list);
+    return wrap;
   }
 
   /* ---------- the gangs tab ---------- */

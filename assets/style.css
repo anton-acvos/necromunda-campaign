@@ -595,6 +595,45 @@ body {
 
 .plan-hint { max-width: 70ch; }
 
+/* ---------- the log ---------- */
+
+.log { margin: 26px 0 0; }
+
+.log-head {
+  margin: 0 0 10px;
+  font-size: 0.78rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+}
+
+.log-list { margin: 0; padding: 0; list-style: none; display: grid; gap: 10px; }
+
+.log-row {
+  display: grid;
+  grid-template-columns: 58px 1fr;
+  gap: 12px;
+  padding: 11px 14px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: var(--bg-raised);
+}
+
+.log-when {
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  color: var(--ink-faint);
+  padding-top: 3px;
+  white-space: nowrap;
+}
+
+.log-body > * { margin: 0; }
+.log-body > * + * { margin-top: 5px; }
+
+.log-what { font-size: 0.92rem; display: flex; align-items: center; gap: 7px; flex-wrap: wrap; }
+.log-who { font-size: 0.84rem; color: var(--ink-dim); }
+.log-sum { font-size: 0.84rem; line-height: 1.45; color: var(--ink-faint); max-width: 70ch; }
+
 /* ---------- swatches (standings, detail) ---------- */
 
 .swatch {
