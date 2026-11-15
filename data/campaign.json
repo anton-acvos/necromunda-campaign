@@ -2389,6 +2389,16 @@
   ],
   "challenges": [
     {
+      "id": "c1-escher-pipe",
+      "cycle": 1,
+      "kind": "challenge",
+      "challenger": "chymist-cult",
+      "territory": "the-bonepipe",
+      "defender": "mycelium",
+      "status": "settled",
+      "battle": "b1-bonepipe"
+    },
+    {
       "id": "c1-bjorn-deep",
       "cycle": 1,
       "kind": "expedition",
@@ -2436,6 +2446,7 @@
   ],
   "battles": [
     {
+      "id": "b1-bonepipe",
       "date": "2026-11-15",
       "scenario": "Challenge declined",
       "territory": "the-bonepipe",

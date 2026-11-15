@@ -207,6 +207,13 @@ for (const [i, c] of (data.challenges ?? []).entries()) {
   const at = `challenges[${i}]`;
   if (!gangIds.has(c.challenger)) err(`${at}.challenger: unknown gang id "${c.challenger}"`);
   if (c.defender != null && !gangIds.has(c.defender)) err(`${at}.defender: unknown gang id "${c.defender}"`);
+  if (c.status && c.status !== 'open' && c.status !== 'settled') {
+    err(`${at}.status: expected "open" or "settled", got ${JSON.stringify(c.status)}`);
+  }
+  if (c.status === 'settled' && !c.battle) warn(`${at}: settled with no battle to point at`);
+  if (c.battle && !(data.battles ?? []).some((b) => b.id === c.battle)) {
+    err(`${at}.battle: no log entry with id "${c.battle}"`);
+  }
   const stake = c.kind === 'expedition' ? c.target : c.territory;
   if (!stake) err(`${at}: no stake — an expedition needs a target, a challenge needs a territory`);
   else if (!terrIds.has(stake)) err(`${at}: unknown territory id "${stake}"`);

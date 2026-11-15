@@ -818,8 +818,9 @@ const xs = drawn.map((p) => p[0]), ys = drawn.map((p) => p[1]);
     notes: t.notes
   })),
   territories,
-  /* Challenges issued for the cycle and not yet settled, in the order they
-     were issued. A settled one moves to the log below and comes out of here.
+  /* Every challenge called this cycle, in the order it was issued, which is
+     also the order they resolve in. A settled one keeps its place here and
+     points at its entry in the log.
 
      An expedition names no holding. The deep is unsurveyed and the campaign
      keeps it that way: the arbitrator knows which tile a gang is walking
@@ -827,6 +828,7 @@ const xs = drawn.map((p) => p[0]), ys = drawn.map((p) => p[1]);
      designation is here because the data has to resolve to a real tile for
      the validator; the page never shows it. */
   challenges: [
+    { id: 'c1-escher-pipe',  cycle: 1, kind: 'challenge',  challenger: 'chymist-cult',      territory: 'the-bonepipe', defender: 'mycelium', status: 'settled', battle: 'b1-bonepipe' },
     { id: 'c1-bjorn-deep',   cycle: 1, kind: 'expedition', challenger: 'bjorn-prospectors', target: 'i-06',         defender: null,   status: 'open' },
     { id: 'c1-sumptown-yard', cycle: 1, kind: 'challenge',  challenger: 'sumptown',          territory: 'harvest-yard', defender: 'chymist-cult', status: 'open' },
     { id: 'c1-archeo-deep',  cycle: 1, kind: 'expedition', challenger: 'archeo-3',          target: 'i-04',         defender: null,   status: 'open' },
@@ -837,7 +839,8 @@ const xs = drawn.map((p) => p[0]), ys = drawn.map((p) => p[1]);
   /* The log. A challenge that nobody turned up for is still how ground
      changed hands, so it goes in here with the games. */
   battles: [
-    { date: '2026-11-15',
+    { id: 'b1-bonepipe',
+      date: '2026-11-15',
       scenario: 'Challenge declined',
       territory: 'the-bonepipe',
       participants: ['chymist-cult', 'mycelium'],

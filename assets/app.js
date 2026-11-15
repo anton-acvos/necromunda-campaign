@@ -631,29 +631,36 @@
     host.appendChild(foot);
   }
 
-  /* The slate: what has been called and not yet settled, in the order the
-     challenges were issued.
+  /* The cycle at a glance: every challenge called, in the order it was
+     issued, which is the order they resolve in. Settled ones keep their
+     place and carry their result, so the run of the cycle reads top to
+     bottom without opening the log underneath.
 
      An expedition prints "expedition into the deep" and nothing more. The
      data knows which tile, because it has to resolve to a real one, but
      naming it here would hand every other player a map of where the gangs
      are going — which is the one thing the deep is meant to withhold. */
+  function battleOf(id) {
+    var found = (state.data.battles || []).filter(function (b) { return b.id === id; });
+    return found.length ? found[0] : null;
+  }
+
   function renderSlate() {
-    var open = (state.data.challenges || []).filter(function (c) {
-      return (c.status || 'open') === 'open';
+    var cycle = (state.data.campaign || {}).cycle;
+    var called = (state.data.challenges || []).filter(function (c) {
+      return c.cycle == null || c.cycle === cycle;
     });
 
     var wrap = h('section', 'slate');
-    wrap.appendChild(h('h3', 'log-head', 'Outstanding this cycle'));
-
-    if (!open.length) {
+    if (!called.length) {
       wrap.appendChild(h('p', 'hint', 'Nothing called yet this cycle.'));
       return wrap;
     }
 
     var list = h('ol', 'slate-list');
-    open.forEach(function (c, i) {
-      var row = h('li', 'slate-row');
+    called.forEach(function (c, i) {
+      var done = (c.status || 'open') === 'settled';
+      var row = h('li', 'slate-row' + (done ? ' is-done' : ''));
       row.appendChild(h('span', 'slate-no', String(i + 1)));
 
       var body = h('div', 'slate-body');
@@ -677,16 +684,34 @@
       }
       body.appendChild(what);
 
-      var d = c.defender ? gangOf(c.defender) : null;
-      body.appendChild(h('p', 'slate-who',
-        d ? 'Defended by ' + (d.short || d.name) : 'Defender to be decided'));
+      body.appendChild(h('p', 'slate-who', done ? outcomeOf(c) : standingOf(c)));
 
       row.appendChild(body);
+      row.appendChild(h('span', 'tag ' + (done ? 'is-done' : 'is-open'),
+                        done ? 'Settled' : 'Outstanding'));
       list.appendChild(row);
     });
 
     wrap.appendChild(list);
     return wrap;
+  }
+
+  /* Who is on the other side of a challenge nobody has fought yet. */
+  function standingOf(c) {
+    var d = c.defender ? gangOf(c.defender) : null;
+    if (c.kind === 'expedition') {
+      return d ? 'Held by ' + (d.short || d.name) : 'Whatever is down there';
+    }
+    return d ? 'Defended by ' + (d.short || d.name) : 'Defender to be decided';
+  }
+
+  /* How it went, read off the log entry the challenge points at. */
+  function outcomeOf(c) {
+    var b = c.battle ? battleOf(c.battle) : null;
+    if (!b) return 'Settled';
+    var w = b.winner ? gangOf(b.winner) : null;
+    var head = b.scenario ? b.scenario + ' \u2014 ' : '';
+    return head + (w ? (w.short || w.name) + ' took it' : 'no decisive result');
   }
 
   /* The log, under the phase track. Brief on purpose: when, what, who,
