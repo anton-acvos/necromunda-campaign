@@ -1045,7 +1045,7 @@
       "owner": null,
       "income": 15,
       "boon": "Or recruit an Ammo-Jack at a 30 credit discount, if you have none",
-      "contested": false,
+      "contested": true,
       "bordersInner": true,
       "labelX": 1283.4,
       "labelY": 524.14,
@@ -2440,6 +2440,15 @@
       "challenger": "mycelium",
       "target": "i-07",
       "defender": null,
+      "status": "open"
+    },
+    {
+      "id": "c1-resource-stair",
+      "cycle": 1,
+      "kind": "challenge",
+      "challenger": "resource-extraction",
+      "territory": "brass-stair",
+      "defender": "chymist-cult",
       "status": "open"
     }
   ],
