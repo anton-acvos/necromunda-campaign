@@ -646,6 +646,20 @@
     return found.length ? found[0] : null;
   }
 
+  /* A gang as it reads in a title: its colour, then its short name, both
+     at the same weight as the other side of the fight. */
+  function gangSide(id) {
+    var g = gangOf(id);
+    var side = h('span', 'slate-side');
+    if (g) {
+      var sw = h('span', 'swatch');
+      sw.style.background = g.color;
+      side.appendChild(sw);
+    }
+    side.appendChild(h('strong', null, g ? (g.short || g.name) : id));
+    return side;
+  }
+
   function renderSlate() {
     var cycle = (state.data.campaign || {}).cycle;
     var called = (state.data.challenges || []).filter(function (c) {
@@ -667,28 +681,25 @@
       var body = h('div', 'slate-body');
       var what = h('p', 'slate-what');
 
-      var g = gangOf(c.challenger);
-      if (g) {
-        var sw = h('span', 'swatch');
-        sw.style.background = g.color;
-        what.appendChild(sw);
-      }
-      what.appendChild(h('strong', null, g ? (g.short || g.name) : c.challenger));
+      what.appendChild(gangSide(c.challenger));
+      what.appendChild(h('span', 'slate-v', 'v'));
+      what.appendChild(c.defender ? gangSide(c.defender)
+                                  : h('span', 'slate-side is-waiting', 'nobody yet'));
 
-      if (c.kind === 'expedition') {
-        var into = c.target ? state.byId[c.target] : null;
-        what.appendChild(document.createTextNode('expedition to'));
-        what.appendChild(into ? linkBtn(into.id, displayName(into))
-                              : document.createTextNode('the deep'));
+      var stake = state.byId[c.kind === 'expedition' ? c.target : c.territory];
+      what.appendChild(h('span', 'slate-at', 'at'));
+      if (stake) {
+        var where = linkBtn(stake.id, displayName(stake));
+        where.classList.add('slate-where');
+        what.appendChild(where);
       } else {
-        var t = state.byId[c.territory];
-        what.appendChild(document.createTextNode('for'));
-        what.appendChild(t ? linkBtn(t.id, displayName(t))
-                           : document.createTextNode('ground off the map'));
+        what.appendChild(h('span', 'slate-side is-waiting',
+          c.kind === 'expedition' ? 'the deep' : 'ground off the map'));
       }
       body.appendChild(what);
 
-      body.appendChild(h('p', 'slate-who', done ? outcomeOf(c) : standingOf(c)));
+      var under = done ? outcomeOf(c) : standingOf(c);
+      if (under) body.appendChild(h('p', 'slate-who', under));
       if (c.notes) body.appendChild(h('p', 'slate-note', c.notes));
 
       row.appendChild(body);
@@ -701,15 +712,17 @@
     return wrap;
   }
 
-  /* Who is on the other side of a challenge nobody has fought yet. An
-     expedition is paired with whoever else is down there, so until the
-     arbitrator pairs it the honest answer is that nobody knows. */
+  /* The line under the title, where there is one to add. The title already
+     names both gangs and the ground, so this only speaks when it says
+     something the title cannot: how two gangs came to be in the same part
+     of the deep, or that nobody has been put opposite this one yet. */
   function standingOf(c) {
     var d = c.defender ? gangOf(c.defender) : null;
-    if (c.kind === 'expedition') {
-      return d ? 'Stumbles into ' + (d.short || d.name) : 'Nobody paired yet';
+    if (!d) {
+      return c.kind === 'expedition' ? 'Nobody paired with it yet'
+                                     : 'Defender to be decided';
     }
-    return d ? 'Defended by ' + (d.short || d.name) : 'Defender to be decided';
+    return c.kind === 'expedition' ? 'Stumbles into ' + (d.short || d.name) : null;
   }
 
   /* How it went, read off the log entry the challenge points at. */

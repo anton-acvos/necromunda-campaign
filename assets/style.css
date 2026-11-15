@@ -631,7 +631,16 @@ body {
 .slate-body > * { margin: 0; }
 .slate-body > * + * { margin-top: 4px; }
 
-.slate-what { font-size: 0.92rem; display: flex; align-items: center; gap: 7px; flex-wrap: wrap; }
+.slate-what { font-size: 0.95rem; display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+.slate-side { display: inline-flex; align-items: center; gap: 6px; }
+.slate-side.is-waiting { color: var(--ink-faint); font-style: italic; }
+
+/* the joiners sit back; the three things they join do not */
+.slate-v,
+.slate-at { font-family: var(--mono); font-size: 0.7rem; color: var(--ink-faint); text-transform: uppercase; }
+
+.slate-where { font-size: 0.9rem; color: var(--ink); padding: 2px 11px; }
+.slate-where:hover { border-color: var(--accent); }
 .slate-what .swatch { margin: 0; }
 .slate-who { font-size: 0.8rem; color: var(--ink-faint); }
 .slate-note { font-size: 0.82rem; line-height: 1.45; color: var(--ink-dim); max-width: 70ch; }
