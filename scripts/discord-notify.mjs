@@ -86,15 +86,17 @@ if (!before) {
   }
 
   /* --- challenges called since the last push ---
-     An expedition is announced without its target. The players are told a
-     gang is going in, not where, which is how the deep stays worth walking. */
+     An expedition is announced with the holding it was nominated for. The
+     designation is on the map for anyone who clicks a deep tile; what is
+     actually in one is still nobody's business until it is walked. */
   {
     const had = new Set((before.challenges ?? []).map((c) => c.id));
     for (const c of after.challenges ?? []) {
       if (had.has(c.id) || (c.status ?? 'open') !== 'open') continue;
       const who = `**${gangName(c.challenger)}**`;
       if (c.kind === 'expedition') {
-        lines.push(`${who} are mounting an expedition into the Uncharted Deep.`);
+        const into = terrNow[c.target];
+        lines.push(`${who} are mounting an expedition into the Uncharted Deep${into ? `, nominating ${into.designation ?? into.id}` : ''}.`);
       } else {
         const t = terrNow[c.territory];
         lines.push(`${who} have called a challenge${t ? ` for ${terrLink(t)}` : ''}.`);

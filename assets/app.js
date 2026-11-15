@@ -636,10 +636,11 @@
      place and carry their result, so the run of the cycle reads top to
      bottom without opening the log underneath.
 
-     An expedition prints "expedition into the deep" and nothing more. The
-     data knows which tile, because it has to resolve to a real one, but
-     naming it here would hand every other player a map of where the gangs
-     are going — which is the one thing the deep is meant to withhold. */
+     An expedition names the holding it was nominated for. The designation
+     is all anyone gets — the map already lets you click any deep tile and
+     read it, and nothing is known about what is in one until a gang walks
+     it. Two expeditions nominating neighbours is the interesting part, and
+     it only reads that way if the board is on the table. */
   function battleOf(id) {
     var found = (state.data.battles || []).filter(function (b) { return b.id === id; });
     return found.length ? found[0] : null;
@@ -675,7 +676,10 @@
       what.appendChild(h('strong', null, g ? (g.short || g.name) : c.challenger));
 
       if (c.kind === 'expedition') {
-        what.appendChild(document.createTextNode('expedition into the deep'));
+        var into = c.target ? state.byId[c.target] : null;
+        what.appendChild(document.createTextNode('expedition to'));
+        what.appendChild(into ? linkBtn(into.id, displayName(into))
+                              : document.createTextNode('the deep'));
       } else {
         var t = state.byId[c.territory];
         what.appendChild(document.createTextNode('for'));
