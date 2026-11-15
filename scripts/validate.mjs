@@ -222,8 +222,10 @@ for (const g of gangs.filter((g) => !g.hidden)) {
   }
 }
 
-/* --- campaign shape: two starting and three unclaimed territories per player --- */
-{
+/* --- campaign shape: two starting and three unclaimed territories per player.
+   A setup check only. Once ground starts changing hands the counts are
+   supposed to drift, so the first logged result retires it. --- */
+if (!(data.battles ?? []).length) {
   const players = gangs.length;
   const held = territories.filter((t) => t.owner).length;
   const open = territories.length - held;

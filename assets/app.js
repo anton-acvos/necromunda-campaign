@@ -386,7 +386,7 @@
       var last = fought[fought.length - 1];
       var w = last.winner ? gangOf(last.winner) : null;
       var row = h('div');
-      row.appendChild(h('dt', null, 'Last battle'));
+      row.appendChild(h('dt', null, 'Last result'));
       row.appendChild(h('dd', null, last.scenario + ' — ' + (w ? w.name + ' took it' : 'no decisive result')));
       dl.appendChild(row);
     }

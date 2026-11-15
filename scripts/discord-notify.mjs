@@ -94,7 +94,7 @@ if (!before) {
     const who = (b.participants ?? []).map(gangName).join(' vs ');
     const where = b.territory && terrNow[b.territory] ? ` at ${terrLink(terrNow[b.territory])}` : '';
     const result = b.winner ? `**${gangName(b.winner)}** won` : 'no decisive result';
-    lines.push(`Battle — *${b.scenario ?? 'unnamed scenario'}*${where}: ${who}. ${result}.`);
+    lines.push(`*${b.scenario ?? 'Battle'}*${where}: ${who}. ${result}.`);
   }
 
   /* --- notice --- */

@@ -5,7 +5,7 @@
     "edition": "N26",
     "arbitrator": "Anton",
     "cycle": 1,
-    "lastUpdated": "2026-11-10",
+    "lastUpdated": "2026-11-15",
     "phases": [
       {
         "id": "exploration",
@@ -1356,7 +1356,7 @@
       "ring": "ring",
       "type": "Rogue Doc Shop",
       "settlement": false,
-      "owner": null,
+      "owner": "chymist-cult",
       "income": 15,
       "boon": "Or recruit a Rogue Doc at a 30 credit discount, if you have none",
       "contested": false,
@@ -2386,5 +2386,17 @@
       "notes": null
     }
   ],
-  "battles": []
+  "battles": [
+    {
+      "date": "2026-11-15",
+      "scenario": "Challenge declined",
+      "territory": "the-bonepipe",
+      "participants": [
+        "chymist-cult",
+        "mycelium"
+      ],
+      "winner": "chymist-cult",
+      "summary": "The Chymist Cult called Mycelium Section out over the Rogue Doc. Mycelium Section did not come, and the doc has new patrons."
+    }
+  ]
 }

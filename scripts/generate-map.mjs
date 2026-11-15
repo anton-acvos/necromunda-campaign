@@ -141,16 +141,14 @@ const outer = [
   { id: 'black-ledger',       name: 'The Black Ledger',       type: 'Gambling Den',          owner: null,                   settlement: false,  income: 15, standing: '+1 Reputation', notes: 'Debts here are recorded in a real book. People have died trying to edit it.' },
   { id: 'sunken-nave',        name: 'The Sunken Nave',        type: 'Settlement',            owner: 'mycelium',             settlement: true,   income: 15, boon: 'Or recruit a ganger at a 25 credit discount', notes: 'Cawdor built it, something else kept it. Mycelium Section took the crypts and left the nave to the candles.' },
   { id: 'ratgut-tunnels',    name: 'Ratgut Tunnels',         type: 'Bounty Den',            owner: 'mycelium',             settlement: false,  income: 25, notes: 'Not mapped, not mappable. Mycelium Section charges for guides and keeps a second ledger of who is worth money to somebody up-hive.' },
-  { id: 'the-bonepipe',       name: 'The Bonepipe',           type: 'Rogue Doc Shop',        owner: null,                   settlement: false,  income: 15, boon: 'Or recruit a Rogue Doc at a 30 credit discount, if you have none', notes: 'The doc is good. The doc is also why several gangers answer to new names.' },
+  { id: 'the-bonepipe',       name: 'The Bonepipe',           type: 'Rogue Doc Shop',        owner: 'chymist-cult',         settlement: false,  income: 15, boon: 'Or recruit a Rogue Doc at a 30 credit discount, if you have none', notes: 'The doc is good. The doc is also why several gangers answer to new names.' },
   { id: 'harvest-yard',       name: 'The Harvest Yard',       type: 'Corpse Farm',           owner: null,                   settlement: false,  income: 25, notes: 'Spools of cable taller than a Goliath, and the vats behind them. The yard takes what the Underhive has finished with and sends it up-hive as protein.' },
 ];
 
-const held = outer.filter((t) => t.owner);
-const free = outer.filter((t) => !t.owner);
-
+/* Twenty-two is structural: the ring below is laid out from this list, and
+   the seed angles assume its length. How many of them are held is not —
+   that moves every time a challenge is settled, so it is not asserted here. */
 if (outer.length !== 22) throw new Error(`charted section is ${outer.length}, expected 22`);
-if (held.length !== 14) throw new Error(`charted section is ${held.length} held, expected 14`);
-if (free.length !== 8) throw new Error(`charted section is ${free.length} unclaimed, expected 8`);
 
 const RAD = Math.PI / 180;
 
@@ -771,7 +769,7 @@ const data = {
     edition: 'N26',
     arbitrator: 'Anton',
     cycle: 1,
-    lastUpdated: '2026-11-10',
+    lastUpdated: '2026-11-15',
     /* The phase a cycle falls in is worked out from this plan, so there is
        only ever one number to change when the campaign moves on. */
     phases: [
@@ -820,7 +818,16 @@ const xs = drawn.map((p) => p[0]), ys = drawn.map((p) => p[1]);
     notes: t.notes
   })),
   territories,
-  battles: []
+  /* The log. A challenge that nobody turned up for is still how ground
+     changed hands, so it goes in here with the games. */
+  battles: [
+    { date: '2026-11-15',
+      scenario: 'Challenge declined',
+      territory: 'the-bonepipe',
+      participants: ['chymist-cult', 'mycelium'],
+      winner: 'chymist-cult',
+      summary: 'The Chymist Cult called Mycelium Section out over the Rogue Doc. Mycelium Section did not come, and the doc has new patrons.' }
+  ]
 };
 
 writeFileSync('data/campaign.json', JSON.stringify(data, null, 2) + '\n');
