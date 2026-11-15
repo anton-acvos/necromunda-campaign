@@ -634,6 +634,7 @@ body {
 .slate-what { font-size: 0.92rem; display: flex; align-items: center; gap: 7px; flex-wrap: wrap; }
 .slate-what .swatch { margin: 0; }
 .slate-who { font-size: 0.8rem; color: var(--ink-faint); }
+.slate-note { font-size: 0.82rem; line-height: 1.45; color: var(--ink-dim); max-width: 70ch; }
 
 .slate-row.is-done { border-left-color: var(--line); background: var(--bg-raised); }
 .slate-row.is-done .slate-who { color: var(--ink-dim); }

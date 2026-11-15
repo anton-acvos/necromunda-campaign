@@ -689,6 +689,7 @@
       body.appendChild(what);
 
       body.appendChild(h('p', 'slate-who', done ? outcomeOf(c) : standingOf(c)));
+      if (c.notes) body.appendChild(h('p', 'slate-note', c.notes));
 
       row.appendChild(body);
       row.appendChild(h('span', 'tag ' + (done ? 'is-done' : 'is-open'),
@@ -700,11 +701,13 @@
     return wrap;
   }
 
-  /* Who is on the other side of a challenge nobody has fought yet. */
+  /* Who is on the other side of a challenge nobody has fought yet. An
+     expedition is paired with whoever else is down there, so until the
+     arbitrator pairs it the honest answer is that nobody knows. */
   function standingOf(c) {
     var d = c.defender ? gangOf(c.defender) : null;
     if (c.kind === 'expedition') {
-      return d ? 'Held by ' + (d.short || d.name) : 'Whatever is down there';
+      return d ? 'Stumbles into ' + (d.short || d.name) : 'Nobody paired yet';
     }
     return d ? 'Defended by ' + (d.short || d.name) : 'Defender to be decided';
   }

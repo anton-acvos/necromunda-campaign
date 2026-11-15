@@ -2403,8 +2403,9 @@
       "kind": "expedition",
       "challenger": "bjorn-prospectors",
       "target": "i-06",
-      "defender": null,
-      "status": "open"
+      "defender": "precinct-22",
+      "status": "open",
+      "notes": "Bjorn “H.C.L.F” filed for its prospecting permit late. Precinct 22 is going down after them, which is an enforcement action and not an expedition at all, whatever the paperwork says."
     },
     {
       "id": "c1-sumptown-yard",
@@ -2439,7 +2440,7 @@
       "kind": "expedition",
       "challenger": "mycelium",
       "target": "i-07",
-      "defender": null,
+      "defender": "bjorn-prospectors",
       "status": "open"
     },
     {

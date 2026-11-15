@@ -90,8 +90,15 @@ if (!before) {
      designation is on the map for anyone who clicks a deep tile; what is
      actually in one is still nobody's business until it is walked. */
   {
-    const had = new Set((before.challenges ?? []).map((c) => c.id));
+    const had = new Map((before.challenges ?? []).map((c) => [c.id, c]));
     for (const c of after.challenges ?? []) {
+      /* a challenge that was already announced, now with somebody on the
+         other side of it: the pairing is the news, not the challenge */
+      const was = had.get(c.id);
+      if (was && (c.status ?? 'open') === 'open' && !was.defender && c.defender) {
+        lines.push(`**${gangName(c.challenger)}** will be met by **${gangName(c.defender)}**` +
+                   (c.kind === 'expedition' ? ' in the deep.' : '.'));
+      }
       if (had.has(c.id) || (c.status ?? 'open') !== 'open') continue;
       const who = `**${gangName(c.challenger)}**`;
       if (c.kind === 'expedition') {

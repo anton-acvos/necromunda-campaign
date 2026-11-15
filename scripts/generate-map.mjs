@@ -829,11 +829,12 @@ const xs = drawn.map((p) => p[0]), ys = drawn.map((p) => p[1]);
      the validator; the page never shows it. */
   challenges: [
     { id: 'c1-escher-pipe',  cycle: 1, kind: 'challenge',  challenger: 'chymist-cult',      territory: 'the-bonepipe', defender: 'mycelium', status: 'settled', battle: 'b1-bonepipe' },
-    { id: 'c1-bjorn-deep',   cycle: 1, kind: 'expedition', challenger: 'bjorn-prospectors', target: 'i-06',         defender: null,   status: 'open' },
+    { id: 'c1-bjorn-deep',   cycle: 1, kind: 'expedition', challenger: 'bjorn-prospectors', target: 'i-06',         defender: 'precinct-22', status: 'open',
+      notes: 'Bjorn “H.C.L.F” filed for its prospecting permit late. Precinct 22 is going down after them, which is an enforcement action and not an expedition at all, whatever the paperwork says.' },
     { id: 'c1-sumptown-yard', cycle: 1, kind: 'challenge',  challenger: 'sumptown',          territory: 'harvest-yard', defender: 'chymist-cult', status: 'open' },
     { id: 'c1-archeo-deep',  cycle: 1, kind: 'expedition', challenger: 'archeo-3',          target: 'i-04',         defender: null,   status: 'open' },
     { id: 'c1-precinct-deep', cycle: 1, kind: 'expedition', challenger: 'precinct-22',      target: 'i-03',         defender: null,   status: 'open' },
-    { id: 'c1-mycelium-deep', cycle: 1, kind: 'expedition', challenger: 'mycelium',         target: 'i-07',         defender: null,   status: 'open' },
+    { id: 'c1-mycelium-deep', cycle: 1, kind: 'expedition', challenger: 'mycelium',         target: 'i-07',         defender: 'bjorn-prospectors', status: 'open' },
     { id: 'c1-resource-stair', cycle: 1, kind: 'challenge',  challenger: 'resource-extraction', territory: 'brass-stair', defender: 'chymist-cult', status: 'open' }
   ],
 
