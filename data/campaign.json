@@ -2431,7 +2431,7 @@
       "kind": "expedition",
       "challenger": "precinct-22",
       "target": "i-03",
-      "defender": null,
+      "defender": "archeo-3",
       "status": "open"
     },
     {
