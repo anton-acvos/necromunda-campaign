@@ -205,6 +205,20 @@ is whole credits a cycle, `boon` is the alternative you may take instead of
 the income, and `standing` is an effect that applies the whole time you hold
 the place.
 
+### House rule: shared infrastructure
+
+The Reach pays for an unbroken block. A charted holding within **two held
+steps** of its gang's settlement — each step over ground that same gang
+holds — pays **5 more** a cycle than the card says. A holding with no run of
+held ground back to the settlement at all pays **5 less**. Three or more
+steps out, it pays what the card says, and the settlement itself is never
+adjusted.
+
+The site works this out from ownership and borders every time it loads, so
+`income` in the data stays the book's number and the rule follows the ground
+as it changes hands. The Gangs tab totals and the territory panel both show
+what the holder actually collects, with the adjustment spelled out.
+
 `effect` is the Battlefield Effect, which applies in a battle where the
 territory is the Stake. Only The Still Rows has one so far: the rest need
 transcribing out of the Core Rulebook, because no published source carries

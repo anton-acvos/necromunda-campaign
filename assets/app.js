@@ -375,7 +375,7 @@
     }
 
     var dl = kvList([
-      ['Income', t.income == null ? null : t.income + ' credits a cycle'],
+      ['Income', incomeText(t)],
       ['Boon', t.boon],
       ['Standing', t.standing],
       ['Battlefield effect', t.effect]
@@ -773,6 +773,97 @@
     return wrap;
   }
 
+  /* ---------- the infrastructure rule ----------
+
+     The Reach pays for being close together. A charted holding within two
+     steps of its gang's settlement — every step over ground that same gang
+     holds — shares roads, power and water with the seat and pays 5 more a
+     cycle than the book says. A holding with no unbroken run of held ground
+     back to the settlement at all pays 5 less: everything it needs is
+     hauled in past somebody else.
+
+     Between the two, three or more held steps out, it pays what the book
+     says. Growing the block outwards is worth money; a holding taken on
+     the far side of the sector costs money to keep.
+
+     The settlement itself is the hold, not a circle around it, so it is
+     never adjusted. A gang with no settlement has no block to measure
+     from, and nothing it holds is adjusted either.
+
+     Worked out here rather than written into the data, because it changes
+     the moment ground changes hands. data/campaign.json keeps the number
+     off the territory card; this is what the gang actually collects. */
+  function computeAdjust() {
+    var adjust = {};
+    var terr = state.data.territories || [];
+
+    (state.data.gangs || []).forEach(function (g) {
+      var mine = terr.filter(function (t) {
+        return t.owner === g.id && t.section === 'outer';
+      });
+
+      var seat = null;
+      mine.forEach(function (t) { if (t.settlement && !seat) seat = t; });
+
+      /* How many held steps each holding is from the seat. The walk runs
+         all the way out, because the penalty is for ground with no run of
+         held territory back to the seat at all — not for ground that is
+         merely far. */
+      if (!seat) return;
+      var step = {};
+      step[seat.id] = 0;
+      var edge = [seat.id];
+      for (var n = 1; edge.length; n++) {
+        var next = [];
+        var depth = n;
+        edge.forEach(function (id) {
+          ((state.byId[id] || {}).links || []).forEach(function (nid) {
+            var t = state.byId[nid];
+            if (!t || t.owner !== g.id || t.section !== 'outer') return;
+            if (step[nid] != null) return;
+            step[nid] = depth;
+            next.push(nid);
+          });
+        });
+        edge = next;
+      }
+
+      mine.forEach(function (t) {
+        if (t.settlement) { adjust[t.id] = 0; return; }
+        if (step[t.id] == null) { adjust[t.id] = -5; return; }
+        adjust[t.id] = (step[t.id] <= 2) ? 5 : 0;
+      });
+    });
+
+    return adjust;
+  }
+
+  function adjustOf(t) {
+    return (state.adjust && state.adjust[t.id]) || 0;
+  }
+
+  /* What the holder actually banks for it. */
+  function incomeOn(t) {
+    return t.income == null ? null : t.income + adjustOf(t);
+  }
+
+  function adjustWhy(t) {
+    var n = adjustOf(t);
+    if (n > 0) return 'shares infrastructure with the settlement';
+    if (n < 0) return 'cut off from the rest of the block';
+    return null;
+  }
+
+  /* "30 credits a cycle (25 + 5, shares infrastructure…)" */
+  function incomeText(t) {
+    var paid = incomeOn(t);
+    if (paid == null) return null;
+    var n = adjustOf(t);
+    if (!n) return paid + ' credits a cycle';
+    return paid + ' credits a cycle (' + t.income +
+           (n > 0 ? ' + 5, ' : ' \u2212 5, ') + adjustWhy(t) + ')';
+  }
+
   /* ---------- the gangs tab ---------- */
 
   /* What a gang draws each cycle is the income on every charted holding it
@@ -783,7 +874,7 @@
   }
 
   function incomeOf(g) {
-    return holdingsOf(g).reduce(function (n, t) { return n + (t.income || 0); }, 0);
+    return holdingsOf(g).reduce(function (n, t) { return n + (incomeOn(t) || 0); }, 0);
   }
 
   function deepHoldingsOf(g) {
@@ -859,7 +950,12 @@
       link.addEventListener('click', function () { select(t.id, true); });
       row.appendChild(link);
       if (t.settlement) row.appendChild(h('span', 'tag settlement', 'Settlement'));
-      row.appendChild(h('span', 'holding-income', (t.income || 0) + ' cr'));
+      row.appendChild(h('span', 'holding-income', (incomeOn(t) || 0) + ' cr'));
+      if (adjustOf(t)) {
+        var mark = h('span', 'holding-adjust', adjustOf(t) > 0 ? '+5' : '\u22125');
+        mark.title = t.income + ' on the card, ' + adjustWhy(t);
+        row.appendChild(mark);
+      }
       li.appendChild(row);
       li.appendChild(h('p', 'holding-type', t.type || 'Unknown type'));
       if (t.boon) li.appendChild(h('p', 'holding-boon', t.boon));
@@ -962,6 +1058,7 @@
     (data.territories || []).forEach(function (t) { state.byId[t.id] = t; });
     (data.gangs || []).forEach(function (g) { state.gangsById[g.id] = g; });
     (data.gateways || []).forEach(function (gw) { state.gatewaysById[gw.id] = gw; });
+    state.adjust = computeAdjust();
     state.tunnelsById = {};
     (data.tunnels || []).forEach(function (t) { state.tunnelsById[t.id] = t; });
 
