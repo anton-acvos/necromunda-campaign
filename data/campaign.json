@@ -2422,7 +2422,7 @@
       "kind": "expedition",
       "challenger": "archeo-3",
       "target": "i-04",
-      "defender": null,
+      "defender": "mycelium",
       "status": "open"
     },
     {
