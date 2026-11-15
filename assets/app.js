@@ -644,7 +644,7 @@
     });
 
     var wrap = h('section', 'slate');
-    wrap.appendChild(h('h3', 'log-head', 'Called this cycle'));
+    wrap.appendChild(h('h3', 'log-head', 'Outstanding this cycle'));
 
     if (!open.length) {
       wrap.appendChild(h('p', 'hint', 'Nothing called yet this cycle.'));
