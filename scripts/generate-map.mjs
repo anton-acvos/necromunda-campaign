@@ -757,7 +757,7 @@ const gangs = [
   { id: 'mycelium',            name: 'Mycelium Section',                  short: 'Mycelium',      house: 'House Delaque',      color: '#7d9683', player: 'Anton', logo: 'assets/gangs/mycelium.svg', credits: 30 },
   { id: 'precinct-22',         name: 'Precinct 22',                       short: 'Precinct 22',   house: 'Palanite Enforcers', color: '#e8c23a' },
   { id: 'bjorn-prospectors',   name: 'Bjorn "H.C.L.F" Prospectors Group', short: 'Bjorn H.C.L.F', house: 'Ironhead Squats',    color: '#e8822c' },
-  { id: 'resource-extraction', name: 'Resource Extraction LLC',           short: 'Resource Ext.', house: 'Ironhead Squats',    color: '#6f9c33' }
+  { id: 'resource-extraction', name: 'Resource Extraction LLC',           short: 'Resource Ext.', house: 'Ironhead Squats',    color: '#6f9c33', credits: 40, reputation: 2 }
 ].map((g) => ({ rating: 1100, credits: 0, reputation: 1, motto: '', ...g }));
 
 /* ---------- emit ---------- */
@@ -917,7 +917,10 @@ const xs = drawn.map((p) => p[0]), ys = drawn.map((p) => p[1]);
       participants: ['resource-extraction', 'chymist-cult'],
       winner: 'resource-extraction',
       played: false,
-      rewards: [{ gang: 'chymist-cult', credits: 30 }],
+      rewards: [
+        { gang: 'resource-extraction', credits: 40, rep: 1 },
+        { gang: 'chymist-cult',        credits: 30 }
+      ],
       summary: 'Second concession of the cycle. Resource Extraction LLC counted the crates on the dry landings, found nobody arguing, and filed the claim.' }
   ]
 };

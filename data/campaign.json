@@ -298,8 +298,8 @@
     },
     {
       "rating": 1100,
-      "credits": 0,
-      "reputation": 1,
+      "credits": 40,
+      "reputation": 2,
       "motto": "",
       "id": "resource-extraction",
       "name": "Resource Extraction LLC",
@@ -2631,6 +2631,11 @@
       "winner": "resource-extraction",
       "played": false,
       "rewards": [
+        {
+          "gang": "resource-extraction",
+          "credits": 40,
+          "rep": 1
+        },
         {
           "gang": "chymist-cult",
           "credits": 30
