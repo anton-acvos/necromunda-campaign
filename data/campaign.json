@@ -2389,6 +2389,7 @@
   "archeotech": [
     {
       "id": "voidshell-harness",
+      "roll": 12,
       "name": "The Voidshell Harness",
       "kind": "Wargear",
       "holder": null,
@@ -2396,6 +2397,7 @@
     },
     {
       "id": "time-sink",
+      "roll": 4,
       "name": "The Time Sink",
       "kind": "Wargear",
       "holder": null,
@@ -2403,6 +2405,7 @@
     },
     {
       "id": "conversion-eradicator",
+      "roll": 10,
       "name": "Conversion Eradicator",
       "kind": "Personal equipment",
       "holder": null,
@@ -2410,6 +2413,7 @@
     },
     {
       "id": "hagioscope",
+      "roll": 5,
       "name": "Hagioscope",
       "kind": "Wargear",
       "holder": null,
@@ -2417,13 +2421,22 @@
     },
     {
       "id": "psychofamile-pheromones",
+      "roll": 6,
       "name": "Psychofamile Pheromones",
       "kind": "One-shot",
       "holder": null,
       "effect": "Target an enemy fighter. For one round they are treated as a friendly model."
     },
     {
+      "id": "obscuroptikon",
+      "name": "The Obscuroptikon",
+      "kind": "Wargear",
+      "holder": null,
+      "effect": "Ranged attacks targeting the bearer suffer −1 to hit. The field shows a shooter a corridor that is not there, and a fighter who walked out of it an hour ago."
+    },
+    {
       "id": "grav-cannon",
+      "roll": 3,
       "name": "Grav Cannon",
       "kind": "Weapon",
       "holder": null,
@@ -2440,6 +2453,7 @@
     },
     {
       "id": "taser-goad",
+      "roll": 8,
       "name": "Taser Goad",
       "kind": "Weapon",
       "holder": null,
@@ -2456,6 +2470,7 @@
     },
     {
       "id": "servo-arc-claw",
+      "roll": 11,
       "name": "Servo-arc Claw",
       "kind": "Weapon",
       "holder": null,
@@ -2474,6 +2489,7 @@
     },
     {
       "id": "servo-chirurgic-claw",
+      "roll": 9,
       "name": "Servo-chirurgic Claw",
       "kind": "Weapon",
       "holder": null,
@@ -2489,7 +2505,26 @@
       "effect": "Blessed Augmetic Surgery (Double) — choose a friendly Seriously Injured fighter within 1\". That fighter is no longer Seriously Injured and regains 1 lost Wound."
     },
     {
+      "id": "uncreator-gauntlet",
+      "roll": 2,
+      "name": "The Uncreator Gauntlet",
+      "kind": "Weapon",
+      "holder": null,
+      "profile": {
+        "range": "E",
+        "str": "S+1",
+        "ap": "2",
+        "lethality": 2,
+        "traits": [
+          "Unwieldy",
+          "Damage(2)"
+        ]
+      },
+      "effect": "On a hit, one weapon or piece of wargear carried by the target is destroyed outright, chosen by the bearer. The gauntlet does not break things so much as decline to let them have been made."
+    },
+    {
       "id": "archaeotoaster",
+      "roll": 7,
       "name": "Archaeotoaster",
       "kind": "Curio",
       "holder": null,

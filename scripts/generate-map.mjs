@@ -822,39 +822,51 @@ const xs = drawn.map((p) => p[0]), ys = drawn.map((p) => p[1]);
      with one of these, and "holder" names the gang that took it — null
      while it is still down there waiting to be found.
 
+     Eleven pieces, one per result on 2d6. The curve does the work: the
+     tails are the prizes nobody expects to see, and a 7 is a toaster.
+
      A weapon carries its profile; everything else carries its rule in
      plain words, because a curio that does nothing is still worth having
      if everyone wants one. */
   archeotech: [
-    { id: 'voidshell-harness', name: 'The Voidshell Harness', kind: 'Wargear', holder: null,
+    { id: 'voidshell-harness', roll: 12, name: 'The Voidshell Harness', kind: 'Wargear', holder: null,
       effect: 'Once per battle, take a 2+ save against a single attack. This save takes priority over the core rules for saves.' },
 
-    { id: 'time-sink', name: 'The Time Sink', kind: 'Wargear', holder: null,
+    { id: 'time-sink', roll: 4, name: 'The Time Sink', kind: 'Wargear', holder: null,
       effect: 'Any enemy fighter within Engagement range suffers \u22121 WS. Time runs slow around the bearer, and it is not pleasant to stand near.' },
 
-    { id: 'conversion-eradicator', name: 'Conversion Eradicator', kind: 'Personal equipment', holder: null,
+    { id: 'conversion-eradicator', roll: 10, name: 'Conversion Eradicator', kind: 'Personal equipment', holder: null,
       effect: 'Every ranged weapon carried by this fighter gains +1 Strength and +1 AP, and becomes unstable.' },
 
-    { id: 'hagioscope', name: 'Hagioscope', kind: 'Wargear', holder: null,
+    { id: 'hagioscope', roll: 5, name: 'Hagioscope', kind: 'Wargear', holder: null,
       effect: 'Before the battle, nominate one enemy fighter to be scanned. Gain +1 to hit against that fighter until the end of the battle.' },
 
-    { id: 'psychofamile-pheromones', name: 'Psychofamile Pheromones', kind: 'One-shot', holder: null,
+    { id: 'psychofamile-pheromones', roll: 6, name: 'Psychofamile Pheromones', kind: 'One-shot', holder: null,
       effect: 'Target an enemy fighter. For one round they are treated as a friendly model.' },
 
-    { id: 'grav-cannon', name: 'Grav Cannon', kind: 'Weapon', holder: null,
+    /* Twelfth piece, and 2d6 has eleven results: this one is not on the
+       table. The arbitrator hands it out. */
+    { id: 'obscuroptikon', name: 'The Obscuroptikon', kind: 'Wargear', holder: null,
+      effect: 'Ranged attacks targeting the bearer suffer \u22121 to hit. The field shows a shooter a corridor that is not there, and a fighter who walked out of it an hour ago.' },
+
+    { id: 'grav-cannon', roll: 3, name: 'Grav Cannon', kind: 'Weapon', holder: null,
       profile: { range: '12"/24"', lethality: 3, traits: ['Heavy', 'Ammo(5+)', 'Blast(5")', 'Graviton Pulse'] } },
 
-    { id: 'taser-goad', name: 'Taser Goad', kind: 'Weapon', holder: null,
+    { id: 'taser-goad', roll: 8, name: 'Taser Goad', kind: 'Weapon', holder: null,
       profile: { range: 'E', str: 'S+1', lethality: 1, traits: ['Melee', 'Shock(5+)', 'Concussive(5+)'] } },
 
-    { id: 'servo-arc-claw', name: 'Servo-arc Claw', kind: 'Weapon', holder: null,
+    { id: 'servo-arc-claw', roll: 11, name: 'Servo-arc Claw', kind: 'Weapon', holder: null,
       profile: { range: 'E', str: 'S+2', ap: '1', lethality: 2, traits: ['Unwieldy', 'Shock(5+)', 'Rending(5+)', 'Damage(2)'] } },
 
-    { id: 'servo-chirurgic-claw', name: 'Servo-chirurgic Claw', kind: 'Weapon', holder: null,
+    { id: 'servo-chirurgic-claw', roll: 9, name: 'Servo-chirurgic Claw', kind: 'Weapon', holder: null,
       profile: { range: 'E', str: 'S', lethality: 1, traits: ['Unwieldy', 'Rending(6+)'] },
       effect: 'Blessed Augmetic Surgery (Double) \u2014 choose a friendly Seriously Injured fighter within 1". That fighter is no longer Seriously Injured and regains 1 lost Wound.' },
 
-    { id: 'archaeotoaster', name: 'Archaeotoaster', kind: 'Curio', holder: null,
+    { id: 'uncreator-gauntlet', roll: 2, name: 'The Uncreator Gauntlet', kind: 'Weapon', holder: null,
+      profile: { range: 'E', str: 'S+1', ap: '2', lethality: 2, traits: ['Unwieldy', 'Damage(2)'] },
+      effect: 'On a hit, one weapon or piece of wargear carried by the target is destroyed outright, chosen by the bearer. The gauntlet does not break things so much as decline to let them have been made.' },
+
+    { id: 'archaeotoaster', roll: 7, name: 'Archaeotoaster', kind: 'Curio', holder: null,
       effect: 'A genuine bread-toasting machine out of the Dark Age of Technology. It does nothing of any value, and everybody wants one. Gain +1 reputation.' }
   ],
 

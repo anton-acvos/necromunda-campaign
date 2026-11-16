@@ -740,8 +740,23 @@ body {
 
 .relic.is-held { border-color: var(--line-bright); }
 
-.relic-head { display: flex; align-items: baseline; justify-content: space-between; gap: 10px; }
-.relic-name { margin: 0; font-size: 0.95rem; letter-spacing: 0.01em; }
+.relic-head { display: flex; align-items: baseline; gap: 9px; }
+.relic-name { margin: 0; font-size: 0.95rem; letter-spacing: 0.01em; flex: 1 1 auto; }
+
+/* the 2d6 result this piece sits on */
+.relic-roll {
+  flex: none;
+  min-width: 26px;
+  padding: 2px 0;
+  border: 1px solid var(--line-bright);
+  font-family: var(--mono);
+  font-size: 0.78rem;
+  text-align: center;
+  color: var(--ink-dim);
+  background: var(--bg);
+}
+
+.relic-roll.is-off { border-style: dashed; color: var(--ink-faint); }
 .relic-kind { flex: none; }
 
 .relic-stats {

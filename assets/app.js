@@ -779,7 +779,7 @@
     head.appendChild(h('h2', null, 'Archeotech of the deep'));
     var found = pool.filter(function (r) { return r.holder; }).length;
     head.appendChild(h('p', 'plan-where',
-      pool.length + ' pieces catalogued \u2014 ' +
+      pool.length + ' pieces catalogued, eleven of them on a 2d6 table \u2014 ' +
       (found ? found + ' recovered, ' + (pool.length - found) + ' still down there'
              : 'none recovered yet')));
     host.appendChild(head);
@@ -791,16 +791,24 @@
     }
 
     wrap.appendChild(h('p', 'relics-intro',
-      'An expedition that wins its fight comes back up with one of these. ' +
-      'Nothing says which holding any of it is under \u2014 nobody knows until ' +
-      'somebody walks the ground.'));
+      'An expedition that wins its fight rolls 2d6 and comes back up with ' +
+      'what the dice say. The curve is the point: a 7 is common and a 2 is ' +
+      'once a campaign. Nothing says which holding any of it is under \u2014 ' +
+      'nobody knows until somebody walks the ground.'));
 
     var grid = h('div', 'relic-grid');
-    pool.forEach(function (r) {
+    pool.slice().sort(function (x, y) {
+      return (x.roll || 99) - (y.roll || 99);
+    }).forEach(function (r) {
       var held = r.holder ? gangOf(r.holder) : null;
       var card = h('article', 'relic' + (held ? ' is-held' : ''));
 
       var head = h('div', 'relic-head');
+      var pip = h('span', 'relic-roll' + (r.roll == null ? ' is-off' : ''),
+                   r.roll == null ? '\u2014' : String(r.roll));
+      pip.title = r.roll == null ? 'Not on the table \u2014 the arbitrator\'s to give'
+                                 : 'Rolled on 2d6';
+      head.appendChild(pip);
       head.appendChild(h('h4', 'relic-name', r.name));
       if (r.kind) head.appendChild(h('span', 'tag relic-kind', r.kind));
       card.appendChild(head);

@@ -233,10 +233,28 @@ for (const [i, r] of (data.archeotech ?? []).entries()) {
   if (r.holder != null && !gangIds.has(r.holder)) {
     err(`${at} (${r.id}).holder: unknown gang id "${r.holder}"`);
   }
+  if (r.roll != null && (typeof r.roll !== 'number' || r.roll < 2 || r.roll > 12)) {
+    err(`${at} (${r.id}).roll: expected a 2d6 result between 2 and 12`);
+  }
   if (!r.effect && !r.profile) warn(`${at} (${r.id}): neither a profile nor an effect`);
   if (r.profile && r.profile.lethality != null && typeof r.profile.lethality !== 'number') {
     err(`${at} (${r.id}).profile.lethality: must be a number`);
   }
+}
+
+/* Eleven results on 2d6, so a full table has one piece on each. A short
+   table is fine while the pool is being written; two pieces on one result
+   is not, because the roll would be ambiguous. */
+{
+  const seen = new Map();
+  for (const r of data.archeotech ?? []) {
+    if (r.roll == null) continue;
+    if (seen.has(r.roll)) err(`archeotech: "${r.id}" and "${seen.get(r.roll)}" both sit on a roll of ${r.roll}`);
+    else seen.set(r.roll, r.id);
+  }
+  const missing = [];
+  for (let n = 2; n <= 12; n++) if (!seen.has(n)) missing.push(n);
+  if (seen.size && missing.length) warn(`archeotech: no piece on 2d6 result ${missing.join(', ')}`);
 }
 
 /* --- battles --- */
