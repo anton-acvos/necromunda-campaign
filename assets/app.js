@@ -60,6 +60,14 @@
     return (state.data.gangs || []).filter(function (g) { return !g.hidden; });
   }
 
+  /* Reputation is what the Reach plays for, so it orders every list of
+     gangs on the site. Name breaks the tie, which keeps the order steady
+     between loads instead of leaving it to the data file. */
+  function byRep(a, b) {
+    return ((b.reputation || 0) - (a.reputation || 0)) ||
+           (a.name || '').localeCompare(b.name || '');
+  }
+
   function outerTerritories() {
     return (state.data.territories || []).filter(function (t) { return t.section === 'outer'; });
   }
@@ -523,8 +531,13 @@
       }
     });
 
+    /* Reputation leads; ground held and rating break the tie before the
+       name does. */
     var sorted = visibleGangs().slice().sort(function (a, b) {
-      return (counts[b.id] - counts[a.id]) || ((b.rating || 0) - (a.rating || 0));
+      return ((b.reputation || 0) - (a.reputation || 0)) ||
+             (counts[b.id] - counts[a.id]) ||
+             ((b.rating || 0) - (a.rating || 0)) ||
+             (a.name || '').localeCompare(b.name || '');
     });
 
     var body = document.getElementById('standings-body');
@@ -796,8 +809,7 @@
       r.gang = gang;
       return r;
     }).sort(function (x, y) {
-      return (y.fights - x.fights) || (y.called - x.called) ||
-             (x.gang.short || x.gang.name).localeCompare(y.gang.short || y.gang.name);
+      return byRep(x.gang, y.gang) || (y.fights - x.fights) || (y.called - x.called);
     });
   }
 
@@ -1088,7 +1100,7 @@
     var stats = h('div', 'gang-stats');
     [
       ['Rating', g.rating != null ? g.rating : '\u2014'],
-      ['Credits', g.credits != null ? g.credits : '\u2014'],
+      ['Stash', g.credits != null ? g.credits : '\u2014'],
       ['Rep', g.reputation != null ? g.reputation : '\u2014'],
       ['Income', incomeOf(g) + '/cycle']
     ].forEach(function (pair) {
@@ -1152,7 +1164,8 @@
       host.appendChild(h('p', 'detail-empty', 'No gangs in the data yet.'));
       return;
     }
-    var players = all;
+    /* an arbitrator's hidden gang stays off the page here too */
+    var players = visibleGangs();
 
     var head = h('div', 'plan-head');
     head.appendChild(h('h2', null, 'The gangs of the Hollow Reach'));
@@ -1165,12 +1178,12 @@
 
     var grid = h('div', 'gang-grid');
     players.slice().sort(function (a, b) {
-      return incomeOf(b) - incomeOf(a) || a.name.localeCompare(b.name);
+      return byRep(a, b) || incomeOf(b) - incomeOf(a);
     }).forEach(function (g) { grid.appendChild(gangCard(g)); });
     host.appendChild(grid);
 
     host.appendChild(h('p', 'hint plan-hint',
-      'Rating, credits and reputation are whatever the arbitrator last wrote into ' +
+      'Rating, stash and reputation are whatever the arbitrator last wrote into ' +
       'data/campaign.json. Income is worked out from the holdings listed here.'));
   }
 

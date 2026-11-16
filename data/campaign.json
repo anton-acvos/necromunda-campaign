@@ -240,7 +240,7 @@
     },
     {
       "rating": 1100,
-      "credits": 50,
+      "credits": 100,
       "reputation": 2,
       "motto": "",
       "id": "chymist-cult",
@@ -2501,6 +2501,12 @@
       ],
       "winner": "sumptown",
       "played": false,
+      "rewards": [
+        {
+          "gang": "chymist-cult",
+          "credits": 20
+        }
+      ],
       "summary": "Sumptown Industries called for the Corpse Farm and the Chymist Cult stood down rather than hold the gate. The vats are under Goliath management by the end of the shift."
     },
     {
@@ -2514,6 +2520,12 @@
       ],
       "winner": "resource-extraction",
       "played": false,
+      "rewards": [
+        {
+          "gang": "chymist-cult",
+          "credits": 30
+        }
+      ],
       "summary": "Second concession of the cycle. Resource Extraction LLC counted the crates on the dry landings, found nobody arguing, and filed the claim."
     }
   ]

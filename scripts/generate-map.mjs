@@ -752,7 +752,7 @@ const gateways = [
 
 const gangs = [
   { id: 'sumptown',            name: 'Sumptown Industries',               short: 'Sumptown',      house: 'House Goliath',      color: '#e03131' },
-  { id: 'chymist-cult',        name: "'Sola Dosis' Chymist Cult",         short: 'Sola Dosis',    house: 'House Escher',       color: '#9d7ad4', logo: 'assets/gangs/chymist-cult.webp', credits: 50, reputation: 2 },
+  { id: 'chymist-cult',        name: "'Sola Dosis' Chymist Cult",         short: 'Sola Dosis',    house: 'House Escher',       color: '#9d7ad4', logo: 'assets/gangs/chymist-cult.webp', credits: 100, reputation: 2 },
   { id: 'archeo-3',            name: 'Archeo-Acquisitions Team 3',        short: 'Archeo-3',      house: 'House Van Saar',     color: '#35a9c0' },
   { id: 'mycelium',            name: 'Mycelium Section',                  short: 'Mycelium',      house: 'House Delaque',      color: '#7d9683', player: 'Anton', logo: 'assets/gangs/mycelium.svg', credits: 30 },
   { id: 'precinct-22',         name: 'Precinct 22',                       short: 'Precinct 22',   house: 'Palanite Enforcers', color: '#e8c23a' },
@@ -867,6 +867,7 @@ const xs = drawn.map((p) => p[0]), ys = drawn.map((p) => p[1]);
       participants: ['sumptown', 'chymist-cult'],
       winner: 'sumptown',
       played: false,
+      rewards: [{ gang: 'chymist-cult', credits: 20 }],
       summary: 'Sumptown Industries called for the Corpse Farm and the Chymist Cult stood down rather than hold the gate. The vats are under Goliath management by the end of the shift.' },
 
     { id: 'b3-brass-stair',
@@ -876,6 +877,7 @@ const xs = drawn.map((p) => p[0]), ys = drawn.map((p) => p[1]);
       participants: ['resource-extraction', 'chymist-cult'],
       winner: 'resource-extraction',
       played: false,
+      rewards: [{ gang: 'chymist-cult', credits: 30 }],
       summary: 'Second concession of the cycle. Resource Extraction LLC counted the crates on the dry landings, found nobody arguing, and filed the claim.' }
   ]
 };
