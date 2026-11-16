@@ -134,7 +134,7 @@ const outer = [
   { id: 'grudgehold',         name: 'Grudgehold',             type: 'Settlement',            owner: 'bjorn-prospectors',    settlement: true,   income: 15, boon: 'Or recruit a ganger at a 25 credit discount', notes: 'Cut into the rock and ledgered to the last slate. Bjorn filed the claim first and has the paperwork to prove it.' },
   { id: 'holestead',          name: 'Holestead',              type: 'Settlement',            owner: 'resource-extraction',  settlement: true,   income: 15, boon: 'Or recruit a ganger at a 25 credit discount', notes: 'Company housing, company store, company arbitration. Resource Extraction filed second and disputes that it matters.' },
   { id: 'scrap-shoals',       name: 'The Scrap Shoals',       type: 'Mine Workings',         owner: 'resource-extraction',  settlement: false,  income: 20, boon: 'Or take two respirators', notes: 'Quarterly extraction targets are posted at the gate. Somebody has been correcting them in blood.' },
-  { id: 'brass-stair',        name: 'The Brass Stair',        type: 'Bullet Den',            owner: null,                   settlement: false,  contested: true,  income: 15, boon: 'Or recruit an Ammo-Jack at a 30 credit discount, if you have none', notes: 'The steps go down into the sump and keep going. Somebody has been stacking crates on the dry landings for a very long time.' },
+  { id: 'brass-stair',        name: 'The Brass Stair',        type: 'Bullet Den',            owner: 'resource-extraction',  settlement: false,  income: 15, boon: 'Or recruit an Ammo-Jack at a 30 credit discount, if you have none', notes: 'The steps go down into the sump and keep going. Somebody has been stacking crates on the dry landings for a very long time.' },
   { id: 'weeping-still',      name: 'The Weeping Still',      type: 'Synth Still',           owner: null,                   settlement: false,  income: 20, notes: 'Groundwater bleeds through the rockcrete in sheets and the condensers underneath catch every drop. What comes out the other end is sold as medicine.' },
   { id: 'quarantines-end',    name: "Quarantine's End",       type: 'Settlement',            owner: 'chymist-cult',         settlement: true,   income: 15, boon: 'Or recruit a ganger at a 25 credit discount', notes: 'A cracked crystalflex dome, sealed off for something nobody will name and unsealed by the Chymists, who insist the air is clean now.' },
   { id: 'the-still-rows',     name: 'The Still Rows',         type: 'Rogue Las Factoria',    owner: 'chymist-cult',         settlement: false,  income: 20, boon: 'Escher only: instead of the income, add two lasguns to the stash for free', effect: 'Faulty Machinery: at the start of each end phase, randomly select a fighter from each gang. If that fighter is active, they become suppressed.', notes: 'Condensers in rows the length of a dome, half of them re-tooled to stamp power cells. Sola Dosis insists the fumes are therapeutic and the lasguns are legal.' },
@@ -142,7 +142,7 @@ const outer = [
   { id: 'sunken-nave',        name: 'The Sunken Nave',        type: 'Settlement',            owner: 'mycelium',             settlement: true,   income: 15, boon: 'Or recruit a ganger at a 25 credit discount', notes: 'Cawdor built it, something else kept it. Mycelium Section took the crypts and left the nave to the candles.' },
   { id: 'ratgut-tunnels',    name: 'Ratgut Tunnels',         type: 'Bounty Den',            owner: 'mycelium',             settlement: false,  income: 25, notes: 'Not mapped, not mappable. Mycelium Section charges for guides and keeps a second ledger of who is worth money to somebody up-hive.' },
   { id: 'the-bonepipe',       name: 'The Bonepipe',           type: 'Rogue Doc Shop',        owner: 'chymist-cult',         settlement: false,  income: 15, boon: 'Or recruit a Rogue Doc at a 30 credit discount, if you have none', notes: 'The doc is good. The doc is also why several gangers answer to new names.' },
-  { id: 'harvest-yard',       name: 'The Harvest Yard',       type: 'Corpse Farm',           owner: null,                   settlement: false,  income: 25, contested: true, notes: 'Spools of cable taller than a Goliath, and the vats behind them. The yard takes what the Underhive has finished with and sends it up-hive as protein.' },
+  { id: 'harvest-yard',       name: 'The Harvest Yard',       type: 'Corpse Farm',           owner: 'sumptown',             settlement: false,  income: 25, notes: 'Spools of cable taller than a Goliath, and the vats behind them. The yard takes what the Underhive has finished with and sends it up-hive as protein.' },
 ];
 
 /* Twenty-two is structural: the ring below is laid out from this list, and
@@ -831,11 +831,11 @@ const xs = drawn.map((p) => p[0]), ys = drawn.map((p) => p[1]);
     { id: 'c1-escher-pipe',  cycle: 1, kind: 'challenge',  challenger: 'chymist-cult',      territory: 'the-bonepipe', defender: 'mycelium', status: 'settled', battle: 'b1-bonepipe' },
     { id: 'c1-bjorn-deep',   cycle: 1, kind: 'expedition', challenger: 'bjorn-prospectors', target: 'i-06',         defender: 'precinct-22', status: 'open',
       notes: 'Bjorn “H.C.L.F” filed for its prospecting permit late. Precinct 22 is going down after them, which is an enforcement action and not an expedition at all, whatever the paperwork says.' },
-    { id: 'c1-sumptown-yard', cycle: 1, kind: 'challenge',  challenger: 'sumptown',          territory: 'harvest-yard', defender: 'chymist-cult', status: 'open' },
+    { id: 'c1-sumptown-yard', cycle: 1, kind: 'challenge',  challenger: 'sumptown',          territory: 'harvest-yard', defender: 'chymist-cult', status: 'settled', battle: 'b2-harvest-yard' },
     { id: 'c1-archeo-deep',  cycle: 1, kind: 'expedition', challenger: 'archeo-3',          target: 'i-04',         defender: 'mycelium', status: 'open' },
     { id: 'c1-precinct-deep', cycle: 1, kind: 'expedition', challenger: 'precinct-22',      target: 'i-03',         defender: 'archeo-3', status: 'open' },
     { id: 'c1-mycelium-deep', cycle: 1, kind: 'expedition', challenger: 'mycelium',         target: 'i-07',         defender: 'bjorn-prospectors', status: 'open' },
-    { id: 'c1-resource-stair', cycle: 1, kind: 'challenge',  challenger: 'resource-extraction', territory: 'brass-stair', defender: 'chymist-cult', status: 'open' }
+    { id: 'c1-resource-stair', cycle: 1, kind: 'challenge',  challenger: 'resource-extraction', territory: 'brass-stair', defender: 'chymist-cult', status: 'settled', battle: 'b3-brass-stair' }
   ],
 
   /* The log. A challenge that nobody turned up for is still how ground
@@ -850,7 +850,25 @@ const xs = drawn.map((p) => p[0]), ys = drawn.map((p) => p[1]);
       /* nobody came, so nobody played: it settles the ground but counts
          as no battle fought for either side */
       played: false,
-      summary: 'The Chymist Cult called Mycelium Section out over the Rogue Doc. Mycelium Section did not come, and the doc has new patrons.' }
+      summary: 'The Chymist Cult called Mycelium Section out over the Rogue Doc. Mycelium Section did not come, and the doc has new patrons.' },
+
+    { id: 'b2-harvest-yard',
+      date: '2026-11-15',
+      scenario: 'Defence conceded',
+      territory: 'harvest-yard',
+      participants: ['sumptown', 'chymist-cult'],
+      winner: 'sumptown',
+      played: false,
+      summary: 'Sumptown Industries called for the Corpse Farm and the Chymist Cult stood down rather than hold the gate. The vats are under Goliath management by the end of the shift.' },
+
+    { id: 'b3-brass-stair',
+      date: '2026-11-15',
+      scenario: 'Defence conceded',
+      territory: 'brass-stair',
+      participants: ['resource-extraction', 'chymist-cult'],
+      winner: 'resource-extraction',
+      played: false,
+      summary: 'Second concession of the cycle. Resource Extraction LLC counted the crates on the dry landings, found nobody arguing, and filed the claim.' }
   ]
 };
 

@@ -1042,10 +1042,10 @@
       "ring": "ring",
       "type": "Bullet Den",
       "settlement": false,
-      "owner": null,
+      "owner": "resource-extraction",
       "income": 15,
       "boon": "Or recruit an Ammo-Jack at a 30 credit discount, if you have none",
-      "contested": true,
+      "contested": false,
       "bordersInner": true,
       "labelX": 1283.4,
       "labelY": 524.14,
@@ -1401,9 +1401,9 @@
       "ring": "ring",
       "type": "Corpse Farm",
       "settlement": false,
-      "owner": null,
+      "owner": "sumptown",
       "income": 25,
-      "contested": true,
+      "contested": false,
       "bordersInner": true,
       "labelX": 656.27,
       "labelY": 1243.17,
@@ -2414,7 +2414,8 @@
       "challenger": "sumptown",
       "territory": "harvest-yard",
       "defender": "chymist-cult",
-      "status": "open"
+      "status": "settled",
+      "battle": "b2-harvest-yard"
     },
     {
       "id": "c1-archeo-deep",
@@ -2450,7 +2451,8 @@
       "challenger": "resource-extraction",
       "territory": "brass-stair",
       "defender": "chymist-cult",
-      "status": "open"
+      "status": "settled",
+      "battle": "b3-brass-stair"
     }
   ],
   "battles": [
@@ -2466,6 +2468,32 @@
       "winner": "chymist-cult",
       "played": false,
       "summary": "The Chymist Cult called Mycelium Section out over the Rogue Doc. Mycelium Section did not come, and the doc has new patrons."
+    },
+    {
+      "id": "b2-harvest-yard",
+      "date": "2026-11-15",
+      "scenario": "Defence conceded",
+      "territory": "harvest-yard",
+      "participants": [
+        "sumptown",
+        "chymist-cult"
+      ],
+      "winner": "sumptown",
+      "played": false,
+      "summary": "Sumptown Industries called for the Corpse Farm and the Chymist Cult stood down rather than hold the gate. The vats are under Goliath management by the end of the shift."
+    },
+    {
+      "id": "b3-brass-stair",
+      "date": "2026-11-15",
+      "scenario": "Defence conceded",
+      "territory": "brass-stair",
+      "participants": [
+        "resource-extraction",
+        "chymist-cult"
+      ],
+      "winner": "resource-extraction",
+      "played": false,
+      "summary": "Second concession of the cycle. Resource Extraction LLC counted the crates on the dry landings, found nobody arguing, and filed the claim."
     }
   ]
 }
