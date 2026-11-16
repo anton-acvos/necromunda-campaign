@@ -5,7 +5,7 @@
     "edition": "N26",
     "arbitrator": "Anton",
     "cycle": 1,
-    "lastUpdated": "2026-11-15",
+    "lastUpdated": "2026-11-16",
     "phases": [
       {
         "id": "exploration",
@@ -228,84 +228,84 @@
   },
   "gangs": [
     {
+      "rating": 1100,
+      "credits": 0,
+      "reputation": 1,
+      "motto": "",
       "id": "sumptown",
       "name": "Sumptown Industries",
       "short": "Sumptown",
       "house": "House Goliath",
-      "color": "#e03131",
-      "rating": 1100,
-      "credits": 0,
-      "reputation": 1,
-      "motto": ""
+      "color": "#e03131"
     },
     {
+      "rating": 1100,
+      "credits": 50,
+      "reputation": 2,
+      "motto": "",
       "id": "chymist-cult",
       "name": "'Sola Dosis' Chymist Cult",
       "short": "Sola Dosis",
       "house": "House Escher",
       "color": "#9d7ad4",
-      "logo": "assets/gangs/chymist-cult.webp",
+      "logo": "assets/gangs/chymist-cult.webp"
+    },
+    {
       "rating": 1100,
       "credits": 0,
       "reputation": 1,
-      "motto": ""
-    },
-    {
+      "motto": "",
       "id": "archeo-3",
       "name": "Archeo-Acquisitions Team 3",
       "short": "Archeo-3",
       "house": "House Van Saar",
-      "color": "#35a9c0",
-      "rating": 1100,
-      "credits": 0,
-      "reputation": 1,
-      "motto": ""
+      "color": "#35a9c0"
     },
     {
+      "rating": 1100,
+      "credits": 30,
+      "reputation": 1,
+      "motto": "",
       "id": "mycelium",
       "name": "Mycelium Section",
       "short": "Mycelium",
       "house": "House Delaque",
       "color": "#7d9683",
       "player": "Anton",
-      "logo": "assets/gangs/mycelium.svg",
+      "logo": "assets/gangs/mycelium.svg"
+    },
+    {
       "rating": 1100,
       "credits": 0,
       "reputation": 1,
-      "motto": ""
-    },
-    {
+      "motto": "",
       "id": "precinct-22",
       "name": "Precinct 22",
       "short": "Precinct 22",
       "house": "Palanite Enforcers",
-      "color": "#e8c23a",
+      "color": "#e8c23a"
+    },
+    {
       "rating": 1100,
       "credits": 0,
       "reputation": 1,
-      "motto": ""
-    },
-    {
+      "motto": "",
       "id": "bjorn-prospectors",
       "name": "Bjorn \"H.C.L.F\" Prospectors Group",
       "short": "Bjorn H.C.L.F",
       "house": "Ironhead Squats",
-      "color": "#e8822c",
+      "color": "#e8822c"
+    },
+    {
       "rating": 1100,
       "credits": 0,
       "reputation": 1,
-      "motto": ""
-    },
-    {
+      "motto": "",
       "id": "resource-extraction",
       "name": "Resource Extraction LLC",
       "short": "Resource Ext.",
       "house": "Ironhead Squats",
-      "color": "#6f9c33",
-      "rating": 1100,
-      "credits": 0,
-      "reputation": 1,
-      "motto": ""
+      "color": "#6f9c33"
     }
   ],
   "gateways": [
@@ -2477,6 +2477,17 @@
       ],
       "winner": "chymist-cult",
       "played": false,
+      "rewards": [
+        {
+          "gang": "chymist-cult",
+          "credits": 50,
+          "rep": 1
+        },
+        {
+          "gang": "mycelium",
+          "credits": 30
+        }
+      ],
       "summary": "The Chymist Cult called Mycelium Section out over the Rogue Doc. Mycelium Section did not come, and the doc has new patrons."
     },
     {

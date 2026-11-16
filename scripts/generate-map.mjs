@@ -752,13 +752,13 @@ const gateways = [
 
 const gangs = [
   { id: 'sumptown',            name: 'Sumptown Industries',               short: 'Sumptown',      house: 'House Goliath',      color: '#e03131' },
-  { id: 'chymist-cult',        name: "'Sola Dosis' Chymist Cult",         short: 'Sola Dosis',    house: 'House Escher',       color: '#9d7ad4', logo: 'assets/gangs/chymist-cult.webp' },
+  { id: 'chymist-cult',        name: "'Sola Dosis' Chymist Cult",         short: 'Sola Dosis',    house: 'House Escher',       color: '#9d7ad4', logo: 'assets/gangs/chymist-cult.webp', credits: 50, reputation: 2 },
   { id: 'archeo-3',            name: 'Archeo-Acquisitions Team 3',        short: 'Archeo-3',      house: 'House Van Saar',     color: '#35a9c0' },
-  { id: 'mycelium',            name: 'Mycelium Section',                  short: 'Mycelium',      house: 'House Delaque',      color: '#7d9683', player: 'Anton', logo: 'assets/gangs/mycelium.svg' },
+  { id: 'mycelium',            name: 'Mycelium Section',                  short: 'Mycelium',      house: 'House Delaque',      color: '#7d9683', player: 'Anton', logo: 'assets/gangs/mycelium.svg', credits: 30 },
   { id: 'precinct-22',         name: 'Precinct 22',                       short: 'Precinct 22',   house: 'Palanite Enforcers', color: '#e8c23a' },
   { id: 'bjorn-prospectors',   name: 'Bjorn "H.C.L.F" Prospectors Group', short: 'Bjorn H.C.L.F', house: 'Ironhead Squats',    color: '#e8822c' },
   { id: 'resource-extraction', name: 'Resource Extraction LLC',           short: 'Resource Ext.', house: 'Ironhead Squats',    color: '#6f9c33' }
-].map((g) => ({ ...g, rating: 1100, credits: 0, reputation: 1, motto: '' }));
+].map((g) => ({ rating: 1100, credits: 0, reputation: 1, motto: '', ...g }));
 
 /* ---------- emit ---------- */
 
@@ -769,7 +769,7 @@ const data = {
     edition: 'N26',
     arbitrator: 'Anton',
     cycle: 1,
-    lastUpdated: '2026-11-15',
+    lastUpdated: '2026-11-16',
     /* The phase a cycle falls in is worked out from this plan, so there is
        only ever one number to change when the campaign moves on. */
     phases: [
@@ -852,6 +852,12 @@ const xs = drawn.map((p) => p[0]), ys = drawn.map((p) => p[1]);
       /* nobody came, so nobody played: it settles the ground but counts
          as no battle fought for either side */
       played: false,
+      /* rolled after the challenge settled: credits each, and the point of
+         reputation that goes with taking the ground */
+      rewards: [
+        { gang: 'chymist-cult', credits: 50, rep: 1 },
+        { gang: 'mycelium',     credits: 30 }
+      ],
       summary: 'The Chymist Cult called Mycelium Section out over the Rogue Doc. Mycelium Section did not come, and the doc has new patrons.' },
 
     { id: 'b2-harvest-yard',

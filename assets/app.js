@@ -902,6 +902,28 @@
       var outcome = w ? (w.short || w.name) + ' took it' : 'no decisive result';
       body.appendChild(h('p', 'log-who', who ? who + ' — ' + outcome : outcome));
 
+      /* what each side walked away with, where it has been rolled */
+      if ((b.rewards || []).length) {
+        var paid = h('p', 'log-paid');
+        b.rewards.forEach(function (r, n) {
+          if (n) paid.appendChild(h('span', 'log-sep', '\u00b7'));
+          var side = h('span', 'log-paid-one');
+          var gg = gangOf(r.gang);
+          if (gg) {
+            var sw = h('span', 'swatch');
+            sw.style.background = gg.color;
+            side.appendChild(sw);
+          }
+          var bits = [];
+          if (r.credits != null) bits.push(r.credits + ' cr');
+          if (r.rep) bits.push((r.rep > 0 ? '+' : '') + r.rep + ' rep');
+          side.appendChild(document.createTextNode(
+            (gg ? (gg.short || gg.name) : r.gang) + ' ' + bits.join(', ')));
+          paid.appendChild(side);
+        });
+        body.appendChild(paid);
+      }
+
       if (b.summary) body.appendChild(h('p', 'log-sum', b.summary));
 
       row.appendChild(body);

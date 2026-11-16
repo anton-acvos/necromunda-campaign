@@ -224,6 +224,15 @@ for (const [i, c] of (data.challenges ?? []).entries()) {
 
 /* --- battles --- */
 for (const [i, b] of (data.battles ?? []).entries()) {
+  for (const r of b.rewards ?? []) {
+    if (!gangIds.has(r.gang)) err(`battles[${i}] (${b.id}).rewards: unknown gang id "${r.gang}"`);
+    if (r.credits != null && typeof r.credits !== 'number') {
+      err(`battles[${i}] (${b.id}).rewards: credits must be a number`);
+    }
+    if (r.rep != null && typeof r.rep !== 'number') {
+      err(`battles[${i}] (${b.id}).rewards: rep must be a number`);
+    }
+  }
   if (b.played != null && typeof b.played !== 'boolean') {
     err(`battles[${i}] (${b.id}): played must be true or false`);
   }
