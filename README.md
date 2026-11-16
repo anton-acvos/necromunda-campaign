@@ -7,7 +7,11 @@ build step, no framework: a static page that reads one JSON file.
 - **Two sections** — the charted ring, and an uncharted deep nobody has surveyed
 - **Forty territories** — two starting and three unclaimed per player
 - **Standings** — territories held, gang rating, reputation
-- **Campaign tab** — the phase plan, with past, current and coming cycles marked
+- **Campaign tab** — the phase plan, with past, current and coming cycles marked,
+  the cycle's challenges and count, and the battle log
+- **Archeotech tab** — the pool an expedition can come back up with
+  (`archeotech` in the data; `holder` names the gang that found a piece, or
+  null while it is still down there)
 - **Gangs tab** — one card per gang: rating, stash, reputation, income a cycle,
   and every holding it owns with that holding's type and boon
 - **Discord** — a GitHub Action announces every change to the campaign channel

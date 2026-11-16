@@ -309,7 +309,7 @@
   /* ---------- selection ---------- */
 
   function select(id, updateHash) {
-    if (id === 'campaign' || id === 'gangs') {
+    if (id === 'campaign' || id === 'gangs' || id === 'archeotech') {
       showTab(id);
       if (updateHash && window.location.hash !== '#' + id) history.replaceState(null, '', '#' + id);
       return;
@@ -754,6 +754,86 @@
     return head + (w ? (w.short || w.name) + ' took it' : 'no decisive result');
   }
 
+  /* ---------- what is down there ----------
+
+     The pool an expedition can come back up with. A piece that has been
+     found says who holds it; the rest are still in the dark, and the page
+     does not say which tile any of them is under, because nobody knows
+     until a gang walks it. */
+  function profileLine(p) {
+    if (!p) return null;
+    var bits = [];
+    if (p.range) bits.push(p.range);
+    if (p.str) bits.push(p.str);
+    if (p.ap) bits.push('AP' + p.ap);
+    if (p.lethality != null) bits.push('L' + p.lethality);
+    return bits.join('  \u00b7  ');
+  }
+
+  function drawRelics() {
+    var host = document.getElementById('panel-archeotech');
+    host.textContent = '';
+    var pool = state.data.archeotech || [];
+
+    var head = h('div', 'plan-head');
+    head.appendChild(h('h2', null, 'Archeotech of the deep'));
+    var found = pool.filter(function (r) { return r.holder; }).length;
+    head.appendChild(h('p', 'plan-where',
+      pool.length + ' pieces catalogued \u2014 ' +
+      (found ? found + ' recovered, ' + (pool.length - found) + ' still down there'
+             : 'none recovered yet')));
+    host.appendChild(head);
+
+    var wrap = h('section', 'relics');
+    if (!pool.length) {
+      host.appendChild(h('p', 'detail-empty', 'Nothing catalogued yet.'));
+      return;
+    }
+
+    wrap.appendChild(h('p', 'relics-intro',
+      'An expedition that wins its fight comes back up with one of these. ' +
+      'Nothing says which holding any of it is under \u2014 nobody knows until ' +
+      'somebody walks the ground.'));
+
+    var grid = h('div', 'relic-grid');
+    pool.forEach(function (r) {
+      var held = r.holder ? gangOf(r.holder) : null;
+      var card = h('article', 'relic' + (held ? ' is-held' : ''));
+
+      var head = h('div', 'relic-head');
+      head.appendChild(h('h4', 'relic-name', r.name));
+      if (r.kind) head.appendChild(h('span', 'tag relic-kind', r.kind));
+      card.appendChild(head);
+
+      var line = profileLine(r.profile);
+      if (line) card.appendChild(h('p', 'relic-stats', line));
+      if (r.profile && (r.profile.traits || []).length) {
+        card.appendChild(h('p', 'relic-traits', r.profile.traits.join(', ')));
+      }
+      if (r.effect) card.appendChild(h('p', 'relic-effect', r.effect));
+
+      var who = h('p', 'relic-who');
+      if (held) {
+        var sw = h('span', 'swatch');
+        sw.style.background = held.color;
+        who.appendChild(sw);
+        who.appendChild(document.createTextNode('Held by ' + (held.short || held.name)));
+      } else {
+        who.classList.add('is-lost');
+        who.appendChild(document.createTextNode('Still down there'));
+      }
+      card.appendChild(who);
+
+      grid.appendChild(card);
+    });
+    wrap.appendChild(grid);
+    host.appendChild(wrap);
+
+    host.appendChild(h('p', 'hint plan-hint',
+      'A piece moves to a gang by setting "holder" on it in data/campaign.json. ' +
+      'Until then it reads as still down there, wherever there is.'));
+  }
+
   /* ---------- the count, per cycle ----------
 
      Two numbers a gang can plan around: how many challenges they called,
@@ -1190,8 +1270,10 @@
   /* ---------- tabs ---------- */
 
   function showTab(name) {
-    var panels = { map: 'panel-map', campaign: 'panel-campaign', gangs: 'panel-gangs' };
-    var tabs = { map: 'tab-map', campaign: 'tab-campaign', gangs: 'tab-gangs' };
+    var panels = { map: 'panel-map', campaign: 'panel-campaign', gangs: 'panel-gangs',
+                   archeotech: 'panel-archeotech' };
+    var tabs = { map: 'tab-map', campaign: 'tab-campaign', gangs: 'tab-gangs',
+                 archeotech: 'tab-archeotech' };
     Object.keys(panels).forEach(function (key) {
       var on = key === name;
       document.getElementById(panels[key]).hidden = !on;
@@ -1241,15 +1323,17 @@
     drawStandings();
     drawTimeline();
     drawGangs();
+    drawRelics();
 
     document.getElementById('tab-map').addEventListener('click', function () {
       showTab('map');
-      if (window.location.hash === '#campaign') {
+      if (['#campaign', '#gangs', '#archeotech'].indexOf(window.location.hash) >= 0) {
         history.replaceState(null, '', state.selected ? '#' + state.selected : window.location.pathname);
       }
     });
     document.getElementById('tab-campaign').addEventListener('click', function () { select('campaign', true); });
     document.getElementById('tab-gangs').addEventListener('click', function () { select('gangs', true); });
+    document.getElementById('tab-archeotech').addEventListener('click', function () { select('archeotech', true); });
 
     var fromHash = window.location.hash.replace(/^#/, '');
     if (fromHash) select(fromHash, false);

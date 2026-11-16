@@ -222,6 +222,23 @@ for (const [i, c] of (data.challenges ?? []).entries()) {
   }
 }
 
+/* --- archeotech --- */
+const relicIds = new Set();
+for (const [i, r] of (data.archeotech ?? []).entries()) {
+  const at = `archeotech[${i}]`;
+  if (!r.id) err(`${at}: no id`);
+  else if (relicIds.has(r.id)) err(`${at}: duplicate id "${r.id}"`);
+  else relicIds.add(r.id);
+  if (!r.name) err(`${at} (${r.id}): no name`);
+  if (r.holder != null && !gangIds.has(r.holder)) {
+    err(`${at} (${r.id}).holder: unknown gang id "${r.holder}"`);
+  }
+  if (!r.effect && !r.profile) warn(`${at} (${r.id}): neither a profile nor an effect`);
+  if (r.profile && r.profile.lethality != null && typeof r.profile.lethality !== 'number') {
+    err(`${at} (${r.id}).profile.lethality: must be a number`);
+  }
+}
+
 /* --- battles --- */
 for (const [i, b] of (data.battles ?? []).entries()) {
   for (const r of b.rewards ?? []) {

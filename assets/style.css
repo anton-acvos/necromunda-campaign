@@ -713,6 +713,71 @@ body {
   max-width: 70ch;
 }
 
+.relics { margin: 0; }
+
+.relics-intro {
+  margin: 0 0 14px;
+  font-size: 0.84rem;
+  line-height: 1.5;
+  color: var(--ink-dim);
+  max-width: 70ch;
+}
+
+.relic-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 12px;
+}
+
+.relic {
+  border: 1px solid var(--line);
+  background: var(--bg-raised);
+  padding: 13px 15px 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+
+.relic.is-held { border-color: var(--line-bright); }
+
+.relic-head { display: flex; align-items: baseline; justify-content: space-between; gap: 10px; }
+.relic-name { margin: 0; font-size: 0.95rem; letter-spacing: 0.01em; }
+.relic-kind { flex: none; }
+
+.relic-stats {
+  margin: 0;
+  font-family: var(--mono);
+  font-size: 0.78rem;
+  color: var(--ink);
+}
+
+.relic-traits {
+  margin: 0;
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  color: var(--ink-faint);
+}
+
+.relic-effect {
+  margin: 0;
+  font-size: 0.84rem;
+  line-height: 1.5;
+  color: var(--ink-dim);
+}
+
+.relic-who {
+  margin: 4px 0 0;
+  font-size: 0.74rem;
+  font-family: var(--mono);
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  color: var(--ink-dim);
+}
+
+.relic-who.is-lost { color: var(--ink-faint); font-style: italic; }
+.relic-who .swatch { margin: 0; }
+
 .log { margin: 26px 0 0; }
 
 .log-head {

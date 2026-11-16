@@ -2386,6 +2386,116 @@
       "notes": null
     }
   ],
+  "archeotech": [
+    {
+      "id": "voidshell-harness",
+      "name": "The Voidshell Harness",
+      "kind": "Wargear",
+      "holder": null,
+      "effect": "Once per battle, take a 2+ save against a single attack. This save takes priority over the core rules for saves."
+    },
+    {
+      "id": "time-sink",
+      "name": "The Time Sink",
+      "kind": "Wargear",
+      "holder": null,
+      "effect": "Any enemy fighter within Engagement range suffers −1 WS. Time runs slow around the bearer, and it is not pleasant to stand near."
+    },
+    {
+      "id": "conversion-eradicator",
+      "name": "Conversion Eradicator",
+      "kind": "Personal equipment",
+      "holder": null,
+      "effect": "Every ranged weapon carried by this fighter gains +1 Strength and +1 AP, and becomes unstable."
+    },
+    {
+      "id": "hagioscope",
+      "name": "Hagioscope",
+      "kind": "Wargear",
+      "holder": null,
+      "effect": "Before the battle, nominate one enemy fighter to be scanned. Gain +1 to hit against that fighter until the end of the battle."
+    },
+    {
+      "id": "psychofamile-pheromones",
+      "name": "Psychofamile Pheromones",
+      "kind": "One-shot",
+      "holder": null,
+      "effect": "Target an enemy fighter. For one round they are treated as a friendly model."
+    },
+    {
+      "id": "grav-cannon",
+      "name": "Grav Cannon",
+      "kind": "Weapon",
+      "holder": null,
+      "profile": {
+        "range": "12\"/24\"",
+        "lethality": 3,
+        "traits": [
+          "Heavy",
+          "Ammo(5+)",
+          "Blast(5\")",
+          "Graviton Pulse"
+        ]
+      }
+    },
+    {
+      "id": "taser-goad",
+      "name": "Taser Goad",
+      "kind": "Weapon",
+      "holder": null,
+      "profile": {
+        "range": "E",
+        "str": "S+1",
+        "lethality": 1,
+        "traits": [
+          "Melee",
+          "Shock(5+)",
+          "Concussive(5+)"
+        ]
+      }
+    },
+    {
+      "id": "servo-arc-claw",
+      "name": "Servo-arc Claw",
+      "kind": "Weapon",
+      "holder": null,
+      "profile": {
+        "range": "E",
+        "str": "S+2",
+        "ap": "1",
+        "lethality": 2,
+        "traits": [
+          "Unwieldy",
+          "Shock(5+)",
+          "Rending(5+)",
+          "Damage(2)"
+        ]
+      }
+    },
+    {
+      "id": "servo-chirurgic-claw",
+      "name": "Servo-chirurgic Claw",
+      "kind": "Weapon",
+      "holder": null,
+      "profile": {
+        "range": "E",
+        "str": "S",
+        "lethality": 1,
+        "traits": [
+          "Unwieldy",
+          "Rending(6+)"
+        ]
+      },
+      "effect": "Blessed Augmetic Surgery (Double) — choose a friendly Seriously Injured fighter within 1\". That fighter is no longer Seriously Injured and regains 1 lost Wound."
+    },
+    {
+      "id": "archaeotoaster",
+      "name": "Archaeotoaster",
+      "kind": "Curio",
+      "holder": null,
+      "effect": "A genuine bread-toasting machine out of the Dark Age of Technology. It does nothing of any value, and everybody wants one. Gain +1 reputation."
+    }
+  ],
   "challenges": [
     {
       "id": "c1-escher-pipe",
