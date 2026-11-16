@@ -46,7 +46,9 @@ Takeover Phase      cycles 9–11
 Campaign Wrap-up    cycle  12
 ```
 
-Each player may issue one challenge per cycle. The validator fails the build if
+Each player may issue one challenge per cycle, and the arbitrator may allow a
+second when concessions leave the cycle light — such a challenge carries a
+`notes` line saying so. The validator fails the build if
 `cycle` runs past the end of the plan, and the Discord notifier announces both
 a new cycle and a new phase.
 

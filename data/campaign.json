@@ -2403,9 +2403,9 @@
       "kind": "expedition",
       "challenger": "bjorn-prospectors",
       "target": "i-06",
-      "defender": "precinct-22",
+      "defender": "resource-extraction",
       "status": "open",
-      "notes": "Bjorn “H.C.L.F” filed for its prospecting permit late. Precinct 22 is going down after them, which is an enforcement action and not an expedition at all, whatever the paperwork says."
+      "notes": "The two prospecting outfits hold ground that touches at Holestead, and the tunnel they both filed on runs under it. Resource Extraction LLC were already down there, with a survey crew and a prior claim they are happy to read aloud."
     },
     {
       "id": "c1-sumptown-yard",
@@ -2453,6 +2453,16 @@
       "defender": "chymist-cult",
       "status": "settled",
       "battle": "b3-brass-stair"
+    },
+    {
+      "id": "c1-precinct-rustfall",
+      "cycle": 1,
+      "kind": "challenge",
+      "challenger": "precinct-22",
+      "territory": "rustfall-row",
+      "defender": "sumptown",
+      "status": "open",
+      "notes": "A second call from Precinct 22 this cycle, which is one more than the rules allow. Two concessions left half the Reach with nothing to do, so the arbitrator let it stand."
     }
   ],
   "battles": [

@@ -632,7 +632,8 @@
     host.appendChild(renderLog());
 
     var foot = h('p', 'hint plan-hint',
-      'Each player may issue one challenge per cycle. The arbitrator moves the campaign on by ' +
+      'Each player may issue one challenge per cycle, and the arbitrator may allow another ' +
+      'when a cycle runs light. The arbitrator moves the campaign on by ' +
       'raising "cycle" in data/campaign.json.');
     host.appendChild(foot);
   }
