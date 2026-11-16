@@ -847,6 +847,9 @@ const xs = drawn.map((p) => p[0]), ys = drawn.map((p) => p[1]);
       territory: 'the-bonepipe',
       participants: ['chymist-cult', 'mycelium'],
       winner: 'chymist-cult',
+      /* nobody came, so nobody played: it settles the ground but counts
+         as no battle fought for either side */
+      played: false,
       summary: 'The Chymist Cult called Mycelium Section out over the Rogue Doc. Mycelium Section did not come, and the doc has new patrons.' }
   ]
 };

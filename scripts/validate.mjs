@@ -224,6 +224,9 @@ for (const [i, c] of (data.challenges ?? []).entries()) {
 
 /* --- battles --- */
 for (const [i, b] of (data.battles ?? []).entries()) {
+  if (b.played != null && typeof b.played !== 'boolean') {
+    err(`battles[${i}] (${b.id}): played must be true or false`);
+  }
   const at = `battles[${i}]`;
   if (b.date && !/^\d{4}-\d{2}-\d{2}$/.test(b.date)) err(`${at}.date: expected YYYY-MM-DD`);
   if (b.territory && !terrIds.has(b.territory)) err(`${at}.territory: unknown id "${b.territory}"`);

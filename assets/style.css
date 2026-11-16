@@ -651,6 +651,68 @@ body {
 
 /* ---------- the log ---------- */
 
+/* the cycle and its count, side by side until there is no room */
+.cycle-cols {
+  margin: 26px 0 0;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 330px;
+  gap: 28px;
+  align-items: start;
+}
+
+@media (max-width: 1000px) {
+  .cycle-cols { grid-template-columns: minmax(0, 1fr); gap: 22px; }
+}
+
+.tally { margin: 0; }
+.cycle-cols .slate { margin: 0; }
+
+.tally-head {
+  margin: 0 0 10px;
+  font-size: 0.78rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+}
+
+.tally-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.88rem;
+}
+
+.tally-row > * {
+  padding: 6px 10px;
+  border-bottom: 1px solid var(--line);
+  text-align: left;
+}
+
+.tally-row.is-head > * {
+  font-family: var(--mono);
+  font-size: 0.68rem;
+  font-weight: 400;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+}
+
+.tally-row.is-idle .tally-gang,
+.tally-row.is-idle .tally-num { color: var(--ink-faint); }
+
+.tally-gang { display: flex; align-items: center; gap: 8px; }
+.tally-gang .swatch { margin: 0; }
+
+.tally-num { font-family: var(--mono); width: 68px; text-align: right; white-space: nowrap; }
+.tally-left { display: block; color: var(--ink-faint); font-size: 0.66rem; }
+
+.tally-foot {
+  margin: 10px 0 0;
+  font-size: 0.78rem;
+  line-height: 1.45;
+  color: var(--ink-faint);
+  max-width: 70ch;
+}
+
 .log { margin: 26px 0 0; }
 
 .log-head {

@@ -622,7 +622,13 @@
     });
     host.appendChild(track);
 
-    host.appendChild(renderSlate());
+    /* The cycle reads left to right: what was called, and what that adds
+       up to per gang. Side by side because they are the same question
+       asked two ways, and because the count is short. */
+    var cols = h('div', 'cycle-cols');
+    cols.appendChild(renderSlate());
+    cols.appendChild(renderTally());
+    host.appendChild(cols);
     host.appendChild(renderLog());
 
     var foot = h('p', 'hint plan-hint',
@@ -732,6 +738,118 @@
     var w = b.winner ? gangOf(b.winner) : null;
     var head = b.scenario ? b.scenario + ' \u2014 ' : '';
     return head + (w ? (w.short || w.name) + ' took it' : 'no decisive result');
+  }
+
+  /* ---------- the count, per cycle ----------
+
+     Two numbers a gang can plan around: how many challenges they called,
+     and how many games that leaves them holding dice for. Calling a fight
+     and being called out are both games, so the second number counts a
+     gang on either side of one.
+
+     A challenge nobody turned up for was still called, so it counts in
+     the first column and not the second: the log entry carries
+     played: false and the count reads it off there rather than guessing
+     from the scenario name. */
+  function wasPlayed(c) {
+    if ((c.status || 'open') !== 'settled') return true;   /* still to come */
+    var b = c.battle ? battleOf(c.battle) : null;
+    return !b || b.played !== false;
+  }
+
+  function cycleOf(c) {
+    return c.cycle == null ? (state.data.campaign || {}).cycle : c.cycle;
+  }
+
+  /* Newest cycle first: the one being played is the one people are
+     counting, and finished cycles stay underneath it. */
+  function cyclesCalled() {
+    var seen = [];
+    (state.data.challenges || []).forEach(function (c) {
+      var n = cycleOf(c);
+      if (n != null && seen.indexOf(n) < 0) seen.push(n);
+    });
+    return seen.sort(function (x, y) { return y - x; });
+  }
+
+  function tallyFor(cycle) {
+    var rows = {};
+    function row(id) {
+      if (!rows[id]) rows[id] = { id: id, called: 0, fights: 0, done: 0 };
+      return rows[id];
+    }
+    (state.data.challenges || []).forEach(function (c) {
+      if (cycleOf(c) !== cycle) return;
+      row(c.challenger).called++;
+      if (!wasPlayed(c)) return;
+      var settled = (c.status || 'open') === 'settled';
+      [c.challenger, c.defender].forEach(function (id) {
+        if (!id) return;
+        var r = row(id);
+        r.fights++;
+        if (settled) r.done++;
+      });
+    });
+    return visibleGangs().map(function (gang) {
+      var r = rows[gang.id] || { id: gang.id, called: 0, fights: 0, done: 0 };
+      r.gang = gang;
+      return r;
+    }).sort(function (x, y) {
+      return (y.fights - x.fights) || (y.called - x.called) ||
+             (x.gang.short || x.gang.name).localeCompare(y.gang.short || y.gang.name);
+    });
+  }
+
+  function renderTally() {
+    var wrap = h('section', 'tally');
+    var cycles = cyclesCalled();
+    if (!cycles.length) return wrap;
+
+    cycles.forEach(function (n) {
+      wrap.appendChild(h('h3', 'tally-head', 'Cycle ' + n + ' \u2014 games each gang has'));
+
+      var table = h('table', 'tally-table');
+      var head = h('tr', 'tally-row is-head');
+      head.appendChild(h('th', 'tally-gang', 'Gang'));
+      head.appendChild(h('th', 'tally-num', 'Called'));
+      head.appendChild(h('th', 'tally-num', 'Games'));
+      var thead = h('thead'); thead.appendChild(head);
+      table.appendChild(thead);
+
+      var body = h('tbody');
+      tallyFor(n).forEach(function (r) {
+        var tr = h('tr', 'tally-row' + (r.fights ? '' : ' is-idle'));
+
+        var who = h('td', 'tally-gang');
+        var sw = h('span', 'swatch');
+        sw.style.background = r.gang.color;
+        who.appendChild(sw);
+        who.appendChild(document.createTextNode(r.gang.short || r.gang.name));
+        tr.appendChild(who);
+
+        tr.appendChild(h('td', 'tally-num', String(r.called)));
+
+        var games = h('td', 'tally-num', String(r.fights));
+        if (r.fights) {
+          var left = r.fights - r.done;
+          games.title = r.done + ' played, ' + left + ' still to fight';
+          if (left && r.done) {
+            games.appendChild(h('span', 'tally-left', ' (' + r.done + ' played)'));
+          }
+        }
+        tr.appendChild(games);
+
+        body.appendChild(tr);
+      });
+      table.appendChild(body);
+      wrap.appendChild(table);
+    });
+
+    wrap.appendChild(h('p', 'tally-foot',
+      'Called: challenges and expeditions a gang issued. Games: every fight ' +
+      'they are in, on either side. A declined challenge was called, but ' +
+      'nobody played it.'));
+    return wrap;
   }
 
   /* The log, under the phase track. Brief on purpose: when, what, who,
