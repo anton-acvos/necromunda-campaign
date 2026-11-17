@@ -76,6 +76,16 @@
     return (state.data.territories || []).filter(function (t) { return t.section === 'inner'; });
   }
 
+  /* An expedition names a deep holding before anyone has walked it, so the
+     map has to say which cells are spoken for. A settled one drops off the
+     map: the mark is about what is still to be fought over. */
+  function expeditionsOn(id) {
+    return (state.data.challenges || []).filter(function (c) {
+      return c.kind === 'expedition' && c.target === id &&
+             (c.status || 'open') !== 'settled';
+    });
+  }
+
   function displayName(t) {
     return t.name || t.designation || t.id;
   }
@@ -201,13 +211,26 @@
     innerTerritories().forEach(function (t) {
       if (!t.polygon) return;
       var g = ownerOf(t);
+      var bids = expeditionsOn(t.id);
+      var bidder = bids.length ? gangOf(bids[0].challenger) : null;
       var group = el('g', {
-        class: 'territory is-deep',
+        class: 'territory is-deep' + (bids.length ? ' is-target' : ''),
         'data-id': t.id,
         tabindex: '0',
         role: 'button',
-        'aria-label': (t.designation || t.id) + ', unsurveyed'
+        'aria-label': (t.designation || t.id) + ', unsurveyed' +
+          (bids.length ? ', expedition target' : '')
       });
+
+      /* A hover tooltip, because the coloured outline alone does not say
+         whose expedition it is. */
+      if (bids.length) {
+        group.appendChild(el('title', {}, bids.map(function (c) {
+          var ch = gangOf(c.challenger), df = gangOf(c.defender);
+          return 'Expedition: ' + (ch ? ch.name : c.challenger) +
+                 (df ? ' against ' + df.name : ', nobody paired with it yet');
+        }).join('\n')));
+      }
 
       group.appendChild(el('path', {
         d: polygonPath(t.polygon),
@@ -222,13 +245,32 @@
       });
       gInner.appendChild(group);
 
+      /* The outline goes in the label layer so it sits over the fog; in
+         the cell layer the fog would wash it out. */
+      if (bids.length) {
+        gLabels.appendChild(el('path', {
+          d: polygonPath(t.polygon),
+          class: 'deep-target',
+          stroke: bidder ? bidder.color : 'var(--warn)'
+        }));
+      }
+
       gLabels.appendChild(el('text', {
         x: t.labelX, y: t.labelY - 1, class: 'deep-name'
       }, t.designation || t.id));
+      var subY = t.labelY + 14;
       if (g) {
         gLabels.appendChild(el('text', {
-          x: t.labelX, y: t.labelY + 14, class: 'deep-sub'
+          x: t.labelX, y: subY, class: 'deep-sub'
         }, g.short || g.house));
+        subY += 13;
+      }
+      if (bids.length) {
+        gLabels.appendChild(el('text', {
+          x: t.labelX, y: subY, class: 'deep-bid',
+          fill: bidder ? bidder.color : 'var(--warn)'
+        }, bids.length > 1 ? bids.length + ' expeditions'
+                           : '\u25b8 ' + (bidder ? (bidder.short || bidder.house) : 'expedition')));
       }
     });
 
@@ -359,6 +401,9 @@
     if (t.type) head.appendChild(h('span', 'tag', t.type));
     if (t.settlement) head.appendChild(h('span', 'tag settlement', 'Settlement'));
     if (t.section === 'inner') head.appendChild(h('span', 'tag unsurveyed', 'Unsurveyed'));
+    if (t.section === 'inner' && expeditionsOn(t.id).length) {
+      head.appendChild(h('span', 'tag target', 'Expedition target'));
+    }
     if (t.contested) head.appendChild(h('span', 'tag contested', 'Contested'));
     box.appendChild(head);
 
@@ -378,6 +423,13 @@
     if (t.section === 'inner') {
       box.appendChild(h('p', 'notes',
         'The ground is charted and nothing else is. What this holding is, what it is worth and whatever already lives in it all get written down the first time a gang walks it.'));
+      expeditionsOn(t.id).forEach(function (c) {
+        var ch = gangOf(c.challenger), df = gangOf(c.defender);
+        box.appendChild(h('p', 'notes is-bid',
+          (ch ? ch.name : c.challenger) + ' are going down for it' +
+          (c.cycle != null ? ' in cycle ' + c.cycle : '') + '. ' +
+          (df ? (df.name + ' drew the defence.') : 'Nobody paired with it yet.')));
+      });
       box.appendChild(neighbourNav(t));
       return;
     }
@@ -443,9 +495,14 @@
     box.appendChild(head);
 
     var list = innerTerritories();
+    var spoken = list.filter(function (t) { return expeditionsOn(t.id).length; });
     box.appendChild(kvList([
       ['Holdings', list.length + ' known to exist, none surveyed'],
-      ['Ways in', (state.data.gateways || []).length + ' found so far']
+      ['Ways in', (state.data.gateways || []).length + ' found so far'],
+      ['Spoken for', spoken.length
+        ? spoken.map(function (t) { return t.designation || t.id; }).join(', ') +
+          ' \u2014 expeditions named them this cycle'
+        : null]
     ]));
 
     if (inner.blurb) box.appendChild(h('p', 'notes', inner.blurb));

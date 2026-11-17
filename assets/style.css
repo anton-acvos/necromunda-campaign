@@ -233,6 +233,32 @@ body {
   stroke-linejoin: round;
 }
 
+/* A holding an expedition has named. The outline and the name under it are
+   the challenger's colour, so the two read as one mark. */
+.deep-target {
+  fill: none;
+  stroke-width: 3;
+  stroke-dasharray: 9 7;
+  stroke-linejoin: round;
+  opacity: 0.9;
+  pointer-events: none;
+}
+
+.territory.is-deep.is-target .deep-shape { fill: #1f2639; }
+
+.deep-bid {
+  font-size: 11px;
+  font-weight: 650;
+  text-anchor: middle;
+  font-family: var(--mono);
+  letter-spacing: 0.04em;
+  pointer-events: none;
+  paint-order: stroke;
+  stroke: #10131c;
+  stroke-width: 3.5;
+  stroke-linejoin: round;
+}
+
 .deep-sub {
   font-size: 11px;
   fill: #7e88ab;
@@ -883,6 +909,7 @@ body {
 .tag.contested { border-color: #6b5520; background: #2a2113; color: var(--warn); }
 .tag.settlement { border-color: #5a4a30; color: #e6d3ad; }
 .tag.unsurveyed { border-color: #3c445e; background: #171c28; color: var(--deep); }
+.tag.target { border-color: #6b5520; background: #2a2113; color: var(--warn); }
 .tag.is-open { border-color: #6b5520; color: var(--warn); }
 .tag.is-done { border-color: var(--line-bright); color: var(--ink-faint); }
 
@@ -912,6 +939,8 @@ body {
 }
 
 .kv > div > dd { margin: 0; font-size: 0.9rem; }
+
+.notes.is-bid { color: var(--ink-dim); border-left: 2px solid var(--line-bright); padding-left: 10px; }
 
 .notes {
   margin: 13px 0 0;
