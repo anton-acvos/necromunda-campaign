@@ -229,8 +229,8 @@
   "gangs": [
     {
       "rating": 1100,
-      "credits": 0,
-      "reputation": 1,
+      "credits": 60,
+      "reputation": 2,
       "motto": "",
       "id": "sumptown",
       "name": "Sumptown Industries",
@@ -2647,6 +2647,11 @@
       "winner": "sumptown",
       "played": false,
       "rewards": [
+        {
+          "gang": "sumptown",
+          "credits": 60,
+          "rep": 1
+        },
         {
           "gang": "chymist-cult",
           "credits": 20
