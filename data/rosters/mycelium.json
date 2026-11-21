@@ -1,0 +1,487 @@
+{
+  "gang": "mycelium",
+  "updated": "2026-11-20",
+  "note": "Hand-kept. The generator does not touch this file.",
+  "fighters": [
+    {
+      "id": 1,
+      "name": "Slippery Jack",
+      "archetype": "Master of Shadow",
+      "keywords": [
+        "Leader",
+        "Champion",
+        "Fighter",
+        "Wyrd"
+      ],
+      "rating": 235,
+      "stats": [
+        "5\"",
+        "3+",
+        "3+",
+        "3",
+        "3",
+        "3",
+        "4",
+        "3",
+        "5+",
+        "8",
+        "8",
+        "9",
+        "8"
+      ],
+      "weapons": [
+        {
+          "name": "Flechette pistol",
+          "sr": "4\"",
+          "lr": "12\"",
+          "str": "-",
+          "ap": "-",
+          "l": "1",
+          "traits": [
+            "Light",
+            "Rapid Fire (1)",
+            "Toxin (3+)"
+          ]
+        },
+        {
+          "name": "Stiletto knife",
+          "sr": "E",
+          "lr": "-",
+          "str": "-",
+          "ap": "-",
+          "l": "1",
+          "traits": [
+            "Melee",
+            "Toxin (3+)"
+          ]
+        }
+      ],
+      "skills": [
+        "A Perfect Void",
+        "Fast Shot",
+        "Inspiring"
+      ],
+      "rules": [
+        "Master of Whispers"
+      ],
+      "wargear": [],
+      "status": null
+    },
+    {
+      "id": 2,
+      "name": "Destroying Angel",
+      "archetype": "Nacht-Ghul",
+      "keywords": [
+        "Champion",
+        "Fighter",
+        "Loner"
+      ],
+      "rating": 210,
+      "stats": [
+        "6\"",
+        "3+",
+        "4+",
+        "4",
+        "3",
+        "2",
+        "5",
+        "3",
+        "5+",
+        "6",
+        "8",
+        "8",
+        "7"
+      ],
+      "weapons": [
+        {
+          "name": "Shivver sword",
+          "sr": "E",
+          "lr": "-",
+          "str": "S+1",
+          "ap": "-1",
+          "l": "2",
+          "traits": [
+            "Melee",
+            "Parry"
+          ]
+        },
+        {
+          "name": "Smoke grenades",
+          "sr": "-",
+          "lr": "9\"",
+          "str": "-",
+          "ap": "-",
+          "l": "-",
+          "traits": [
+            "Ammo (4+)",
+            "Blast (3\")",
+            "Limited",
+            "Smoke"
+          ]
+        },
+        {
+          "name": "Stiletto knife",
+          "sr": "E",
+          "lr": "-",
+          "str": "-",
+          "ap": "-",
+          "l": "1",
+          "traits": [
+            "Melee",
+            "Toxin (3+)"
+          ]
+        }
+      ],
+      "skills": [
+        "Inspiring",
+        "Rain of Blows"
+      ],
+      "rules": [
+        "From the Shadows"
+      ],
+      "wargear": [],
+      "status": null
+    },
+    {
+      "id": 3,
+      "name": "Death Cap",
+      "archetype": "Psy-Gheist",
+      "keywords": [
+        "Fighter",
+        "Prospect",
+        "Wyrd"
+      ],
+      "rating": 155,
+      "stats": [
+        "6\"",
+        "5+",
+        "5+",
+        "3",
+        "3",
+        "1",
+        "4",
+        "1",
+        "6+",
+        "5",
+        "6",
+        "7",
+        "5"
+      ],
+      "weapons": [
+        {
+          "name": "Flamer",
+          "sr": "T",
+          "lr": "-",
+          "str": "4",
+          "ap": "-1",
+          "l": "1",
+          "traits": [
+            "Ammo (6+)",
+            "Blaze (5+)",
+            "Template"
+          ]
+        },
+        {
+          "name": "Stub gun",
+          "sr": "6\"",
+          "lr": "12\"",
+          "str": "3",
+          "ap": "-",
+          "l": "1",
+          "traits": [
+            "Light"
+          ]
+        }
+      ],
+      "skills": [
+        "Cacophony of Silence"
+      ],
+      "rules": [
+        "Whispers in the Dark"
+      ],
+      "wargear": [
+        "Psychoteric Wyrm"
+      ],
+      "status": null
+    },
+    {
+      "id": 4,
+      "name": "Psychoteric Wyrm",
+      "archetype": "Psychoteric Wyrm",
+      "keywords": [
+        "Beast",
+        "Pet"
+      ],
+      "rating": 0,
+      "stats": [
+        "6\"",
+        "4+",
+        "6+",
+        "2",
+        "3",
+        "1",
+        "3",
+        "1",
+        "6+",
+        "5",
+        "6",
+        "7",
+        "5"
+      ],
+      "weapons": [
+        {
+          "name": "Ferocious jaws",
+          "sr": "E",
+          "lr": "-",
+          "str": "S+1",
+          "ap": "-1",
+          "l": "1",
+          "traits": [
+            "Melee",
+            "Rending (6+)"
+          ]
+        }
+      ],
+      "skills": [],
+      "rules": [
+        "Psychoteric Node",
+        "Leash Range (12\")",
+        "Burrowing"
+      ],
+      "wargear": [],
+      "status": null
+    },
+    {
+      "id": 5,
+      "name": "Puffball",
+      "archetype": "Ghost",
+      "keywords": [
+        "Ganger",
+        "Specialist",
+        "Gunslinger"
+      ],
+      "rating": 115,
+      "stats": [
+        "5\"",
+        "4+",
+        "4+",
+        "3",
+        "3",
+        "1",
+        "4",
+        "1",
+        "6+",
+        "6",
+        "6",
+        "7",
+        "6"
+      ],
+      "weapons": [
+        {
+          "name": "Flechette pistol (x2)",
+          "sr": "4\"",
+          "lr": "12\"",
+          "str": "-",
+          "ap": "-",
+          "l": "1",
+          "traits": [
+            "Light",
+            "Rapid Fire (1)",
+            "Toxin (3+)"
+          ]
+        }
+      ],
+      "skills": [
+        "Gunfighter"
+      ],
+      "rules": [],
+      "wargear": [],
+      "status": null
+    },
+    {
+      "id": 6,
+      "name": "Amanita",
+      "archetype": "Shadow",
+      "keywords": [
+        "Prospect"
+      ],
+      "rating": 80,
+      "stats": [
+        "6\"",
+        "5+",
+        "5+",
+        "3",
+        "3",
+        "1",
+        "4",
+        "1",
+        "6+",
+        "5",
+        "5",
+        "6",
+        "5"
+      ],
+      "weapons": [
+        {
+          "name": "Grav gun",
+          "sr": "9\"",
+          "lr": "18\"",
+          "str": "-",
+          "ap": "-",
+          "l": "2",
+          "traits": [
+            "Ammo (5+)",
+            "Blast (3\")",
+            "Graviton Pulse"
+          ]
+        },
+        {
+          "name": "Stub gun",
+          "sr": "6\"",
+          "lr": "12\"",
+          "str": "3",
+          "ap": "-",
+          "l": "1",
+          "traits": [
+            "Light"
+          ]
+        }
+      ],
+      "skills": [],
+      "rules": [],
+      "wargear": [],
+      "status": null
+    },
+    {
+      "id": 7,
+      "name": "Fly Agaric",
+      "archetype": "Phantom",
+      "keywords": [
+        "Champion",
+        "Fighter",
+        "Wyrd"
+      ],
+      "rating": 210,
+      "stats": [
+        "5\"",
+        "3+",
+        "3+",
+        "3",
+        "3",
+        "2",
+        "4",
+        "2",
+        "5+",
+        "7",
+        "7",
+        "8",
+        "7"
+      ],
+      "weapons": [
+        {
+          "name": "Flechette pistol",
+          "sr": "4\"",
+          "lr": "12\"",
+          "str": "-",
+          "ap": "-",
+          "l": "1",
+          "traits": [
+            "Light",
+            "Rapid Fire (1)",
+            "Toxin (3+)"
+          ]
+        },
+        {
+          "name": "Smoke grenades",
+          "sr": "-",
+          "lr": "9\"",
+          "str": "-",
+          "ap": "-",
+          "l": "-",
+          "traits": [
+            "Ammo (4+)",
+            "Blast (3\")",
+            "Limited",
+            "Smoke"
+          ]
+        },
+        {
+          "name": "Stiletto knife",
+          "sr": "E",
+          "lr": "-",
+          "str": "-",
+          "ap": "-",
+          "l": "1",
+          "traits": [
+            "Melee",
+            "Toxin (3+)"
+          ]
+        }
+      ],
+      "skills": [
+        "Eternal Slumber",
+        "Inspiring",
+        "Sprint"
+      ],
+      "rules": [
+        "Master of Whispers"
+      ],
+      "wargear": [],
+      "status": null
+    },
+    {
+      "id": 8,
+      "name": "Galerina",
+      "archetype": "Shadow",
+      "keywords": [
+        "Prospect"
+      ],
+      "rating": 95,
+      "stats": [
+        "6\"",
+        "5+",
+        "5+",
+        "3",
+        "3",
+        "1",
+        "4",
+        "1",
+        "6+",
+        "5",
+        "5",
+        "6",
+        "5"
+      ],
+      "weapons": [
+        {
+          "name": "Stub gun",
+          "sr": "6\"",
+          "lr": "12\"",
+          "str": "3",
+          "ap": "-",
+          "l": "1",
+          "traits": [
+            "Light"
+          ]
+        },
+        {
+          "name": "Web gun",
+          "sr": "T",
+          "lr": "-",
+          "str": "5",
+          "ap": "-",
+          "l": "-",
+          "traits": [
+            "Ammo (6+)",
+            "Template",
+            "Web"
+          ]
+        }
+      ],
+      "skills": [],
+      "rules": [],
+      "wargear": [],
+      "status": null
+    }
+  ]
+}

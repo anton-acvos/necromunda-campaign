@@ -211,6 +211,50 @@ is whole credits a cycle, `boon` is the alternative you may take instead of
 the income, and `standing` is an effect that applies the whole time you hold
 the place.
 
+### The stash
+
+A gang's stash is not stored. It is worked out from every line of money that
+has reached them: the `credits` on each battle's `rewards`, plus any entry
+in the top-level `ledger` array that names the gang. The Gangs tab shows the
+total as the **Stash** stat and a shut **Stash** fold underneath lists the
+lines that make it, newest first.
+
+Because battle payouts are read off the battles themselves, the same credits
+are never written down twice and the total cannot drift away from the history
+that explains it. `ledger` is for everything else — a cycle's income once it
+is collected, a purchase (a negative `amount`), a trade between gangs — and
+an entry carries `id`, `gang`, `cycle`, `date`, `amount` and `what`. The
+validator rejects an entry that names a `battle`, because that payout already
+lives on the battle.
+
+### Rosters
+
+A gang's fighters live in their own file, `data/rosters/<gang>.json`, and the
+gang record in `campaign.json` points at it with `roster`. These files are
+**hand-kept**: `scripts/generate-map.mjs` does not write them, so editing a
+fighter never rewrites the map.
+
+The Gangs tab shows a shut `Roster` fold under each card that has one. The
+file is fetched the first time somebody opens the fold and cached after that,
+so a gang nobody expands costs nothing to load.
+
+A fighter carries `id`, `name`, `archetype`, `keywords`, `rating`, a
+13-value `stats` array in the order **M WS BS S T W I A Sv Ld Cl Wil Int**,
+a `weapons` array of `{ name, sr, lr, str, ap, l, traits }`, and `skills`,
+`rules` and `wargear` arrays. `keywords` is the fighter's keyword list in
+sheet order — a fighter can be Leader, Champion, Fighter and Wyrd all at
+once — and the roster summary reads the rank back out of it, counting each
+fighter once as the highest rank they carry. `status` is free text for
+anything the sheet
+notes about them right now — "In recovery", "Captured" — and is left null
+otherwise.
+
+`scripts/validate.mjs` reads every roster a gang points at: it rejects a
+duplicate id, a missing name, a statline that is not 13 values and a weapon
+with no name, and it warns when the fighters' ratings no longer add up to
+the gang's `rating`. The site says the same thing in the fold, so a sheet
+that has drifted is visible without running the validator.
+
 ### House rule: shared infrastructure
 
 The Reach pays for an unbroken block. A charted holding within **two held

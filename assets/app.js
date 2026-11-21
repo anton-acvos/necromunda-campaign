@@ -1241,6 +1241,86 @@
     });
   }
 
+  /* ---------- the stash ----------
+
+     A gang's stash is not a number in the data. It is every line of money
+     that has ever reached them, added up: what each battle paid out, plus
+     anything in campaign.ledger that did not come out of a fight. The
+     battle rewards are read straight off the battles, so the same credits
+     are never written down twice and the total cannot drift away from the
+     history that explains it. */
+  function stashLines(gang) {
+    var out = [];
+
+    (state.data.battles || []).forEach(function (b) {
+      (b.rewards || []).forEach(function (r) {
+        if (r.gang !== gang.id || r.credits == null) return;
+        var t = b.territory ? state.byId[b.territory] : null;
+        out.push({
+          date: b.date,
+          amount: r.credits,
+          what: (b.scenario || 'Battle') + (t ? ' \u2014 ' + displayName(t) : ''),
+          battle: b.id
+        });
+      });
+    });
+
+    (state.data.ledger || []).forEach(function (e) {
+      if (e.gang !== gang.id) return;
+      out.push({ date: e.date, amount: e.amount || 0, what: e.what, cycle: e.cycle });
+    });
+
+    /* Newest first, and a line with no date sits with the oldest rather
+       than jumping the queue. */
+    return out.sort(function (x, y) {
+      return String(y.date || '').localeCompare(String(x.date || ''));
+    });
+  }
+
+  function stashOf(gang) {
+    return stashLines(gang).reduce(function (n, e) { return n + (e.amount || 0); }, 0);
+  }
+
+  function stashFold(gang) {
+    var lines = stashLines(gang);
+    var box = h('details', 'fold is-ledger');
+    var total = stashOf(gang);
+    box.appendChild(h('summary', 'fold-summary',
+      'Stash \u2014 ' + total + ' credits' +
+      (lines.length ? ' from ' + lines.length +
+        (lines.length === 1 ? ' entry' : ' entries') : ', nothing banked yet')));
+
+    var body = h('div', 'fold-body');
+    if (!lines.length) {
+      body.appendChild(h('p', 'fold-note', 'Nothing has reached them yet.'));
+      box.appendChild(body);
+      return box;
+    }
+
+    var tbl = h('table', 'ledger-table');
+    var head = h('tr');
+    ['When', 'Where from', 'In'].forEach(function (k) { head.appendChild(h('th', null, k)); });
+    var thead = h('thead'); thead.appendChild(head);
+    var tb = h('tbody');
+    lines.forEach(function (e) {
+      var tr = h('tr');
+      tr.appendChild(h('td', 'led-when', e.date || '\u2013'));
+      tr.appendChild(h('td', 'led-what', e.what || '\u2013'));
+      tr.appendChild(h('td', 'led-amt' + (e.amount < 0 ? ' is-out' : ''),
+        (e.amount > 0 ? '+' : '') + e.amount));
+      tb.appendChild(tr);
+    });
+    var foot = h('tr', 'led-total');
+    foot.appendChild(h('td', 'led-when', ''));
+    foot.appendChild(h('td', 'led-what', 'Stash'));
+    foot.appendChild(h('td', 'led-amt', String(total)));
+    var tfoot = h('tfoot'); tfoot.appendChild(foot);
+    tbl.appendChild(thead); tbl.appendChild(tb); tbl.appendChild(tfoot);
+    body.appendChild(tbl);
+    box.appendChild(body);
+    return box;
+  }
+
   /* A walked holding in the deep pays like any other. It takes no
      infrastructure adjustment: it is not part of the charted block, and
      there is no road back to the seat worth the name. */
@@ -1260,6 +1340,178 @@
     return (state.data.territories || []).filter(function (t) {
       return t.owner === g.id && t.section === 'inner';
     });
+  }
+
+  /* ---------- rosters ----------
+
+     A roster is its own file under data/rosters/, hand-kept, one per gang,
+     and the gang record points at it. It is fetched the first time somebody
+     opens the fold and cached after that, so a gang nobody expands costs
+     nothing and an edit to a fighter never touches campaign.json.
+
+     The fold is shut on load. Open, it is the whole sheet: statline,
+     weapons, skills, rules and gear, in the order the paper roster has
+     them. */
+  var STAT_HEAD = ['M', 'WS', 'BS', 'S', 'T', 'W', 'I', 'A', 'Sv', 'Ld', 'Cl', 'Wil', 'Int'];
+  var rosterCache = {};
+
+  /* The keyword list is the fighter's rank and everything else about them
+     at once, in the order the sheet prints it. The tally reads the rank
+     back out: a fighter who is both Leader and Champion counts once, as
+     the highest thing they are. */
+  var RANK_ORDER = ['Leader', 'Champion', 'Ganger', 'Prospect', 'Juve',
+                    'Brute', 'Beast', 'Hanger-on'];
+
+  function rankOf(f) {
+    var kw = f.keywords || [];
+    for (var i = 0; i < RANK_ORDER.length; i++) {
+      if (kw.indexOf(RANK_ORDER[i]) !== -1) return RANK_ORDER[i];
+    }
+    return null;
+  }
+
+  function rosterLine(f) {
+    var kw = (f.keywords || []).join(', ');
+    return [f.archetype, kw].filter(Boolean).join(' \u2022 ');
+  }
+
+  function rosterSummary(r) {
+    var fs_ = r.fighters || [];
+    var byRank = {};
+    fs_.forEach(function (f) {
+      var rank = rankOf(f);
+      if (rank) byRank[rank] = (byRank[rank] || 0) + 1;
+    });
+    var parts = [fs_.length + (fs_.length === 1 ? ' fighter' : ' fighters')];
+    RANK_ORDER
+      .forEach(function (rank) {
+        var n = byRank[rank];
+        if (!n) return;
+        var word = rank.toLowerCase();
+        parts.push(n + ' ' + (n === 1 ? word : word + 's'));
+      });
+    var rating = fs_.reduce(function (n, f) { return n + (f.rating || 0); }, 0);
+    parts.push(rating + ' rating');
+    return parts.join(' \u00b7 ');
+  }
+
+  function fighterCard(f) {
+    var card = h('article', 'fighter');
+
+    var head = h('div', 'fighter-head');
+    head.appendChild(h('h4', 'fighter-name', f.name));
+    if (f.rating != null) head.appendChild(h('span', 'fighter-rating', f.rating + ' rating'));
+    card.appendChild(head);
+    card.appendChild(h('p', 'fighter-role', rosterLine(f)));
+    if (f.status) card.appendChild(h('p', 'fighter-status', f.status));
+
+    /* statline */
+    if ((f.stats || []).length) {
+      var wrap = h('div', 'stat-scroll');
+      var tbl = h('table', 'statline');
+      var hr = h('tr');
+      STAT_HEAD.forEach(function (k, n) {
+        var th = h('th', n === 9 ? 'is-split' : null, k);
+        hr.appendChild(th);
+      });
+      var br = h('tr');
+      f.stats.forEach(function (v, n) {
+        br.appendChild(h('td', n === 9 ? 'is-split' : null, String(v)));
+      });
+      var thead = h('thead'); thead.appendChild(hr);
+      var tbody = h('tbody'); tbody.appendChild(br);
+      tbl.appendChild(thead); tbl.appendChild(tbody);
+      wrap.appendChild(tbl);
+      card.appendChild(wrap);
+    }
+
+    /* weapons */
+    if ((f.weapons || []).length) {
+      var ww = h('div', 'stat-scroll');
+      var wt = h('table', 'weapons');
+      var wh = h('tr');
+      ['Weapon', 'SR', 'LR', 'Str', 'AP', 'L', 'Traits'].forEach(function (k) {
+        wh.appendChild(h('th', null, k));
+      });
+      var wb = h('tbody');
+      f.weapons.forEach(function (w) {
+        var tr = h('tr');
+        tr.appendChild(h('td', 'wep-name', w.name));
+        ['sr', 'lr', 'str', 'ap', 'l'].forEach(function (k) {
+          tr.appendChild(h('td', 'wep-num', w[k] == null || w[k] === '' ? '\u2013' : String(w[k])));
+        });
+        tr.appendChild(h('td', 'wep-traits', (w.traits || []).join(', ') || '\u2013'));
+        wb.appendChild(tr);
+      });
+      var wthead = h('thead'); wthead.appendChild(wh);
+      wt.appendChild(wthead); wt.appendChild(wb);
+      ww.appendChild(wt);
+      card.appendChild(ww);
+    }
+
+    [['Skills', f.skills], ['Rules', f.rules], ['Wargear', f.wargear]].forEach(function (pair) {
+      if (!(pair[1] || []).length) return;
+      var p = h('p', 'fighter-extra');
+      p.appendChild(h('span', 'fighter-extra-label', pair[0]));
+      p.appendChild(document.createTextNode(' ' + pair[1].join(', ')));
+      card.appendChild(p);
+    });
+
+    return card;
+  }
+
+  function fillRoster(host, r, gang) {
+    host.textContent = '';
+    var fs_ = r.fighters || [];
+    if (!fs_.length) {
+      host.appendChild(h('p', 'fold-note', 'The file is there but it has nobody in it yet.'));
+      return;
+    }
+    var rating = fs_.reduce(function (n, f) { return n + (f.rating || 0); }, 0);
+    if (gang && gang.rating != null && gang.rating !== rating) {
+      host.appendChild(h('p', 'fold-note is-off',
+        'The sheet adds up to ' + rating + ' and the gang record says ' + gang.rating +
+        '. One of the two is out of date.'));
+    }
+    if (r.updated) {
+      host.appendChild(h('p', 'fold-note', 'Sheet as of ' + r.updated + '.'));
+    }
+    fs_.forEach(function (f) { host.appendChild(fighterCard(f)); });
+  }
+
+  /* The fold does the fetching, once, the first time it is opened. */
+  function rosterFold(g) {
+    var box = h('details', 'fold is-roster');
+    var sum = h('summary', 'fold-summary', 'Roster');
+    box.appendChild(sum);
+    var host = h('div', 'fold-body');
+    host.appendChild(h('p', 'fold-note', 'Reading the sheet\u2026'));
+    box.appendChild(host);
+
+    var loaded = false;
+    box.addEventListener('toggle', function () {
+      if (!box.open || loaded) return;
+      loaded = true;
+      if (rosterCache[g.id]) { fillRoster(host, rosterCache[g.id], g); return; }
+      fetch(g.roster, { cache: 'no-cache' })
+        .then(function (res) {
+          if (!res.ok) throw new Error('HTTP ' + res.status);
+          return res.json();
+        })
+        .then(function (r) {
+          rosterCache[g.id] = r;
+          sum.textContent = 'Roster \u2014 ' + rosterSummary(r);
+          fillRoster(host, r, g);
+        })
+        .catch(function (e) {
+          loaded = false;
+          host.textContent = '';
+          host.appendChild(h('p', 'fold-note is-off',
+            'Could not read ' + g.roster + ' (' + e.message + '). Close and open to try again.'));
+        });
+    });
+
+    return box;
   }
 
   /* One card. Every gang here is a player; some play by their own rules,
@@ -1306,7 +1558,7 @@
     var stats = h('div', 'gang-stats');
     [
       ['Rating', g.rating != null ? g.rating : '\u2014'],
-      ['Stash', g.credits != null ? g.credits : '\u2014'],
+      ['Stash', stashOf(g)],
       ['Rep', g.reputation != null ? g.reputation : '\u2014'],
       ['Income', incomeOf(g) + '/cycle']
     ].forEach(function (pair) {
@@ -1376,6 +1628,9 @@
       list.appendChild(h('li', 'holding is-empty', 'Holds nothing on the charted map.'));
     }
     card.appendChild(list);
+
+    card.appendChild(stashFold(g));
+    if (g.roster) card.appendChild(rosterFold(g));
     return card;
   }
 

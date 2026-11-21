@@ -229,7 +229,6 @@
   "gangs": [
     {
       "rating": 1100,
-      "credits": 60,
       "reputation": 2,
       "motto": "",
       "id": "sumptown",
@@ -240,7 +239,6 @@
     },
     {
       "rating": 1100,
-      "credits": 100,
       "reputation": 2,
       "motto": "",
       "id": "chymist-cult",
@@ -252,7 +250,6 @@
     },
     {
       "rating": 1100,
-      "credits": 0,
       "reputation": 3,
       "motto": "",
       "id": "archeo-3",
@@ -263,7 +260,6 @@
     },
     {
       "rating": 1100,
-      "credits": 90,
       "reputation": 2,
       "motto": "",
       "id": "mycelium",
@@ -272,11 +268,11 @@
       "house": "House Delaque",
       "color": "#7d9683",
       "player": "Anton",
-      "logo": "assets/gangs/mycelium.svg"
+      "logo": "assets/gangs/mycelium.svg",
+      "roster": "data/rosters/mycelium.json"
     },
     {
       "rating": 1100,
-      "credits": 40,
       "reputation": 2,
       "motto": "",
       "id": "precinct-22",
@@ -287,7 +283,6 @@
     },
     {
       "rating": 1100,
-      "credits": 0,
       "reputation": 1,
       "motto": "",
       "id": "bjorn-prospectors",
@@ -298,7 +293,6 @@
     },
     {
       "rating": 1100,
-      "credits": 40,
       "reputation": 2,
       "motto": "",
       "id": "resource-extraction",
@@ -2631,6 +2625,7 @@
       "notes": "A second call from Precinct 22 this cycle, which is one more than the rules allow. Two concessions left half the Reach with nothing to do, so the arbitrator let it stand."
     }
   ],
+  "ledger": [],
   "battles": [
     {
       "id": "b1-bonepipe",

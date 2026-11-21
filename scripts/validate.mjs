@@ -262,6 +262,107 @@ for (const [i, r] of (data.archeotech ?? []).entries()) {
   if (seen.size && missing.length) warn(`archeotech: no piece on 2d6 result ${missing.join(', ')}`);
 }
 
+/* --- rosters ---
+
+   A roster lives in its own file so a fighter edit never rewrites the map.
+   The gang record points at it with "roster"; the file is checked here as
+   part of the same run, because a roster that will not parse is a roster
+   nobody sees. */
+{
+  const STAT_COUNT = 13;
+  /* One of these has to appear in a fighter's keywords, or the roster
+     summary has nothing to count them as. The rest of the list is free. */
+  const RANKS = new Set([
+    'Leader', 'Champion', 'Ganger', 'Prospect', 'Juve',
+    'Brute', 'Beast', 'Hanger-on'
+  ]);
+
+  for (const g of data.gangs ?? []) {
+    if (!g.roster) continue;
+    let roster;
+    try {
+      roster = JSON.parse(readFileSync(g.roster, 'utf8'));
+    } catch (e) {
+      err(`gang "${g.id}".roster: cannot read ${g.roster} — ${e.message}`);
+      continue;
+    }
+
+    if (roster.gang !== g.id) {
+      err(`${g.roster}: says it belongs to "${roster.gang}", but ${g.id} points at it`);
+    }
+
+    const fighters = roster.fighters ?? [];
+    if (!Array.isArray(fighters)) {
+      err(`${g.roster}.fighters: expected an array`);
+      continue;
+    }
+
+    const seen = new Set();
+    let rating = 0;
+    for (const [i, f] of fighters.entries()) {
+      const at = `${g.roster}.fighters[${i}]`;
+      if (!f.name) err(`${at}.name: required`);
+      if (f.id == null) err(`${at}.id: required`);
+      else if (seen.has(f.id)) err(`${at}.id: duplicate "${f.id}"`);
+      else seen.add(f.id);
+
+      if (!Array.isArray(f.keywords) || !f.keywords.length) {
+        err(`${at}.keywords: expected the fighter's keyword list`);
+      } else if (!f.keywords.some((k) => RANKS.has(k))) {
+        warn(`${at}.keywords: none of them is a rank, so the summary cannot count them`);
+      }
+      if (!Number.isInteger(f.rating) || f.rating < 0) {
+        err(`${at}.rating: expected whole credits, got ${JSON.stringify(f.rating)}`);
+      } else {
+        rating += f.rating;
+      }
+      if (!Array.isArray(f.stats) || f.stats.length !== STAT_COUNT) {
+        err(`${at}.stats: expected ${STAT_COUNT} values, M through Int`);
+      }
+      for (const [n, w] of (f.weapons ?? []).entries()) {
+        if (!w.name) err(`${at}.weapons[${n}].name: required`);
+        if (w.traits != null && !Array.isArray(w.traits)) {
+          err(`${at}.weapons[${n}].traits: expected an array`);
+        }
+      }
+      for (const k of ['skills', 'rules', 'wargear']) {
+        if (f[k] != null && !Array.isArray(f[k])) err(`${at}.${k}: expected an array`);
+      }
+    }
+
+    /* The sheet and the gang record are two copies of one number, so say
+       when they stop agreeing rather than letting the site do it. */
+    if (g.rating != null && fighters.length && g.rating !== rating) {
+      warn(`${g.roster}: fighters add up to ${rating}, gang record says ${g.rating}`);
+    }
+  }
+}
+
+/* --- ledger ---
+
+   Money that did not come out of a battle. A battle's rewards are not
+   repeated here; writing one down twice would quietly double it, so an
+   entry that names a battle is rejected. */
+{
+  const seen = new Set();
+  for (const [i, e] of (data.ledger ?? []).entries()) {
+    const at = `ledger[${i}]`;
+    if (!e.id) err(`${at}.id: required`);
+    else if (seen.has(e.id)) err(`${at}.id: duplicate "${e.id}"`);
+    else seen.add(e.id);
+
+    if (!gangIds.has(e.gang)) err(`${at}.gang: unknown gang id "${e.gang}"`);
+    if (typeof e.amount !== 'number' || !Number.isInteger(e.amount)) {
+      err(`${at}.amount: expected whole credits, in or negative out`);
+    }
+    if (!e.what) err(`${at}.what: required — one line saying where it came from`);
+    if (e.date && !/^\d{4}-\d{2}-\d{2}$/.test(e.date)) err(`${at}.date: expected YYYY-MM-DD`);
+    if (e.battle) {
+      err(`${at}.battle: a battle's payout belongs on the battle, not here`);
+    }
+  }
+}
+
 /* --- battles --- */
 for (const [i, b] of (data.battles ?? []).entries()) {
   for (const r of b.rewards ?? []) {

@@ -1071,3 +1071,173 @@ body {
 .tunnel:focus-visible,
 .gateway:focus,
 .gateway:focus-visible { outline: none; }
+
+
+/* --- rosters, folded under a gang card --- */
+
+.fold {
+  grid-column: 1 / -1;
+  margin-top: 12px;
+  border-top: 1px solid var(--line);
+  padding-top: 10px;
+}
+
+.fold-summary {
+  cursor: pointer;
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink-dim);
+  list-style: none;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.fold-summary::-webkit-details-marker { display: none; }
+
+.fold-summary::before {
+  content: "\25b8";
+  display: inline-block;
+  transition: transform 120ms ease;
+  color: var(--ink-faint);
+}
+
+.fold[open] > .fold-summary::before { transform: rotate(90deg); }
+.fold-summary:hover { color: var(--ink); }
+
+.fold-body { margin-top: 12px; display: grid; gap: 12px; }
+
+.fold-note { margin: 0; font-size: 0.78rem; color: var(--ink-faint); }
+.fold-note.is-off { color: var(--warn); }
+
+.fighter {
+  border: 1px solid var(--line);
+  background: var(--bg-raise, rgba(255, 255, 255, 0.015));
+  padding: 10px 12px;
+}
+
+.fighter-head { display: flex; align-items: baseline; gap: 10px; }
+.fighter-name { margin: 0; font-size: 0.92rem; flex: 1 1 auto; }
+
+.fighter-rating {
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  color: var(--ink-faint);
+  white-space: nowrap;
+}
+
+.fighter-role {
+  margin: 2px 0 8px;
+  font-size: 0.76rem;
+  color: var(--ink-dim);
+}
+
+.fighter-status {
+  margin: 0 0 8px;
+  font-size: 0.76rem;
+  color: var(--warn);
+}
+
+/* The statline is thirteen columns and a phone is not thirteen columns
+   wide, so each table scrolls on its own rather than the card stretching. */
+.stat-scroll { overflow-x: auto; margin-bottom: 8px; }
+
+.statline,
+.weapons {
+  border-collapse: collapse;
+  width: 100%;
+  font-family: var(--mono);
+  font-size: 0.72rem;
+}
+
+.statline th,
+.statline td {
+  padding: 3px 0;
+  text-align: center;
+  min-width: 30px;
+  border-bottom: 1px solid var(--line);
+}
+
+.statline th { color: var(--ink-faint); font-weight: 600; }
+.statline td { color: var(--ink); }
+.statline th.is-split,
+.statline td.is-split { border-left: 1px solid var(--line-bright); }
+
+.weapons th,
+.weapons td {
+  padding: 3px 6px;
+  text-align: left;
+  vertical-align: top;
+  border-bottom: 1px solid var(--line);
+}
+
+.weapons th { color: var(--ink-faint); font-weight: 600; white-space: nowrap; }
+.weapons td.wep-name { white-space: nowrap; }
+.weapons td.wep-num { text-align: center; min-width: 28px; }
+.weapons td.wep-traits { color: var(--ink-dim); }
+
+.fighter-extra { margin: 4px 0 0; font-size: 0.76rem; color: var(--ink-dim); }
+
+.fighter-extra-label {
+  font-family: var(--mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+}
+
+
+/* --- where the money came from --- */
+
+.fold.is-ledger { margin-top: 10px; }
+
+.ledger-table {
+  border-collapse: collapse;
+  width: 100%;
+  font-size: 0.78rem;
+}
+
+.ledger-table th,
+.ledger-table td {
+  padding: 4px 6px;
+  text-align: left;
+  vertical-align: top;
+  border-bottom: 1px solid var(--line);
+}
+
+.ledger-table th {
+  font-family: var(--mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+  font-weight: 600;
+}
+
+.ledger-table td.led-when {
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  color: var(--ink-faint);
+  white-space: nowrap;
+}
+
+.ledger-table td.led-what { color: var(--ink-dim); }
+
+.ledger-table td.led-amt {
+  font-family: var(--mono);
+  text-align: right;
+  white-space: nowrap;
+  color: var(--ink);
+}
+
+.ledger-table td.led-amt.is-out { color: var(--warn); }
+
+.ledger-table tfoot .led-what,
+.ledger-table tfoot .led-amt {
+  color: var(--ink);
+  font-weight: 650;
+  border-bottom: none;
+  border-top: 1px solid var(--line-bright);
+}

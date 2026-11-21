@@ -778,14 +778,14 @@ const gateways = [
 /* ---------- gangs ---------- */
 
 const gangs = [
-  { id: 'sumptown',            name: 'Sumptown Industries',               short: 'Sumptown',      house: 'House Goliath',      color: '#e03131', credits: 60, reputation: 2 },
-  { id: 'chymist-cult',        name: "'Sola Dosis' Chymist Cult",         short: 'Sola Dosis',    house: 'House Escher',       color: '#9d7ad4', logo: 'assets/gangs/chymist-cult.webp', credits: 100, reputation: 2 },
+  { id: 'sumptown',            name: 'Sumptown Industries',               short: 'Sumptown',      house: 'House Goliath',      color: '#e03131', reputation: 2 },
+  { id: 'chymist-cult',        name: "'Sola Dosis' Chymist Cult",         short: 'Sola Dosis',    house: 'House Escher',       color: '#9d7ad4', logo: 'assets/gangs/chymist-cult.webp', reputation: 2 },
   { id: 'archeo-3',            name: 'Archeo-Acquisitions Team 3',        short: 'Archeo-3',      house: 'House Van Saar',     color: '#35a9c0', reputation: 3 },
-  { id: 'mycelium',            name: 'Mycelium Section',                  short: 'Mycelium',      house: 'House Delaque',      color: '#7d9683', player: 'Anton', logo: 'assets/gangs/mycelium.svg', credits: 90, reputation: 2 },
-  { id: 'precinct-22',         name: 'Precinct 22',                       short: 'Precinct 22',   house: 'Palanite Enforcers', color: '#e8c23a', credits: 40, reputation: 2 },
+  { id: 'mycelium',            name: 'Mycelium Section',                  short: 'Mycelium',      house: 'House Delaque',      color: '#7d9683', player: 'Anton', logo: 'assets/gangs/mycelium.svg', reputation: 2, roster: 'data/rosters/mycelium.json' },
+  { id: 'precinct-22',         name: 'Precinct 22',                       short: 'Precinct 22',   house: 'Palanite Enforcers', color: '#e8c23a', reputation: 2 },
   { id: 'bjorn-prospectors',   name: 'Bjorn "H.C.L.F" Prospectors Group', short: 'Bjorn H.C.L.F', house: 'Ironhead Squats',    color: '#e8822c' },
-  { id: 'resource-extraction', name: 'Resource Extraction LLC',           short: 'Resource Ext.', house: 'Ironhead Squats',    color: '#6f9c33', credits: 40, reputation: 2 }
-].map((g) => ({ rating: 1100, credits: 0, reputation: 1, motto: '', ...g }));
+  { id: 'resource-extraction', name: 'Resource Extraction LLC',           short: 'Resource Ext.', house: 'Ironhead Squats',    color: '#6f9c33', reputation: 2 }
+].map((g) => ({ rating: 1100, reputation: 1, motto: '', ...g }));
 
 /* ---------- emit ---------- */
 
@@ -922,6 +922,16 @@ const xs = drawn.map((p) => p[0]), ys = drawn.map((p) => p[1]);
 
   /* The log. A challenge that nobody turned up for is still how ground
      changed hands, so it goes in here with the games. */
+  /* Money that did not come out of a battle. A battle's own rewards are
+     already written down on the battle, so they are not repeated here: the
+     site adds the two together and that sum IS the stash. Nobody keeps a
+     running total by hand, so nobody can forget to.
+
+     amount is credits in, or negative for credits out. "what" is the one
+     line that will be read back in six weeks' time, so it says where the
+     money came from, not what it was for. */
+  ledger: [],
+
   battles: [
     { id: 'b1-bonepipe',
       date: '2026-11-15',
