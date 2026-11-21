@@ -252,6 +252,11 @@ for (const [i, r] of (data.archeotech ?? []).entries()) {
     if (seen.has(r.roll)) err(`archeotech: "${r.id}" and "${seen.get(r.roll)}" both sit on a roll of ${r.roll}`);
     else seen.set(r.roll, r.id);
   }
+  for (const r of data.archeotech ?? []) {
+    if (r.holder && r.roll != null) {
+      err(`archeotech: "${r.id}" is held by ${r.holder} but still has a 2d6 result`);
+    }
+  }
   const missing = [];
   for (let n = 2; n <= 12; n++) if (!seen.has(n)) missing.push(n);
   if (seen.size && missing.length) warn(`archeotech: no piece on 2d6 result ${missing.join(', ')}`);
@@ -266,6 +271,9 @@ for (const [i, b] of (data.battles ?? []).entries()) {
     }
     if (r.rep != null && typeof r.rep !== 'number') {
       err(`battles[${i}] (${b.id}).rewards: rep must be a number`);
+    }
+    if (r.gear != null && typeof r.gear !== 'string') {
+      err(`battles[${i}] (${b.id}).rewards: gear must be a line of text`);
     }
   }
   if (b.played != null && typeof b.played !== 'boolean') {

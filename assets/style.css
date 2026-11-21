@@ -213,6 +213,11 @@ body {
 
 .territory.is-deep:hover .deep-shape { fill: #232c44; }
 
+/* A walked holding is drawn with .territory-shape, so it picks up the ring's
+   hover and selection on its own. The name over it stays in the deep's
+   lettering, because it is still down there. */
+.territory.is-deep .territory-shape { stroke-width: 2.5; }
+
 .territory.is-deep.is-selected .deep-shape {
   stroke: #cdd5ee;
   stroke-width: 3.5;
@@ -258,6 +263,9 @@ body {
   stroke-width: 3.5;
   stroke-linejoin: round;
 }
+
+/* A holding somebody has walked gets its name in the charted hand. */
+.deep-name.is-walked { fill: #dfe6f8; letter-spacing: 0.02em; }
 
 .deep-sub {
   font-size: 11px;
@@ -909,6 +917,7 @@ body {
 .tag.contested { border-color: #6b5520; background: #2a2113; color: var(--warn); }
 .tag.settlement { border-color: #5a4a30; color: #e6d3ad; }
 .tag.unsurveyed { border-color: #3c445e; background: #171c28; color: var(--deep); }
+.tag.deep-tag { border-color: #3c445e; background: #171c28; color: #9fb0e0; }
 .tag.target { border-color: #6b5520; background: #2a2113; color: var(--warn); }
 .tag.is-open { border-color: #6b5520; color: var(--warn); }
 .tag.is-done { border-color: var(--line-bright); color: var(--ink-faint); }

@@ -19,7 +19,7 @@ build step, no framework: a static page that reads one JSON file.
 ## The sector
 
 **The charted ring (22 territories).** One band, one tile deep, running right
-round the uncharted. Seven gangs hold fourteen of it — a settlement (marked
+round the uncharted. Seven gangs hold fourteen of it — a stronghold (marked
 with a star) plus one more territory alongside it — and the other eight are
 unclaimed ground lying between gangs rather than behind them. Every holding on
 the ring borders the deep, so no gang is further from it than another.
@@ -214,11 +214,22 @@ the place.
 ### House rule: shared infrastructure
 
 The Reach pays for an unbroken block. A charted holding within **two held
-steps** of its gang's settlement — each step over ground that same gang
+steps** of its gang's stronghold — each step over ground that same gang
 holds — pays **5 more** a cycle than the card says. A holding with no run of
-held ground back to the settlement at all pays **5 less**. Three or more
-steps out, it pays what the card says, and the settlement itself is never
-adjusted.
+held ground back to the stronghold at all pays **5 less**. Three or more
+steps out, it pays what the card says. The stronghold is zero steps from
+itself, so it takes the bonus too.
+
+A gang's stronghold is its seat: the territory carries the N26 **Settlement**
+type, and the site labels it **Stronghold** so it reads as the main holding
+rather than as one type among several. It heads the gang's list of ground.
+
+An expedition charts a holding in the deep; it does not take it. The ground
+goes on the map with its name, type and income filled in and no owner, open
+to a challenge like anywhere else. A holding in the deep is never adjusted
+either way: it is not part of the charted block, and there is no run of held
+ground back to the seat. Once a gang does hold one, its income counts
+towards their total unadjusted.
 
 The site works this out from ownership and borders every time it loads, so
 `income` in the data stays the book's number and the rule follows the ground

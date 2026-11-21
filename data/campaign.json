@@ -253,7 +253,7 @@
     {
       "rating": 1100,
       "credits": 0,
-      "reputation": 1,
+      "reputation": 3,
       "motto": "",
       "id": "archeo-3",
       "name": "Archeo-Acquisitions Team 3",
@@ -263,8 +263,8 @@
     },
     {
       "rating": 1100,
-      "credits": 30,
-      "reputation": 1,
+      "credits": 90,
+      "reputation": 2,
       "motto": "",
       "id": "mycelium",
       "name": "Mycelium Section",
@@ -276,8 +276,8 @@
     },
     {
       "rating": 1100,
-      "credits": 0,
-      "reputation": 1,
+      "credits": 40,
+      "reputation": 2,
       "motto": "",
       "id": "precinct-22",
       "name": "Precinct 22",
@@ -538,7 +538,7 @@
       "ring": "ring",
       "type": "Mess Shack",
       "settlement": false,
-      "owner": null,
+      "owner": "precinct-22",
       "income": 15,
       "boon": "Or recruit a Slopper at a 30 credit discount, if you have none",
       "contested": false,
@@ -1449,6 +1449,7 @@
       "hidden": false,
       "income": null,
       "boon": null,
+      "standing": null,
       "contested": false,
       "labelX": 543.3,
       "labelY": 1009.51,
@@ -1507,6 +1508,7 @@
       "hidden": false,
       "income": null,
       "boon": null,
+      "standing": null,
       "contested": false,
       "labelX": 383.9,
       "labelY": 932.34,
@@ -1560,6 +1562,7 @@
       "hidden": false,
       "income": null,
       "boon": null,
+      "standing": null,
       "contested": false,
       "labelX": 440.31,
       "labelY": 774.57,
@@ -1609,15 +1612,16 @@
     },
     {
       "id": "i-04",
-      "name": null,
+      "name": "Relumen",
       "designation": "I-04",
       "section": "inner",
-      "surveyed": false,
-      "type": null,
+      "surveyed": true,
+      "type": "Generatorium",
       "owner": null,
       "hidden": false,
-      "income": null,
+      "income": 15,
       "boon": null,
+      "standing": "+1 Reputation",
       "contested": false,
       "labelX": 453.47,
       "labelY": 598.55,
@@ -1658,7 +1662,7 @@
         "i-16",
         "reclaimers-breach"
       ],
-      "notes": null
+      "notes": "A generatorium that had been dark long enough for the dust to settle in drifts. Archeo-Acquisitions Team 3 found the fault, cleared it, and the stack came back up on its own governors. It has been lit ever since, and nobody holds it."
     },
     {
       "id": "i-05",
@@ -1671,6 +1675,7 @@
       "hidden": false,
       "income": null,
       "boon": null,
+      "standing": null,
       "contested": false,
       "labelX": 549.54,
       "labelY": 469.7,
@@ -1722,6 +1727,7 @@
       "hidden": false,
       "income": null,
       "boon": null,
+      "standing": null,
       "contested": false,
       "labelX": 732.75,
       "labelY": 414.91,
@@ -1759,15 +1765,16 @@
     },
     {
       "id": "i-07",
-      "name": null,
+      "name": "Hollowbore",
       "designation": "I-07",
       "section": "inner",
-      "surveyed": false,
-      "type": null,
+      "surveyed": true,
+      "type": "Mine Workings",
       "owner": null,
       "hidden": false,
-      "income": null,
-      "boon": null,
+      "income": 20,
+      "boon": "Or take two respirators",
+      "standing": null,
       "contested": false,
       "labelX": 913.31,
       "labelY": 466.1,
@@ -1813,7 +1820,7 @@
         "i-17",
         "scrap-shoals"
       ],
-      "notes": null
+      "notes": "A worked seam the Squats never filed, running back further than the lamps reach. Mycelium Section charted it and came back up with the air filters off the dead. Nobody holds it: it is simply on the map now, and anyone may call for it."
     },
     {
       "id": "i-08",
@@ -1826,6 +1833,7 @@
       "hidden": false,
       "income": null,
       "boon": null,
+      "standing": null,
       "contested": false,
       "labelX": 1124.03,
       "labelY": 631.73,
@@ -1879,6 +1887,7 @@
       "hidden": false,
       "income": null,
       "boon": null,
+      "standing": null,
       "contested": false,
       "labelX": 1250.6,
       "labelY": 775.32,
@@ -1942,6 +1951,7 @@
       "hidden": false,
       "income": null,
       "boon": null,
+      "standing": null,
       "contested": false,
       "labelX": 1096.44,
       "labelY": 915.95,
@@ -1993,6 +2003,7 @@
       "hidden": false,
       "income": null,
       "boon": null,
+      "standing": null,
       "contested": false,
       "labelX": 937.48,
       "labelY": 1039.3,
@@ -2044,6 +2055,7 @@
       "hidden": false,
       "income": null,
       "boon": null,
+      "standing": null,
       "contested": false,
       "labelX": 727.02,
       "labelY": 1050.51,
@@ -2095,6 +2107,7 @@
       "hidden": false,
       "income": null,
       "boon": null,
+      "standing": null,
       "contested": false,
       "labelX": 872.84,
       "labelY": 869.17,
@@ -2146,6 +2159,7 @@
       "hidden": false,
       "income": null,
       "boon": null,
+      "standing": null,
       "contested": false,
       "labelX": 693.84,
       "labelY": 872.19,
@@ -2197,6 +2211,7 @@
       "hidden": false,
       "income": null,
       "boon": null,
+      "standing": null,
       "contested": false,
       "labelX": 624.54,
       "labelY": 726.37,
@@ -2243,6 +2258,7 @@
       "hidden": false,
       "income": null,
       "boon": null,
+      "standing": null,
       "contested": false,
       "labelX": 714.92,
       "labelY": 586,
@@ -2294,6 +2310,7 @@
       "hidden": false,
       "income": null,
       "boon": null,
+      "standing": null,
       "contested": false,
       "labelX": 882.7,
       "labelY": 646.72,
@@ -2350,6 +2367,7 @@
       "hidden": false,
       "income": null,
       "boon": null,
+      "standing": null,
       "contested": false,
       "labelX": 1013.43,
       "labelY": 758.15,
@@ -2429,6 +2447,7 @@
     },
     {
       "id": "obscuroptikon",
+      "roll": 11,
       "name": "The Obscuroptikon",
       "kind": "Wargear",
       "holder": null,
@@ -2470,10 +2489,9 @@
     },
     {
       "id": "servo-arc-claw",
-      "roll": 11,
       "name": "Servo-arc Claw",
       "kind": "Weapon",
-      "holder": null,
+      "holder": "archeo-3",
       "profile": {
         "range": "E",
         "str": "S+2",
@@ -2569,7 +2587,8 @@
       "challenger": "archeo-3",
       "target": "i-04",
       "defender": "mycelium",
-      "status": "open"
+      "status": "settled",
+      "battle": "b6-relumen"
     },
     {
       "id": "c1-precinct-deep",
@@ -2587,7 +2606,8 @@
       "challenger": "mycelium",
       "target": "i-07",
       "defender": "bjorn-prospectors",
-      "status": "open"
+      "status": "settled",
+      "battle": "b4-hollowbore"
     },
     {
       "id": "c1-resource-stair",
@@ -2606,7 +2626,8 @@
       "challenger": "precinct-22",
       "territory": "rustfall-row",
       "defender": "sumptown",
-      "status": "open",
+      "status": "settled",
+      "battle": "b5-rustfall-row",
       "notes": "A second call from Precinct 22 this cycle, which is one more than the rules allow. Two concessions left half the Reach with nothing to do, so the arbitrator let it stand."
     }
   ],
@@ -2682,6 +2703,71 @@
         }
       ],
       "summary": "Second concession of the cycle. Resource Extraction LLC counted the crates on the dry landings, found nobody arguing, and filed the claim."
+    },
+    {
+      "id": "b4-hollowbore",
+      "date": "2026-11-20",
+      "scenario": "Expedition",
+      "territory": "i-07",
+      "participants": [
+        "mycelium",
+        "bjorn-prospectors"
+      ],
+      "winner": "mycelium",
+      "played": true,
+      "rewards": [
+        {
+          "gang": "mycelium",
+          "credits": 50,
+          "rep": 1,
+          "gear": "Two respirators out of the workings"
+        }
+      ],
+      "summary": "First holding in the deep anyone has walked. Mycelium Section beat the Bjorn Prospectors to the seam and found it worked out but breathable: a mine, a side job paid on the way out, and no archeotech anywhere in it. The ground itself goes on the map unheld — the expedition charted it, it did not claim it."
+    },
+    {
+      "id": "b5-rustfall-row",
+      "date": "2026-11-20",
+      "scenario": "Challenge",
+      "territory": "rustfall-row",
+      "participants": [
+        "precinct-22",
+        "sumptown"
+      ],
+      "winner": "precinct-22",
+      "played": true,
+      "rewards": [
+        {
+          "gang": "precinct-22",
+          "credits": 40,
+          "rep": 1
+        }
+      ],
+      "summary": "The call the arbitrator let stand, and the Enforcers made it pay. Precinct 22 cleared the stacks off Sumptown Industries and the kitchen at the bottom now serves whoever the Palanites say it serves."
+    },
+    {
+      "id": "b6-relumen",
+      "date": "2026-11-20",
+      "scenario": "Expedition",
+      "territory": "i-04",
+      "participants": [
+        "archeo-3",
+        "mycelium"
+      ],
+      "winner": "archeo-3",
+      "played": true,
+      "rewards": [
+        {
+          "gang": "archeo-3",
+          "rep": 2,
+          "gear": "The Servo-arc Claw"
+        },
+        {
+          "gang": "mycelium",
+          "credits": 10
+        }
+      ],
+      "summary": "Archeo-Acquisitions Team 3 beat Mycelium Section off the approach and then did what Van Saar do: read the fault, cleared it, and brought the stack back up. One rep for the fight and one for the light. The claw came out of a maintenance cradle nobody had opened."
     }
   ]
 }

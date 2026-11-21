@@ -206,7 +206,22 @@
     var inner = map.inner;
     var innerD = inner && inner.polygon ? polygonPath(inner.polygon) : null;
 
-    if (innerD) gInner.appendChild(el('path', { d: innerD, class: 'inner-fill' }));
+    /* The fog and the glow are the deep being unknown. A holding somebody
+       has walked is known, so they are cut out around it: the region path
+       carries each charted cell as a second sub-path and the even-odd rule
+       turns them into holes. The cells lie wholly inside the region and
+       never overlap, so the holes come out clean. */
+    var chartedD = innerTerritories()
+      .filter(function (t) { return t.surveyed && t.polygon; })
+      .map(function (t) { return polygonPath(t.polygon); })
+      .join(' ');
+    var fogD = innerD ? innerD + (chartedD ? ' ' + chartedD : '') : null;
+
+    if (innerD) {
+      gInner.appendChild(el('path', {
+        d: fogD, class: 'inner-fill', 'fill-rule': 'evenodd'
+      }));
+    }
 
     innerTerritories().forEach(function (t) {
       if (!t.polygon) return;
@@ -218,7 +233,7 @@
         'data-id': t.id,
         tabindex: '0',
         role: 'button',
-        'aria-label': (t.designation || t.id) + ', unsurveyed' +
+        'aria-label': displayName(t) + (t.surveyed ? ', walked' : ', unsurveyed') +
           (bids.length ? ', expedition target' : '')
       });
 
@@ -232,11 +247,17 @@
         }).join('\n')));
       }
 
+      /* Held: the gang's colour. Walked but unheld: the same brown the
+         charted ring uses for ground nobody has claimed, so the two read
+         alike. Never walked: the dark the stylesheet gives it. */
+      /* Walked ground is drawn with the charted ring's class, so a holding
+         nobody holds looks the same whichever side of the border it is on.
+         Only ground nobody has walked keeps the deep's dark. */
       group.appendChild(el('path', {
         d: polygonPath(t.polygon),
-        class: 'deep-shape',
-        fill: g ? g.color : null,
-        'fill-opacity': g ? 0.5 : null
+        class: t.surveyed ? 'territory-shape' : 'deep-shape',
+        fill: g ? g.color : (t.surveyed ? NEUTRAL : null),
+        'fill-opacity': g ? (t.surveyed ? 0.55 : 0.5) : (t.surveyed ? 1 : null)
       }));
 
       group.addEventListener('click', function () { select(t.id, true); });
@@ -256,8 +277,9 @@
       }
 
       gLabels.appendChild(el('text', {
-        x: t.labelX, y: t.labelY - 1, class: 'deep-name'
-      }, t.designation || t.id));
+        x: t.labelX, y: t.labelY - 1,
+        class: 'deep-name' + (t.surveyed ? ' is-walked' : '')
+      }, t.surveyed && t.name ? t.name : (t.designation || t.id)));
       var subY = t.labelY + 14;
       if (g) {
         gLabels.appendChild(el('text', {
@@ -275,7 +297,9 @@
     });
 
     if (innerD) {
-      gInner.appendChild(el('path', { d: innerD, class: 'inner-fog' }));
+      gInner.appendChild(el('path', {
+        d: fogD, class: 'inner-fog', 'fill-rule': 'evenodd'
+      }));
       gInner.appendChild(el('path', { d: innerD, class: 'inner-edge' }));
     }
 
@@ -398,9 +422,15 @@
 
     var head = h('div', 'detail-head');
     head.appendChild(h('h3', null, displayName(t)));
-    if (t.type) head.appendChild(h('span', 'tag', t.type));
-    if (t.settlement) head.appendChild(h('span', 'tag settlement', 'Settlement'));
-    if (t.section === 'inner') head.appendChild(h('span', 'tag unsurveyed', 'Unsurveyed'));
+    if (t.type && !t.settlement) head.appendChild(h('span', 'tag', t.type));
+    if (t.settlement) head.appendChild(h('span', 'tag settlement', 'Stronghold'));
+    if (t.section === 'inner' && !t.surveyed) {
+      head.appendChild(h('span', 'tag unsurveyed', 'Unsurveyed'));
+    }
+    if (t.section === 'inner' && t.surveyed) {
+      head.appendChild(h('span', 'tag deep-tag', 'In the deep'));
+      if (!t.owner) head.appendChild(h('span', 'tag is-open', 'Open to a call'));
+    }
     if (t.section === 'inner' && expeditionsOn(t.id).length) {
       head.appendChild(h('span', 'tag target', 'Expedition target'));
     }
@@ -420,7 +450,7 @@
     }
     box.appendChild(bar);
 
-    if (t.section === 'inner') {
+    if (t.section === 'inner' && !t.surveyed) {
       box.appendChild(h('p', 'notes',
         'The ground is charted and nothing else is. What this holding is, what it is worth and whatever already lives in it all get written down the first time a gang walks it.'));
       expeditionsOn(t.id).forEach(function (c) {
@@ -447,7 +477,9 @@
       var w = last.winner ? gangOf(last.winner) : null;
       var row = h('div');
       row.appendChild(h('dt', null, 'Last result'));
-      row.appendChild(h('dd', null, last.scenario + ' — ' + (w ? w.name + ' took it' : 'no decisive result')));
+      row.appendChild(h('dd', null, last.scenario + ' — ' +
+        (w ? w.name + (t.section === 'inner' ? ' charted it' : ' took it')
+           : 'no decisive result')));
       dl.appendChild(row);
     }
     box.appendChild(dl);
@@ -497,7 +529,14 @@
     var list = innerTerritories();
     var spoken = list.filter(function (t) { return expeditionsOn(t.id).length; });
     box.appendChild(kvList([
-      ['Holdings', list.length + ' known to exist, none surveyed'],
+      ['Holdings', (function () {
+        var walked = list.filter(function (t) { return t.surveyed; });
+        return list.length + ' known to exist, ' +
+               (walked.length
+                 ? walked.length + ' charted: ' +
+                   walked.map(function (t) { return displayName(t); }).join(', ')
+                 : 'none surveyed');
+      })()],
       ['Ways in', (state.data.gateways || []).length + ' found so far'],
       ['Spoken for', spoken.length
         ? spoken.map(function (t) { return t.designation || t.id; }).join(', ') +
@@ -622,7 +661,9 @@
 
     document.getElementById('neutral-count').textContent =
       unclaimedOuter + ' of ' + outerTerritories().length +
-      ' charted territories unclaimed · ' + innerTerritories().length + ' deep holdings unsurveyed.';
+      ' charted territories unclaimed · ' +
+      innerTerritories().filter(function (t) { return !t.surveyed; }).length +
+      ' deep holdings unsurveyed.';
   }
 
   /* ---------- the campaign plan ----------
@@ -863,8 +904,9 @@
       var head = h('div', 'relic-head');
       var pip = h('span', 'relic-roll' + (r.roll == null ? ' is-off' : ''),
                    r.roll == null ? '\u2014' : String(r.roll));
-      pip.title = r.roll == null ? 'Not on the table \u2014 the arbitrator\'s to give'
-                                 : 'Rolled on 2d6';
+      pip.title = r.roll != null ? 'Rolled on 2d6'
+                 : r.holder ? 'Off the table \u2014 somebody is carrying it'
+                            : 'Not on the table \u2014 the arbitrator\'s to give';
       head.appendChild(pip);
       head.appendChild(h('h4', 'relic-name', r.name));
       if (r.kind) head.appendChild(h('span', 'tag relic-kind', r.kind));
@@ -1074,6 +1116,7 @@
           var bits = [];
           if (r.credits != null) bits.push(r.credits + ' cr');
           if (r.rep) bits.push((r.rep > 0 ? '+' : '') + r.rep + ' rep');
+          if (r.gear) bits.push(r.gear);
           side.appendChild(document.createTextNode(
             (gg ? (gg.short || gg.name) : r.gang) + ' ' + bits.join(', ')));
           paid.appendChild(side);
@@ -1094,19 +1137,20 @@
   /* ---------- the infrastructure rule ----------
 
      The Reach pays for being close together. A charted holding within two
-     steps of its gang's settlement — every step over ground that same gang
-     holds — shares roads, power and water with the seat and pays 5 more a
-     cycle than the book says. A holding with no unbroken run of held ground
-     back to the settlement at all pays 5 less: everything it needs is
-     hauled in past somebody else.
+     steps of its gang's stronghold — every step over ground that same gang
+     holds — shares roads, power and water with it and pays 5 more a cycle
+     than the book says. A holding with no unbroken run of held ground back
+     to the stronghold at all pays 5 less: everything it needs is hauled in
+     past somebody else.
 
      Between the two, three or more held steps out, it pays what the book
      says. Growing the block outwards is worth money; a holding taken on
      the far side of the sector costs money to keep.
 
-     The settlement itself is the hold, not a circle around it, so it is
-     never adjusted. A gang with no settlement has no block to measure
-     from, and nothing it holds is adjusted either.
+     The stronghold is the middle of its own block and zero steps from
+     itself, so it takes the bonus like anything else inside two steps. A
+     gang with no stronghold has no block to measure from, and nothing it
+     holds is adjusted at all.
 
      Worked out here rather than written into the data, because it changes
      the moment ground changes hands. data/campaign.json keeps the number
@@ -1147,7 +1191,6 @@
       }
 
       mine.forEach(function (t) {
-        if (t.settlement) { adjust[t.id] = 0; return; }
         if (step[t.id] == null) { adjust[t.id] = -5; return; }
         adjust[t.id] = (step[t.id] <= 2) ? 5 : 0;
       });
@@ -1167,7 +1210,8 @@
 
   function adjustWhy(t) {
     var n = adjustOf(t);
-    if (n > 0) return 'shares infrastructure with the settlement';
+    if (n > 0) return t.settlement ? 'the stronghold itself'
+                                   : 'shares infrastructure with the stronghold';
     if (n < 0) return 'cut off from the rest of the block';
     return null;
   }
@@ -1187,12 +1231,29 @@
   /* What a gang draws each cycle is the income on every charted holding it
      owns. Standing boons are listed beside the holding rather than folded
      into the total, because several only pay out for the right House. */
+  /* The stronghold heads the list: it is the ground the rest is measured
+     from, so it reads first. The rest keep the order the map gives them. */
   function holdingsOf(g) {
-    return outerTerritories().filter(function (t) { return t.owner === g.id; });
+    return outerTerritories().filter(function (t) {
+      return t.owner === g.id;
+    }).sort(function (x, y) {
+      return (y.settlement ? 1 : 0) - (x.settlement ? 1 : 0);
+    });
+  }
+
+  /* A walked holding in the deep pays like any other. It takes no
+     infrastructure adjustment: it is not part of the charted block, and
+     there is no road back to the seat worth the name. */
+  function surveyedDeepOf(g) {
+    return (state.data.territories || []).filter(function (t) {
+      return t.owner === g.id && t.section === 'inner' && t.surveyed;
+    });
   }
 
   function incomeOf(g) {
-    return holdingsOf(g).reduce(function (n, t) { return n + (incomeOn(t) || 0); }, 0);
+    return holdingsOf(g).concat(surveyedDeepOf(g)).reduce(function (n, t) {
+      return n + (incomeOn(t) || 0);
+    }, 0);
   }
 
   function deepHoldingsOf(g) {
@@ -1267,7 +1328,7 @@
       link.title = 'Show ' + t.name + ' on the map';
       link.addEventListener('click', function () { select(t.id, true); });
       row.appendChild(link);
-      if (t.settlement) row.appendChild(h('span', 'tag settlement', 'Settlement'));
+      if (t.settlement) row.appendChild(h('span', 'tag settlement', 'Stronghold'));
       row.appendChild(h('span', 'holding-income', (incomeOn(t) || 0) + ' cr'));
       if (adjustOf(t)) {
         var mark = h('span', 'holding-adjust', adjustOf(t) > 0 ? '+5' : '\u22125');
@@ -1283,14 +1344,31 @@
       list.appendChild(li);
     });
 
-    if (deep.length) {
-      var unsurveyed = deep.filter(function (t) { return !t.surveyed; });
+    deep.filter(function (t) { return t.surveyed; }).forEach(function (t) {
+      var li = h('li', 'holding is-walked');
+      var row = h('div', 'holding-row');
+      var link = h('button', 'holding-name');
+      link.type = 'button';
+      link.textContent = displayName(t);
+      link.title = 'Show ' + displayName(t) + ' on the map';
+      link.addEventListener('click', function () { select(t.id, true); });
+      row.appendChild(link);
+      row.appendChild(h('span', 'tag deep-tag', 'In the deep'));
+      row.appendChild(h('span', 'holding-income', (incomeOn(t) || 0) + ' cr'));
+      li.appendChild(row);
+      li.appendChild(h('p', 'holding-type', t.type || 'Unknown type'));
+      if (t.boon) li.appendChild(h('p', 'holding-boon', t.boon));
+      list.appendChild(li);
+    });
+
+    var blank = deep.filter(function (t) { return !t.surveyed; });
+    if (blank.length) {
       var li = h('li', 'holding is-deep');
       li.appendChild(h('div', 'holding-row',
-        deep.length === 1 ? 'One holding in the deep' : deep.length + ' holdings in the deep'));
-      li.appendChild(h('p', 'holding-type', unsurveyed.length === deep.length
-        ? 'Nobody has walked them, so nobody has charted which they are.'
-        : 'Some of them have been walked.'));
+        blank.length === 1 ? 'One more holding in the deep'
+                           : blank.length + ' more holdings in the deep'));
+      li.appendChild(h('p', 'holding-type',
+        'Nobody has walked them, so nobody has charted which they are.'));
       list.appendChild(li);
     }
 

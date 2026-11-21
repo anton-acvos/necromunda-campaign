@@ -123,7 +123,7 @@ const edgeKey = (a, b) => {
 const outer = [
   { id: 'sumptown',           name: 'Sumptown',               type: 'Settlement',            owner: 'sumptown',             settlement: true,   income: 15, boon: 'Or recruit a ganger at a 25 credit discount', notes: 'Barge wharves and a century of silt. Everything coming down from above lands here first.' },
   { id: 'the-brood-vats',     name: 'The Brood Vats',         type: 'Amneo-vats',            owner: 'sumptown',             settlement: false,  income: 25, standing: 'Goliath hold it, so it pays 25 a cycle instead of the 15 it would pay anyone else', notes: 'Amneotic tanks in rows under the sump, lidded and bubbling. Sumptown grows its own, and the ones that come out wrong go back in.' },
-  { id: 'rustfall-row',       name: 'Rustfall Row',           type: 'Mess Shack',            owner: null,                   settlement: false,  income: 15, boon: 'Or recruit a Slopper at a 30 credit discount, if you have none', notes: 'Collapsed habs stacked nine deep with one kitchen still lit at the bottom. The queue forms before the shift horn and nobody skips it.' },
+  { id: 'rustfall-row',       name: 'Rustfall Row',           type: 'Mess Shack',            owner: 'precinct-22',          settlement: false,  income: 15, boon: 'Or recruit a Slopper at a 30 credit discount, if you have none', notes: 'Collapsed habs stacked nine deep with one kitchen still lit at the bottom. The queue forms before the shift horn and nobody skips it.' },
   { id: 'precinct-house-22',  name: 'Precinct House 22',      type: 'Settlement',            owner: 'precinct-22',          settlement: true,   income: 15, boon: 'Or recruit a ganger at a 25 credit discount', notes: 'Built to hold two hundred. Currently holds nineteen, a vox relay and a great deal of institutional stubbornness.' },
   { id: 'the-pit-market',     name: 'The Pit Market',         type: 'Mine Workings',         owner: 'precinct-22',          settlement: false,  income: 20, boon: 'Or take two respirators', notes: 'A worked-out pit the Enforcers reopened and now run themselves. The market that gave it its name trades on the spoil heap at the top.' },
   { id: 'coil-gardens',       name: 'The Coil Gardens',       type: 'Fence Hangout',         owner: null,                   settlement: false,  income: 15, boon: 'Or recruit a Dome Runner at a 30 credit discount, if you have none', notes: 'Pipework grown into a thicket, and a dozen quiet doors inside it. Whatever leaves the sector by the back way goes through here first.' },
@@ -668,27 +668,54 @@ const territories = outerSeeds.map((s) => {
 /* The deep is now divided into its sixteen holdings: the ground is drawn,
    but nothing is known about any of it. `surveyed` flips to true once a
    holding has a name and a type, not when it gains a shape. */
+/* A holding stops being a blank the moment somebody walks it and lives.
+   Walking it does not take it: the expedition comes back up with what it
+   found and the ground goes on the map unclaimed, open to a challenge like
+   any other. "owner" fills in when somebody holds it. Keyed by designation;
+   everything not listed here is still a shape with nothing known about it. */
+const WALKED = {
+  'I-04': {
+    name: 'Relumen',
+    type: 'Generatorium',
+    owner: null,
+    income: 15,
+    standing: '+1 Reputation',
+    notes: 'A generatorium that had been dark long enough for the dust to settle in drifts. Archeo-Acquisitions Team 3 found the fault, cleared it, and the stack came back up on its own governors. It has been lit ever since, and nobody holds it.'
+  },
+
+  'I-07': {
+    name: 'Hollowbore',
+    type: 'Mine Workings',
+    owner: null,
+    income: 20,
+    boon: 'Or take two respirators',
+    notes: 'A worked seam the Squats never filed, running back further than the lamps reach. Mycelium Section charted it and came back up with the air filters off the dead. Nobody holds it: it is simply on the map now, and anyone may call for it.'
+  }
+};
+
 for (const s of innerSeeds) {
   const id = s.designation.toLowerCase();
+  const found = WALKED[s.designation] || null;
   const [lx, ly] = centroid(s.block);
   territories.push({
     id,
-    name: null,
+    name: found ? found.name : null,
     designation: s.designation,
     section: 'inner',
-    surveyed: false,
-    type: null,
-    owner: null,
+    surveyed: !!found,
+    type: found ? found.type : null,
+    owner: found ? found.owner : null,
     hidden: false,
-    income: null,
-    boon: null,
+    income: found ? found.income : null,
+    boon: found ? found.boon || null : null,
+    standing: found ? found.standing || null : null,
     contested: false,
     labelX: lx,
     labelY: ly,
     polygon: s.block,
     tunnels: s.onTunnels,
     links: [...adjacency.get(id)].sort(),
-    notes: null
+    notes: found ? found.notes : null
   });
 }
 
@@ -753,9 +780,9 @@ const gateways = [
 const gangs = [
   { id: 'sumptown',            name: 'Sumptown Industries',               short: 'Sumptown',      house: 'House Goliath',      color: '#e03131', credits: 60, reputation: 2 },
   { id: 'chymist-cult',        name: "'Sola Dosis' Chymist Cult",         short: 'Sola Dosis',    house: 'House Escher',       color: '#9d7ad4', logo: 'assets/gangs/chymist-cult.webp', credits: 100, reputation: 2 },
-  { id: 'archeo-3',            name: 'Archeo-Acquisitions Team 3',        short: 'Archeo-3',      house: 'House Van Saar',     color: '#35a9c0' },
-  { id: 'mycelium',            name: 'Mycelium Section',                  short: 'Mycelium',      house: 'House Delaque',      color: '#7d9683', player: 'Anton', logo: 'assets/gangs/mycelium.svg', credits: 30 },
-  { id: 'precinct-22',         name: 'Precinct 22',                       short: 'Precinct 22',   house: 'Palanite Enforcers', color: '#e8c23a' },
+  { id: 'archeo-3',            name: 'Archeo-Acquisitions Team 3',        short: 'Archeo-3',      house: 'House Van Saar',     color: '#35a9c0', reputation: 3 },
+  { id: 'mycelium',            name: 'Mycelium Section',                  short: 'Mycelium',      house: 'House Delaque',      color: '#7d9683', player: 'Anton', logo: 'assets/gangs/mycelium.svg', credits: 90, reputation: 2 },
+  { id: 'precinct-22',         name: 'Precinct 22',                       short: 'Precinct 22',   house: 'Palanite Enforcers', color: '#e8c23a', credits: 40, reputation: 2 },
   { id: 'bjorn-prospectors',   name: 'Bjorn "H.C.L.F" Prospectors Group', short: 'Bjorn H.C.L.F', house: 'Ironhead Squats',    color: '#e8822c' },
   { id: 'resource-extraction', name: 'Resource Extraction LLC',           short: 'Resource Ext.', house: 'Ironhead Squats',    color: '#6f9c33', credits: 40, reputation: 2 }
 ].map((g) => ({ rating: 1100, credits: 0, reputation: 1, motto: '', ...g }));
@@ -844,9 +871,10 @@ const xs = drawn.map((p) => p[0]), ys = drawn.map((p) => p[1]);
     { id: 'psychofamile-pheromones', roll: 6, name: 'Psychofamile Pheromones', kind: 'One-shot', holder: null,
       effect: 'Target an enemy fighter. For one round they are treated as a friendly model.' },
 
-    /* Twelfth piece, and 2d6 has eleven results: this one is not on the
-       table. The arbitrator hands it out. */
-    { id: 'obscuroptikon', name: 'The Obscuroptikon', kind: 'Wargear', holder: null,
+    /* Took the Servo-arc Claw's slot the cycle Team 3 carried that one out
+       of the deep. A piece drops off the table when somebody holds it, and
+       whatever is waiting moves up. */
+    { id: 'obscuroptikon', roll: 11, name: 'The Obscuroptikon', kind: 'Wargear', holder: null,
       effect: 'Ranged attacks targeting the bearer suffer \u22121 to hit. The field shows a shooter a corridor that is not there, and a fighter who walked out of it an hour ago.' },
 
     { id: 'grav-cannon', roll: 3, name: 'Grav Cannon', kind: 'Weapon', holder: null,
@@ -855,7 +883,7 @@ const xs = drawn.map((p) => p[0]), ys = drawn.map((p) => p[1]);
     { id: 'taser-goad', roll: 8, name: 'Taser Goad', kind: 'Weapon', holder: null,
       profile: { range: 'E', str: 'S+1', lethality: 1, traits: ['Melee', 'Shock(5+)', 'Concussive(5+)'] } },
 
-    { id: 'servo-arc-claw', roll: 11, name: 'Servo-arc Claw', kind: 'Weapon', holder: null,
+    { id: 'servo-arc-claw', name: 'Servo-arc Claw', kind: 'Weapon', holder: 'archeo-3',
       profile: { range: 'E', str: 'S+2', ap: '1', lethality: 2, traits: ['Unwieldy', 'Shock(5+)', 'Rending(5+)', 'Damage(2)'] } },
 
     { id: 'servo-chirurgic-claw', roll: 9, name: 'Servo-chirurgic Claw', kind: 'Weapon', holder: null,
@@ -884,11 +912,11 @@ const xs = drawn.map((p) => p[0]), ys = drawn.map((p) => p[1]);
     { id: 'c1-bjorn-deep',   cycle: 1, kind: 'expedition', challenger: 'bjorn-prospectors', target: 'i-06',         defender: 'resource-extraction', status: 'open',
       notes: 'The two prospecting outfits hold ground that touches at Holestead, and the tunnel they both filed on runs under it. Resource Extraction LLC were already down there, with a survey crew and a prior claim they are happy to read aloud.' },
     { id: 'c1-sumptown-yard', cycle: 1, kind: 'challenge',  challenger: 'sumptown',          territory: 'harvest-yard', defender: 'chymist-cult', status: 'settled', battle: 'b2-harvest-yard' },
-    { id: 'c1-archeo-deep',  cycle: 1, kind: 'expedition', challenger: 'archeo-3',          target: 'i-04',         defender: 'mycelium', status: 'open' },
+    { id: 'c1-archeo-deep',  cycle: 1, kind: 'expedition', challenger: 'archeo-3',          target: 'i-04',         defender: 'mycelium', status: 'settled', battle: 'b6-relumen' },
     { id: 'c1-precinct-deep', cycle: 1, kind: 'expedition', challenger: 'precinct-22',      target: 'i-03',         defender: 'archeo-3', status: 'open' },
-    { id: 'c1-mycelium-deep', cycle: 1, kind: 'expedition', challenger: 'mycelium',         target: 'i-07',         defender: 'bjorn-prospectors', status: 'open' },
+    { id: 'c1-mycelium-deep', cycle: 1, kind: 'expedition', challenger: 'mycelium',         target: 'i-07',         defender: 'bjorn-prospectors', status: 'settled', battle: 'b4-hollowbore' },
     { id: 'c1-resource-stair', cycle: 1, kind: 'challenge',  challenger: 'resource-extraction', territory: 'brass-stair', defender: 'chymist-cult', status: 'settled', battle: 'b3-brass-stair' },
-    { id: 'c1-precinct-rustfall', cycle: 1, kind: 'challenge', challenger: 'precinct-22', territory: 'rustfall-row', defender: 'sumptown', status: 'open',
+    { id: 'c1-precinct-rustfall', cycle: 1, kind: 'challenge', challenger: 'precinct-22', territory: 'rustfall-row', defender: 'sumptown', status: 'settled', battle: 'b5-rustfall-row',
       notes: 'A second call from Precinct 22 this cycle, which is one more than the rules allow. Two concessions left half the Reach with nothing to do, so the arbitrator let it stand.' }
   ],
 
@@ -936,7 +964,44 @@ const xs = drawn.map((p) => p[0]), ys = drawn.map((p) => p[1]);
         { gang: 'resource-extraction', credits: 40, rep: 1 },
         { gang: 'chymist-cult',        credits: 30 }
       ],
-      summary: 'Second concession of the cycle. Resource Extraction LLC counted the crates on the dry landings, found nobody arguing, and filed the claim.' }
+      summary: 'Second concession of the cycle. Resource Extraction LLC counted the crates on the dry landings, found nobody arguing, and filed the claim.' },
+
+    { id: 'b4-hollowbore',
+      date: '2026-11-20',
+      scenario: 'Expedition',
+      territory: 'i-07',
+      participants: ['mycelium', 'bjorn-prospectors'],
+      winner: 'mycelium',
+      played: true,
+      rewards: [
+        { gang: 'mycelium', credits: 50, rep: 1, gear: 'Two respirators out of the workings' }
+      ],
+      summary: 'First holding in the deep anyone has walked. Mycelium Section beat the Bjorn Prospectors to the seam and found it worked out but breathable: a mine, a side job paid on the way out, and no archeotech anywhere in it. The ground itself goes on the map unheld — the expedition charted it, it did not claim it.' },
+
+    { id: 'b5-rustfall-row',
+      date: '2026-11-20',
+      scenario: 'Challenge',
+      territory: 'rustfall-row',
+      participants: ['precinct-22', 'sumptown'],
+      winner: 'precinct-22',
+      played: true,
+      rewards: [
+        { gang: 'precinct-22', credits: 40, rep: 1 }
+      ],
+      summary: 'The call the arbitrator let stand, and the Enforcers made it pay. Precinct 22 cleared the stacks off Sumptown Industries and the kitchen at the bottom now serves whoever the Palanites say it serves.' },
+
+    { id: 'b6-relumen',
+      date: '2026-11-20',
+      scenario: 'Expedition',
+      territory: 'i-04',
+      participants: ['archeo-3', 'mycelium'],
+      winner: 'archeo-3',
+      played: true,
+      rewards: [
+        { gang: 'archeo-3', rep: 2, gear: 'The Servo-arc Claw' },
+        { gang: 'mycelium', credits: 10 }
+      ],
+      summary: 'Archeo-Acquisitions Team 3 beat Mycelium Section off the approach and then did what Van Saar do: read the fault, cleared it, and brought the stack back up. One rep for the fight and one for the light. The claw came out of a maintenance cradle nobody had opened.' }
   ]
 };
 
@@ -944,7 +1009,13 @@ writeFileSync('data/campaign.json', JSON.stringify(data, null, 2) + '\n');
 
 const o = territories.filter((t) => t.section === 'outer');
 console.log(`outer ${o.length}: ${o.filter(t => t.owner).length} held, ${o.filter(t => !t.owner).length} unclaimed, ${o.filter(t => t.settlement).length} settlements`);
-console.log(`inner ${territories.filter(t => t.section === 'inner').length}: all unclaimed`);
+{
+  const deep = territories.filter((t) => t.section === 'inner');
+  const walked = deep.filter((t) => t.surveyed);
+  console.log(`inner ${deep.length}: ${walked.length
+    ? walked.map((t) => t.name).join(', ') + ' walked'
+    : 'all unclaimed'}`);
+}
 console.log(`inner border: ${innerPolygon.length} vertices; outer cells touching it: ${o.filter(t => t.bordersInner).length}`);
 const reach = territories.filter((t) => t.bordersInner && t.owner);
 console.log(`reach    ${reach.length} held territories touch the deep: ${reach.map((t) => t.name).join(", ") || "none"}`);
