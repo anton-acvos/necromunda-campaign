@@ -229,7 +229,6 @@
   "gangs": [
     {
       "rating": 1100,
-      "reputation": 2,
       "motto": "",
       "id": "sumptown",
       "name": "Sumptown Industries",
@@ -239,7 +238,6 @@
     },
     {
       "rating": 1100,
-      "reputation": 2,
       "motto": "",
       "id": "chymist-cult",
       "name": "'Sola Dosis' Chymist Cult",
@@ -250,7 +248,6 @@
     },
     {
       "rating": 1100,
-      "reputation": 3,
       "motto": "",
       "id": "archeo-3",
       "name": "Archeo-Acquisitions Team 3",
@@ -260,7 +257,6 @@
     },
     {
       "rating": 1100,
-      "reputation": 2,
       "motto": "",
       "id": "mycelium",
       "name": "Mycelium Section",
@@ -273,7 +269,6 @@
     },
     {
       "rating": 1100,
-      "reputation": 2,
       "motto": "",
       "id": "precinct-22",
       "name": "Precinct 22",
@@ -283,7 +278,6 @@
     },
     {
       "rating": 1100,
-      "reputation": 1,
       "motto": "",
       "id": "bjorn-prospectors",
       "name": "Bjorn \"H.C.L.F\" Prospectors Group",
@@ -293,7 +287,6 @@
     },
     {
       "rating": 1100,
-      "reputation": 2,
       "motto": "",
       "id": "resource-extraction",
       "name": "Resource Extraction LLC",
@@ -442,6 +435,7 @@
       "owner": "sumptown",
       "income": 15,
       "boon": "Or recruit a ganger at a 25 credit discount",
+      "rep": null,
       "contested": false,
       "bordersInner": true,
       "labelX": 484.25,
@@ -488,6 +482,7 @@
       "owner": "sumptown",
       "income": 25,
       "standing": "Goliath hold it, so it pays 25 a cycle instead of the 15 it would pay anyone else",
+      "rep": null,
       "contested": false,
       "bordersInner": true,
       "labelX": 343.48,
@@ -535,6 +530,7 @@
       "owner": "precinct-22",
       "income": 15,
       "boon": "Or recruit a Slopper at a 30 credit discount, if you have none",
+      "rep": null,
       "contested": false,
       "bordersInner": true,
       "labelX": 187.51,
@@ -581,6 +577,7 @@
       "owner": "precinct-22",
       "income": 15,
       "boon": "Or recruit a ganger at a 25 credit discount",
+      "rep": null,
       "contested": false,
       "bordersInner": true,
       "labelX": 116.13,
@@ -623,6 +620,7 @@
       "owner": "precinct-22",
       "income": 20,
       "boon": "Or take two respirators",
+      "rep": null,
       "contested": false,
       "bordersInner": true,
       "labelX": 198.99,
@@ -670,6 +668,7 @@
       "owner": null,
       "income": 15,
       "boon": "Or recruit a Dome Runner at a 30 credit discount, if you have none",
+      "rep": null,
       "contested": false,
       "bordersInner": true,
       "labelX": 210.87,
@@ -717,6 +716,7 @@
       "owner": "archeo-3",
       "income": 15,
       "boon": "Or recruit a ganger at a 25 credit discount",
+      "rep": null,
       "contested": false,
       "bordersInner": true,
       "labelX": 256.67,
@@ -769,6 +769,7 @@
       "owner": "archeo-3",
       "income": 15,
       "standing": "+1 Reputation",
+      "rep": 1,
       "contested": false,
       "bordersInner": false,
       "labelX": 275.96,
@@ -811,6 +812,7 @@
       "settlement": false,
       "owner": null,
       "income": 15,
+      "rep": null,
       "contested": false,
       "bordersInner": true,
       "labelX": 445.4,
@@ -856,6 +858,7 @@
       "owner": "bjorn-prospectors",
       "income": 20,
       "boon": "Or take two respirators",
+      "rep": null,
       "contested": false,
       "bordersInner": true,
       "labelX": 599.8,
@@ -901,6 +904,7 @@
       "owner": "bjorn-prospectors",
       "income": 15,
       "boon": "Or recruit a ganger at a 25 credit discount",
+      "rep": null,
       "contested": false,
       "bordersInner": true,
       "labelX": 785.17,
@@ -950,6 +954,7 @@
       "owner": "resource-extraction",
       "income": 15,
       "boon": "Or recruit a ganger at a 25 credit discount",
+      "rep": null,
       "contested": false,
       "bordersInner": true,
       "labelX": 965.11,
@@ -992,6 +997,7 @@
       "owner": "resource-extraction",
       "income": 20,
       "boon": "Or take two respirators",
+      "rep": null,
       "contested": false,
       "bordersInner": true,
       "labelX": 1128.87,
@@ -1039,6 +1045,7 @@
       "owner": "resource-extraction",
       "income": 15,
       "boon": "Or recruit an Ammo-Jack at a 30 credit discount, if you have none",
+      "rep": null,
       "contested": false,
       "bordersInner": true,
       "labelX": 1283.4,
@@ -1085,6 +1092,7 @@
       "settlement": false,
       "owner": null,
       "income": 20,
+      "rep": null,
       "contested": false,
       "bordersInner": true,
       "labelX": 1447.85,
@@ -1131,6 +1139,7 @@
       "owner": "chymist-cult",
       "income": 15,
       "boon": "Or recruit a ganger at a 25 credit discount",
+      "rep": null,
       "contested": false,
       "bordersInner": true,
       "labelX": 1524.02,
@@ -1177,6 +1186,7 @@
       "owner": "chymist-cult",
       "income": 20,
       "boon": "Escher only: instead of the income, add two lasguns to the stash for free",
+      "rep": null,
       "effect": "Faulty Machinery: at the start of each end phase, randomly select a fighter from each gang. If that fighter is active, they become suppressed.",
       "contested": false,
       "bordersInner": true,
@@ -1220,6 +1230,7 @@
       "owner": null,
       "income": 15,
       "standing": "+1 Reputation",
+      "rep": 1,
       "contested": false,
       "bordersInner": true,
       "labelX": 1287.75,
@@ -1265,6 +1276,7 @@
       "owner": "mycelium",
       "income": 15,
       "boon": "Or recruit a ganger at a 25 credit discount",
+      "rep": null,
       "contested": false,
       "bordersInner": true,
       "labelX": 1163.37,
@@ -1309,6 +1321,7 @@
       "settlement": false,
       "owner": "mycelium",
       "income": 25,
+      "rep": null,
       "contested": false,
       "bordersInner": true,
       "labelX": 1028.92,
@@ -1353,6 +1366,7 @@
       "owner": "chymist-cult",
       "income": 15,
       "boon": "Or recruit a Rogue Doc at a 30 credit discount, if you have none",
+      "rep": null,
       "contested": false,
       "bordersInner": true,
       "labelX": 839.48,
@@ -1397,6 +1411,7 @@
       "settlement": false,
       "owner": "sumptown",
       "income": 25,
+      "rep": null,
       "contested": false,
       "bordersInner": true,
       "labelX": 656.27,
@@ -1444,6 +1459,7 @@
       "income": null,
       "boon": null,
       "standing": null,
+      "rep": null,
       "contested": false,
       "labelX": 543.3,
       "labelY": 1009.51,
@@ -1503,6 +1519,7 @@
       "income": null,
       "boon": null,
       "standing": null,
+      "rep": null,
       "contested": false,
       "labelX": 383.9,
       "labelY": 932.34,
@@ -1557,6 +1574,7 @@
       "income": null,
       "boon": null,
       "standing": null,
+      "rep": null,
       "contested": false,
       "labelX": 440.31,
       "labelY": 774.57,
@@ -1616,6 +1634,7 @@
       "income": 15,
       "boon": null,
       "standing": "+1 Reputation",
+      "rep": 1,
       "contested": false,
       "labelX": 453.47,
       "labelY": 598.55,
@@ -1670,6 +1689,7 @@
       "income": null,
       "boon": null,
       "standing": null,
+      "rep": null,
       "contested": false,
       "labelX": 549.54,
       "labelY": 469.7,
@@ -1722,6 +1742,7 @@
       "income": null,
       "boon": null,
       "standing": null,
+      "rep": null,
       "contested": false,
       "labelX": 732.75,
       "labelY": 414.91,
@@ -1769,6 +1790,7 @@
       "income": 20,
       "boon": "Or take two respirators",
       "standing": null,
+      "rep": null,
       "contested": false,
       "labelX": 913.31,
       "labelY": 466.1,
@@ -1828,6 +1850,7 @@
       "income": null,
       "boon": null,
       "standing": null,
+      "rep": null,
       "contested": false,
       "labelX": 1124.03,
       "labelY": 631.73,
@@ -1882,6 +1905,7 @@
       "income": null,
       "boon": null,
       "standing": null,
+      "rep": null,
       "contested": false,
       "labelX": 1250.6,
       "labelY": 775.32,
@@ -1946,6 +1970,7 @@
       "income": null,
       "boon": null,
       "standing": null,
+      "rep": null,
       "contested": false,
       "labelX": 1096.44,
       "labelY": 915.95,
@@ -1998,6 +2023,7 @@
       "income": null,
       "boon": null,
       "standing": null,
+      "rep": null,
       "contested": false,
       "labelX": 937.48,
       "labelY": 1039.3,
@@ -2050,6 +2076,7 @@
       "income": null,
       "boon": null,
       "standing": null,
+      "rep": null,
       "contested": false,
       "labelX": 727.02,
       "labelY": 1050.51,
@@ -2102,6 +2129,7 @@
       "income": null,
       "boon": null,
       "standing": null,
+      "rep": null,
       "contested": false,
       "labelX": 872.84,
       "labelY": 869.17,
@@ -2154,6 +2182,7 @@
       "income": null,
       "boon": null,
       "standing": null,
+      "rep": null,
       "contested": false,
       "labelX": 693.84,
       "labelY": 872.19,
@@ -2206,6 +2235,7 @@
       "income": null,
       "boon": null,
       "standing": null,
+      "rep": null,
       "contested": false,
       "labelX": 624.54,
       "labelY": 726.37,
@@ -2253,6 +2283,7 @@
       "income": null,
       "boon": null,
       "standing": null,
+      "rep": null,
       "contested": false,
       "labelX": 714.92,
       "labelY": 586,
@@ -2305,6 +2336,7 @@
       "income": null,
       "boon": null,
       "standing": null,
+      "rep": null,
       "contested": false,
       "labelX": 882.7,
       "labelY": 646.72,
@@ -2362,6 +2394,7 @@
       "income": null,
       "boon": null,
       "standing": null,
+      "rep": null,
       "contested": false,
       "labelX": 1013.43,
       "labelY": 758.15,
@@ -2604,6 +2637,15 @@
       "battle": "b4-hollowbore"
     },
     {
+      "id": "c1-chymist-deep",
+      "cycle": 1,
+      "kind": "expedition",
+      "challenger": "chymist-cult",
+      "target": "i-17",
+      "status": "open",
+      "notes": "The Chymist Cult filed on I-17 off the back of what came out of the Hollowbore: it sits one wall over from the workings Mycelium Section charted, and whatever is breathable down there is of professional interest. Nobody has been paired with them yet."
+    },
+    {
       "id": "c1-resource-stair",
       "cycle": 1,
       "kind": "challenge",
@@ -2713,9 +2755,13 @@
       "rewards": [
         {
           "gang": "mycelium",
-          "credits": 50,
+          "primary": 40,
+          "sidejob": 10,
           "rep": 1,
           "gear": "Two respirators out of the workings"
+        },
+        {
+          "gang": "bjorn-prospectors"
         }
       ],
       "summary": "First holding in the deep anyone has walked. Mycelium Section beat the Bjorn Prospectors to the seam and found it worked out but breathable: a mine, a side job paid on the way out, and no archeotech anywhere in it. The ground itself goes on the map unheld — the expedition charted it, it did not claim it."
@@ -2734,8 +2780,12 @@
       "rewards": [
         {
           "gang": "precinct-22",
-          "credits": 40,
+          "primary": 20,
+          "sidejob": 20,
           "rep": 1
+        },
+        {
+          "gang": "sumptown"
         }
       ],
       "summary": "The call the arbitrator let stand, and the Enforcers made it pay. Precinct 22 cleared the stacks off Sumptown Industries and the kitchen at the bottom now serves whoever the Palanites say it serves."
@@ -2754,15 +2804,25 @@
       "rewards": [
         {
           "gang": "archeo-3",
+          "primary": 20,
+          "sidejob": 20,
+          "credits": 15,
           "rep": 2,
-          "gear": "The Servo-arc Claw"
+          "xp": 14,
+          "takedowns": 3,
+          "outOfAction": 0,
+          "gear": "The Servo-arc Claw",
+          "notes": "The fifteen came with the discovery, along with the point of reputation for lighting the stack."
         },
         {
           "gang": "mycelium",
-          "credits": 10
+          "primary": 10,
+          "xp": 7,
+          "takedowns": 0,
+          "outOfAction": 3
         }
       ],
-      "summary": "Archeo-Acquisitions Team 3 beat Mycelium Section off the approach and then did what Van Saar do: read the fault, cleared it, and brought the stack back up. One rep for the fight and one for the light. The claw came out of a maintenance cradle nobody had opened."
+      "summary": "Archeo-Acquisitions Team 3 beat Mycelium Section off the approach and then did what Van Saar do: read the fault, cleared it, and brought the stack back up. One rep for the fight and one for the light, twenty credits for the win, twenty for the side job and fifteen for lighting the place at all. The claw came out of a maintenance cradle nobody had opened."
     }
   ]
 }

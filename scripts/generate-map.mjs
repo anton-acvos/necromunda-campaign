@@ -128,7 +128,7 @@ const outer = [
   { id: 'the-pit-market',     name: 'The Pit Market',         type: 'Mine Workings',         owner: 'precinct-22',          settlement: false,  income: 20, boon: 'Or take two respirators', notes: 'A worked-out pit the Enforcers reopened and now run themselves. The market that gave it its name trades on the spoil heap at the top.' },
   { id: 'coil-gardens',       name: 'The Coil Gardens',       type: 'Fence Hangout',         owner: null,                   settlement: false,  income: 15, boon: 'Or recruit a Dome Runner at a 30 credit discount, if you have none', notes: 'Pipework grown into a thicket, and a dozen quiet doors inside it. Whatever leaves the sector by the back way goes through here first.' },
   { id: 'reclaimers-breach',  name: "Reclaimers' Breach",     type: 'Settlement',            owner: 'archeo-3',             settlement: true,   income: 15, boon: 'Or recruit a ganger at a 25 credit discount', notes: 'Team 3 cut their way in here and named it for the work. The Tech-Acquisitor party staged out of this hold; their last transmission was a set of coordinates and nothing else.' },
-  { id: 'generatorium',       name: 'The Generatorium',       type: 'Generatorium',          owner: 'archeo-3',             settlement: false,  income: 15, standing: '+1 Reputation', notes: 'Plasma conduits that have not gone cold in ten thousand years. Team 3 metered the output before they posted a single guard.' },
+  { id: 'generatorium',       name: 'The Generatorium',       type: 'Generatorium',          owner: 'archeo-3',             settlement: false,  income: 15, standing: '+1 Reputation', rep: 1, notes: 'Plasma conduits that have not gone cold in ten thousand years. Team 3 metered the output before they posted a single guard.' },
   { id: 'cog-market',         name: 'The Cog Market',         type: 'Tech Bazaar',           owner: null,                   settlement: false,  income: 15, notes: 'The up-hive draught comes down the old vent and keeps the stalls cool. Half the tech on the tables was still working when somebody pulled it out.' },
   { id: 'cinder-yard',        name: 'Cinder Yard',            type: 'Mine Workings',         owner: 'bjorn-prospectors',    settlement: false,  income: 20, boon: 'Or take two respirators', notes: 'Ash heaps that shift without warning. Three gangs are still down there somewhere.' },
   { id: 'grudgehold',         name: 'Grudgehold',             type: 'Settlement',            owner: 'bjorn-prospectors',    settlement: true,   income: 15, boon: 'Or recruit a ganger at a 25 credit discount', notes: 'Cut into the rock and ledgered to the last slate. Bjorn filed the claim first and has the paperwork to prove it.' },
@@ -138,7 +138,7 @@ const outer = [
   { id: 'weeping-still',      name: 'The Weeping Still',      type: 'Synth Still',           owner: null,                   settlement: false,  income: 20, notes: 'Groundwater bleeds through the rockcrete in sheets and the condensers underneath catch every drop. What comes out the other end is sold as medicine.' },
   { id: 'quarantines-end',    name: "Quarantine's End",       type: 'Settlement',            owner: 'chymist-cult',         settlement: true,   income: 15, boon: 'Or recruit a ganger at a 25 credit discount', notes: 'A cracked crystalflex dome, sealed off for something nobody will name and unsealed by the Chymists, who insist the air is clean now.' },
   { id: 'the-still-rows',     name: 'The Still Rows',         type: 'Rogue Las Factoria',    owner: 'chymist-cult',         settlement: false,  income: 20, boon: 'Escher only: instead of the income, add two lasguns to the stash for free', effect: 'Faulty Machinery: at the start of each end phase, randomly select a fighter from each gang. If that fighter is active, they become suppressed.', notes: 'Condensers in rows the length of a dome, half of them re-tooled to stamp power cells. Sola Dosis insists the fumes are therapeutic and the lasguns are legal.' },
-  { id: 'black-ledger',       name: 'The Black Ledger',       type: 'Gambling Den',          owner: null,                   settlement: false,  income: 15, standing: '+1 Reputation', notes: 'Debts here are recorded in a real book. People have died trying to edit it.' },
+  { id: 'black-ledger',       name: 'The Black Ledger',       type: 'Gambling Den',          owner: null,                   settlement: false,  income: 15, standing: '+1 Reputation', rep: 1, notes: 'Debts here are recorded in a real book. People have died trying to edit it.' },
   { id: 'sunken-nave',        name: 'The Sunken Nave',        type: 'Settlement',            owner: 'mycelium',             settlement: true,   income: 15, boon: 'Or recruit a ganger at a 25 credit discount', notes: 'Cawdor built it, something else kept it. Mycelium Section took the crypts and left the nave to the candles.' },
   { id: 'ratgut-tunnels',    name: 'Ratgut Tunnels',         type: 'Bounty Den',            owner: 'mycelium',             settlement: false,  income: 25, notes: 'Not mapped, not mappable. Mycelium Section charges for guides and keeps a second ledger of who is worth money to somebody up-hive.' },
   { id: 'the-bonepipe',       name: 'The Bonepipe',           type: 'Rogue Doc Shop',        owner: 'chymist-cult',         settlement: false,  income: 15, boon: 'Or recruit a Rogue Doc at a 30 credit discount, if you have none', notes: 'The doc is good. The doc is also why several gangers answer to new names.' },
@@ -653,6 +653,7 @@ const territories = outerSeeds.map((s) => {
     income: t.income,
     boon: t.boon,
     standing: t.standing,
+    rep: t.rep || null,
     effect: t.effect,
     contested: !!t.contested,
     bordersInner,
@@ -680,6 +681,7 @@ const WALKED = {
     owner: null,
     income: 15,
     standing: '+1 Reputation',
+    rep: 1,
     notes: 'A generatorium that had been dark long enough for the dust to settle in drifts. Archeo-Acquisitions Team 3 found the fault, cleared it, and the stack came back up on its own governors. It has been lit ever since, and nobody holds it.'
   },
 
@@ -709,6 +711,7 @@ for (const s of innerSeeds) {
     income: found ? found.income : null,
     boon: found ? found.boon || null : null,
     standing: found ? found.standing || null : null,
+    rep: found ? found.rep || null : null,
     contested: false,
     labelX: lx,
     labelY: ly,
@@ -778,14 +781,14 @@ const gateways = [
 /* ---------- gangs ---------- */
 
 const gangs = [
-  { id: 'sumptown',            name: 'Sumptown Industries',               short: 'Sumptown',      house: 'House Goliath',      color: '#e03131', reputation: 2 },
-  { id: 'chymist-cult',        name: "'Sola Dosis' Chymist Cult",         short: 'Sola Dosis',    house: 'House Escher',       color: '#9d7ad4', logo: 'assets/gangs/chymist-cult.webp', reputation: 2 },
-  { id: 'archeo-3',            name: 'Archeo-Acquisitions Team 3',        short: 'Archeo-3',      house: 'House Van Saar',     color: '#35a9c0', reputation: 3 },
-  { id: 'mycelium',            name: 'Mycelium Section',                  short: 'Mycelium',      house: 'House Delaque',      color: '#7d9683', player: 'Anton', logo: 'assets/gangs/mycelium.svg', reputation: 2, roster: 'data/rosters/mycelium.json' },
-  { id: 'precinct-22',         name: 'Precinct 22',                       short: 'Precinct 22',   house: 'Palanite Enforcers', color: '#e8c23a', reputation: 2 },
+  { id: 'sumptown',            name: 'Sumptown Industries',               short: 'Sumptown',      house: 'House Goliath',      color: '#e03131' },
+  { id: 'chymist-cult',        name: "'Sola Dosis' Chymist Cult",         short: 'Sola Dosis',    house: 'House Escher',       color: '#9d7ad4', logo: 'assets/gangs/chymist-cult.webp' },
+  { id: 'archeo-3',            name: 'Archeo-Acquisitions Team 3',        short: 'Archeo-3',      house: 'House Van Saar',     color: '#35a9c0' },
+  { id: 'mycelium',            name: 'Mycelium Section',                  short: 'Mycelium',      house: 'House Delaque',      color: '#7d9683', player: 'Anton', logo: 'assets/gangs/mycelium.svg', roster: 'data/rosters/mycelium.json' },
+  { id: 'precinct-22',         name: 'Precinct 22',                       short: 'Precinct 22',   house: 'Palanite Enforcers', color: '#e8c23a' },
   { id: 'bjorn-prospectors',   name: 'Bjorn "H.C.L.F" Prospectors Group', short: 'Bjorn H.C.L.F', house: 'Ironhead Squats',    color: '#e8822c' },
-  { id: 'resource-extraction', name: 'Resource Extraction LLC',           short: 'Resource Ext.', house: 'Ironhead Squats',    color: '#6f9c33', reputation: 2 }
-].map((g) => ({ rating: 1100, reputation: 1, motto: '', ...g }));
+  { id: 'resource-extraction', name: 'Resource Extraction LLC',           short: 'Resource Ext.', house: 'Ironhead Squats',    color: '#6f9c33' }
+].map((g) => ({ rating: 1100, motto: '', ...g }));
 
 /* ---------- emit ---------- */
 
@@ -915,6 +918,8 @@ const xs = drawn.map((p) => p[0]), ys = drawn.map((p) => p[1]);
     { id: 'c1-archeo-deep',  cycle: 1, kind: 'expedition', challenger: 'archeo-3',          target: 'i-04',         defender: 'mycelium', status: 'settled', battle: 'b6-relumen' },
     { id: 'c1-precinct-deep', cycle: 1, kind: 'expedition', challenger: 'precinct-22',      target: 'i-03',         defender: 'archeo-3', status: 'open' },
     { id: 'c1-mycelium-deep', cycle: 1, kind: 'expedition', challenger: 'mycelium',         target: 'i-07',         defender: 'bjorn-prospectors', status: 'settled', battle: 'b4-hollowbore' },
+    { id: 'c1-chymist-deep', cycle: 1, kind: 'expedition', challenger: 'chymist-cult',     target: 'i-17',         status: 'open',
+      notes: 'The Chymist Cult filed on I-17 off the back of what came out of the Hollowbore: it sits one wall over from the workings Mycelium Section charted, and whatever is breathable down there is of professional interest. Nobody has been paired with them yet.' },
     { id: 'c1-resource-stair', cycle: 1, kind: 'challenge',  challenger: 'resource-extraction', territory: 'brass-stair', defender: 'chymist-cult', status: 'settled', battle: 'b3-brass-stair' },
     { id: 'c1-precinct-rustfall', cycle: 1, kind: 'challenge', challenger: 'precinct-22', territory: 'rustfall-row', defender: 'sumptown', status: 'settled', battle: 'b5-rustfall-row',
       notes: 'A second call from Precinct 22 this cycle, which is one more than the rules allow. Two concessions left half the Reach with nothing to do, so the arbitrator let it stand.' }
@@ -931,6 +936,26 @@ const xs = drawn.map((p) => p[0]), ys = drawn.map((p) => p[1]);
      line that will be read back in six weeks' time, so it says where the
      money came from, not what it was for. */
   ledger: [],
+
+  /* The log. Each battle carries one reward entry per gang that turned up,
+     win or lose, and that entry is the whole record of the game for them:
+
+       primary      credits from the primary mission
+       sidejob      credits from the side job
+       credits      any other credits (a concession, a consolation, a find)
+       rep          reputation gained
+       xp           total experience the gang earned
+       takedowns    the other side's models taken out of action
+       outOfAction  their own models taken out of action
+       gear         anything that came back with them, in words
+       notes        anything else worth reading back
+
+     Money is three fields rather than one total because the two missions
+     pay separately and the arbitrator is told them separately. Everything
+     the site shows — a gang's stash, its reputation, how many models it
+     has put down — is added up from these, so nothing is kept twice.
+
+     A battle nobody played carries no combat numbers: there was no game. */
 
   battles: [
     { id: 'b1-bonepipe',
@@ -984,7 +1009,8 @@ const xs = drawn.map((p) => p[0]), ys = drawn.map((p) => p[1]);
       winner: 'mycelium',
       played: true,
       rewards: [
-        { gang: 'mycelium', credits: 50, rep: 1, gear: 'Two respirators out of the workings' }
+        { gang: 'mycelium', primary: 40, sidejob: 10, rep: 1, gear: 'Two respirators out of the workings' },
+        { gang: 'bjorn-prospectors' }
       ],
       summary: 'First holding in the deep anyone has walked. Mycelium Section beat the Bjorn Prospectors to the seam and found it worked out but breathable: a mine, a side job paid on the way out, and no archeotech anywhere in it. The ground itself goes on the map unheld — the expedition charted it, it did not claim it.' },
 
@@ -996,7 +1022,8 @@ const xs = drawn.map((p) => p[0]), ys = drawn.map((p) => p[1]);
       winner: 'precinct-22',
       played: true,
       rewards: [
-        { gang: 'precinct-22', credits: 40, rep: 1 }
+        { gang: 'precinct-22', primary: 20, sidejob: 20, rep: 1 },
+        { gang: 'sumptown' }
       ],
       summary: 'The call the arbitrator let stand, and the Enforcers made it pay. Precinct 22 cleared the stacks off Sumptown Industries and the kitchen at the bottom now serves whoever the Palanites say it serves.' },
 
@@ -1008,10 +1035,11 @@ const xs = drawn.map((p) => p[0]), ys = drawn.map((p) => p[1]);
       winner: 'archeo-3',
       played: true,
       rewards: [
-        { gang: 'archeo-3', rep: 2, gear: 'The Servo-arc Claw' },
-        { gang: 'mycelium', credits: 10 }
+        { gang: 'archeo-3', primary: 20, sidejob: 20, credits: 15, rep: 2, xp: 14, takedowns: 3, outOfAction: 0, gear: 'The Servo-arc Claw',
+          notes: 'The fifteen came with the discovery, along with the point of reputation for lighting the stack.' },
+        { gang: 'mycelium', primary: 10, xp: 7, takedowns: 0, outOfAction: 3 }
       ],
-      summary: 'Archeo-Acquisitions Team 3 beat Mycelium Section off the approach and then did what Van Saar do: read the fault, cleared it, and brought the stack back up. One rep for the fight and one for the light. The claw came out of a maintenance cradle nobody had opened.' }
+      summary: 'Archeo-Acquisitions Team 3 beat Mycelium Section off the approach and then did what Van Saar do: read the fault, cleared it, and brought the stack back up. One rep for the fight and one for the light, twenty credits for the win, twenty for the side job and fifteen for lighting the place at all. The claw came out of a maintenance cradle nobody had opened.' }
   ]
 };
 

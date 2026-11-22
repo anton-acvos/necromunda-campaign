@@ -56,6 +56,9 @@
     return gangOf(t.owner);
   }
 
+  /* Every gang comes into the campaign on one reputation. */
+  var BASE_REP = 1;
+
   function visibleGangs() {
     return (state.data.gangs || []).filter(function (g) { return !g.hidden; });
   }
@@ -64,7 +67,7 @@
      gangs on the site. Name breaks the tie, which keeps the order steady
      between loads instead of leaving it to the data file. */
   function byRep(a, b) {
-    return ((b.reputation || 0) - (a.reputation || 0)) ||
+    return (repOf(b) - repOf(a)) ||
            (a.name || '').localeCompare(b.name || '');
   }
 
@@ -630,7 +633,7 @@
     /* Reputation leads; ground held and rating break the tie before the
        name does. */
     var sorted = visibleGangs().slice().sort(function (a, b) {
-      return ((b.reputation || 0) - (a.reputation || 0)) ||
+      return (repOf(b) - repOf(a)) ||
              (counts[b.id] - counts[a.id]) ||
              ((b.rating || 0) - (a.rating || 0)) ||
              (a.name || '').localeCompare(b.name || '');
@@ -655,7 +658,7 @@
 
       tr.appendChild(h('td', 'num', String(counts[g.id])));
       tr.appendChild(h('td', 'num', g.rating != null ? String(g.rating) : '—'));
-      tr.appendChild(h('td', 'num', g.reputation != null ? String(g.reputation) : '—'));
+      tr.appendChild(h('td', 'num', String(repOf(g))));
       body.appendChild(tr);
     });
 
@@ -1067,6 +1070,49 @@
     return Number(m[3]) + ' ' + months[Number(m[2]) - 1];
   }
 
+  /* One gang's record of one battle. Credits, reputation and experience
+     first, then what it cost in bodies, then anything that came back with
+     them. A side with nothing written down yet says so rather than
+     pretending the game was bloodless. */
+  function recordLine(r, b) {
+    var row = h('div', 'log-paid');
+    var side = h('span', 'log-paid-one');
+    var gg = gangOf(r.gang);
+    if (gg) {
+      var sw = h('span', 'swatch');
+      sw.style.background = gg.color;
+      side.appendChild(sw);
+    }
+    side.appendChild(h('span', 'log-paid-who', gg ? (gg.short || gg.name) : r.gang));
+
+    var bits = [];
+    PAYOUTS.forEach(function (kind) {
+      if (r[kind[0]]) {
+        bits.push(r[kind[0]] + ' cr' + (kind[1] ? ' ' + kind[1] : ''));
+      }
+    });
+    if (r.rep) bits.push((r.rep > 0 ? '+' : '') + r.rep + ' rep');
+    if (r.xp) bits.push(r.xp + ' XP');
+    /* A nought is a result, not a blank: a gang that came through a game
+       without losing anybody wants that written down. */
+    if (r.takedowns != null) bits.push(r.takedowns ? r.takedowns + ' taken out' : 'none taken out');
+    if (r.outOfAction != null) bits.push(r.outOfAction ? r.outOfAction + ' lost' : 'none lost');
+
+    if (!bits.length) {
+      side.appendChild(h('span', 'log-paid-none',
+        b.played === false ? 'no game played' : 'nothing recorded yet'));
+    } else {
+      side.appendChild(h('span', 'log-paid-bits', bits.join('  \u00b7  ')));
+    }
+    row.appendChild(side);
+
+    var extra = [];
+    if (r.gear) extra.push(r.gear);
+    if (r.notes) extra.push(r.notes);
+    if (extra.length) row.appendChild(h('p', 'log-paid-extra', extra.join(' — ')));
+    return row;
+  }
+
   function renderLog() {
     var wrap = h('section', 'log');
     wrap.appendChild(h('h3', 'log-head', 'The log'));
@@ -1101,28 +1147,11 @@
       var outcome = w ? (w.short || w.name) + ' took it' : 'no decisive result';
       body.appendChild(h('p', 'log-who', who ? who + ' — ' + outcome : outcome));
 
-      /* what each side walked away with, where it has been rolled */
-      if ((b.rewards || []).length) {
-        var paid = h('p', 'log-paid');
-        b.rewards.forEach(function (r, n) {
-          if (n) paid.appendChild(h('span', 'log-sep', '\u00b7'));
-          var side = h('span', 'log-paid-one');
-          var gg = gangOf(r.gang);
-          if (gg) {
-            var sw = h('span', 'swatch');
-            sw.style.background = gg.color;
-            side.appendChild(sw);
-          }
-          var bits = [];
-          if (r.credits != null) bits.push(r.credits + ' cr');
-          if (r.rep) bits.push((r.rep > 0 ? '+' : '') + r.rep + ' rep');
-          if (r.gear) bits.push(r.gear);
-          side.appendChild(document.createTextNode(
-            (gg ? (gg.short || gg.name) : r.gang) + ' ' + bits.join(', ')));
-          paid.appendChild(side);
-        });
-        body.appendChild(paid);
-      }
+      /* What each side came away with: a line apiece, because a battle has
+         two records and the loser's is worth reading too. */
+      (b.rewards || []).forEach(function (r) {
+        body.appendChild(recordLine(r, b));
+      });
 
       if (b.summary) body.appendChild(h('p', 'log-sum', b.summary));
 
@@ -1241,6 +1270,30 @@
     });
   }
 
+  /* ---------- what a battle paid ----------
+
+     The two missions pay separately and anything else — a concession, a
+     consolation, credits that came with a discovery — is its own field, so
+     a payout is read as three numbers and added up in one place. */
+  var PAYOUTS = [
+    ['primary', 'primary mission'],
+    ['sidejob', 'side job'],
+    ['credits', null]
+  ];
+
+  function payoutOf(r) {
+    return (r.primary || 0) + (r.sidejob || 0) + (r.credits || 0);
+  }
+
+  /* Every model this gang has put down, across the whole campaign. */
+  function takedownsOf(gang) {
+    return (state.data.battles || []).reduce(function (n, b) {
+      return n + (b.rewards || []).reduce(function (m, r) {
+        return m + (r.gang === gang.id ? (r.takedowns || 0) : 0);
+      }, 0);
+    }, 0);
+  }
+
   /* ---------- the stash ----------
 
      A gang's stash is not a number in the data. It is every line of money
@@ -1254,13 +1307,18 @@
 
     (state.data.battles || []).forEach(function (b) {
       (b.rewards || []).forEach(function (r) {
-        if (r.gang !== gang.id || r.credits == null) return;
+        if (r.gang !== gang.id) return;
         var t = b.territory ? state.byId[b.territory] : null;
-        out.push({
-          date: b.date,
-          amount: r.credits,
-          what: (b.scenario || 'Battle') + (t ? ' \u2014 ' + displayName(t) : ''),
-          battle: b.id
+        var where = (b.scenario || 'Battle') + (t ? ' \u2014 ' + displayName(t) : '');
+        PAYOUTS.forEach(function (kind) {
+          var n = r[kind[0]];
+          if (!n) return;
+          out.push({
+            date: b.date,
+            amount: n,
+            what: where + (kind[1] ? ' \u00b7 ' + kind[1] : ''),
+            battle: b.id
+          });
         });
       });
     });
@@ -1319,6 +1377,40 @@
     body.appendChild(tbl);
     box.appendChild(body);
     return box;
+  }
+
+  /* ---------- reputation ----------
+
+     Reputation is not a number in the data either. Every gang starts the
+     campaign on one, battles pay more, and a holding with a standing pays
+     for exactly as long as it is held — so losing the ground loses the
+     reputation with it, without anyone having to remember to take it off
+     again. */
+  function repLines(gang) {
+    var out = [{ what: 'Starting reputation', amount: BASE_REP }];
+
+    (state.data.battles || []).forEach(function (b) {
+      (b.rewards || []).forEach(function (r) {
+        if (r.gang !== gang.id || !r.rep) return;
+        var t = b.territory ? state.byId[b.territory] : null;
+        out.push({
+          date: b.date,
+          amount: r.rep,
+          what: (b.scenario || 'Battle') + (t ? ' \u2014 ' + displayName(t) : '')
+        });
+      });
+    });
+
+    holdingsOf(gang).concat(surveyedDeepOf(gang)).forEach(function (t) {
+      if (!t.rep) return;
+      out.push({ amount: t.rep, what: displayName(t) + ', while it is held', held: true });
+    });
+
+    return out;
+  }
+
+  function repOf(gang) {
+    return repLines(gang).reduce(function (n, e) { return n + (e.amount || 0); }, 0);
   }
 
   /* A walked holding in the deep pays like any other. It takes no
@@ -1559,8 +1651,9 @@
     [
       ['Rating', g.rating != null ? g.rating : '\u2014'],
       ['Stash', stashOf(g)],
-      ['Rep', g.reputation != null ? g.reputation : '\u2014'],
-      ['Income', incomeOf(g) + '/cycle']
+      ['Rep', repOf(g)],
+      ['Income', incomeOf(g) + '/cycle'],
+      ['Taken out', takedownsOf(g)]
     ].forEach(function (pair) {
       var cell = h('div', 'gang-stat');
       cell.appendChild(h('span', 'gang-stat-label', pair[0]));
@@ -1661,8 +1754,10 @@
     host.appendChild(grid);
 
     host.appendChild(h('p', 'hint plan-hint',
-      'Rating, stash and reputation are whatever the arbitrator last wrote into ' +
-      'data/campaign.json. Income is worked out from the holdings listed here.'));
+      'Rating is whatever the arbitrator last wrote into data/campaign.json. ' +
+      'Stash, reputation and income are all worked out: the stash from every ' +
+      'payout on record, reputation from one to start plus the battles and the ' +
+      'standings of the ground held, income from the holdings listed here.'));
   }
 
   /* ---------- tabs ---------- */

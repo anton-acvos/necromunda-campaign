@@ -862,8 +862,12 @@ body {
 
 .log-what { font-size: 0.92rem; display: flex; align-items: center; gap: 7px; flex-wrap: wrap; }
 .log-who { font-size: 0.84rem; color: var(--ink-dim); }
-.log-paid { font-size: 0.8rem; display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
-.log-paid-one { display: inline-flex; align-items: center; gap: 6px; font-family: var(--mono); font-size: 0.74rem; color: var(--ink-dim); }
+.log-paid { font-size: 0.8rem; display: flex; flex-direction: column; align-items: flex-start; gap: 2px; }
+.log-paid-one { display: flex; align-items: baseline; flex-wrap: wrap; gap: 4px 8px; font-family: var(--mono); font-size: 0.74rem; color: var(--ink-dim); }
+.log-paid-who { color: var(--ink); }
+.log-paid-none { color: var(--ink-faint); font-style: italic; }
+.log-paid-extra { margin: 1px 0 0 21px; font-size: 0.78rem; line-height: 1.4; color: var(--ink-faint); max-width: 70ch; }
+.log-paid .swatch { align-self: center; }
 .log-paid .swatch { margin: 0; }
 .log-sep { color: var(--ink-faint); }
 .log-sum { font-size: 0.84rem; line-height: 1.45; color: var(--ink-faint); max-width: 70ch; }

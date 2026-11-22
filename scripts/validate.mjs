@@ -89,6 +89,10 @@ for (const [i, g] of gangs.entries()) {
   else if (!/^#[0-9a-fA-F]{6}$/.test(g.color)) err(`${at}.color: expected #rrggbb, got "${g.color}"`);
   if (!g.short) warn(`${at}.short: no short map label; the map falls back to the house name (${g.name})`);
   if (g.rating != null && typeof g.rating !== 'number') err(`${at}.rating: must be a number`);
+  if (g.reputation !== undefined) {
+    err(`${at}.reputation: reputation is worked out from the battles and the ` +
+        `standings of the ground held, so it is not stored on a gang`);
+  }
 }
 
 /* The N26 territory types: the core D66 table, plus the house journal holdings.
@@ -137,6 +141,19 @@ for (const [i, t] of territories.entries()) {
       err(`${at}.income: expected whole credits a cycle, got ${JSON.stringify(t.income)}`);
     }
     if (t.settlement) settlements++;
+  }
+
+  /* A holding that pays reputation carries the number as well as the line
+     of prose, because the number is what the site adds up. */
+  if (t.rep !== undefined && t.rep !== null) {
+    if (!Number.isInteger(t.rep) || t.rep < 1) {
+      err(`${at}.rep: expected whole reputation paid while held, got ${JSON.stringify(t.rep)}`);
+    }
+    if (!t.standing) {
+      err(`${at}.rep: a holding that pays reputation needs a standing line saying so`);
+    }
+  } else if (t.standing && /reputation/i.test(t.standing)) {
+    err(`${at}.standing: says reputation but no rep number, so nothing is added up`);
   }
 
   if (t.section === 'inner') {
@@ -363,6 +380,47 @@ for (const [i, r] of (data.archeotech ?? []).entries()) {
   }
 }
 
+/* --- a battle record: one entry per gang that turned up ---
+
+   Credits arrive as up to three fields and every count is a whole number
+   of models or points, because the site adds them up rather than printing
+   them. A battle nobody played carries no combat numbers: there was no
+   game to take anything out of. */
+const REWARD_COUNTS = ['primary', 'sidejob', 'credits', 'xp', 'takedowns', 'outOfAction'];
+const REWARD_COMBAT = ['xp', 'takedowns', 'outOfAction'];
+
+function checkRecord(at, b, r) {
+  for (const k of REWARD_COUNTS) {
+    if (r[k] === undefined || r[k] === null) continue;
+    if (!Number.isInteger(r[k]) || r[k] < 0) {
+      err(`${at}.${k}: expected a whole count, got ${JSON.stringify(r[k])}`);
+    }
+  }
+  if (b.played === false) {
+    for (const k of REWARD_COMBAT) {
+      if (r[k]) err(`${at}.${k}: "${b.id}" was never played, so nothing happened in it`);
+    }
+  }
+  if (r.notes != null && typeof r.notes !== 'string') err(`${at}.notes: expected a line of text`);
+  if ((b.participants ?? []).length && !(b.participants ?? []).includes(r.gang)) {
+    err(`${at}.gang: "${r.gang}" is not down as having turned up to "${b.id}"`);
+  }
+}
+
+/* Both sides of a two-gang game count the same bodies from opposite ends:
+   what one side took out is what the other side lost. A mismatch is worth
+   a look but not an error — a model can go down without being put down. */
+function checkBodies(b) {
+  const rs = (b.rewards ?? []).filter((r) => r.takedowns != null || r.outOfAction != null);
+  if ((b.participants ?? []).length !== 2 || rs.length !== 2) return;
+  const [x, y] = rs;
+  for (const [p, q] of [[x, y], [y, x]]) {
+    if (p.takedowns != null && q.outOfAction != null && p.takedowns !== q.outOfAction) {
+      warn(`${b.id}: ${p.gang} took out ${p.takedowns} but ${q.gang} only lost ${q.outOfAction}`);
+    }
+  }
+}
+
 /* --- battles --- */
 for (const [i, b] of (data.battles ?? []).entries()) {
   for (const r of b.rewards ?? []) {
@@ -376,7 +434,9 @@ for (const [i, b] of (data.battles ?? []).entries()) {
     if (r.gear != null && typeof r.gear !== 'string') {
       err(`battles[${i}] (${b.id}).rewards: gear must be a line of text`);
     }
+    checkRecord(`battles[${i}] (${b.id}).rewards[${r.gang}]`, b, r);
   }
+  checkBodies(b);
   if (b.played != null && typeof b.played !== 'boolean') {
     err(`battles[${i}] (${b.id}): played must be true or false`);
   }

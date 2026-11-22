@@ -211,6 +211,42 @@ is whole credits a cycle, `boon` is the alternative you may take instead of
 the income, and `standing` is an effect that applies the whole time you hold
 the place.
 
+### A battle record
+
+A settled battle carries one entry in `rewards` for **each gang that turned
+up**, win or lose, and that entry is the whole record of the game for them:
+
+| field | what it holds |
+| --- | --- |
+| `primary` | credits from the primary mission |
+| `sidejob` | credits from the side job |
+| `credits` | any other credits — a concession, a consolation, a find |
+| `rep` | reputation gained |
+| `xp` | total experience the gang earned |
+| `takedowns` | the other side's models taken out of action |
+| `outOfAction` | their own models taken out of action |
+| `gear` | anything that came back with them, in words |
+| `notes` | anything else worth reading back |
+
+Money is three fields rather than one total because the two missions pay
+separately. Everything the site shows is added up from these: the stash
+lists each mission as its own line, reputation adds the `rep`, and the Gangs
+tab's **Taken out** stat is every `takedowns` a gang has ever been credited
+with. A battle with `played: false` may carry credits and reputation but no
+combat numbers — there was no game — and the validator enforces that, warns
+when one side's takedowns do not match the other side's losses, and rejects
+an entry for a gang that is not in `participants`.
+
+### Reputation
+
+Reputation is not stored either. A gang starts the campaign on **1**, each
+`rep` on a battle's `rewards` adds to it, and a held territory with a `rep`
+number pays that for as long as it is held — drop the ground and the
+reputation goes with it, with nothing to remember. A territory carries both
+`standing` (the line the site prints, e.g. `+1 Reputation`) and `rep` (the
+number that gets added up); the validator rejects a standing that mentions
+reputation without a `rep`, and rejects a `reputation` field on a gang.
+
 ### The stash
 
 A gang's stash is not stored. It is worked out from every line of money that
