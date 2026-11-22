@@ -279,6 +279,8 @@ for (const [i, r] of (data.archeotech ?? []).entries()) {
   if (seen.size && missing.length) warn(`archeotech: no piece on 2d6 result ${missing.join(', ')}`);
 }
 
+const rosterNames = new Map();
+
 /* --- rosters ---
 
    A roster lives in its own file so a fighter edit never rewrites the map.
@@ -291,7 +293,7 @@ for (const [i, r] of (data.archeotech ?? []).entries()) {
      summary has nothing to count them as. The rest of the list is free. */
   const RANKS = new Set([
     'Leader', 'Champion', 'Ganger', 'Prospect', 'Juve',
-    'Brute', 'Beast', 'Hanger-on'
+    'Brute', 'Beast', 'Hybrid', 'Hanger-on'
   ]);
 
   for (const g of data.gangs ?? []) {
@@ -322,6 +324,14 @@ for (const [i, r] of (data.archeotech ?? []).entries()) {
       if (f.id == null) err(`${at}.id: required`);
       else if (seen.has(f.id)) err(`${at}.id: duplicate "${f.id}"`);
       else seen.add(f.id);
+
+      if (f.xp != null && (!Number.isInteger(f.xp) || f.xp < 0)) {
+        err(`${at}.xp: expected whole experience, got ${JSON.stringify(f.xp)}`);
+      }
+      if (f.name) {
+        if (!rosterNames.has(g.id)) rosterNames.set(g.id, new Set());
+        rosterNames.get(g.id).add(f.name);
+      }
 
       if (!Array.isArray(f.keywords) || !f.keywords.length) {
         err(`${at}.keywords: expected the fighter's keyword list`);
@@ -373,6 +383,9 @@ for (const [i, r] of (data.archeotech ?? []).entries()) {
       err(`${at}.amount: expected whole credits, in or negative out`);
     }
     if (!e.what) err(`${at}.what: required — one line saying where it came from`);
+    if (!Number.isInteger(e.cycle) || e.cycle < 1) {
+      err(`${at}.cycle: required — the stash is read in campaign time`);
+    }
     if (e.date && !/^\d{4}-\d{2}-\d{2}$/.test(e.date)) err(`${at}.date: expected YYYY-MM-DD`);
     if (e.battle) {
       err(`${at}.battle: a battle's payout belongs on the battle, not here`);
@@ -402,6 +415,19 @@ function checkRecord(at, b, r) {
     }
   }
   if (r.notes != null && typeof r.notes !== 'string') err(`${at}.notes: expected a line of text`);
+  for (const [j, f] of (r.fighters ?? []).entries()) {
+    const fat = `${at}.fighters[${j}]`;
+    if (!f.fighter) err(`${fat}.fighter: required — name the fighter off the roster`);
+    if (f.xp != null && (!Number.isInteger(f.xp) || f.xp < 0)) {
+      err(`${fat}.xp: expected whole experience, got ${JSON.stringify(f.xp)}`);
+    }
+    if (f.outOfAction != null && typeof f.outOfAction !== 'boolean') {
+      err(`${fat}.outOfAction: true or false — a count belongs on the gang's record`);
+    }
+    if (b.played === false && (f.xp || f.outOfAction)) {
+      err(`${fat}: "${b.id}" was never played, so nobody did anything in it`);
+    }
+  }
   if ((b.participants ?? []).length && !(b.participants ?? []).includes(r.gang)) {
     err(`${at}.gang: "${r.gang}" is not down as having turned up to "${b.id}"`);
   }
@@ -410,6 +436,34 @@ function checkRecord(at, b, r) {
 /* Both sides of a two-gang game count the same bodies from opposite ends:
    what one side took out is what the other side lost. A mismatch is worth
    a look but not an error — a model can go down without being put down. */
+/* A gang's record carries the totals; the per-fighter lines are the same
+   game told one model at a time. They are allowed to disagree — a gang can
+   earn experience no fighter is credited with, and a model can go down
+   without an enemy putting it there — but a disagreement is worth a look. */
+function checkCrew(b, rosters) {
+  for (const r of b.rewards ?? []) {
+    const crew = r.fighters ?? [];
+    if (!crew.length) continue;
+
+    const xp = crew.reduce((n, f) => n + (f.xp ?? 0), 0);
+    if (r.xp != null && xp !== r.xp) {
+      warn(`${b.id}: ${r.gang} is down for ${r.xp} XP but the fighters add up to ${xp}`);
+    }
+    const down = crew.filter((f) => f.outOfAction).length;
+    if (r.outOfAction != null && down !== r.outOfAction) {
+      warn(`${b.id}: ${r.gang} is down for ${r.outOfAction} out of action but ${down} marked`);
+    }
+
+    const names = rosters.get(r.gang);
+    if (!names) continue;
+    for (const f of crew) {
+      if (f.fighter && !names.has(f.fighter)) {
+        warn(`${b.id}: "${f.fighter}" is not a name on ${r.gang}'s roster`);
+      }
+    }
+  }
+}
+
 function checkBodies(b) {
   const rs = (b.rewards ?? []).filter((r) => r.takedowns != null || r.outOfAction != null);
   if ((b.participants ?? []).length !== 2 || rs.length !== 2) return;
@@ -437,6 +491,12 @@ for (const [i, b] of (data.battles ?? []).entries()) {
     checkRecord(`battles[${i}] (${b.id}).rewards[${r.gang}]`, b, r);
   }
   checkBodies(b);
+  checkCrew(b, rosterNames);
+  if (!Number.isInteger(b.cycle) || b.cycle < 1) {
+    err(`battles[${i}] (${b.id}).cycle: required — the log is read in campaign time, not by date`);
+  } else if (data.campaign?.cycle != null && b.cycle > data.campaign.cycle) {
+    err(`battles[${i}] (${b.id}).cycle: ${b.cycle} is after the campaign's own cycle ${data.campaign.cycle}`);
+  }
   if (b.played != null && typeof b.played !== 'boolean') {
     err(`battles[${i}] (${b.id}): played must be true or false`);
   }

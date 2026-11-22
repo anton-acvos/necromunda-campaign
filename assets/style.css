@@ -868,6 +868,79 @@ body {
 .log-paid-none { color: var(--ink-faint); font-style: italic; }
 .log-paid-extra { margin: 1px 0 0 21px; font-size: 0.78rem; line-height: 1.4; color: var(--ink-faint); max-width: 70ch; }
 .log-paid .swatch { align-self: center; }
+
+/* --- a column per gang, in the half of the card nothing was using --- */
+
+.log-row.has-sides { grid-template-columns: 58px minmax(0, 1fr) minmax(0, 1.05fr); }
+
+.log-sides {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+  align-items: start;
+  padding-left: 14px;
+  border-left: 1px solid var(--line);
+}
+
+.log-sides.is-one { grid-template-columns: minmax(0, 1fr); }
+
+.log-sides .log-paid-extra { margin-left: 0; }
+
+.crew-list {
+  list-style: none;
+  margin: 8px 0 0;
+  padding: 0;
+  display: grid;
+  gap: 4px;
+}
+
+.crew {
+  border-left: 2px solid var(--line);
+  padding-left: 8px;
+  cursor: help;
+}
+
+.crew.is-down { border-left-color: var(--warn); }
+.crew > * { margin: 0; }
+
+.crew-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 8px;
+  font-size: 0.78rem;
+}
+
+.crew-name { color: var(--ink); }
+
+.crew-xp {
+  font-family: var(--mono);
+  font-size: 0.68rem;
+  color: var(--ink-dim);
+  white-space: nowrap;
+}
+
+.crew-hurt {
+  font-family: var(--mono);
+  font-size: 0.66rem;
+  letter-spacing: 0.04em;
+  color: var(--warn);
+}
+
+@media (max-width: 1000px) {
+  .log-row.has-sides { grid-template-columns: 58px minmax(0, 1fr); }
+  .log-sides {
+    grid-column: 1 / -1;
+    padding-left: 0;
+    border-left: none;
+    border-top: 1px solid var(--line);
+    padding-top: 10px;
+  }
+}
+
+@media (max-width: 620px) {
+  .log-sides { grid-template-columns: minmax(0, 1fr); }
+}
 .log-paid .swatch { margin: 0; }
 .log-sep { color: var(--ink-faint); }
 .log-sum { font-size: 0.84rem; line-height: 1.45; color: var(--ink-faint); max-width: 70ch; }
@@ -1132,6 +1205,14 @@ body {
   white-space: nowrap;
 }
 
+.fighter-xp {
+  font-family: var(--mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.06em;
+  color: var(--ink-faint);
+  white-space: nowrap;
+}
+
 .fighter-role {
   margin: 2px 0 8px;
   font-size: 0.76rem;
@@ -1225,7 +1306,43 @@ body {
   font-size: 0.72rem;
   color: var(--ink-faint);
   white-space: nowrap;
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
 }
+
+.led-cycle { color: var(--ink-dim); }
+.led-phase { font-size: 0.64rem; letter-spacing: 0.06em; text-transform: uppercase; }
+
+.log-link {
+  appearance: none;
+  background: none;
+  border: none;
+  padding: 0;
+  font: inherit;
+  color: var(--ink);
+  text-align: left;
+  text-decoration: underline;
+  text-decoration-color: var(--line-bright);
+  text-underline-offset: 2px;
+  cursor: pointer;
+}
+
+.log-link:hover,
+.log-link:focus-visible { text-decoration-color: currentColor; }
+
+.led-part { color: var(--ink-faint); }
+.led-part::before { content: '\00a0\00b7\00a0'; }
+
+.log-when { display: flex; flex-direction: column; gap: 1px; }
+.log-phase { font-size: 0.6rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--ink-faint); }
+
+@keyframes log-flash {
+  from { background: var(--line-bright); }
+  to   { background: transparent; }
+}
+
+.log-row.is-flash { animation: log-flash 1.6s ease-out; }
 
 .ledger-table td.led-what { color: var(--ink-dim); }
 

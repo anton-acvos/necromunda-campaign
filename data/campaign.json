@@ -247,13 +247,15 @@
       "logo": "assets/gangs/chymist-cult.webp"
     },
     {
-      "rating": 1100,
+      "rating": 1095,
       "motto": "",
       "id": "archeo-3",
       "name": "Archeo-Acquisitions Team 3",
       "short": "Archeo-3",
       "house": "House Van Saar",
-      "color": "#35a9c0"
+      "color": "#35a9c0",
+      "player": "Gawarges",
+      "roster": "data/rosters/archeo-3.json"
     },
     {
       "rating": 1100,
@@ -2672,6 +2674,7 @@
     {
       "id": "b1-bonepipe",
       "date": "2026-11-15",
+      "cycle": 1,
       "scenario": "Challenge declined",
       "territory": "the-bonepipe",
       "participants": [
@@ -2696,6 +2699,7 @@
     {
       "id": "b2-harvest-yard",
       "date": "2026-11-15",
+      "cycle": 1,
       "scenario": "Defence conceded",
       "territory": "harvest-yard",
       "participants": [
@@ -2720,6 +2724,7 @@
     {
       "id": "b3-brass-stair",
       "date": "2026-11-15",
+      "cycle": 1,
       "scenario": "Defence conceded",
       "territory": "brass-stair",
       "participants": [
@@ -2744,6 +2749,7 @@
     {
       "id": "b4-hollowbore",
       "date": "2026-11-20",
+      "cycle": 1,
       "scenario": "Expedition",
       "territory": "i-07",
       "participants": [
@@ -2769,6 +2775,7 @@
     {
       "id": "b5-rustfall-row",
       "date": "2026-11-20",
+      "cycle": 1,
       "scenario": "Challenge",
       "territory": "rustfall-row",
       "participants": [
@@ -2793,6 +2800,7 @@
     {
       "id": "b6-relumen",
       "date": "2026-11-20",
+      "cycle": 1,
       "scenario": "Expedition",
       "territory": "i-04",
       "participants": [
@@ -2812,14 +2820,74 @@
           "takedowns": 3,
           "outOfAction": 0,
           "gear": "The Servo-arc Claw",
-          "notes": "The fifteen came with the discovery, along with the point of reputation for lighting the stack."
+          "notes": "The fifteen came with the discovery, along with the point of reputation for lighting the stack.",
+          "fighters": [
+            {
+              "fighter": "Skorgen \"Fixer\" Plasen",
+              "xp": 2,
+              "xpFor": "Standing on an objective, and the point for turning up"
+            },
+            {
+              "fighter": "Krell \"Crackles\" Rache",
+              "xp": 5,
+              "xpFor": "Three for putting the leader out of action, one for an objective, one for turning up"
+            },
+            {
+              "fighter": "Spydr 17",
+              "xp": 4,
+              "xpFor": "Three for putting the champion out of action, one for turning up"
+            },
+            {
+              "fighter": "Skarper \"Gofer\" Raleski",
+              "xp": 2,
+              "xpFor": "Standing on an objective, and the point for turning up"
+            },
+            {
+              "fighter": "Kirsche \"Deathwish\" Pashkel",
+              "xp": 1,
+              "xpFor": "Turning up",
+              "note": "Ran out of ammunition while missing exclusively."
+            }
+          ]
         },
         {
           "gang": "mycelium",
           "primary": 10,
           "xp": 7,
           "takedowns": 0,
-          "outOfAction": 3
+          "outOfAction": 3,
+          "fighters": [
+            {
+              "fighter": "Slippery Jack",
+              "xp": 2,
+              "xpFor": "An objective, and the point for turning up",
+              "outOfAction": true,
+              "injury": "Enfeebled"
+            },
+            {
+              "fighter": "Destroying Angel",
+              "xp": 1,
+              "xpFor": "Turning up",
+              "outOfAction": true,
+              "injury": "Out cold"
+            },
+            {
+              "fighter": "Amanita",
+              "xp": 1,
+              "xpFor": "Turning up",
+              "note": "Bottled out. No lasting injuries."
+            },
+            {
+              "fighter": "Galerina",
+              "xp": 2,
+              "xpFor": "An objective, and the point for turning up"
+            },
+            {
+              "fighter": "Puffball",
+              "xp": 1,
+              "xpFor": "Turning up"
+            }
+          ]
         }
       ],
       "summary": "Archeo-Acquisitions Team 3 beat Mycelium Section off the approach and then did what Van Saar do: read the fault, cleared it, and brought the stack back up. One rep for the fight and one for the light, twenty credits for the win, twenty for the side job and fifteen for lighting the place at all. The claw came out of a maintenance cradle nobody had opened."

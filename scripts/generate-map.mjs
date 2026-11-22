@@ -783,7 +783,7 @@ const gateways = [
 const gangs = [
   { id: 'sumptown',            name: 'Sumptown Industries',               short: 'Sumptown',      house: 'House Goliath',      color: '#e03131' },
   { id: 'chymist-cult',        name: "'Sola Dosis' Chymist Cult",         short: 'Sola Dosis',    house: 'House Escher',       color: '#9d7ad4', logo: 'assets/gangs/chymist-cult.webp' },
-  { id: 'archeo-3',            name: 'Archeo-Acquisitions Team 3',        short: 'Archeo-3',      house: 'House Van Saar',     color: '#35a9c0' },
+  { id: 'archeo-3',            name: 'Archeo-Acquisitions Team 3',        short: 'Archeo-3',      house: 'House Van Saar',     color: '#35a9c0', player: 'Gawarges', rating: 1095, roster: 'data/rosters/archeo-3.json' },
   { id: 'mycelium',            name: 'Mycelium Section',                  short: 'Mycelium',      house: 'House Delaque',      color: '#7d9683', player: 'Anton', logo: 'assets/gangs/mycelium.svg', roster: 'data/rosters/mycelium.json' },
   { id: 'precinct-22',         name: 'Precinct 22',                       short: 'Precinct 22',   house: 'Palanite Enforcers', color: '#e8c23a' },
   { id: 'bjorn-prospectors',   name: 'Bjorn "H.C.L.F" Prospectors Group', short: 'Bjorn H.C.L.F', house: 'Ironhead Squats',    color: '#e8822c' },
@@ -926,7 +926,12 @@ const xs = drawn.map((p) => p[0]), ys = drawn.map((p) => p[1]);
   ],
 
   /* The log. A challenge that nobody turned up for is still how ground
-     changed hands, so it goes in here with the games. */
+     changed hands, so it goes in here with the games.
+
+     Every entry carries the cycle it happened in. The real-world date is
+     kept because it is how the arbitrator finds a game again, but nothing
+     on the site is ordered or labelled by it: campaign time is what the
+     players think in, and the phase is worked out from the cycle. */
   /* Money that did not come out of a battle. A battle's own rewards are
      already written down on the battle, so they are not repeated here: the
      site adds the two together and that sum IS the stash. Nobody keeps a
@@ -955,11 +960,26 @@ const xs = drawn.map((p) => p[0]), ys = drawn.map((p) => p[1]);
      the site shows — a gang's stash, its reputation, how many models it
      has put down — is added up from these, so nothing is kept twice.
 
-     A battle nobody played carries no combat numbers: there was no game. */
+     A battle nobody played carries no combat numbers: there was no game.
+
+     fighters is the same game told one model at a time. Each line names a
+     fighter off that gang's roster and says what they came out of it with:
+
+       fighter      the name on the roster
+       xp           experience that fighter earned
+       xpFor        what the experience was for, in words
+       outOfAction  true if they went out of action
+       injury       what they picked up, if anything lasting
+       note         anything else worth reading back
+
+     The gang's own xp on the record above is the total, not a sum the
+     site works out, because a gang can earn experience no fighter is
+     credited with. */
 
   battles: [
     { id: 'b1-bonepipe',
       date: '2026-11-15',
+      cycle: 1,
       scenario: 'Challenge declined',
       territory: 'the-bonepipe',
       participants: ['chymist-cult', 'mycelium'],
@@ -977,6 +997,7 @@ const xs = drawn.map((p) => p[0]), ys = drawn.map((p) => p[1]);
 
     { id: 'b2-harvest-yard',
       date: '2026-11-15',
+      cycle: 1,
       scenario: 'Defence conceded',
       territory: 'harvest-yard',
       participants: ['sumptown', 'chymist-cult'],
@@ -990,6 +1011,7 @@ const xs = drawn.map((p) => p[0]), ys = drawn.map((p) => p[1]);
 
     { id: 'b3-brass-stair',
       date: '2026-11-15',
+      cycle: 1,
       scenario: 'Defence conceded',
       territory: 'brass-stair',
       participants: ['resource-extraction', 'chymist-cult'],
@@ -1003,6 +1025,7 @@ const xs = drawn.map((p) => p[0]), ys = drawn.map((p) => p[1]);
 
     { id: 'b4-hollowbore',
       date: '2026-11-20',
+      cycle: 1,
       scenario: 'Expedition',
       territory: 'i-07',
       participants: ['mycelium', 'bjorn-prospectors'],
@@ -1016,6 +1039,7 @@ const xs = drawn.map((p) => p[0]), ys = drawn.map((p) => p[1]);
 
     { id: 'b5-rustfall-row',
       date: '2026-11-20',
+      cycle: 1,
       scenario: 'Challenge',
       territory: 'rustfall-row',
       participants: ['precinct-22', 'sumptown'],
@@ -1029,6 +1053,7 @@ const xs = drawn.map((p) => p[0]), ys = drawn.map((p) => p[1]);
 
     { id: 'b6-relumen',
       date: '2026-11-20',
+      cycle: 1,
       scenario: 'Expedition',
       territory: 'i-04',
       participants: ['archeo-3', 'mycelium'],
@@ -1036,8 +1061,26 @@ const xs = drawn.map((p) => p[0]), ys = drawn.map((p) => p[1]);
       played: true,
       rewards: [
         { gang: 'archeo-3', primary: 20, sidejob: 20, credits: 15, rep: 2, xp: 14, takedowns: 3, outOfAction: 0, gear: 'The Servo-arc Claw',
-          notes: 'The fifteen came with the discovery, along with the point of reputation for lighting the stack.' },
-        { gang: 'mycelium', primary: 10, xp: 7, takedowns: 0, outOfAction: 3 }
+          notes: 'The fifteen came with the discovery, along with the point of reputation for lighting the stack.',
+          fighters: [
+            { fighter: 'Skorgen "Fixer" Plasen', xp: 2, xpFor: 'Standing on an objective, and the point for turning up' },
+            { fighter: 'Krell "Crackles" Rache', xp: 5, xpFor: 'Three for putting the leader out of action, one for an objective, one for turning up' },
+            { fighter: 'Spydr 17', xp: 4, xpFor: 'Three for putting the champion out of action, one for turning up' },
+            { fighter: 'Skarper "Gofer" Raleski', xp: 2, xpFor: 'Standing on an objective, and the point for turning up' },
+            { fighter: 'Kirsche "Deathwish" Pashkel', xp: 1, xpFor: 'Turning up',
+              note: 'Ran out of ammunition while missing exclusively.' }
+          ] },
+        { gang: 'mycelium', primary: 10, xp: 7, takedowns: 0, outOfAction: 3,
+          fighters: [
+            { fighter: 'Slippery Jack', xp: 2, xpFor: 'An objective, and the point for turning up',
+              outOfAction: true, injury: 'Enfeebled' },
+            { fighter: 'Destroying Angel', xp: 1, xpFor: 'Turning up',
+              outOfAction: true, injury: 'Out cold' },
+            { fighter: 'Amanita', xp: 1, xpFor: 'Turning up',
+              note: 'Bottled out. No lasting injuries.' },
+            { fighter: 'Galerina', xp: 2, xpFor: 'An objective, and the point for turning up' },
+            { fighter: 'Puffball', xp: 1, xpFor: 'Turning up' }
+          ] }
       ],
       summary: 'Archeo-Acquisitions Team 3 beat Mycelium Section off the approach and then did what Van Saar do: read the fault, cleared it, and brought the stack back up. One rep for the fight and one for the light, twenty credits for the win, twenty for the side job and fifteen for lighting the place at all. The claw came out of a maintenance cradle nobody had opened.' }
   ]

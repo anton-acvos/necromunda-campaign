@@ -211,6 +211,15 @@ is whole credits a cycle, `boon` is the alternative you may take instead of
 the income, and `standing` is an effect that applies the whole time you hold
 the place.
 
+### Campaign time
+
+Everything the players read is dated by **cycle**, never by the calendar.
+A battle and a ledger entry both carry a `cycle`, and the phase is worked
+out from it through `campaign.phases`, so the two can never disagree. The
+real-world `date` stays in the data — it is how the arbitrator finds a game
+again — but nothing is ordered or labelled by it. In the stash, a line that
+came out of a game links back to that entry in the log.
+
 ### A battle record
 
 A settled battle carries one entry in `rewards` for **each gang that turned
@@ -227,6 +236,16 @@ up**, win or lose, and that entry is the whole record of the game for them:
 | `outOfAction` | their own models taken out of action |
 | `gear` | anything that came back with them, in words |
 | `notes` | anything else worth reading back |
+
+A record may also carry `fighters`: the same game told one model at a
+time. Each line names a fighter off that gang's roster and carries `xp`,
+`xpFor` (what the experience was for, in words), `outOfAction`, `injury`
+and `note`. The log card gives each gang a column of its own and lists them
+there, showing the name and the experience, with `xpFor` and `note` in the
+tooltip. The gang's own `xp` and `outOfAction` stay the totals — a gang can
+earn experience no fighter is credited with, and a model can go down
+without an enemy putting it there — but the validator warns when the two
+disagree, and when a named fighter is not on that gang's roster.
 
 Money is three fields rather than one total because the two missions pay
 separately. Everything the site shows is added up from these: the stash

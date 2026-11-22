@@ -689,6 +689,18 @@
     return plan.length ? plan[plan.length - 1].to : 0;
   }
 
+  /* How a moment in the campaign is named: the cycle, and the phase that
+     cycle falls in. Nothing the players read is dated by the calendar. */
+  function whenOf(cycle) {
+    if (cycle == null) return { cycle: null, phase: null, label: 'Before the log' };
+    var p = phaseOfCycle(cycle);
+    return {
+      cycle: cycle,
+      phase: p ? p.name.replace(/ Phase$/, '') : null,
+      label: 'Cycle ' + cycle + (p ? ' \u00b7 ' + p.name.replace(/ Phase$/, '') : '')
+    };
+  }
+
   function phaseOfCycle(cycle) {
     var hit = phasePlan().filter(function (b) { return cycle >= b.from && cycle <= b.to; })[0];
     return hit ? hit.phase : null;
@@ -762,6 +774,33 @@
      read it, and nothing is known about what is in one until a gang walks
      it. Two expeditions nominating neighbours is the interesting part, and
      it only reads that way if the board is on the table. */
+  /* What to call a battle out loud: what was played, and where. The id is
+     for the data; this is for the page. */
+  function battleName(b) {
+    if (!b) return 'a battle';
+    var t = b.territory ? state.byId[b.territory] : null;
+    return (b.scenario || 'Battle') + (t ? ' at ' + displayName(t) : '');
+  }
+
+  /* Jump to that battle in the log, wherever the reader is. */
+  function goToLog(id) {
+    showTab('campaign');
+    var row = document.getElementById('log-' + id);
+    if (!row) return;
+    if (row.scrollIntoView) row.scrollIntoView({ block: 'center' });
+    row.classList.remove('is-flash');
+    /* reading offsetWidth restarts the animation on a second click */
+    void row.offsetWidth;
+    row.classList.add('is-flash');
+  }
+
+  function logLink(b) {
+    var btn = h('button', 'log-link', battleName(b));
+    btn.type = 'button';
+    btn.addEventListener('click', function () { goToLog(b.id); });
+    return btn;
+  }
+
   function battleOf(id) {
     var found = (state.data.battles || []).filter(function (b) { return b.id === id; });
     return found.length ? found[0] : null;
@@ -1074,6 +1113,30 @@
      first, then what it cost in bodies, then anything that came back with
      them. A side with nothing written down yet says so rather than
      pretending the game was bloodless. */
+  /* One fighter's share of one game. The line says what they earned and
+     what it cost them; why they earned it is in the tooltip, because the
+     reasons are the same five phrases over and over and the numbers are
+     what anybody is reading for. */
+  function crewLine(f) {
+    var li = h('li', 'crew' + (f.outOfAction ? ' is-down' : ''));
+
+    var why = [];
+    if (f.xpFor) why.push(f.xpFor);
+    if (f.note) why.push(f.note);
+    if (why.length) li.title = why.join(' ');
+
+    var top = h('p', 'crew-head');
+    top.appendChild(h('span', 'crew-name', f.fighter || 'A fighter'));
+    if (f.xp != null) top.appendChild(h('span', 'crew-xp', f.xp + ' XP'));
+    li.appendChild(top);
+
+    var hurt = [];
+    if (f.outOfAction) hurt.push('out of action');
+    if (f.injury) hurt.push(f.injury);
+    if (hurt.length) li.appendChild(h('p', 'crew-hurt', hurt.join(', ')));
+    return li;
+  }
+
   function recordLine(r, b) {
     var row = h('div', 'log-paid');
     var side = h('span', 'log-paid-one');
@@ -1110,6 +1173,12 @@
     if (r.gear) extra.push(r.gear);
     if (r.notes) extra.push(r.notes);
     if (extra.length) row.appendChild(h('p', 'log-paid-extra', extra.join(' — ')));
+
+    if ((r.fighters || []).length) {
+      var crew = h('ul', 'crew-list');
+      r.fighters.forEach(function (f) { crew.appendChild(crewLine(f)); });
+      row.appendChild(crew);
+    }
     return row;
   }
 
@@ -1126,7 +1195,12 @@
     var list = h('ol', 'log-list');
     rows.forEach(function (b) {
       var row = h('li', 'log-row');
-      row.appendChild(h('span', 'log-when', logDate(b.date)));
+      if (b.id) row.id = 'log-' + b.id;
+      var when = whenOf(b.cycle);
+      var stamp = h('span', 'log-when');
+      stamp.appendChild(h('span', 'log-cycle', when.cycle != null ? 'Cycle ' + when.cycle : logDate(b.date)));
+      if (when.phase) stamp.appendChild(h('span', 'log-phase', when.phase));
+      row.appendChild(stamp);
 
       var body = h('div', 'log-body');
 
@@ -1147,15 +1221,22 @@
       var outcome = w ? (w.short || w.name) + ' took it' : 'no decisive result';
       body.appendChild(h('p', 'log-who', who ? who + ' — ' + outcome : outcome));
 
-      /* What each side came away with: a line apiece, because a battle has
-         two records and the loser's is worth reading too. */
-      (b.rewards || []).forEach(function (r) {
-        body.appendChild(recordLine(r, b));
-      });
+      /* The records do not go here. They go in the empty half of the
+         card, a column to a gang, because a battle has two sides and the
+         loser's is worth reading too. */
 
       if (b.summary) body.appendChild(h('p', 'log-sum', b.summary));
 
       row.appendChild(body);
+
+      var rewards = b.rewards || [];
+      if (rewards.length) {
+        row.classList.add('has-sides');
+        var sides = h('div', 'log-sides' + (rewards.length === 1 ? ' is-one' : ''));
+        rewards.forEach(function (r) { sides.appendChild(recordLine(r, b)); });
+        row.appendChild(sides);
+      }
+
       list.appendChild(row);
     });
 
@@ -1308,15 +1389,14 @@
     (state.data.battles || []).forEach(function (b) {
       (b.rewards || []).forEach(function (r) {
         if (r.gang !== gang.id) return;
-        var t = b.territory ? state.byId[b.territory] : null;
-        var where = (b.scenario || 'Battle') + (t ? ' \u2014 ' + displayName(t) : '');
         PAYOUTS.forEach(function (kind) {
           var n = r[kind[0]];
           if (!n) return;
           out.push({
+            cycle: b.cycle,
             date: b.date,
             amount: n,
-            what: where + (kind[1] ? ' \u00b7 ' + kind[1] : ''),
+            what: kind[1],
             battle: b.id
           });
         });
@@ -1328,10 +1408,12 @@
       out.push({ date: e.date, amount: e.amount || 0, what: e.what, cycle: e.cycle });
     });
 
-    /* Newest first, and a line with no date sits with the oldest rather
-       than jumping the queue. */
+    /* Latest cycle first. The calendar date is only a tie-break inside a
+       cycle, and a line with neither sits with the oldest rather than
+       jumping the queue. */
     return out.sort(function (x, y) {
-      return String(y.date || '').localeCompare(String(x.date || ''));
+      return ((y.cycle || 0) - (x.cycle || 0)) ||
+             String(y.date || '').localeCompare(String(x.date || ''));
     });
   }
 
@@ -1362,8 +1444,24 @@
     var tb = h('tbody');
     lines.forEach(function (e) {
       var tr = h('tr');
-      tr.appendChild(h('td', 'led-when', e.date || '\u2013'));
-      tr.appendChild(h('td', 'led-what', e.what || '\u2013'));
+
+      var when = whenOf(e.cycle);
+      var td1 = h('td', 'led-when');
+      td1.appendChild(h('span', 'led-cycle', when.cycle != null ? 'Cycle ' + when.cycle : '\u2013'));
+      if (when.phase) td1.appendChild(h('span', 'led-phase', when.phase));
+      tr.appendChild(td1);
+
+      /* A payout points back at the game it came out of; anything else is
+         just the line somebody wrote down. */
+      var td2 = h('td', 'led-what');
+      var b = e.battle ? battleOf(e.battle) : null;
+      if (b) {
+        td2.appendChild(logLink(b));
+        if (e.what) td2.appendChild(h('span', 'led-part', e.what));
+      } else {
+        td2.appendChild(document.createTextNode(e.what || '\u2013'));
+      }
+      tr.appendChild(td2);
       tr.appendChild(h('td', 'led-amt' + (e.amount < 0 ? ' is-out' : ''),
         (e.amount > 0 ? '+' : '') + e.amount));
       tb.appendChild(tr);
@@ -1452,7 +1550,7 @@
      back out: a fighter who is both Leader and Champion counts once, as
      the highest thing they are. */
   var RANK_ORDER = ['Leader', 'Champion', 'Ganger', 'Prospect', 'Juve',
-                    'Brute', 'Beast', 'Hanger-on'];
+                    'Brute', 'Beast', 'Hybrid', 'Hanger-on'];
 
   function rankOf(f) {
     var kw = f.keywords || [];
@@ -1493,6 +1591,7 @@
     var head = h('div', 'fighter-head');
     head.appendChild(h('h4', 'fighter-name', f.name));
     if (f.rating != null) head.appendChild(h('span', 'fighter-rating', f.rating + ' rating'));
+    if (f.xp != null) head.appendChild(h('span', 'fighter-xp', f.xp + ' XP'));
     card.appendChild(head);
     card.appendChild(h('p', 'fighter-role', rosterLine(f)));
     if (f.status) card.appendChild(h('p', 'fighter-status', f.status));
