@@ -276,7 +276,8 @@
       "name": "Precinct 22",
       "short": "Precinct 22",
       "house": "Palanite Enforcers",
-      "color": "#e8c23a"
+      "color": "#e8c23a",
+      "roster": "data/rosters/precinct-22.json"
     },
     {
       "rating": 1100,
