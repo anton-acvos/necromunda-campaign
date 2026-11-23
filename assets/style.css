@@ -9,6 +9,7 @@
   --line-bright: #4a4039;
   --accent: #d2652a;
   --warn: #f0d060;
+  --good: #8aae6a;
   --deep: #8c99c6;
   --neutral-fill: #2b2521;
   --radius: 10px;
@@ -735,6 +736,11 @@ body {
 
 .tally-gang { display: flex; align-items: center; gap: 8px; }
 .tally-gang .swatch { margin: 0; }
+
+/* A gang with nothing left to fight this cycle. The rows that still owe
+   a game keep the ordinary colour, so the column can be skimmed for who
+   is holding the cycle up. */
+.tally-num.is-complete { color: var(--good); }
 
 .tally-num { font-family: var(--mono); width: 68px; text-align: right; white-space: nowrap; }
 

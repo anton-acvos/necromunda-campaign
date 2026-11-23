@@ -1073,10 +1073,12 @@
 
         /* Played out of booked, as one figure. "2/3" reads faster than
            "3 (2 played)" and keeps the column a column. */
-        var games = h('td', 'tally-num', r.fights ? r.done + '/' + r.fights : '0');
+        var left = r.fights - r.done;
+        var games = h('td', 'tally-num' + (r.fights && !left ? ' is-complete' : ''),
+                      r.fights ? r.done + '/' + r.fights : '0');
         if (r.fights) {
-          var left = r.fights - r.done;
-          games.title = r.done + ' played, ' + left + ' still to fight';
+          games.title = left ? r.done + ' played, ' + left + ' still to fight'
+                             : 'All ' + r.fights + ' played';
         }
         tr.appendChild(games);
 
