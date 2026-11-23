@@ -1273,6 +1273,53 @@ body {
   color: var(--ink-faint);
 }
 
+/* --- the games the log can account for --- */
+
+.fighter-log { margin-top: 8px; }
+
+.flog-list {
+  list-style: none;
+  margin: 4px 0 0;
+  padding: 0;
+  display: grid;
+  gap: 3px;
+}
+
+.flog {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  font-size: 0.74rem;
+  color: var(--ink-dim);
+  border-left: 2px solid var(--line);
+  padding-left: 8px;
+  cursor: help;
+}
+
+.flog.is-down { border-left-color: var(--warn); }
+
+.flog .log-link {
+  font-size: 0.74rem;
+  color: var(--ink-dim);
+}
+
+.flog-xp {
+  font-family: var(--mono);
+  font-size: 0.66rem;
+  letter-spacing: 0.04em;
+  color: var(--ink-faint);
+  white-space: nowrap;
+  margin-left: auto;
+}
+
+.flog-hurt {
+  font-family: var(--mono);
+  font-size: 0.64rem;
+  letter-spacing: 0.04em;
+  color: var(--warn);
+  white-space: nowrap;
+}
+
 
 /* --- where the money came from --- */
 

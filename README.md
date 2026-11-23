@@ -237,6 +237,12 @@ up**, win or lose, and that entry is the whole record of the game for them:
 | `gear` | anything that came back with them, in words |
 | `notes` | anything else worth reading back |
 
+Those same `fighters` lines come back out on the roster card, under
+"From the log": every game the campaign has written down for that fighter,
+with the experience it paid, a link into the log and the reason in the
+tooltip. The sheet's own `xp` stays the total — the log only accounts for
+the part of it that happened since the records started.
+
 A record may also carry `fighters`: the same game told one model at a
 time. Each line names a fighter off that gang's roster and carries `xp`,
 `xpFor` (what the experience was for, in words), `outOfAction`, `injury`

@@ -1367,6 +1367,25 @@
   }
 
   /* Every model this gang has put down, across the whole campaign. */
+  /* Every game the log credits this fighter with, in the order the
+     battles are written. A fighter nobody has written into a record comes
+     back empty, which is the ordinary case for a gang whose games have
+     not been filled in. */
+  function logXpOf(gangId, name) {
+    var out = [];
+    (state.data.battles || []).forEach(function (b) {
+      (b.rewards || []).forEach(function (r) {
+        if (r.gang !== gangId) return;
+        (r.fighters || []).forEach(function (f) {
+          if (f.fighter !== name) return;
+          out.push({ battle: b, xp: f.xp || 0, xpFor: f.xpFor, note: f.note,
+                     outOfAction: f.outOfAction, injury: f.injury });
+        });
+      });
+    });
+    return out;
+  }
+
   function takedownsOf(gang) {
     return (state.data.battles || []).reduce(function (n, b) {
       return n + (b.rewards || []).reduce(function (m, r) {
@@ -1585,7 +1604,7 @@
     return parts.join(' \u00b7 ');
   }
 
-  function fighterCard(f) {
+  function fighterCard(f, gang) {
     var card = h('article', 'fighter');
 
     var head = h('div', 'fighter-head');
@@ -1648,6 +1667,38 @@
       card.appendChild(p);
     });
 
+    /* What the log says this fighter did. The sheet's number is the total
+       and stays in the header; this is the part of it the campaign can
+       account for, game by game. */
+    var games = gang ? logXpOf(gang.id, f.name) : [];
+    if (games.length) {
+      var box = h('div', 'fighter-log');
+      var earned = games.reduce(function (n, g) { return n + g.xp; }, 0);
+      var lead = h('p', 'fighter-extra');
+      lead.appendChild(h('span', 'fighter-extra-label', 'From the log'));
+      lead.appendChild(document.createTextNode(' ' + earned + ' XP across ' +
+        games.length + (games.length === 1 ? ' battle' : ' battles')));
+      box.appendChild(lead);
+
+      var list = h('ul', 'flog-list');
+      games.forEach(function (g) {
+        var li = h('li', 'flog' + (g.outOfAction ? ' is-down' : ''));
+        var why = [];
+        if (g.xpFor) why.push(g.xpFor);
+        if (g.note) why.push(g.note);
+        if (why.length) li.title = why.join(' ');
+        li.appendChild(logLink(g.battle));
+        var hurt = [];
+        if (g.outOfAction) hurt.push('out of action');
+        if (g.injury) hurt.push(g.injury);
+        if (hurt.length) li.appendChild(h('span', 'flog-hurt', hurt.join(', ')));
+        li.appendChild(h('span', 'flog-xp', g.xp + ' XP'));
+        list.appendChild(li);
+      });
+      box.appendChild(list);
+      card.appendChild(box);
+    }
+
     return card;
   }
 
@@ -1667,7 +1718,7 @@
     if (r.updated) {
       host.appendChild(h('p', 'fold-note', 'Sheet as of ' + r.updated + '.'));
     }
-    fs_.forEach(function (f) { host.appendChild(fighterCard(f)); });
+    fs_.forEach(function (f) { host.appendChild(fighterCard(f, gang)); });
   }
 
   /* The fold does the fetching, once, the first time it is opened. */
