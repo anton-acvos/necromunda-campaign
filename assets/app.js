@@ -1607,10 +1607,25 @@
   function fighterCard(f, gang) {
     var card = h('article', 'fighter');
 
+    /* The sheet's experience is where the fighter started: what they had
+       the day the roster was written down. Everything the log has credited
+       them with since is added on, so the number in the corner is what
+       they are worth now rather than what they were worth then. */
+    var games = gang ? logXpOf(gang.id, f.name) : [];
+    var earned = games.reduce(function (n, g) { return n + g.xp; }, 0);
+    var total = (f.xp || 0) + earned;
+
     var head = h('div', 'fighter-head');
     head.appendChild(h('h4', 'fighter-name', f.name));
     if (f.rating != null) head.appendChild(h('span', 'fighter-rating', f.rating + ' rating'));
-    if (f.xp != null) head.appendChild(h('span', 'fighter-xp', f.xp + ' XP'));
+    if (f.xp != null || earned) {
+      var xpEl = h('span', 'fighter-xp' + (earned ? ' is-earned' : ''), total + ' XP');
+      if (earned) {
+        xpEl.title = (f.xp != null ? f.xp + ' on the sheet' : 'nothing on the sheet') +
+                     ', ' + earned + ' since, out of the log.';
+      }
+      head.appendChild(xpEl);
+    }
     card.appendChild(head);
     card.appendChild(h('p', 'fighter-role', rosterLine(f)));
     if (f.status) card.appendChild(h('p', 'fighter-status', f.status));
@@ -1670,14 +1685,13 @@
     /* What the log says this fighter did. The sheet's number is the total
        and stays in the header; this is the part of it the campaign can
        account for, game by game. */
-    var games = gang ? logXpOf(gang.id, f.name) : [];
     if (games.length) {
       var box = h('div', 'fighter-log');
-      var earned = games.reduce(function (n, g) { return n + g.xp; }, 0);
       var lead = h('p', 'fighter-extra');
       lead.appendChild(h('span', 'fighter-extra-label', 'From the log'));
       lead.appendChild(document.createTextNode(' ' + earned + ' XP across ' +
-        games.length + (games.length === 1 ? ' battle' : ' battles')));
+        games.length + (games.length === 1 ? ' battle' : ' battles') +
+        (f.xp != null ? ', on top of ' + f.xp + ' on the sheet' : '')));
       box.appendChild(lead);
 
       var list = h('ul', 'flog-list');

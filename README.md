@@ -240,8 +240,15 @@ up**, win or lose, and that entry is the whole record of the game for them:
 Those same `fighters` lines come back out on the roster card, under
 "From the log": every game the campaign has written down for that fighter,
 with the experience it paid, a link into the log and the reason in the
-tooltip. The sheet's own `xp` stays the total — the log only accounts for
-the part of it that happened since the records started.
+tooltip.
+
+A roster's `xp` is where the fighter **started**: what they had the day
+that sheet was written down, not what they have now. The number in the
+card's corner is that plus everything the log has paid them since, and its
+tooltip splits the two. So a sheet is never out of date for experience —
+it only has to be right about the day it was taken, and the log carries
+the rest. Re-reading a player's sheet after some games means subtracting
+the logged experience back out, or the same games get counted twice.
 
 A record may also carry `fighters`: the same game told one model at a
 time. Each line names a fighter off that gang's roster and carries `xp`,

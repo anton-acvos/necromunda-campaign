@@ -1213,6 +1213,15 @@ body {
   white-space: nowrap;
 }
 
+/* A fighter the log has paid since the sheet was written is worth more
+   than the sheet says, so the corner says so and the tooltip splits it. */
+.fighter-xp.is-earned {
+  color: var(--ink-dim);
+  cursor: help;
+  text-decoration: underline dotted var(--line-bright);
+  text-underline-offset: 3px;
+}
+
 .fighter-role {
   margin: 2px 0 8px;
   font-size: 0.76rem;
