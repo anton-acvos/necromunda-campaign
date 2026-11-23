@@ -1,0 +1,283 @@
+{
+  "gang": "sumptown",
+  "updated": "2026-11-16",
+  "note": "Hand-kept, off the player's own sheet. The generator does not touch this file.",
+  "fighters": [
+    {
+      "id": 1,
+      "name": "Drak",
+      "archetype": "Forge Tyrant",
+      "keywords": ["Leader"],
+      "rating": 255,
+      "xp": 61,
+      "stats": ["4\"", "3+", "3+", "3", "4", "3", "4", "3", "5+", "8", "8", "7", "8"],
+      "weapons": [
+        {
+          "name": "Combi-stub gun — stub gun (primary)",
+          "sr": "6\"",
+          "lr": "12\"",
+          "str": "3",
+          "ap": "-",
+          "l": "1",
+          "traits": ["Combi", "Light"]
+        },
+        {
+          "name": "Combi-stub gun — plasma pistol (secondary)",
+          "sr": "6\"",
+          "lr": "12\"",
+          "str": "5",
+          "ap": "-2",
+          "l": "2",
+          "traits": ["Ammo (6+)", "Combi", "Damage (2)", "Light", "Unstable"]
+        },
+        {
+          "name": "Power hammer",
+          "sr": "E",
+          "lr": "-",
+          "str": "S",
+          "ap": "-2",
+          "l": "2",
+          "traits": ["Breaching (6+)", "Concussive (6+)", "Melee"]
+        }
+      ],
+      "skills": ["Inspiring", "Nerves of Steel"],
+      "rules": [],
+      "wargear": [],
+      "status": null
+    },
+    {
+      "id": 2,
+      "name": "Chain-tooth Dax",
+      "archetype": "Forge Boss",
+      "keywords": ["Champion"],
+      "rating": 250,
+      "xp": 37,
+      "stats": ["4\"", "3+", "3+", "3", "4", "2", "3", "2", "5+", "7", "8", "6", "6"],
+      "weapons": [
+        {
+          "name": "'Pulverizer' serrated axe (x2)",
+          "sr": "E",
+          "lr": "-",
+          "str": "S",
+          "ap": "-2",
+          "l": "2",
+          "traits": ["Melee"]
+        },
+        {
+          "name": "Grenade launcher — frag grenades",
+          "sr": "6\"",
+          "lr": "24\"",
+          "str": "3",
+          "ap": "-",
+          "l": "1",
+          "traits": ["Ammo (4+)", "Blast (3\")", "Knockback (5+)"]
+        },
+        {
+          "name": "Grenade launcher — krak grenades",
+          "sr": "6\"",
+          "lr": "24\"",
+          "str": "6",
+          "ap": "-2",
+          "l": "1",
+          "traits": ["Ammo (4+)"]
+        }
+      ],
+      "skills": ["Inspiring", "Rain of Blows"],
+      "rules": [],
+      "wargear": [],
+      "status": null
+    },
+    {
+      "id": 3,
+      "name": "Dunny Smokestack",
+      "archetype": "Bruiser",
+      "keywords": ["Ganger", "Specialist", "Heavy"],
+      "rating": 150,
+      "xp": 13,
+      "stats": ["4\"", "4+", "4+", "3", "4", "1", "3", "1", "6+", "6", "7", "5", "6"],
+      "weapons": [
+        {
+          "name": "Cleaver",
+          "sr": "E",
+          "lr": "-",
+          "str": "S",
+          "ap": "-1",
+          "l": "2",
+          "traits": ["Melee"]
+        },
+        {
+          "name": "Grenade launcher — frag grenades",
+          "sr": "6\"",
+          "lr": "24\"",
+          "str": "3",
+          "ap": "-",
+          "l": "1",
+          "traits": ["Ammo (4+)", "Blast (3\")", "Knockback (5+)"]
+        },
+        {
+          "name": "Grenade launcher — krak grenades",
+          "sr": "6\"",
+          "lr": "24\"",
+          "str": "6",
+          "ap": "-2",
+          "l": "1",
+          "traits": ["Ammo (4+)"]
+        }
+      ],
+      "skills": ["Hip-shooting"],
+      "rules": [],
+      "wargear": [],
+      "status": null
+    },
+    {
+      "id": 4,
+      "name": "Grub Knuckle",
+      "archetype": "Bruiser",
+      "keywords": ["Ganger", "Specialist", "Gunner"],
+      "rating": 105,
+      "xp": 13,
+      "stats": ["4\"", "4+", "4+", "3", "4", "1", "3", "1", "6+", "6", "7", "5", "6"],
+      "weapons": [
+        {
+          "name": "Cleaver",
+          "sr": "E",
+          "lr": "-",
+          "str": "S",
+          "ap": "-1",
+          "l": "2",
+          "traits": ["Melee"]
+        },
+        {
+          "name": "Combat shotgun — salvo ammo",
+          "sr": "4\"",
+          "lr": "12\"",
+          "str": "4",
+          "ap": "-",
+          "l": "1",
+          "traits": ["Knockback (6+)"]
+        },
+        {
+          "name": "Combat shotgun — shredder ammo",
+          "sr": "T",
+          "lr": "-",
+          "str": "3",
+          "ap": "-",
+          "l": "1",
+          "traits": ["Ammo (6+)", "Rapid Fire (1)", "Shred (6+)", "Template"]
+        }
+      ],
+      "skills": ["Hip-shooting"],
+      "rules": [],
+      "wargear": [],
+      "status": null
+    },
+    {
+      "id": 5,
+      "name": "Runt-biter",
+      "archetype": "Bruiser",
+      "keywords": ["Ganger", "Specialist", "Gunner"],
+      "rating": 105,
+      "xp": 13,
+      "stats": ["4\"", "4+", "4+", "3", "4", "1", "3", "1", "6+", "6", "7", "5", "6"],
+      "weapons": [
+        {
+          "name": "Cleaver",
+          "sr": "E",
+          "lr": "-",
+          "str": "S",
+          "ap": "-1",
+          "l": "2",
+          "traits": ["Melee"]
+        },
+        {
+          "name": "Combat shotgun — salvo ammo",
+          "sr": "4\"",
+          "lr": "12\"",
+          "str": "4",
+          "ap": "-",
+          "l": "1",
+          "traits": ["Knockback (6+)"]
+        },
+        {
+          "name": "Combat shotgun — shredder ammo",
+          "sr": "T",
+          "lr": "-",
+          "str": "3",
+          "ap": "-",
+          "l": "1",
+          "traits": ["Ammo (6+)", "Rapid Fire (1)", "Shred (6+)", "Template"]
+        }
+      ],
+      "skills": ["Hip-shooting"],
+      "rules": [],
+      "wargear": [],
+      "status": null
+    },
+    {
+      "id": 6,
+      "name": "Stubs Johnson",
+      "archetype": "Bruiser",
+      "keywords": ["Ganger", "Specialist", "Heavy"],
+      "rating": 105,
+      "xp": 13,
+      "stats": ["4\"", "4+", "4+", "3", "4", "1", "3", "1", "6+", "6", "7", "5", "6"],
+      "weapons": [
+        {
+          "name": "Cleaver",
+          "sr": "E",
+          "lr": "-",
+          "str": "S",
+          "ap": "-1",
+          "l": "2",
+          "traits": ["Melee"]
+        },
+        {
+          "name": "Stub cannon",
+          "sr": "9\"",
+          "lr": "18\"",
+          "str": "5",
+          "ap": "-",
+          "l": "1",
+          "traits": ["Knockback (5+)"]
+        }
+      ],
+      "skills": ["Hip-shooting"],
+      "rules": [],
+      "wargear": [],
+      "status": null
+    },
+    {
+      "id": 7,
+      "name": "Billy-fo-finger",
+      "archetype": "Bruiser",
+      "keywords": ["Ganger", "Specialist", "Heavy"],
+      "rating": 105,
+      "xp": 13,
+      "stats": ["4\"", "4+", "4+", "3", "4", "1", "3", "1", "6+", "6", "7", "5", "6"],
+      "weapons": [
+        {
+          "name": "Cleaver",
+          "sr": "E",
+          "lr": "-",
+          "str": "S",
+          "ap": "-1",
+          "l": "2",
+          "traits": ["Melee"]
+        },
+        {
+          "name": "Stub cannon",
+          "sr": "9\"",
+          "lr": "18\"",
+          "str": "5",
+          "ap": "-",
+          "l": "1",
+          "traits": ["Knockback (5+)"]
+        }
+      ],
+      "skills": ["Hip-shooting"],
+      "rules": [],
+      "wargear": [],
+      "status": null
+    }
+  ]
+}

@@ -1,0 +1,208 @@
+{
+  "gang": "chymist-cult",
+  "updated": "2026-11-16",
+  "note": "Hand-kept, off the player's own sheet. The generator does not touch this file.",
+  "fighters": [
+    {
+      "id": 1,
+      "name": "Carmine",
+      "archetype": "Chem Mother",
+      "keywords": ["Leader"],
+      "rating": 265,
+      "xp": 73,
+      "stats": ["5\"", "3+", "3+", "3", "3", "3", "5", "3", "5+", "8", "7", "7", "8"],
+      "weapons": [
+        {
+          "name": "Stiletto knife (Irradiating)",
+          "sr": "E",
+          "lr": "-",
+          "str": "-",
+          "ap": "-",
+          "l": "1",
+          "traits": ["Melee", "Toxin (3+)", "Shred (6+)"]
+        },
+        {
+          "name": "Stiletto knife (Paralysing)",
+          "sr": "E",
+          "lr": "-",
+          "str": "-",
+          "ap": "-",
+          "l": "1",
+          "traits": ["Melee", "Toxin (3+)", "Shred (6+)"]
+        }
+      ],
+      "skills": ["Inspiring", "Mentor", "Two-weapon Fighter"],
+      "rules": [],
+      "wargear": ["Irradiating", "Mesh armour", "Paralysing"],
+      "status": null
+    },
+    {
+      "id": 2,
+      "name": "Jean",
+      "archetype": "Clan Chymist",
+      "keywords": ["Champion"],
+      "rating": 175,
+      "xp": 49,
+      "stats": ["5\"", "3+", "3+", "3", "3", "2", "5", "2", "5+", "7", "7", "6", "7"],
+      "weapons": [
+        {
+          "name": "Stiletto knife",
+          "sr": "E",
+          "lr": "-",
+          "str": "-",
+          "ap": "-",
+          "l": "1",
+          "traits": ["Melee", "Toxin (3+)", "Shred (6+)"]
+        }
+      ],
+      "skills": ["Backstab", "Inspiring", "Medicate", "Mentor"],
+      "rules": [],
+      "wargear": ["Mesh armour"],
+      "status": null
+    },
+    {
+      "id": 3,
+      "name": "Marie",
+      "archetype": "Chem Wytch",
+      "keywords": ["Ganger"],
+      "rating": 125,
+      "xp": 19,
+      "stats": ["5\"", "4+", "4+", "3", "3", "1", "4", "1", "6+", "6", "6", "6", "7"],
+      "weapons": [
+        {
+          "name": "Stiletto knife",
+          "sr": "E",
+          "lr": "-",
+          "str": "-",
+          "ap": "-",
+          "l": "1",
+          "traits": ["Melee", "Toxin (3+)", "Shred (6+)"]
+        }
+      ],
+      "skills": ["Medicate"],
+      "rules": [],
+      "wargear": ["Blood Rush", "Servo-medicae"],
+      "status": null
+    },
+    {
+      "id": 4,
+      "name": "Rosalyn",
+      "archetype": "Blade Maiden",
+      "keywords": ["Ganger"],
+      "rating": 150,
+      "xp": 19,
+      "stats": ["5\"", "4+", "4+", "3", "3", "1", "4", "2", "6+", "6", "6", "6", "6"],
+      "weapons": [
+        {
+          "name": "Khimerix sting*",
+          "sr": "E",
+          "lr": "-",
+          "str": "-",
+          "ap": "-1",
+          "l": "1",
+          "traits": ["Melee", "Paired (2)", "Toxin (3+)", "Shred (6+)"]
+        }
+      ],
+      "skills": ["Deadly Blows", "Hit & Run"],
+      "rules": [],
+      "wargear": ["Mesh armour"],
+      "status": null
+    },
+    {
+      "id": 5,
+      "name": "Curie",
+      "archetype": "Chem Wytch",
+      "keywords": ["Ganger"],
+      "rating": 125,
+      "xp": 19,
+      "stats": ["5\"", "4+", "4+", "3", "3", "1", "4", "1", "6+", "6", "6", "6", "7"],
+      "weapons": [
+        {
+          "name": "Stiletto knife",
+          "sr": "E",
+          "lr": "-",
+          "str": "-",
+          "ap": "-",
+          "l": "1",
+          "traits": ["Melee", "Toxin (3+)", "Shred (6+)"]
+        }
+      ],
+      "skills": ["Medicate"],
+      "rules": [],
+      "wargear": ["Blood Rush", "Servo-medicae"],
+      "status": null
+    },
+    {
+      "id": 6,
+      "name": "Kizzmekia",
+      "archetype": "Blade Maiden",
+      "keywords": ["Ganger"],
+      "rating": 150,
+      "xp": 19,
+      "stats": ["5\"", "4+", "4+", "3", "3", "1", "4", "2", "6+", "6", "6", "6", "6"],
+      "weapons": [
+        {
+          "name": "Khimerix sting*",
+          "sr": "E",
+          "lr": "-",
+          "str": "-",
+          "ap": "-1",
+          "l": "1",
+          "traits": ["Melee", "Paired (2)", "Toxin (3+)", "Shred (6+)"]
+        }
+      ],
+      "skills": ["Deadly Blows", "Hit & Run"],
+      "rules": [],
+      "wargear": ["Mesh armour"],
+      "status": null
+    },
+    {
+      "id": 7,
+      "name": "Claire",
+      "archetype": "Gun Maiden",
+      "keywords": ["Ganger"],
+      "rating": 110,
+      "xp": 19,
+      "stats": ["5\"", "4+", "4+", "3", "3", "1", "4", "1", "6+", "6", "7", "6", "6"],
+      "weapons": [
+        {
+          "name": "Repeater needle rifle",
+          "sr": "9\"",
+          "lr": "18\"",
+          "str": "-",
+          "ap": "-1",
+          "l": "1",
+          "traits": ["Rapid Fire (1)", "Toxin (3+)", "Shred (6+)"]
+        }
+      ],
+      "skills": ["Hip-shooting", "Lightning Reflexes"],
+      "rules": [],
+      "wargear": [],
+      "status": null
+    },
+    {
+      "id": 8,
+      "name": "The Bonepipe",
+      "archetype": "Rogue Doc",
+      "keywords": ["Hanger-on"],
+      "rating": 90,
+      "xp": 13,
+      "stats": ["5\"", "5+", "5+", "2", "3", "1", "3", "1", "6+", "6", "8", "6", "7"],
+      "weapons": [
+        {
+          "name": "Stub gun",
+          "sr": "6\"",
+          "lr": "12\"",
+          "str": "3",
+          "ap": "-",
+          "l": "1",
+          "traits": ["Light"]
+        }
+      ],
+      "skills": ["Medicate"],
+      "rules": ["Patch-up"],
+      "wargear": ["Medi skull", "Medicae kit"],
+      "status": null
+    }
+  ]
+}

@@ -228,23 +228,27 @@
   },
   "gangs": [
     {
-      "rating": 1100,
+      "rating": 1075,
       "motto": "",
       "id": "sumptown",
       "name": "Sumptown Industries",
       "short": "Sumptown",
       "house": "House Goliath",
-      "color": "#e03131"
+      "color": "#e03131",
+      "player": "C0dy",
+      "roster": "data/rosters/sumptown.json"
     },
     {
-      "rating": 1100,
+      "rating": 1190,
       "motto": "",
       "id": "chymist-cult",
       "name": "'Sola Dosis' Chymist Cult",
       "short": "Sola Dosis",
       "house": "House Escher",
       "color": "#9d7ad4",
-      "logo": "assets/gangs/chymist-cult.webp"
+      "logo": "assets/gangs/chymist-cult.webp",
+      "player": "AmaraTheSilent",
+      "roster": "data/rosters/chymist-cult.json"
     },
     {
       "rating": 1095,
@@ -286,7 +290,9 @@
       "name": "Bjorn \"H.C.L.F\" Prospectors Group",
       "short": "Bjorn H.C.L.F",
       "house": "Ironhead Squats",
-      "color": "#e8822c"
+      "color": "#e8822c",
+      "player": "Maxgame107",
+      "roster": "data/rosters/bjorn-prospectors.json"
     },
     {
       "rating": 1100,
@@ -295,7 +301,9 @@
       "name": "Resource Extraction LLC",
       "short": "Resource Ext.",
       "house": "Ironhead Squats",
-      "color": "#6f9c33"
+      "color": "#6f9c33",
+      "player": "Almindor",
+      "roster": "data/rosters/resource-extraction.json"
     }
   ],
   "gateways": [

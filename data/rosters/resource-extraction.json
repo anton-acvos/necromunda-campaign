@@ -1,0 +1,229 @@
+{
+  "gang": "resource-extraction",
+  "updated": "2026-11-05",
+  "note": "Hand-kept, off the player's own sheet. The generator does not touch this file.",
+  "fighters": [
+    {
+      "id": 1,
+      "name": "Karl",
+      "archetype": "Charter Master",
+      "keywords": ["Leader"],
+      "rating": 225,
+      "xp": 61,
+      "stats": ["4\"", "3+", "3+", "3", "4", "3", "2", "3", "5+", "8", "8", "8", "7"],
+      "weapons": [
+        {
+          "name": "Axe",
+          "sr": "E",
+          "lr": "-",
+          "str": "S",
+          "ap": "-1",
+          "l": "1",
+          "traits": ["Melee"]
+        },
+        {
+          "name": "Ironhead boltgun",
+          "sr": "12\"",
+          "lr": "24\"",
+          "str": "4",
+          "ap": "-1",
+          "l": "2",
+          "traits": ["Ammo (3+)", "Rapid Fire (1)", "Reliable"]
+        }
+      ],
+      "skills": ["Inspiring", "Iron Will"],
+      "rules": [],
+      "wargear": ["Photo-lumens"],
+      "status": null
+    },
+    {
+      "id": 2,
+      "name": "Helga",
+      "archetype": "Exo Master",
+      "keywords": ["Champion"],
+      "rating": 185,
+      "xp": 49,
+      "stats": ["4\"", "3+", "4+", "3", "4", "2", "2", "2", "4+", "8", "7", "7", "7"],
+      "weapons": [
+        {
+          "name": "Gem extractor",
+          "sr": "E",
+          "lr": "-",
+          "str": "S+1",
+          "ap": "-",
+          "l": "1",
+          "traits": ["Additional Attacks (1)", "Melee", "Power Pack"]
+        },
+        {
+          "name": "Ironhead combat shotgun",
+          "sr": "8\"",
+          "lr": "16\"",
+          "str": "4",
+          "ap": "-",
+          "l": "2",
+          "traits": ["Knockback (6+)", "Rapid Fire (1)"]
+        }
+      ],
+      "skills": ["Fearsome", "Inspiring"],
+      "rules": [],
+      "wargear": ["Exo-Suit"],
+      "status": null
+    },
+    {
+      "id": 3,
+      "name": "Daedra",
+      "archetype": "Drill Master",
+      "keywords": ["Champion"],
+      "rating": 165,
+      "xp": 37,
+      "stats": ["4\"", "4+", "3+", "3", "4", "2", "2", "2", "5+", "7", "7", "7", "6"],
+      "weapons": [
+        {
+          "name": "Axe",
+          "sr": "E",
+          "lr": "-",
+          "str": "S",
+          "ap": "-1",
+          "l": "1",
+          "traits": ["Melee"]
+        },
+        {
+          "name": "Ironhead grenade launcher",
+          "sr": "6\"",
+          "lr": "24\"",
+          "str": "3",
+          "ap": "-1",
+          "l": "1",
+          "traits": ["Ammo (4+)", "Blast (3\")", "Breaching (6+)", "Concussive (5+)", "Knockback (5+)"]
+        }
+      ],
+      "skills": ["Inspiring", "Unstoppable"],
+      "rules": [],
+      "wargear": ["Photo-lumens"],
+      "status": null
+    },
+    {
+      "id": 4,
+      "name": "Alric",
+      "archetype": "Drill-Kyn",
+      "keywords": ["Ganger", "Specialist", "Gunner"],
+      "rating": 65,
+      "xp": 13,
+      "stats": ["4\"", "4+", "4+", "3", "4", "1", "2", "1", "6+", "6", "7", "7", "6"],
+      "weapons": [
+        {
+          "name": "Fighting knife",
+          "sr": "E",
+          "lr": "-",
+          "str": "S",
+          "ap": "-",
+          "l": "1",
+          "traits": ["Backstab", "Melee"]
+        },
+        {
+          "name": "Ironhead stub gun",
+          "sr": "6\"",
+          "lr": "12\"",
+          "str": "3",
+          "ap": "-",
+          "l": "1",
+          "traits": ["Light", "Rapid Fire (1)"]
+        }
+      ],
+      "skills": ["Hip-shooting"],
+      "rules": [],
+      "wargear": [],
+      "status": null
+    },
+    {
+      "id": 5,
+      "name": "Bob",
+      "archetype": "Vartijan Exo-Driller",
+      "keywords": ["Brute"],
+      "rating": 280,
+      "xp": 25,
+      "stats": ["4\"", "4+", "3+", "4", "5", "3", "3", "2", "4+", "7", "7", "6", "6"],
+      "weapons": [
+        {
+          "name": "Heavy flamer*",
+          "sr": "T",
+          "lr": "-",
+          "str": "5",
+          "ap": "-2",
+          "l": "1",
+          "traits": ["Ammo (6+)", "Blaze (5+)", "Template"]
+        },
+        {
+          "name": "Power fist",
+          "sr": "E",
+          "lr": "-",
+          "str": "S+3",
+          "ap": "-3",
+          "l": "2",
+          "traits": ["Breaching (6+)", "Concussive (5+)", "Damage (2)", "Melee", "Unwieldy"]
+        },
+        {
+          "name": "Seismic crusher",
+          "sr": "T",
+          "lr": "-",
+          "str": "2",
+          "ap": "-",
+          "l": "1",
+          "traits": ["Ammo (6+)", "Breaching (5+)", "Template"]
+        }
+      ],
+      "skills": ["Bulging Biceps", "Juggernaut"],
+      "rules": ["Sensor Suite"],
+      "wargear": [],
+      "status": null
+    },
+    {
+      "id": 6,
+      "name": "Nate",
+      "archetype": "Digger",
+      "keywords": ["Prospect"],
+      "rating": 95,
+      "xp": 1,
+      "stats": ["5\"", "5+", "5+", "3", "4", "1", "3", "1", "6+", "5", "6", "5", "5"],
+      "weapons": [
+        {
+          "name": "Ironhead hand flamer",
+          "sr": "T",
+          "lr": "-",
+          "str": "3",
+          "ap": "-",
+          "l": "1",
+          "traits": ["Ammo (6+)", "Blaze (5+)", "Light", "Rapid Fire (1)", "Template"]
+        }
+      ],
+      "skills": [],
+      "rules": [],
+      "wargear": ["Drop rig"],
+      "status": null
+    },
+    {
+      "id": 7,
+      "name": "Norn",
+      "archetype": "Digger",
+      "keywords": ["Prospect"],
+      "rating": 85,
+      "xp": 1,
+      "stats": ["5\"", "5+", "5+", "3", "4", "1", "3", "1", "6+", "5", "6", "5", "5"],
+      "weapons": [
+        {
+          "name": "Ironhead autogun",
+          "sr": "8\"",
+          "lr": "24\"",
+          "str": "3",
+          "ap": "-",
+          "l": "1",
+          "traits": ["Rapid Fire (1)", "Reliable"]
+        }
+      ],
+      "skills": [],
+      "rules": [],
+      "wargear": ["Drop rig", "Photo-lumens"],
+      "status": null
+    }
+  ]
+}
