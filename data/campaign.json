@@ -2792,8 +2792,7 @@
           "rep": 1,
           "xp": 15,
           "takedowns": 4,
-          "outOfAction": 1,
-          "notes": "Three of the four they put down are credited to Destroying Angel. The fourth is not credited to anybody, which is how it was reported.",
+          "outOfAction": 0,
           "gear": [
             {
               "item": "Respirator",
@@ -2805,14 +2804,13 @@
             {
               "fighter": "Slippery Jack",
               "xp": 2,
-              "xpFor": "Turning up, and going down",
-              "outOfAction": true
+              "xpFor": "Turning up, and putting one of them out of action"
             },
             {
               "fighter": "Destroying Angel",
               "xp": 10,
               "xpFor": "Turning up; two for seriously injuring the Charter Master and three more for putting him out of action; two apiece for two more of them",
-              "note": "Three of the four Squats who went down are on this one line."
+              "note": "Three of the four Squats who went down are on this one line. Slippery Jack had the fourth."
             },
             {
               "fighter": "Amanita",
@@ -2834,7 +2832,7 @@
         {
           "gang": "bjorn-prospectors",
           "xp": 6,
-          "takedowns": 1,
+          "takedowns": 0,
           "outOfAction": 4,
           "fighters": [
             {
@@ -2876,7 +2874,7 @@
           ]
         }
       ],
-      "summary": "First holding in the deep anyone has walked. Mycelium Section beat the Bjorn Prospectors to the seam and found it worked out but breathable: a mine, a side job paid on the way out, and no archeotech anywhere in it. Four Squats went down in the dark, three of them to Destroying Angel, who came back up worth ten experience alone. The ground itself goes on the map unheld — the expedition charted it, it did not claim it."
+      "summary": "First holding in the deep anyone has walked. Mycelium Section beat the Bjorn Prospectors to the seam and found it worked out but breathable: a mine, a side job paid on the way out, and no archeotech anywhere in it. Four Squats went down in the dark and Mycelium Section lost nobody at all. Three of the four are Destroying Angel, who came back up worth ten experience alone. The ground itself goes on the map unheld — the expedition charted it, it did not claim it."
     },
     {
       "id": "b5-rustfall-row",

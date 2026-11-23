@@ -1044,20 +1044,18 @@ const xs = drawn.map((p) => p[0]), ys = drawn.map((p) => p[1]);
       winner: 'mycelium',
       played: true,
       rewards: [
-        { gang: 'mycelium', primary: 40, sidejob: 10, rep: 1, xp: 15, takedowns: 4, outOfAction: 1,
-          notes: 'Three of the four they put down are credited to Destroying Angel. The fourth is not credited to anybody, which is how it was reported.',
+        { gang: 'mycelium', primary: 40, sidejob: 10, rep: 1, xp: 15, takedowns: 4, outOfAction: 0,
           gear: [{ item: 'Respirator', qty: 2, note: 'Off the dead, on the way back up' }],
           fighters: [
-            { fighter: 'Slippery Jack',    xp: 2, xpFor: 'Turning up, and going down',
-              outOfAction: true },
+            { fighter: 'Slippery Jack',    xp: 2, xpFor: 'Turning up, and putting one of them out of action' },
             { fighter: 'Destroying Angel', xp: 10,
               xpFor: 'Turning up; two for seriously injuring the Charter Master and three more for putting him out of action; two apiece for two more of them',
-              note: 'Three of the four Squats who went down are on this one line.' },
+              note: 'Three of the four Squats who went down are on this one line. Slippery Jack had the fourth.' },
             { fighter: 'Amanita',          xp: 1, xpFor: 'Turning up' },
             { fighter: 'Galerina',         xp: 1, xpFor: 'Turning up' },
             { fighter: 'Puffball',         xp: 1, xpFor: 'Turning up' }
           ] },
-        { gang: 'bjorn-prospectors', xp: 6, takedowns: 1, outOfAction: 4,
+        { gang: 'bjorn-prospectors', xp: 6, takedowns: 0, outOfAction: 4,
           fighters: [
             { fighter: 'Bjorn Ironbeard',       xp: 1, xpFor: 'Turning up',
               outOfAction: true, injury: 'Enfeebled (-1 Toughness)', note: 'Into recovery.' },
@@ -1070,7 +1068,7 @@ const xs = drawn.map((p) => p[0]), ys = drawn.map((p) => p[1]);
             { fighter: 'The Iron Bowling Ball', xp: 2, xpFor: 'Turning up, and seriously injuring one of theirs' }
           ] }
       ],
-      summary: 'First holding in the deep anyone has walked. Mycelium Section beat the Bjorn Prospectors to the seam and found it worked out but breathable: a mine, a side job paid on the way out, and no archeotech anywhere in it. Four Squats went down in the dark, three of them to Destroying Angel, who came back up worth ten experience alone. The ground itself goes on the map unheld — the expedition charted it, it did not claim it.' },
+      summary: 'First holding in the deep anyone has walked. Mycelium Section beat the Bjorn Prospectors to the seam and found it worked out but breathable: a mine, a side job paid on the way out, and no archeotech anywhere in it. Four Squats went down in the dark and Mycelium Section lost nobody at all. Three of the four are Destroying Angel, who came back up worth ten experience alone. The ground itself goes on the map unheld — the expedition charted it, it did not claim it.' },
 
     { id: 'b5-rustfall-row',
       date: '2026-11-20',
