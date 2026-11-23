@@ -2538,7 +2538,7 @@
       "name": "Servo-arc Claw",
       "kind": "Weapon",
       "holder": "archeo-3",
-      "value": 100,
+      "value": 80,
       "profile": {
         "range": "E",
         "str": "S+2",

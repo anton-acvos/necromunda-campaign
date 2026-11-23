@@ -892,7 +892,7 @@ const xs = drawn.map((p) => p[0]), ys = drawn.map((p) => p[1]);
     { id: 'taser-goad', roll: 8, name: 'Taser Goad', kind: 'Weapon', holder: null, value: 55,
       profile: { range: 'E', str: 'S+1', lethality: 1, traits: ['Melee', 'Shock(5+)', 'Concussive(5+)'] } },
 
-    { id: 'servo-arc-claw', name: 'Servo-arc Claw', kind: 'Weapon', holder: 'archeo-3', value: 100,
+    { id: 'servo-arc-claw', name: 'Servo-arc Claw', kind: 'Weapon', holder: 'archeo-3', value: 80,
       profile: { range: 'E', str: 'S+2', ap: '1', lethality: 2, traits: ['Unwieldy', 'Shock(5+)', 'Rending(5+)', 'Damage(2)'] } },
 
     { id: 'servo-chirurgic-claw', roll: 9, name: 'Servo-chirurgic Claw', kind: 'Weapon', holder: null, value: 85,
