@@ -962,7 +962,15 @@ const xs = drawn.map((p) => p[0]), ys = drawn.map((p) => p[1]);
        what      the line that says why, read back in six weeks
        cycle     when it happened
        battle    the game it came out of, if it came out of one */
-  honours: [],
+  honours: [
+    { id: 'h1-burton-evidence', gang: 'precinct-22', fighter: 'Jamie Burton',
+      title: 'Planted the Evidence', cycle: 1, battle: 'b5-rustfall-row',
+      what: 'One game into the service, and already walking onto Sumptown\u2019s own ground to leave a quantity of illicit substance where the Palanites could find it later. It is the reason Precinct 22 can come back legally, which is worth more to the precinct than anything anybody shot that day.' },
+
+    { id: 'h1-bowling-ball-stand', gang: 'bjorn-prospectors', fighter: 'The Iron Bowling Ball',
+      title: 'Last One Standing', cycle: 1, battle: 'b4-hollowbore',
+      what: 'Four of the crew went down in the workings, the Charter Master among them, and the Exo-Driller was the only thing left upright at the end of it. Finished the side job anyway. The Prospectors lost the seam and came back up with the work done.' }
+  ],
 
   /* The log. Each battle carries one reward entry per gang that turned up,
      win or lose, and that entry is the whole record of the game for them:
@@ -1081,7 +1089,8 @@ const xs = drawn.map((p) => p[0]), ys = drawn.map((p) => p[1]);
               outOfAction: true, injury: 'Critical injury', note: 'Needs a doctor.' },
             { fighter: 'Vikram Azril',          xp: 1, xpFor: 'Turning up',
               outOfAction: true, injury: 'Hobbled (-1 Movement)', note: 'Into recovery.' },
-            { fighter: 'The Iron Bowling Ball', xp: 2, xpFor: 'Turning up, and seriously injuring one of theirs' }
+            { fighter: 'The Iron Bowling Ball', xp: 2, xpFor: 'Turning up, and seriously injuring one of theirs',
+              note: 'Last of the Prospectors left standing, and finished the side job on the way out.' }
           ] }
       ],
       summary: 'First holding in the deep anyone has walked. Mycelium Section beat the Bjorn Prospectors to the seam and found it worked out but breathable: a mine, a side job paid on the way out, and no archeotech anywhere in it. Four Squats went down in the dark and Mycelium Section lost nobody at all. Three of the four are Destroying Angel, who came back up worth ten experience alone. The ground itself goes on the map unheld — the expedition charted it, it did not claim it.' },
@@ -1099,7 +1108,7 @@ const xs = drawn.map((p) => p[0]), ys = drawn.map((p) => p[1]);
            were on the roster and are not in it: no experience was credited
            to either, so neither has a line. */
         { gang: 'precinct-22', primary: 20, sidejob: 20, rep: 1, xp: 22, outOfAction: 1,
-          notes: 'The side job was a frame. The Palanites left evidence of illicit substance possession on Sumptown ground, which gives them a reason to come back legally.',
+          notes: 'The side job was a frame, and Jamie Burton did the planting \u2014 a Rookie, one game into the service. The illicit substance sits on Sumptown ground where the Palanites can find it whenever they choose to, which gives them a reason to come back legally.',
           fighters: [
             { fighter: 'Precinct Captain Uriel',     xp: 6 },
             { fighter: 'Sergeant Marvin Heemeyer',   xp: 4 },
@@ -1108,7 +1117,7 @@ const xs = drawn.map((p) => p[0]), ys = drawn.map((p) => p[1]);
             { fighter: 'Cave Johnson',               xp: 1, outOfAction: true,
               note: 'Gassed and went down, and came up with nothing lasting. Under observation for the foreseeable future.' },
             { fighter: 'Azazel the Unbroken',        xp: 2 },
-            { fighter: 'Jamie Burton',               xp: 2 }
+            { fighter: 'Jamie Burton',               xp: 2, xpFor: 'Turning up, and the side job' }
           ] },
         /* Sumptown have not reported yet, so their side of this game is
            still blank: no experience, no casualties, nothing claimed. */
