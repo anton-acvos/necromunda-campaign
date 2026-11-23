@@ -922,7 +922,9 @@ const xs = drawn.map((p) => p[0]), ys = drawn.map((p) => p[1]);
       notes: 'The Chymist Cult filed on I-17 off the back of what came out of the Hollowbore: it sits one wall over from the workings Mycelium Section charted, and whatever is breathable down there is of professional interest. Nobody has been paired with them yet.' },
     { id: 'c1-resource-stair', cycle: 1, kind: 'challenge',  challenger: 'resource-extraction', territory: 'brass-stair', defender: 'chymist-cult', status: 'settled', battle: 'b3-brass-stair' },
     { id: 'c1-precinct-rustfall', cycle: 1, kind: 'challenge', challenger: 'precinct-22', territory: 'rustfall-row', defender: 'sumptown', status: 'settled', battle: 'b5-rustfall-row',
-      notes: 'A second call from Precinct 22 this cycle, which is one more than the rules allow. Two concessions left half the Reach with nothing to do, so the arbitrator let it stand.' }
+      notes: 'A second call from Precinct 22 this cycle, which is one more than the rules allow. Two concessions left half the Reach with nothing to do, so the arbitrator let it stand.' },
+    { id: 'c1-sumptown-deep', cycle: 1, kind: 'expedition', challenger: 'sumptown', target: 'i-05', status: 'open',
+      notes: 'Sumptown filed on the deep the cycle they lost Rustfall Row to the Enforcers. Ground nobody holds costs nothing to call for, and Sumptown would rather walk a tunnel than knock on the same door twice. Nobody has been paired with them yet.' }
   ],
 
   /* The log. A challenge that nobody turned up for is still how ground
@@ -940,7 +942,10 @@ const xs = drawn.map((p) => p[0]), ys = drawn.map((p) => p[1]);
      amount is credits in, or negative for credits out. "what" is the one
      line that will be read back in six weeks' time, so it says where the
      money came from, not what it was for. */
-  ledger: [],
+  ledger: [
+    { id: 'l1-sumptown-cache', cycle: 1, gang: 'sumptown', amount: 25,
+      what: 'Starting cache left over \u2014 Sumptown was founded for 1075 of the 1100 they were allowed, and never spent the rest' }
+  ],
 
   /* The log. Each battle carries one reward entry per gang that turned up,
      win or lose, and that entry is the whole record of the game for them:
