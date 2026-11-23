@@ -1051,7 +1051,23 @@ const xs = drawn.map((p) => p[0]), ys = drawn.map((p) => p[1]);
       winner: 'precinct-22',
       played: true,
       rewards: [
-        { gang: 'precinct-22', primary: 20, sidejob: 20, rep: 1 },
+        /* Precinct 22's own report, one officer at a time. Jones and daniel
+           were on the roster and are not in it: no experience was credited
+           to either, so neither has a line. */
+        { gang: 'precinct-22', primary: 20, sidejob: 20, rep: 1, xp: 22, outOfAction: 1,
+          notes: 'The side job was a frame. The Palanites left evidence of illicit substance possession on Sumptown ground, which gives them a reason to come back legally.',
+          fighters: [
+            { fighter: 'Precinct Captain Uriel',     xp: 6 },
+            { fighter: 'Sergeant Marvin Heemeyer',   xp: 4 },
+            { fighter: 'Specialist Hazard',          xp: 3 },
+            { fighter: 'Specialist Ian',             xp: 4 },
+            { fighter: 'Cave Johnson',               xp: 1, outOfAction: true,
+              note: 'Gassed and went down, and came up with nothing lasting. Under observation for the foreseeable future.' },
+            { fighter: 'Azazel the Unbroken',        xp: 2 },
+            { fighter: 'Jamie Burton',               xp: 2 }
+          ] },
+        /* Sumptown have not reported yet, so their side of this game is
+           still blank: no experience, no casualties, nothing claimed. */
         { gang: 'sumptown' }
       ],
       summary: 'The call the arbitrator let stand, and the Enforcers made it pay. Precinct 22 cleared the stacks off Sumptown Industries and the kitchen at the bottom now serves whoever the Palanites say it serves.' },

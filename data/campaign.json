@@ -2815,7 +2815,42 @@
           "gang": "precinct-22",
           "primary": 20,
           "sidejob": 20,
-          "rep": 1
+          "rep": 1,
+          "xp": 22,
+          "outOfAction": 1,
+          "notes": "The side job was a frame. The Palanites left evidence of illicit substance possession on Sumptown ground, which gives them a reason to come back legally.",
+          "fighters": [
+            {
+              "fighter": "Precinct Captain Uriel",
+              "xp": 6
+            },
+            {
+              "fighter": "Sergeant Marvin Heemeyer",
+              "xp": 4
+            },
+            {
+              "fighter": "Specialist Hazard",
+              "xp": 3
+            },
+            {
+              "fighter": "Specialist Ian",
+              "xp": 4
+            },
+            {
+              "fighter": "Cave Johnson",
+              "xp": 1,
+              "outOfAction": true,
+              "note": "Gassed and went down, and came up with nothing lasting. Under observation for the foreseeable future."
+            },
+            {
+              "fighter": "Azazel the Unbroken",
+              "xp": 2
+            },
+            {
+              "fighter": "Jamie Burton",
+              "xp": 2
+            }
+          ]
         },
         {
           "gang": "sumptown"
