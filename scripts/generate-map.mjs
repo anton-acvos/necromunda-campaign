@@ -969,7 +969,11 @@ const xs = drawn.map((p) => p[0]), ys = drawn.map((p) => p[1]);
 
     { id: 'h1-bowling-ball-stand', gang: 'bjorn-prospectors', fighter: 'The Iron Bowling Ball',
       title: 'Last One Standing', cycle: 1, battle: 'b4-hollowbore',
-      what: 'Four of the crew went down in the workings, the Charter Master among them, and the Exo-Driller was the only thing left upright at the end of it. Finished the side job anyway. The Prospectors lost the seam and came back up with the work done.' }
+      what: 'Four of the crew went down in the workings, the Charter Master among them, and the Exo-Driller was the only thing left upright at the end of it. Finished the side job anyway. The Prospectors lost the seam and came back up with the work done.' },
+
+    { id: 'h1-spydr-angel', gang: 'archeo-3', fighter: 'Spydr 17',
+      title: 'Felled the Angel', cycle: 1, battle: 'b6-relumen',
+      what: 'Not just a champion. Destroying Angel, who walked out of the Hollowbore the same cycle having put three Squats down and taken nothing back, went out cold in the generatorium to an Arachni-Rig. Whoever is at the top of this board, somebody can reach them.' }
   ],
 
   /* The log. Each battle carries one reward entry per gang that turned up,
@@ -1139,7 +1143,8 @@ const xs = drawn.map((p) => p[0]), ys = drawn.map((p) => p[1]);
           fighters: [
             { fighter: 'Skorgen "Fixer" Plasen', xp: 2, xpFor: 'Standing on an objective, and the point for turning up' },
             { fighter: 'Krell "Crackles" Rache', xp: 5, takedowns: 1, xpFor: 'Three for putting the leader out of action, one for an objective, one for turning up' },
-            { fighter: 'Spydr 17', xp: 4, takedowns: 1, xpFor: 'Three for putting the champion out of action, one for turning up' },
+            { fighter: 'Spydr 17', xp: 4, takedowns: 1,
+              xpFor: 'Three for putting Destroying Angel out of action, one for turning up' },
             { fighter: 'Skarper "Gofer" Raleski', xp: 2, xpFor: 'Standing on an objective, and the point for turning up' },
             { fighter: 'Kirsche "Deathwish" Pashkel', xp: 1, xpFor: 'Turning up',
               note: 'Ran out of ammunition while missing exclusively.' }

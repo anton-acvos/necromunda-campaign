@@ -2714,6 +2714,15 @@
       "cycle": 1,
       "battle": "b4-hollowbore",
       "what": "Four of the crew went down in the workings, the Charter Master among them, and the Exo-Driller was the only thing left upright at the end of it. Finished the side job anyway. The Prospectors lost the seam and came back up with the work done."
+    },
+    {
+      "id": "h1-spydr-angel",
+      "gang": "archeo-3",
+      "fighter": "Spydr 17",
+      "title": "Felled the Angel",
+      "cycle": 1,
+      "battle": "b6-relumen",
+      "what": "Not just a champion. Destroying Angel, who walked out of the Hollowbore the same cycle having put three Squats down and taken nothing back, went out cold in the generatorium to an Arachni-Rig. Whoever is at the top of this board, somebody can reach them."
     }
   ],
   "battles": [
@@ -3004,7 +3013,7 @@
               "fighter": "Spydr 17",
               "xp": 4,
               "takedowns": 1,
-              "xpFor": "Three for putting the champion out of action, one for turning up"
+              "xpFor": "Three for putting Destroying Angel out of action, one for turning up"
             },
             {
               "fighter": "Skarper \"Gofer\" Raleski",
