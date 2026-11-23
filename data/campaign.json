@@ -2842,7 +2842,7 @@
               "xp": 1,
               "xpFor": "Turning up",
               "outOfAction": true,
-              "injury": "Enfeebled",
+              "injury": "Enfeebled (-1 Toughness)",
               "note": "Into recovery."
             },
             {
@@ -3007,7 +3007,7 @@
               "xp": 2,
               "xpFor": "An objective, and the point for turning up",
               "outOfAction": true,
-              "injury": "Enfeebled"
+              "injury": "Enfeebled (-1 Toughness)"
             },
             {
               "fighter": "Destroying Angel",

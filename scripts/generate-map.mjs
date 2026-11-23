@@ -1060,7 +1060,7 @@ const xs = drawn.map((p) => p[0]), ys = drawn.map((p) => p[1]);
         { gang: 'bjorn-prospectors', xp: 6, takedowns: 1, outOfAction: 4,
           fighters: [
             { fighter: 'Bjorn Ironbeard',       xp: 1, xpFor: 'Turning up',
-              outOfAction: true, injury: 'Enfeebled', note: 'Into recovery.' },
+              outOfAction: true, injury: 'Enfeebled (-1 Toughness)', note: 'Into recovery.' },
             { fighter: 'Kadri Cromson',         xp: 1, xpFor: 'Turning up',
               outOfAction: true, note: 'Out cold, and came up with nothing lasting.' },
             { fighter: 'Sven Silverhorn',       xp: 1, xpFor: 'Turning up',
@@ -1124,7 +1124,7 @@ const xs = drawn.map((p) => p[0]), ys = drawn.map((p) => p[1]);
         { gang: 'mycelium', primary: 10, xp: 7, takedowns: 0, outOfAction: 3,
           fighters: [
             { fighter: 'Slippery Jack', xp: 2, xpFor: 'An objective, and the point for turning up',
-              outOfAction: true, injury: 'Enfeebled' },
+              outOfAction: true, injury: 'Enfeebled (-1 Toughness)' },
             { fighter: 'Destroying Angel', xp: 1, xpFor: 'Turning up',
               outOfAction: true, injury: 'Out cold' },
             { fighter: 'Amanita', xp: 1, xpFor: 'Turning up',
