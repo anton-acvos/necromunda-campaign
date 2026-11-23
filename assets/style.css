@@ -1387,6 +1387,62 @@ body {
 .log-link:hover,
 .log-link:focus-visible { text-decoration-color: currentColor; }
 
+/* The lockup. Each thing is a line, and under it the lines that put it
+   there, so a count can be read back to the game it came out of. */
+/* Capped to a readable column so a count stays beside the line that
+   explains it rather than drifting off to the edge of a wide card. */
+.lockup-list {
+  display: grid;
+  gap: 10px;
+  margin: 0;
+  padding: 0;
+  max-width: 46ch;
+  list-style: none;
+}
+
+.lockup-head {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+  margin: 0;
+}
+
+.lockup-name { font-weight: 600; }
+.lockup-qty { color: var(--ink-dim); font-family: var(--mono); font-size: 0.78rem; }
+
+.lockup-tag {
+  font-family: var(--mono);
+  font-size: 0.6rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--accent);
+  border: 1px solid var(--line-bright);
+  border-radius: 3px;
+  padding: 1px 4px;
+}
+
+.lockup-from {
+  display: grid;
+  gap: 2px;
+  margin: 4px 0 0;
+  padding: 0 0 0 9px;
+  list-style: none;
+  border-left: 2px solid var(--line);
+}
+
+.lockup-line {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+  font-size: 0.74rem;
+  color: var(--ink-dim);
+}
+
+.lockup-note { color: var(--ink-faint); }
+.lockup-amt { margin-left: auto; font-family: var(--mono); }
+.lockup-line.is-out { color: var(--ink-faint); }
+.lockup-line.is-out .lockup-amt { color: var(--warn); }
+
 .led-part { color: var(--ink-faint); }
 .led-part::before { content: '\00a0\00b7\00a0'; }
 

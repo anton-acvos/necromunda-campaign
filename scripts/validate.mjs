@@ -279,6 +279,43 @@ for (const [i, r] of (data.archeotech ?? []).entries()) {
   if (seen.size && missing.length) warn(`archeotech: no piece on 2d6 result ${missing.join(', ')}`);
 }
 
+/* --- gear ---
+
+   What a gang came away with that was not money. A line is either a
+   piece of ordinary kit with a count, or an archeotech id — and an
+   archeotech line carries no name of its own, because the piece already
+   has one and the holder written on it is what says who has it. The two
+   have to agree, or the same object is in two places at once. */
+function checkGear(at, gangId, gear) {
+  if (gear == null) return;
+  if (!Array.isArray(gear)) {
+    err(`${at}.gear: expected a list of lines, not ${typeof gear}`);
+    return;
+  }
+  for (const [j, g] of gear.entries()) {
+    const w = `${at}.gear[${j}]`;
+    const qty = g.qty == null ? 1 : g.qty;
+    if (g.item && g.piece) {
+      err(`${w}: names both an item and an archeotech piece — pick one`);
+    } else if (g.piece) {
+      const piece = (data.archeotech ?? []).find((r) => r.id === g.piece);
+      if (!piece) err(`${w}.piece: unknown archeotech id "${g.piece}"`);
+      else if (qty > 0 && piece.holder !== gangId) {
+        err(`${w}.piece: "${g.piece}" went to ${gangId}, but the piece says ` +
+            `${piece.holder ?? 'nobody'} is holding it`);
+      } else if (qty < 0 && piece.holder === gangId) {
+        err(`${w}.piece: "${g.piece}" is written off ${gangId}, but the piece ` +
+            `still says they are holding it`);
+      }
+    } else if (!g.item) {
+      err(`${w}: needs an item name or an archeotech piece`);
+    }
+    if (g.qty != null && (!Number.isInteger(g.qty) || g.qty === 0)) {
+      err(`${w}.qty: expected a whole number in, or negative out`);
+    }
+  }
+}
+
 const rosterNames = new Map();
 
 /* --- rosters ---
@@ -379,9 +416,13 @@ const rosterNames = new Map();
     else seen.add(e.id);
 
     if (!gangIds.has(e.gang)) err(`${at}.gang: unknown gang id "${e.gang}"`);
-    if (typeof e.amount !== 'number' || !Number.isInteger(e.amount)) {
+    if (e.amount == null && e.gear == null) {
+      err(`${at}: carries neither credits nor gear, so nothing moved`);
+    }
+    if (e.amount != null && !Number.isInteger(e.amount)) {
       err(`${at}.amount: expected whole credits, in or negative out`);
     }
+    checkGear(at, e.gang, e.gear);
     if (!e.what) err(`${at}.what: required — one line saying where it came from`);
     if (!Number.isInteger(e.cycle) || e.cycle < 1) {
       err(`${at}.cycle: required — the stash is read in campaign time`);
@@ -485,9 +526,7 @@ for (const [i, b] of (data.battles ?? []).entries()) {
     if (r.rep != null && typeof r.rep !== 'number') {
       err(`battles[${i}] (${b.id}).rewards: rep must be a number`);
     }
-    if (r.gear != null && typeof r.gear !== 'string') {
-      err(`battles[${i}] (${b.id}).rewards: gear must be a line of text`);
-    }
+    checkGear(`battles[${i}] (${b.id}).rewards[${r.gang}]`, r.gang, r.gear);
     checkRecord(`battles[${i}] (${b.id}).rewards[${r.gang}]`, b, r);
   }
   checkBodies(b);

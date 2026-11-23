@@ -2790,7 +2790,13 @@
           "primary": 40,
           "sidejob": 10,
           "rep": 1,
-          "gear": "Two respirators out of the workings"
+          "gear": [
+            {
+              "item": "Respirator",
+              "qty": 2,
+              "note": "Off the dead, on the way back up"
+            }
+          ]
         },
         {
           "gang": "bjorn-prospectors"
@@ -2880,7 +2886,11 @@
           "xp": 14,
           "takedowns": 3,
           "outOfAction": 0,
-          "gear": "The Servo-arc Claw",
+          "gear": [
+            {
+              "piece": "servo-arc-claw"
+            }
+          ],
           "notes": "The fifteen came with the discovery, along with the point of reputation for lighting the stack.",
           "fighters": [
             {

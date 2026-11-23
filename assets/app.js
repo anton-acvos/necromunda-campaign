@@ -1170,7 +1170,8 @@
     row.appendChild(side);
 
     var extra = [];
-    if (r.gear) extra.push(r.gear);
+    if ((r.gear || []).length) extra.push(r.gear.map(gearWords).join(
+));
     if (r.notes) extra.push(r.notes);
     if (extra.length) row.appendChild(h('p', 'log-paid-extra', extra.join(' — ')));
 
@@ -1492,6 +1493,131 @@
     var tfoot = h('tfoot'); tfoot.appendChild(foot);
     tbl.appendChild(thead); tbl.appendChild(tb); tbl.appendChild(tfoot);
     body.appendChild(tbl);
+    box.appendChild(body);
+    return box;
+  }
+
+  /* ---------- the lockup ----------
+
+     Everything a gang owns that is not money, worked out exactly the way
+     the stash is: from the lines that each say where one thing came from.
+     A battle that paid out kit says so on its reward; anything else is a
+     ledger line; and an item strapped onto a fighter leaves again with a
+     negative count. So the lockup is what is spare rather than what the
+     gang owns in total, and a fighter's own wargear stays the one place
+     their kit is written down.
+
+     An archeotech line names the piece instead of repeating it. The name
+     and the holder live on the piece, so both are read off it here. */
+  function relicOf(id) {
+    var all = state.data.archeotech || [];
+    for (var i = 0; i < all.length; i++) if (all[i].id === id) return all[i];
+    return null;
+  }
+
+  /* One gear line in the words the log wants: a name, a count when there
+     is more than one of it, and which way it went if it went out. */
+  function gearWords(g) {
+    var relic = g.piece ? relicOf(g.piece) : null;
+    var name = relic ? relic.name : g.item;
+    var n = g.qty == null ? 1 : g.qty;
+    if (n < 0) return name + (n < -1 ? ' \u00d7' + (-n) : '') + ' given up';
+    return name + (n > 1 ? ' \u00d7' + n : '');
+  }
+
+  function lockupLines(gang) {
+    var out = [];
+
+    function take(src, g) {
+      var relic = g.piece ? relicOf(g.piece) : null;
+      if (g.piece && !relic) return;
+      out.push({
+        key: g.piece ? 'piece:' + g.piece : 'item:' + g.item,
+        name: relic ? relic.name : g.item,
+        relic: relic,
+        qty: g.qty == null ? 1 : g.qty,
+        note: g.note,
+        cycle: src.cycle,
+        date: src.date,
+        what: src.what,
+        battle: src.battle
+      });
+    }
+
+    (state.data.battles || []).forEach(function (b) {
+      (b.rewards || []).forEach(function (r) {
+        if (r.gang !== gang.id) return;
+        (r.gear || []).forEach(function (g) {
+          take({ cycle: b.cycle, date: b.date, battle: b.id }, g);
+        });
+      });
+    });
+
+    (state.data.ledger || []).forEach(function (e) {
+      if (e.gang !== gang.id) return;
+      (e.gear || []).forEach(function (g) {
+        take({ cycle: e.cycle, date: e.date, what: e.what }, g);
+      });
+    });
+
+    return out;
+  }
+
+  /* One row per thing, with the lines that got it there kept alongside,
+     so a count can always be read back to where it came from. Something
+     that has all gone out again nets to nothing and drops off the list
+     rather than sitting there at zero. */
+  function lockupOf(gang) {
+    var order = [];
+    var by = {};
+    lockupLines(gang).forEach(function (l) {
+      if (!by[l.key]) {
+        by[l.key] = { name: l.name, relic: l.relic, qty: 0, from: [] };
+        order.push(l.key);
+      }
+      by[l.key].qty += l.qty;
+      by[l.key].from.push(l);
+    });
+    return order.map(function (k) { return by[k]; })
+                .filter(function (r) { return r.qty > 0; });
+  }
+
+  /* A gang with nothing in the lockup gets no fold at all: an empty one
+     would say less than the silence does. */
+  function lockupFold(gang) {
+    var rows = lockupOf(gang);
+    if (!rows.length) return null;
+
+    var things = rows.reduce(function (n, r) { return n + r.qty; }, 0);
+    var box = h('details', 'fold is-lockup');
+    box.appendChild(h('summary', 'fold-summary',
+      'Lockup \u2014 ' + things + (things === 1 ? ' thing' : ' things') +
+      ' across ' + rows.length + (rows.length === 1 ? ' line' : ' lines')));
+
+    var body = h('div', 'fold-body');
+    var list = h('ul', 'lockup-list');
+    rows.forEach(function (r) {
+      var li = h('li', 'lockup' + (r.relic ? ' is-relic' : ''));
+      var head = h('p', 'lockup-head');
+      head.appendChild(h('span', 'lockup-name', r.name));
+      if (r.qty > 1) head.appendChild(h('span', 'lockup-qty', '\u00d7' + r.qty));
+      if (r.relic) head.appendChild(h('span', 'lockup-tag', 'Archeotech'));
+      li.appendChild(head);
+
+      var from = h('ul', 'lockup-from');
+      r.from.forEach(function (l) {
+        var line = h('li', 'lockup-line' + (l.qty < 0 ? ' is-out' : ''));
+        var b = l.battle ? battleOf(l.battle) : null;
+        if (b) line.appendChild(logLink(b));
+        else line.appendChild(h('span', 'lockup-what', l.what || '\u2013'));
+        if (l.note) line.appendChild(h('span', 'lockup-note', l.note));
+        line.appendChild(h('span', 'lockup-amt', (l.qty > 0 ? '+' : '') + l.qty));
+        from.appendChild(line);
+      });
+      li.appendChild(from);
+      list.appendChild(li);
+    });
+    body.appendChild(list);
     box.appendChild(body);
     return box;
   }
@@ -1887,6 +2013,8 @@
     card.appendChild(list);
 
     card.appendChild(stashFold(g));
+    var lock = lockupFold(g);
+    if (lock) card.appendChild(lock);
     if (g.roster) card.appendChild(rosterFold(g));
     return card;
   }

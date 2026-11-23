@@ -234,7 +234,7 @@ up**, win or lose, and that entry is the whole record of the game for them:
 | `xp` | total experience the gang earned |
 | `takedowns` | the other side's models taken out of action |
 | `outOfAction` | their own models taken out of action |
-| `gear` | anything that came back with them, in words |
+| `gear` | anything that came back with them, as lines — see the lockup |
 | `notes` | anything else worth reading back |
 
 Those same `fighters` lines come back out on the roster card, under
@@ -294,6 +294,34 @@ is collected, a purchase (a negative `amount`), a trade between gangs — and
 an entry carries `id`, `gang`, `cycle`, `date`, `amount` and `what`. The
 validator rejects an entry that names a `battle`, because that payout already
 lives on the battle.
+
+### The lockup
+
+Kit is kept the same way money is, and for the same reason: from the lines
+that say where each thing came from, never as a total somebody maintains.
+A battle's `rewards` carry `gear`, and so may a `ledger` entry. Each gear
+line is one of two shapes:
+
+```js
+gear: [{ item: 'Respirator', qty: 2, note: 'Off the dead, on the way back up' }]
+gear: [{ piece: 'servo-arc-claw' }]
+```
+
+An `item` line names ordinary kit and counts it; `qty` defaults to 1 and
+goes **negative** when the thing leaves. A `piece` line names an entry in
+`archeotech` instead of repeating it, and the name shown comes off that
+piece — as does who holds it, so the validator rejects a gear line that
+disagrees with the piece's own `holder`.
+
+The Gangs tab shows a shut **Lockup** fold under the stash: one row per
+thing, the count beside it, and under each row the lines that got it there.
+A gang holding nothing gets no fold.
+
+Giving an item to a fighter is two edits: add it to their `wargear` on the
+roster, and write a ledger line with a negative `qty` saying who took it.
+The lockup is therefore **what is spare**, not everything the gang owns —
+a fighter's own card is the only place their kit is written down, so it
+is never counted twice.
 
 ### Rosters
 

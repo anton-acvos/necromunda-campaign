@@ -939,9 +939,12 @@ const xs = drawn.map((p) => p[0]), ys = drawn.map((p) => p[1]);
      site adds the two together and that sum IS the stash. Nobody keeps a
      running total by hand, so nobody can forget to.
 
-     amount is credits in, or negative for credits out. "what" is the one
-     line that will be read back in six weeks' time, so it says where the
-     money came from, not what it was for. */
+     amount is credits in, or negative for credits out. gear is the same
+     idea in objects rather than money: a crate bought, traded away, or
+     strapped onto a fighter is one line with a positive or negative qty.
+     An entry carries money, gear, or both. "what" is the one line that
+     will be read back in six weeks' time, so it says where the thing
+     came from, not what it was for. */
   ledger: [
     { id: 'l1-sumptown-cache', cycle: 1, gang: 'sumptown', amount: 25,
       what: 'Starting cache left over \u2014 Sumptown was founded for 1075 of the 1100 they were allowed, and never spent the rest' }
@@ -957,7 +960,11 @@ const xs = drawn.map((p) => p[0]), ys = drawn.map((p) => p[1]);
        xp           total experience the gang earned
        takedowns    the other side's models taken out of action
        outOfAction  their own models taken out of action
-       gear         anything that came back with them, in words
+       gear         anything that came back with them, as lines rather
+                    than a sentence: { item, qty } for ordinary kit, or
+                    { piece } naming an archeotech id, whose name and
+                    holder stay on the piece instead of being written
+                    down twice
        notes        anything else worth reading back
 
      Money is three fields rather than one total because the two missions
@@ -1037,7 +1044,7 @@ const xs = drawn.map((p) => p[0]), ys = drawn.map((p) => p[1]);
       winner: 'mycelium',
       played: true,
       rewards: [
-        { gang: 'mycelium', primary: 40, sidejob: 10, rep: 1, gear: 'Two respirators out of the workings' },
+        { gang: 'mycelium', primary: 40, sidejob: 10, rep: 1, gear: [{ item: 'Respirator', qty: 2, note: 'Off the dead, on the way back up' }] },
         { gang: 'bjorn-prospectors' }
       ],
       summary: 'First holding in the deep anyone has walked. Mycelium Section beat the Bjorn Prospectors to the seam and found it worked out but breathable: a mine, a side job paid on the way out, and no archeotech anywhere in it. The ground itself goes on the map unheld — the expedition charted it, it did not claim it.' },
@@ -1081,7 +1088,7 @@ const xs = drawn.map((p) => p[0]), ys = drawn.map((p) => p[1]);
       winner: 'archeo-3',
       played: true,
       rewards: [
-        { gang: 'archeo-3', primary: 20, sidejob: 20, credits: 15, rep: 2, xp: 14, takedowns: 3, outOfAction: 0, gear: 'The Servo-arc Claw',
+        { gang: 'archeo-3', primary: 20, sidejob: 20, credits: 15, rep: 2, xp: 14, takedowns: 3, outOfAction: 0, gear: [{ piece: 'servo-arc-claw' }],
           notes: 'The fifteen came with the discovery, along with the point of reputation for lighting the stack.',
           fighters: [
             { fighter: 'Skorgen "Fixer" Plasen', xp: 2, xpFor: 'Standing on an objective, and the point for turning up' },
