@@ -253,6 +253,11 @@ for (const [i, r] of (data.archeotech ?? []).entries()) {
   if (r.roll != null && (typeof r.roll !== 'number' || r.roll < 2 || r.roll > 12)) {
     err(`${at} (${r.id}).roll: expected a 2d6 result between 2 and 12`);
   }
+  if (r.value == null) {
+    warn(`${at} (${r.id}): no value \u2014 nobody can trade or rate a piece worth nothing`);
+  } else if (!Number.isInteger(r.value) || r.value < 0) {
+    err(`${at} (${r.id}).value: expected whole credits`);
+  }
   if (!r.effect && !r.profile) warn(`${at} (${r.id}): neither a profile nor an effect`);
   if (r.profile && r.profile.lethality != null && typeof r.profile.lethality !== 'number') {
     err(`${at} (${r.id}).profile.lethality: must be a number`);
@@ -340,6 +345,12 @@ function checkGear(at, gangId, gear) {
       }
     } else if (!g.item) {
       err(`${w}: needs an item name or an archeotech piece`);
+    }
+    if (g.value != null && (!Number.isInteger(g.value) || g.value < 0)) {
+      err(`${w}.value: expected whole credits apiece`);
+    }
+    if (g.value != null && g.piece) {
+      err(`${w}.value: an archeotech piece is worth what the piece says it is`);
     }
     if (g.qty != null && (!Number.isInteger(g.qty) || g.qty === 0)) {
       err(`${w}.qty: expected a whole number in, or negative out`);

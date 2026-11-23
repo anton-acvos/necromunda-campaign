@@ -919,10 +919,12 @@
     var head = h('div', 'plan-head');
     head.appendChild(h('h2', null, 'Archeotech of the deep'));
     var found = pool.filter(function (r) { return r.holder; }).length;
+    var worth = pool.reduce(function (n, r) { return n + (r.value || 0); }, 0);
     head.appendChild(h('p', 'plan-where',
       pool.length + ' pieces catalogued, eleven of them on a 2d6 table \u2014 ' +
       (found ? found + ' recovered, ' + (pool.length - found) + ' still down there'
-             : 'none recovered yet')));
+             : 'none recovered yet') +
+      (worth ? '. ' + worth + ' credits of it in all.' : '')));
     host.appendChild(head);
 
     var wrap = h('section', 'relics');
@@ -953,6 +955,12 @@
       head.appendChild(pip);
       head.appendChild(h('h4', 'relic-name', r.name));
       if (r.kind) head.appendChild(h('span', 'tag relic-kind', r.kind));
+      if (r.value != null) {
+        var worthEl = h('span', 'relic-value', r.value + ' cr');
+        worthEl.title = 'What it adds to a gang\u2019s rating, and what it would ' +
+                        'fetch. Holding it does not put credits in the stash.';
+        head.appendChild(worthEl);
+      }
       card.appendChild(head);
 
       var line = profileLine(r.profile);
@@ -1537,6 +1545,10 @@
         key: g.piece ? 'piece:' + g.piece : 'item:' + g.item,
         name: relic ? relic.name : g.item,
         relic: relic,
+        /* A piece is worth what the piece says; ordinary kit is worth
+           what the line that brought it in says, because the same thing
+           can be picked up off the dead one week and bought the next. */
+        value: relic ? relic.value : g.value,
         qty: g.qty == null ? 1 : g.qty,
         note: g.note,
         cycle: src.cycle,
@@ -1574,9 +1586,10 @@
     var by = {};
     lockupLines(gang).forEach(function (l) {
       if (!by[l.key]) {
-        by[l.key] = { name: l.name, relic: l.relic, qty: 0, from: [] };
+        by[l.key] = { name: l.name, relic: l.relic, value: null, qty: 0, from: [] };
         order.push(l.key);
       }
+      if (l.value != null) by[l.key].value = l.value;
       by[l.key].qty += l.qty;
       by[l.key].from.push(l);
     });
@@ -1591,10 +1604,16 @@
     if (!rows.length) return null;
 
     var things = rows.reduce(function (n, r) { return n + r.qty; }, 0);
+    /* Worth, not money: it is what the lockup would fetch, and it stays
+       out of the stash because nobody has sold any of it. */
+    var worth = rows.reduce(function (n, r) {
+      return n + (r.value || 0) * r.qty;
+    }, 0);
     var box = h('details', 'fold is-lockup');
     box.appendChild(h('summary', 'fold-summary',
       'Lockup \u2014 ' + things + (things === 1 ? ' thing' : ' things') +
-      ' across ' + rows.length + (rows.length === 1 ? ' line' : ' lines')));
+      ' across ' + rows.length + (rows.length === 1 ? ' line' : ' lines') +
+      (worth ? ', worth ' + worth + ' credits' : '')));
 
     var body = h('div', 'fold-body');
     var list = h('ul', 'lockup-list');
@@ -1604,6 +1623,10 @@
       head.appendChild(h('span', 'lockup-name', r.name));
       if (r.qty > 1) head.appendChild(h('span', 'lockup-qty', '\u00d7' + r.qty));
       if (r.relic) head.appendChild(h('span', 'lockup-tag', 'Archeotech'));
+      if (r.value != null) {
+        head.appendChild(h('span', 'lockup-worth',
+          (r.qty > 1 ? r.value * r.qty + ' cr' : r.value + ' cr')));
+      }
       li.appendChild(head);
 
       var from = h('ul', 'lockup-from');

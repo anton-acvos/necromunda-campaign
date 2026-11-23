@@ -848,7 +848,13 @@ const xs = drawn.map((p) => p[0]), ys = drawn.map((p) => p[1]);
     notes: t.notes
   })),
   territories,
-  /* What the deep still has in it. An expedition that wins comes back up
+  /* Every piece carries what it is worth in credits. The number is the
+     arbitrator's, set against what the thing does rather than against
+     any list, and it is what the piece adds to a gang's rating and what
+     it fetches if it is ever traded. It is not money: holding a piece
+     does not put a single credit in anybody's stash.
+
+     What the deep still has in it. An expedition that wins comes back up
      with one of these, and "holder" names the gang that took it — null
      while it is still down there waiting to be found.
 
@@ -859,45 +865,45 @@ const xs = drawn.map((p) => p[0]), ys = drawn.map((p) => p[1]);
      plain words, because a curio that does nothing is still worth having
      if everyone wants one. */
   archeotech: [
-    { id: 'voidshell-harness', roll: 12, name: 'The Voidshell Harness', kind: 'Wargear', holder: null,
+    { id: 'voidshell-harness', roll: 12, name: 'The Voidshell Harness', kind: 'Wargear', holder: null, value: 150,
       effect: 'Once per battle, take a 2+ save against a single attack. This save takes priority over the core rules for saves.' },
 
-    { id: 'time-sink', roll: 4, name: 'The Time Sink', kind: 'Wargear', holder: null,
+    { id: 'time-sink', roll: 4, name: 'The Time Sink', kind: 'Wargear', holder: null, value: 90,
       effect: 'Any enemy fighter within Engagement range suffers \u22121 WS. Time runs slow around the bearer, and it is not pleasant to stand near.' },
 
-    { id: 'conversion-eradicator', roll: 10, name: 'Conversion Eradicator', kind: 'Personal equipment', holder: null,
+    { id: 'conversion-eradicator', roll: 10, name: 'Conversion Eradicator', kind: 'Personal equipment', holder: null, value: 110,
       effect: 'Every ranged weapon carried by this fighter gains +1 Strength and +1 AP, and becomes unstable.' },
 
-    { id: 'hagioscope', roll: 5, name: 'Hagioscope', kind: 'Wargear', holder: null,
+    { id: 'hagioscope', roll: 5, name: 'Hagioscope', kind: 'Wargear', holder: null, value: 60,
       effect: 'Before the battle, nominate one enemy fighter to be scanned. Gain +1 to hit against that fighter until the end of the battle.' },
 
-    { id: 'psychofamile-pheromones', roll: 6, name: 'Psychofamile Pheromones', kind: 'One-shot', holder: null,
+    { id: 'psychofamile-pheromones', roll: 6, name: 'Psychofamile Pheromones', kind: 'One-shot', holder: null, value: 45,
       effect: 'Target an enemy fighter. For one round they are treated as a friendly model.' },
 
     /* Took the Servo-arc Claw's slot the cycle Team 3 carried that one out
        of the deep. A piece drops off the table when somebody holds it, and
        whatever is waiting moves up. */
-    { id: 'obscuroptikon', roll: 11, name: 'The Obscuroptikon', kind: 'Wargear', holder: null,
+    { id: 'obscuroptikon', roll: 11, name: 'The Obscuroptikon', kind: 'Wargear', holder: null, value: 120,
       effect: 'Ranged attacks targeting the bearer suffer \u22121 to hit. The field shows a shooter a corridor that is not there, and a fighter who walked out of it an hour ago.' },
 
-    { id: 'grav-cannon', roll: 3, name: 'Grav Cannon', kind: 'Weapon', holder: null,
+    { id: 'grav-cannon', roll: 3, name: 'Grav Cannon', kind: 'Weapon', holder: null, value: 145,
       profile: { range: '12"/24"', lethality: 3, traits: ['Heavy', 'Ammo(5+)', 'Blast(5")', 'Graviton Pulse'] } },
 
-    { id: 'taser-goad', roll: 8, name: 'Taser Goad', kind: 'Weapon', holder: null,
+    { id: 'taser-goad', roll: 8, name: 'Taser Goad', kind: 'Weapon', holder: null, value: 55,
       profile: { range: 'E', str: 'S+1', lethality: 1, traits: ['Melee', 'Shock(5+)', 'Concussive(5+)'] } },
 
-    { id: 'servo-arc-claw', name: 'Servo-arc Claw', kind: 'Weapon', holder: 'archeo-3',
+    { id: 'servo-arc-claw', name: 'Servo-arc Claw', kind: 'Weapon', holder: 'archeo-3', value: 100,
       profile: { range: 'E', str: 'S+2', ap: '1', lethality: 2, traits: ['Unwieldy', 'Shock(5+)', 'Rending(5+)', 'Damage(2)'] } },
 
-    { id: 'servo-chirurgic-claw', roll: 9, name: 'Servo-chirurgic Claw', kind: 'Weapon', holder: null,
+    { id: 'servo-chirurgic-claw', roll: 9, name: 'Servo-chirurgic Claw', kind: 'Weapon', holder: null, value: 85,
       profile: { range: 'E', str: 'S', lethality: 1, traits: ['Unwieldy', 'Rending(6+)'] },
       effect: 'Blessed Augmetic Surgery (Double) \u2014 choose a friendly Seriously Injured fighter within 1". That fighter is no longer Seriously Injured and regains 1 lost Wound.' },
 
-    { id: 'uncreator-gauntlet', roll: 2, name: 'The Uncreator Gauntlet', kind: 'Weapon', holder: null,
+    { id: 'uncreator-gauntlet', roll: 2, name: 'The Uncreator Gauntlet', kind: 'Weapon', holder: null, value: 140,
       profile: { range: 'E', str: 'S+1', ap: '2', lethality: 2, traits: ['Unwieldy', 'Damage(2)'] },
       effect: 'On a hit, one weapon or piece of wargear carried by the target is destroyed outright, chosen by the bearer. The gauntlet does not break things so much as decline to let them have been made.' },
 
-    { id: 'archaeotoaster', roll: 7, name: 'Archaeotoaster', kind: 'Curio', holder: null,
+    { id: 'archaeotoaster', roll: 7, name: 'Archaeotoaster', kind: 'Curio', holder: null, value: 25,
       effect: 'A genuine bread-toasting machine out of the Dark Age of Technology. It does nothing of any value, and everybody wants one. Gain +1 reputation.' }
   ],
 
@@ -987,10 +993,10 @@ const xs = drawn.map((p) => p[0]), ys = drawn.map((p) => p[1]);
        takedowns    the other side's models taken out of action
        outOfAction  their own models taken out of action
        gear         anything that came back with them, as lines rather
-                    than a sentence: { item, qty } for ordinary kit, or
-                    { piece } naming an archeotech id, whose name and
-                    holder stay on the piece instead of being written
-                    down twice
+                    than a sentence: { item, qty, value } for ordinary
+                    kit, or { piece } naming an archeotech id, whose
+                    name, holder and value stay on the piece instead of
+                    being written down twice. value is credits apiece
        notes        anything else worth reading back
 
      Money is three fields rather than one total because the two missions
@@ -1073,7 +1079,7 @@ const xs = drawn.map((p) => p[0]), ys = drawn.map((p) => p[1]);
       played: true,
       rewards: [
         { gang: 'mycelium', primary: 40, sidejob: 10, rep: 1, xp: 15, takedowns: 4, outOfAction: 0,
-          gear: [{ item: 'Respirator', qty: 2, note: 'Off the dead, on the way back up' }],
+          gear: [{ item: 'Respirator', qty: 2, value: 15, note: 'Off the dead, on the way back up' }],
           fighters: [
             { fighter: 'Slippery Jack',    xp: 2, takedowns: 1, xpFor: 'Turning up, and putting one of them out of action' },
             { fighter: 'Destroying Angel', xp: 10, takedowns: 3,

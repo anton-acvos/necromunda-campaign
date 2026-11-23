@@ -307,6 +307,10 @@ gear: [{ item: 'Respirator', qty: 2, note: 'Off the dead, on the way back up' }]
 gear: [{ piece: 'servo-arc-claw' }]
 ```
 
+A line may also carry `value`, the credits **one** of them is worth; the
+fold multiplies it by the count and totals the lockup in its summary. An
+archeotech line never carries one, because the piece already has it.
+
 An `item` line names ordinary kit and counts it; `qty` defaults to 1 and
 goes **negative** when the thing leaves. A `piece` line names an entry in
 `archeotech` instead of repeating it, and the name shown comes off that

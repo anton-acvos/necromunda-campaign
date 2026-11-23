@@ -798,6 +798,14 @@ body {
 .relic-roll.is-off { border-style: dashed; color: var(--ink-faint); }
 .relic-kind { flex: none; }
 
+.relic-value {
+  flex: none;
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  color: var(--ink-dim);
+  cursor: help;
+}
+
 .relic-stats {
   margin: 0;
   font-family: var(--mono);
@@ -1413,6 +1421,7 @@ body {
 }
 
 .lockup-name { font-weight: 600; }
+.lockup-worth { margin-left: auto; font-family: var(--mono); font-size: 0.74rem; color: var(--ink-dim); }
 .lockup-qty { color: var(--ink-dim); font-family: var(--mono); font-size: 0.78rem; }
 
 .lockup-tag {

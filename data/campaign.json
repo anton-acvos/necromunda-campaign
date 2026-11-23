@@ -2449,6 +2449,7 @@
       "name": "The Voidshell Harness",
       "kind": "Wargear",
       "holder": null,
+      "value": 150,
       "effect": "Once per battle, take a 2+ save against a single attack. This save takes priority over the core rules for saves."
     },
     {
@@ -2457,6 +2458,7 @@
       "name": "The Time Sink",
       "kind": "Wargear",
       "holder": null,
+      "value": 90,
       "effect": "Any enemy fighter within Engagement range suffers −1 WS. Time runs slow around the bearer, and it is not pleasant to stand near."
     },
     {
@@ -2465,6 +2467,7 @@
       "name": "Conversion Eradicator",
       "kind": "Personal equipment",
       "holder": null,
+      "value": 110,
       "effect": "Every ranged weapon carried by this fighter gains +1 Strength and +1 AP, and becomes unstable."
     },
     {
@@ -2473,6 +2476,7 @@
       "name": "Hagioscope",
       "kind": "Wargear",
       "holder": null,
+      "value": 60,
       "effect": "Before the battle, nominate one enemy fighter to be scanned. Gain +1 to hit against that fighter until the end of the battle."
     },
     {
@@ -2481,6 +2485,7 @@
       "name": "Psychofamile Pheromones",
       "kind": "One-shot",
       "holder": null,
+      "value": 45,
       "effect": "Target an enemy fighter. For one round they are treated as a friendly model."
     },
     {
@@ -2489,6 +2494,7 @@
       "name": "The Obscuroptikon",
       "kind": "Wargear",
       "holder": null,
+      "value": 120,
       "effect": "Ranged attacks targeting the bearer suffer −1 to hit. The field shows a shooter a corridor that is not there, and a fighter who walked out of it an hour ago."
     },
     {
@@ -2497,6 +2503,7 @@
       "name": "Grav Cannon",
       "kind": "Weapon",
       "holder": null,
+      "value": 145,
       "profile": {
         "range": "12\"/24\"",
         "lethality": 3,
@@ -2514,6 +2521,7 @@
       "name": "Taser Goad",
       "kind": "Weapon",
       "holder": null,
+      "value": 55,
       "profile": {
         "range": "E",
         "str": "S+1",
@@ -2530,6 +2538,7 @@
       "name": "Servo-arc Claw",
       "kind": "Weapon",
       "holder": "archeo-3",
+      "value": 100,
       "profile": {
         "range": "E",
         "str": "S+2",
@@ -2549,6 +2558,7 @@
       "name": "Servo-chirurgic Claw",
       "kind": "Weapon",
       "holder": null,
+      "value": 85,
       "profile": {
         "range": "E",
         "str": "S",
@@ -2566,6 +2576,7 @@
       "name": "The Uncreator Gauntlet",
       "kind": "Weapon",
       "holder": null,
+      "value": 140,
       "profile": {
         "range": "E",
         "str": "S+1",
@@ -2584,6 +2595,7 @@
       "name": "Archaeotoaster",
       "kind": "Curio",
       "holder": null,
+      "value": 25,
       "effect": "A genuine bread-toasting machine out of the Dark Age of Technology. It does nothing of any value, and everybody wants one. Gain +1 reputation."
     }
   ],
@@ -2826,6 +2838,7 @@
             {
               "item": "Respirator",
               "qty": 2,
+              "value": 15,
               "note": "Off the dead, on the way back up"
             }
           ],
