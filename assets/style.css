@@ -1448,6 +1448,128 @@ body {
 .lockup-line.is-out { color: var(--ink-faint); }
 .lockup-line.is-out .lockup-amt { color: var(--warn); }
 
+/* The Heroes board. One row per fighter: rank, who they are and what
+   they are remembered for, then the renown with its own working. */
+.hero-list {
+  display: grid;
+  gap: 8px;
+  margin: 16px 0 18px;
+  padding: 0;
+  list-style: none;
+}
+
+.hero {
+  display: grid;
+  grid-template-columns: 44px 1fr auto;
+  align-items: center;
+  gap: 14px;
+  padding: 11px 14px;
+  background: var(--bg-raised);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+}
+
+.hero-rank {
+  font-family: var(--mono);
+  font-size: 1.3rem;
+  text-align: center;
+  color: var(--ink-faint);
+}
+
+.hero.is-podium { border-color: var(--line-bright); }
+.hero.rank-1 .hero-rank { color: #e8c23a; }
+.hero.rank-2 .hero-rank { color: #c9c3b8; }
+.hero.rank-3 .hero-rank { color: #b07a4a; }
+
+.hero-who { min-width: 0; }
+
+.hero-name {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  margin: 0;
+  font-weight: 600;
+}
+
+.hero-what {
+  margin: 2px 0 0;
+  font-size: 0.74rem;
+  color: var(--ink-dim);
+}
+
+.hero-honour {
+  display: flex;
+  align-items: baseline;
+  gap: 7px;
+  margin: 5px 0 0;
+  font-size: 0.76rem;
+  color: var(--ink);
+}
+
+.hero-honour-tag {
+  flex: none;
+  font-family: var(--mono);
+  font-size: 0.6rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--accent);
+  border: 1px solid var(--line-bright);
+  border-radius: 3px;
+  padding: 1px 5px;
+}
+
+.hero-why {
+  display: flex;
+  align-items: baseline;
+  gap: 7px;
+  margin: 5px 0 0;
+  font-size: 0.74rem;
+  color: var(--ink-faint);
+}
+
+.hero-why-text { min-width: 0; }
+
+.hero-hurt {
+  margin: 3px 0 0;
+  font-size: 0.72rem;
+  color: var(--warn);
+}
+
+.hero-score {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 1px;
+  white-space: nowrap;
+}
+
+.hero-renown {
+  font-family: var(--mono);
+  font-size: 1.35rem;
+  line-height: 1.1;
+  color: var(--good);
+}
+
+.hero-score-label {
+  font-size: 0.6rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+}
+
+.hero-sum,
+.hero-total {
+  font-size: 0.66rem;
+  color: var(--ink-faint);
+}
+
+.hero-sum { margin-top: 3px; }
+
+@media (max-width: 620px) {
+  .hero { grid-template-columns: 32px 1fr; }
+  .hero-score { grid-column: 2; align-items: flex-start; margin-top: 7px; }
+}
+
 .led-part { color: var(--ink-faint); }
 .led-part::before { content: '\00a0\00b7\00a0'; }
 

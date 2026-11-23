@@ -252,8 +252,8 @@ the logged experience back out, or the same games get counted twice.
 
 A record may also carry `fighters`: the same game told one model at a
 time. Each line names a fighter off that gang's roster and carries `xp`,
-`xpFor` (what the experience was for, in words), `outOfAction`, `injury`
-and `note`. The log card gives each gang a column of its own and lists them
+`xpFor` (what the experience was for, in words), `takedowns` (models
+*this* fighter put out of action), `outOfAction`, `injury` and `note`. The log card gives each gang a column of its own and lists them
 there, showing the name and the experience, with `xpFor` and `note` in the
 tooltip. The gang's own `xp` and `outOfAction` stay the totals — a gang can
 earn experience no fighter is credited with, and a model can go down
@@ -322,6 +322,48 @@ roster, and write a ledger line with a negative `qty` saying who took it.
 The lockup is therefore **what is spare**, not everything the gang owns —
 a fighter's own card is the only place their kit is written down, so it
 is never counted twice.
+
+### Heroes
+
+The **Heroes** tab ranks the ten most renowned fighters in the campaign.
+Renown is one number made of three:
+
+| worth | for |
+| --- | --- |
+| 1 | each experience point **the log** has paid them |
+| 3 | each model they have put out of action |
+| 5 | each honour the arbitrator has written down |
+
+Each row prints that working beside the total, so the board can be
+checked without reading any code.
+
+Experience is counted from the log only, never off the sheet: a Leader is
+written onto a sheet with sixty-odd before a shot is fired and a Prospect
+with one, so ranking on the total would rank the roster rather than the
+campaign. Ties go to the fighter who took more models out, then to
+whoever did it in fewer games.
+
+Takedowns come from a `takedowns` field on a battle reward's `fighters`
+line — the models *that fighter* put out of action, where the reward's own
+`takedowns` is the gang total. Nothing else has to be written down for a
+fighter to climb: experience and kills both fall out of the battle records.
+
+**Honours** are the exception, and the only hand-written part of the
+board. They live in a top-level `honours` array for the things a battle
+record has no column for — the moments the campaign will still be telling
+stories about:
+
+```js
+{ id: 'h1-angel-charter', gang: 'mycelium', fighter: 'Destroying Angel',
+  title: 'Broke the Charter', cycle: 1, battle: 'b4-hollowbore',
+  what: 'Put the Prospectors\u2019 Charter Master down in the dark and two of his crew after him.' }
+```
+
+`battle` is optional, because an honour need not have come out of a game.
+The validator rejects one whose fighter is not on that gang’s sheet.
+
+The board reads every roster file at once the first time it is opened, and
+shares that cache with the Gangs tab.
 
 ### Rosters
 

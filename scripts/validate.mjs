@@ -279,6 +279,37 @@ for (const [i, r] of (data.archeotech ?? []).entries()) {
   if (seen.size && missing.length) warn(`archeotech: no piece on 2d6 result ${missing.join(', ')}`);
 }
 
+/* --- honours ---
+
+   The arbitrator's own list. A fighter has to exist on the roster it is
+   written against, because an honour nobody can look up is just a line. */
+function checkHonours(rosterNames) {
+  const battleIds = new Set((data.battles ?? []).map((b) => b.id));
+  const seen = new Set();
+  for (const [i, o] of (data.honours ?? []).entries()) {
+    const at = `honours[${i}]`;
+    if (!o.id) err(`${at}.id: required`);
+    else if (seen.has(o.id)) err(`${at}.id: duplicate "${o.id}"`);
+    else seen.add(o.id);
+
+    if (!gangIds.has(o.gang)) err(`${at}.gang: unknown gang id "${o.gang}"`);
+    if (!o.fighter) err(`${at}.fighter: required`);
+    else {
+      const names = rosterNames.get(o.gang);
+      if (names && names.size && !names.has(o.fighter)) {
+        err(`${at}.fighter: "${o.fighter}" is not on ${o.gang}\u2019s sheet`);
+      }
+    }
+    if (!o.what) err(`${at}.what: required \u2014 an honour has to say why`);
+    if (!Number.isInteger(o.cycle) || o.cycle < 1) {
+      err(`${at}.cycle: required \u2014 the board is read in campaign time`);
+    }
+    if (o.battle && !battleIds.has(o.battle)) {
+      err(`${at}.battle: unknown battle id "${o.battle}"`);
+    }
+  }
+}
+
 /* --- gear ---
 
    What a gang came away with that was not money. A line is either a
@@ -495,6 +526,14 @@ function checkCrew(b, rosters) {
       warn(`${b.id}: ${r.gang} is down for ${r.outOfAction} out of action but ${down} marked`);
     }
 
+    /* The gang's takedowns are the total; the fighters' are who did it.
+       Fewer credited than counted is ordinary — nobody always knows who
+       landed the shot — but more credited than counted cannot be. */
+    const kills = crew.reduce((n, f) => n + (f.takedowns ?? 0), 0);
+    if (r.takedowns != null && kills > r.takedowns) {
+      warn(`${b.id}: ${r.gang} took out ${r.takedowns} but the fighters are credited with ${kills}`);
+    }
+
     const names = rosters.get(r.gang);
     if (!names) continue;
     for (const f of crew) {
@@ -547,6 +586,8 @@ for (const [i, b] of (data.battles ?? []).entries()) {
     if (!gangIds.has(p)) err(`${at}.participants: unknown gang id "${p}"`);
   }
 }
+
+checkHonours(rosterNames);
 
 /* --- campaign shape: a gang with charted ground needs a settlement on it.
    A gang that holds nothing charted is playing by its own rules, so the

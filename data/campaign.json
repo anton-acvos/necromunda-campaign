@@ -2696,6 +2696,7 @@
       "what": "Starting cache left over — Sumptown was founded for 1075 of the 1100 they were allowed, and never spent the rest"
     }
   ],
+  "honours": [],
   "battles": [
     {
       "id": "b1-bonepipe",
@@ -2804,11 +2805,13 @@
             {
               "fighter": "Slippery Jack",
               "xp": 2,
+              "takedowns": 1,
               "xpFor": "Turning up, and putting one of them out of action"
             },
             {
               "fighter": "Destroying Angel",
               "xp": 10,
+              "takedowns": 3,
               "xpFor": "Turning up; two for seriously injuring the Charter Master and three more for putting him out of action; two apiece for two more of them",
               "note": "Three of the four Squats who went down are on this one line. Slippery Jack had the fourth."
             },
@@ -2973,11 +2976,13 @@
             {
               "fighter": "Krell \"Crackles\" Rache",
               "xp": 5,
+              "takedowns": 1,
               "xpFor": "Three for putting the leader out of action, one for an objective, one for turning up"
             },
             {
               "fighter": "Spydr 17",
               "xp": 4,
+              "takedowns": 1,
               "xpFor": "Three for putting the champion out of action, one for turning up"
             },
             {

@@ -378,8 +378,9 @@
   /* ---------- selection ---------- */
 
   function select(id, updateHash) {
-    if (id === 'campaign' || id === 'gangs' || id === 'archeotech') {
+    if (id === 'campaign' || id === 'gangs' || id === 'heroes' || id === 'archeotech') {
       showTab(id);
+      if (id === 'heroes') drawHeroes();
       if (updateHash && window.location.hash !== '#' + id) history.replaceState(null, '', '#' + id);
       return;
     }
@@ -2053,13 +2054,237 @@
       'standings of the ground held, income from the holdings listed here.'));
   }
 
+
+  /* ---------- heroes ----------
+
+     Three things earn a fighter a place, so the board adds all three up
+     and calls the sum renown:
+
+       every experience point the log has paid them     1 each
+       every model they have put out of action          3 each
+       every honour the arbitrator has written down     5 each
+
+     The weights are a judgement, not a rule out of the book, so the row
+     shows its own working: the three figures are printed beside the
+     total and anyone can check it. A takedown is worth more than the
+     experience it pays because a gang that fights wins ground, and an
+     honour is worth more again because somebody had to decide it was
+     worth remembering.
+
+     Experience is counted from the log only, never off the sheet. A
+     Leader is written down with sixty-odd before a shot is fired and a
+     Prospect with one, and neither of them fought for that; ranking on
+     the total would rank the roster rather than the campaign.
+
+     The board needs every roster at once, which the Gangs tab only ever
+     loads one at a time, so the first look fetches the missing ones and
+     the cache is shared with the folds. */
+  var RENOWN = { xp: 1, takedown: 3, honour: 5 };
+  var HERO_LIMIT = 10;
+
+  function withRosters(then) {
+    var want = (state.data.gangs || []).filter(function (g) {
+      return g.roster && !rosterCache[g.id];
+    });
+    if (!want.length) { then(); return; }
+    var left = want.length;
+    want.forEach(function (g) {
+      fetch(g.roster, { cache: 'no-cache' })
+        .then(function (res) { return res.ok ? res.json() : null; })
+        .catch(function () { return null; })
+        .then(function (r) {
+          if (r) rosterCache[g.id] = r;
+          if (!--left) then();
+        });
+    });
+  }
+
+  /* Everything the campaign knows about one fighter, gathered across every
+     game they are written into and every honour against their name. The
+     sheet is looked up for what they are and what they started on; a
+     fighter the log names who is on no sheet still counts, because the
+     game happened either way. */
+  function heroRows() {
+    var by = {};
+    var order = [];
+
+    function rowFor(gangId, name) {
+      var key = gangId + '|' + name;
+      if (!by[key]) {
+        by[key] = { gang: gangOf(gangId), name: name, earned: 0, kills: 0,
+                    games: 0, down: 0, hurt: [], honours: [], best: null };
+        order.push(key);
+      }
+      return by[key];
+    }
+
+    (state.data.battles || []).forEach(function (b) {
+      (b.rewards || []).forEach(function (r) {
+        (r.fighters || []).forEach(function (f) {
+          var row = rowFor(r.gang, f.fighter);
+          row.earned += f.xp || 0;
+          row.kills += f.takedowns || 0;
+          row.games += 1;
+          if (f.outOfAction) row.down += 1;
+          if (f.injury) row.hurt.push(f.injury);
+          /* The single best night they have had, kept for the line under
+             their name. A tie goes to the earlier game. */
+          if (f.xpFor && (!row.best || (f.xp || 0) > row.best.xp)) {
+            row.best = { xp: f.xp || 0, why: f.xpFor, battle: b };
+          }
+        });
+      });
+    });
+
+    (state.data.honours || []).forEach(function (o) {
+      rowFor(o.gang, o.fighter).honours.push(o);
+    });
+
+    order.forEach(function (k) {
+      var row = by[k];
+      var r = row.gang ? rosterCache[row.gang.id] : null;
+      var sheet = null;
+      ((r && r.fighters) || []).forEach(function (f) {
+        if (f.name === row.name) sheet = f;
+      });
+      row.archetype = sheet ? sheet.archetype : null;
+      row.start = sheet ? sheet.xp : null;
+      row.total = (sheet && sheet.xp != null ? sheet.xp : 0) + row.earned;
+      row.renown = row.earned * RENOWN.xp +
+                   row.kills * RENOWN.takedown +
+                   row.honours.length * RENOWN.honour;
+    });
+
+    /* Most renown first. A tie goes to the one who took more models out,
+       then to whoever did it in fewer games, then alphabetically, so the
+       order never wobbles between loads. */
+    return order.map(function (k) { return by[k]; })
+      .filter(function (row) { return row.renown > 0; })
+      .sort(function (a, b) {
+        return (b.renown - a.renown) || (b.kills - a.kills) ||
+               (a.games - b.games) || a.name.localeCompare(b.name);
+      });
+  }
+
+  function drawHeroes() {
+    var host = document.getElementById('panel-heroes');
+    if (host.getAttribute('data-drawn') === 'yes') return;
+    host.setAttribute('data-drawn', 'yes');
+    host.textContent = '';
+    host.appendChild(h('p', 'detail-empty', 'Reading every sheet\u2026'));
+    withRosters(function () { fillHeroes(host); });
+  }
+
+  function fillHeroes(host) {
+    var rows = heroRows();
+    host.textContent = '';
+    host.appendChild(h('h2', 'panel-title', 'Heroes of the Hollow Reach'));
+
+    if (!rows.length) {
+      host.appendChild(h('p', 'detail-empty',
+        'Nobody has done anything yet. The board fills up as the log does.'));
+      return;
+    }
+
+    var top = rows.slice(0, HERO_LIMIT);
+    host.appendChild(h('p', 'panel-sub',
+      'The ' + top.length + ' most renowned fighters in the Reach' +
+      (rows.length > top.length
+        ? ', out of ' + rows.length + ' who have earned a place at all' : '') + '.'));
+
+    var list = h('ol', 'hero-list');
+    top.forEach(function (row, i) {
+      var li = h('li', 'hero' + (i < 3 ? ' is-podium rank-' + (i + 1) : ''));
+      li.appendChild(h('span', 'hero-rank', String(i + 1)));
+
+      var who = h('div', 'hero-who');
+      var name = h('p', 'hero-name');
+      if (row.gang) {
+        var sw = h('span', 'swatch');
+        sw.style.background = row.gang.color;
+        name.appendChild(sw);
+      }
+      name.appendChild(document.createTextNode(row.name));
+      who.appendChild(name);
+
+      var bits = [];
+      if (row.archetype) bits.push(row.archetype);
+      if (row.gang) bits.push(row.gang.short || row.gang.name);
+      bits.push(row.games + (row.games === 1 ? ' game' : ' games'));
+      if (row.kills) {
+        /* Per game once there is more than one game to average over. On a
+           single outing the rate is the count, and saying "a game" about
+           it reads like a claim nobody has tested. */
+        bits.push(row.games > 1
+          ? (row.kills / row.games).toFixed(1).replace(/\.0$/, '') + ' taken out a game'
+          : row.kills + ' taken out');
+      }
+      if (row.down) {
+        bits.push(row.down + (row.down === 1 ? ' time down' : ' times down'));
+      }
+      who.appendChild(h('p', 'hero-what', bits.join(' \u00b7 ')));
+
+      row.honours.forEach(function (o) {
+        var line = h('p', 'hero-honour');
+        line.appendChild(h('span', 'hero-honour-tag', o.title || 'Honour'));
+        line.appendChild(document.createTextNode(o.what));
+        who.appendChild(line);
+      });
+
+      if (row.best && row.best.why) {
+        var why = h('p', 'hero-why');
+        why.appendChild(logLink(row.best.battle));
+        why.appendChild(h('span', 'hero-why-text', row.best.why));
+        who.appendChild(why);
+      }
+
+      if (row.hurt.length) {
+        who.appendChild(h('p', 'hero-hurt', row.hurt.join(' \u00b7 ')));
+      }
+      li.appendChild(who);
+
+      var score = h('div', 'hero-score');
+      score.appendChild(h('strong', 'hero-renown', String(row.renown)));
+      score.appendChild(h('span', 'hero-score-label', 'renown'));
+
+      /* The working: each part is what it contributed and what for, so the
+         total adds up on the page without anybody reading the code. */
+      var parts = [];
+      if (row.earned) parts.push(row.earned + ' XP');
+      if (row.kills) {
+        parts.push((row.kills * RENOWN.takedown) + ' for ' + row.kills + ' taken out');
+      }
+      if (row.honours.length) {
+        parts.push((row.honours.length * RENOWN.honour) + ' for ' + row.honours.length +
+                   (row.honours.length === 1 ? ' honour' : ' honours'));
+      }
+      score.appendChild(h('span', 'hero-sum', parts.join(' + ')));
+      if (row.start != null) {
+        score.appendChild(h('span', 'hero-total', row.total + ' XP all told'));
+      }
+      li.appendChild(score);
+
+      list.appendChild(li);
+    });
+    host.appendChild(list);
+
+    host.appendChild(h('p', 'tally-foot',
+      'Renown is one point per experience the log has paid them, ' +
+      RENOWN.takedown + ' per model they have put out of action, and ' +
+      RENOWN.honour + ' per honour the arbitrator has written down. ' +
+      'Experience is counted from the log only \u2014 a Leader starts with ' +
+      'sixty of it and a Prospect with one, and neither of them fought ' +
+      'for that. Ties go to the one who took more models out, then to ' +
+      'whoever did it in fewer games.'));
+  }
+
   /* ---------- tabs ---------- */
 
   function showTab(name) {
     var panels = { map: 'panel-map', campaign: 'panel-campaign', gangs: 'panel-gangs',
-                   archeotech: 'panel-archeotech' };
+                   heroes: 'panel-heroes', archeotech: 'panel-archeotech' };
     var tabs = { map: 'tab-map', campaign: 'tab-campaign', gangs: 'tab-gangs',
-                 archeotech: 'tab-archeotech' };
+                 heroes: 'tab-heroes', archeotech: 'tab-archeotech' };
     Object.keys(panels).forEach(function (key) {
       var on = key === name;
       document.getElementById(panels[key]).hidden = !on;
@@ -2113,12 +2338,13 @@
 
     document.getElementById('tab-map').addEventListener('click', function () {
       showTab('map');
-      if (['#campaign', '#gangs', '#archeotech'].indexOf(window.location.hash) >= 0) {
+      if (['#campaign', '#gangs', '#heroes', '#archeotech'].indexOf(window.location.hash) >= 0) {
         history.replaceState(null, '', state.selected ? '#' + state.selected : window.location.pathname);
       }
     });
     document.getElementById('tab-campaign').addEventListener('click', function () { select('campaign', true); });
     document.getElementById('tab-gangs').addEventListener('click', function () { select('gangs', true); });
+    document.getElementById('tab-heroes').addEventListener('click', function () { select('heroes', true); });
     document.getElementById('tab-archeotech').addEventListener('click', function () { select('archeotech', true); });
 
     var fromHash = window.location.hash.replace(/^#/, '');

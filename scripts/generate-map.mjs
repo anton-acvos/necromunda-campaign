@@ -950,6 +950,20 @@ const xs = drawn.map((p) => p[0]), ys = drawn.map((p) => p[1]);
       what: 'Starting cache left over \u2014 Sumptown was founded for 1075 of the 1100 they were allowed, and never spent the rest' }
   ],
 
+  /* What the Reach remembers a fighter for. Experience and takedowns
+     come out of the battle records on their own; an honour is the part
+     no column can hold — the thing that happened that the campaign will
+     still be telling stories about. The arbitrator writes these by hand
+     and they are the only hand-written part of the Heroes board.
+
+       gang      whose roster the fighter is on
+       fighter   the name on that roster, spelled the way the sheet does
+       title     two or three words, the way it would be announced
+       what      the line that says why, read back in six weeks
+       cycle     when it happened
+       battle    the game it came out of, if it came out of one */
+  honours: [],
+
   /* The log. Each battle carries one reward entry per gang that turned up,
      win or lose, and that entry is the whole record of the game for them:
 
@@ -979,6 +993,8 @@ const xs = drawn.map((p) => p[0]), ys = drawn.map((p) => p[1]);
 
        fighter      the name on the roster
        xp           experience that fighter earned
+       takedowns    models of the other side this fighter put out of
+                    action, which is where a kill rate comes from
        xpFor        what the experience was for, in words
        outOfAction  true if they went out of action
        injury       what they picked up, if anything lasting
@@ -1047,8 +1063,8 @@ const xs = drawn.map((p) => p[0]), ys = drawn.map((p) => p[1]);
         { gang: 'mycelium', primary: 40, sidejob: 10, rep: 1, xp: 15, takedowns: 4, outOfAction: 0,
           gear: [{ item: 'Respirator', qty: 2, note: 'Off the dead, on the way back up' }],
           fighters: [
-            { fighter: 'Slippery Jack',    xp: 2, xpFor: 'Turning up, and putting one of them out of action' },
-            { fighter: 'Destroying Angel', xp: 10,
+            { fighter: 'Slippery Jack',    xp: 2, takedowns: 1, xpFor: 'Turning up, and putting one of them out of action' },
+            { fighter: 'Destroying Angel', xp: 10, takedowns: 3,
               xpFor: 'Turning up; two for seriously injuring the Charter Master and three more for putting him out of action; two apiece for two more of them',
               note: 'Three of the four Squats who went down are on this one line. Slippery Jack had the fourth.' },
             { fighter: 'Amanita',          xp: 1, xpFor: 'Turning up' },
@@ -1113,8 +1129,8 @@ const xs = drawn.map((p) => p[0]), ys = drawn.map((p) => p[1]);
           notes: 'The fifteen came with the discovery, along with the point of reputation for lighting the stack.',
           fighters: [
             { fighter: 'Skorgen "Fixer" Plasen', xp: 2, xpFor: 'Standing on an objective, and the point for turning up' },
-            { fighter: 'Krell "Crackles" Rache', xp: 5, xpFor: 'Three for putting the leader out of action, one for an objective, one for turning up' },
-            { fighter: 'Spydr 17', xp: 4, xpFor: 'Three for putting the champion out of action, one for turning up' },
+            { fighter: 'Krell "Crackles" Rache', xp: 5, takedowns: 1, xpFor: 'Three for putting the leader out of action, one for an objective, one for turning up' },
+            { fighter: 'Spydr 17', xp: 4, takedowns: 1, xpFor: 'Three for putting the champion out of action, one for turning up' },
             { fighter: 'Skarper "Gofer" Raleski', xp: 2, xpFor: 'Standing on an objective, and the point for turning up' },
             { fighter: 'Kirsche "Deathwish" Pashkel', xp: 1, xpFor: 'Turning up',
               note: 'Ran out of ammunition while missing exclusively.' }
