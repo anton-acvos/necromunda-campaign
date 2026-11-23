@@ -903,7 +903,7 @@ const xs = drawn.map((p) => p[0]), ys = drawn.map((p) => p[1]);
       profile: { range: 'E', str: 'S+1', ap: '2', lethality: 2, traits: ['Unwieldy', 'Damage(2)'] },
       effect: 'On a hit, one weapon or piece of wargear carried by the target is destroyed outright, chosen by the bearer. The gauntlet does not break things so much as decline to let them have been made.' },
 
-    { id: 'archaeotoaster', roll: 7, name: 'Archaeotoaster', kind: 'Curio', holder: null, value: 25,
+    { id: 'archaeotoaster', roll: 7, name: 'Archaeotoaster', kind: 'Curio', holder: null, value: 125,
       effect: 'A genuine bread-toasting machine out of the Dark Age of Technology. It does nothing of any value, and everybody wants one. Gain +1 reputation.' }
   ],
 

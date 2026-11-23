@@ -955,12 +955,6 @@
       head.appendChild(pip);
       head.appendChild(h('h4', 'relic-name', r.name));
       if (r.kind) head.appendChild(h('span', 'tag relic-kind', r.kind));
-      if (r.value != null) {
-        var worthEl = h('span', 'relic-value', r.value + ' cr');
-        worthEl.title = 'What it adds to a gang\u2019s rating, and what it would ' +
-                        'fetch. Holding it does not put credits in the stash.';
-        head.appendChild(worthEl);
-      }
       card.appendChild(head);
 
       var line = profileLine(r.profile);
@@ -970,6 +964,7 @@
       }
       if (r.effect) card.appendChild(h('p', 'relic-effect', r.effect));
 
+      var foot = h('div', 'relic-foot');
       var who = h('p', 'relic-who');
       if (held) {
         var sw = h('span', 'swatch');
@@ -980,7 +975,15 @@
         who.classList.add('is-lost');
         who.appendChild(document.createTextNode('Still down there'));
       }
-      card.appendChild(who);
+      foot.appendChild(who);
+
+      if (r.value != null) {
+        var worthEl = h('span', 'relic-value', r.value + ' cr');
+        worthEl.title = 'What it adds to a gang\u2019s rating, and what it would ' +
+                        'fetch. Holding it does not put credits in the stash.';
+        foot.appendChild(worthEl);
+      }
+      card.appendChild(foot);
 
       grid.appendChild(card);
     });

@@ -798,11 +798,24 @@ body {
 .relic-roll.is-off { border-style: dashed; color: var(--ink-faint); }
 .relic-kind { flex: none; }
 
+/* The bottom line of a card: who has it on the left, what it is worth
+   on the right, and margin-top:auto so it sits on the floor of the card
+   however long the effect text above it runs. */
+.relic-foot {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 10px;
+  margin-top: auto;
+  padding-top: 8px;
+  border-top: 1px solid var(--line);
+}
+
 .relic-value {
   flex: none;
   font-family: var(--mono);
-  font-size: 0.72rem;
-  color: var(--ink-dim);
+  font-size: 0.82rem;
+  color: var(--ink);
   cursor: help;
 }
 
@@ -828,7 +841,7 @@ body {
 }
 
 .relic-who {
-  margin: 4px 0 0;
+  margin: 0;
   font-size: 0.74rem;
   font-family: var(--mono);
   display: flex;
