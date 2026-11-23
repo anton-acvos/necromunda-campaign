@@ -1071,13 +1071,12 @@
 
         tr.appendChild(h('td', 'tally-num', String(r.called)));
 
-        var games = h('td', 'tally-num', String(r.fights));
+        /* Played out of booked, as one figure. "2/3" reads faster than
+           "3 (2 played)" and keeps the column a column. */
+        var games = h('td', 'tally-num', r.fights ? r.done + '/' + r.fights : '0');
         if (r.fights) {
           var left = r.fights - r.done;
           games.title = r.done + ' played, ' + left + ' still to fight';
-          if (left && r.done) {
-            games.appendChild(h('span', 'tally-left', ' (' + r.done + ' played)'));
-          }
         }
         tr.appendChild(games);
 
@@ -1088,9 +1087,9 @@
     });
 
     wrap.appendChild(h('p', 'tally-foot',
-      'Called: challenges and expeditions a gang issued. Games: every fight ' +
-      'they are in, on either side. A declined challenge was called, but ' +
-      'nobody played it.'));
+      'Called: challenges and expeditions a gang issued. Games: how many of ' +
+      'the fights they are in, on either side, have actually been played. A ' +
+      'declined challenge was called, but nobody played it.'));
     return wrap;
   }
 

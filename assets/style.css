@@ -737,7 +737,6 @@ body {
 .tally-gang .swatch { margin: 0; }
 
 .tally-num { font-family: var(--mono); width: 68px; text-align: right; white-space: nowrap; }
-.tally-left { display: block; color: var(--ink-faint); font-size: 0.66rem; }
 
 .tally-foot {
   margin: 10px 0 0;
