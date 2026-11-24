@@ -3097,7 +3097,8 @@
       "rewards": [
         {
           "gang": "resource-extraction",
-          "credits": 40,
+          "credits": 55,
+          "rep": 1,
           "xp": 14,
           "takedowns": 2,
           "outOfAction": 0,
@@ -3106,7 +3107,7 @@
               "piece": "servo-chirurgic-claw"
             }
           ],
-          "notes": "Forty credits of scrap off the floor, and a claw out of the sealed stacks.",
+          "notes": "Forty credits of scrap off the floor and fifteen for finding a Bullet Den nobody had on a map, plus the point of reputation for holding the ground and a claw out of the sealed stacks.",
           "fighters": [
             {
               "fighter": "Karl",
@@ -3160,7 +3161,7 @@
           ]
         }
       ],
-      "summary": "Nobody meant to fight this one. Both Ironhead companies had filed on the same shaft and both sent a scouring party down the Deadfall without telling anybody, and in a sealed munitions store with no lamps lit the two crews shot at each other for a while before either worked out it was shooting at an ally. Resource Extraction LLC held the floor when the light came up and Bjorn H.C.L.F agreed to withdraw. Karl put a Drill-Kyn out of action and Bob walked the Exo-Driller into Okri Goldhands, who came up with a Grievous Wound and is the only lasting damage on either side. Forty credits of scrap each, a Bullet Den on the map, and a Servo-chirurgic Claw out of the stacks for the company. The ground itself stays unheld."
+      "summary": "Nobody meant to fight this one. Both Ironhead companies had filed on the same shaft and both sent a scouring party down the Deadfall without telling anybody, and in a sealed munitions store with no lamps lit the two crews shot at each other for a while before either worked out it was shooting at an ally. Resource Extraction LLC held the floor when the light came up and Bjorn H.C.L.F agreed to withdraw. Karl put a Drill-Kyn out of action and Bob walked the Exo-Driller into Okri Goldhands, who came up with a Grievous Wound and is the only lasting damage on either side. Forty credits of scrap each, fifteen more and a point of reputation to the company for putting a Bullet Den on the map, and a Servo-chirurgic Claw out of the stacks. The ground itself stays unheld."
     }
   ]
 }
