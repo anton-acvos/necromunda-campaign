@@ -685,6 +685,15 @@ const WALKED = {
     notes: 'A generatorium that had been dark long enough for the dust to settle in drifts. Archeo-Acquisitions Team 3 found the fault, cleared it, and the stack came back up on its own governors. It has been lit ever since, and nobody holds it.'
   },
 
+  'I-06': {
+    name: 'The Blind Magazine',
+    type: 'Bullet Den',
+    owner: null,
+    income: 15,
+    boon: 'Or recruit an Ammo-Jack at a 30 credit discount, if you have none',
+    notes: 'A munitions store at the bottom of the Deadfall, stacked and sealed and dark enough that the two Ironhead companies who walked into it from opposite ends shot at each other before either worked out who the other was. Resource Extraction LLC held the floor when the lamps came up. Nobody holds the ground.'
+  },
+
   'I-07': {
     name: 'Hollowbore',
     type: 'Mine Workings',
@@ -895,7 +904,7 @@ const xs = drawn.map((p) => p[0]), ys = drawn.map((p) => p[1]);
     { id: 'servo-arc-claw', name: 'Servo-arc Claw', kind: 'Weapon', holder: 'archeo-3', value: 80,
       profile: { range: 'E', str: 'S+2', ap: '1', lethality: 2, traits: ['Unwieldy', 'Shock(5+)', 'Rending(5+)', 'Damage(2)'] } },
 
-    { id: 'servo-chirurgic-claw', roll: 9, name: 'Servo-chirurgic Claw', kind: 'Weapon', holder: null, value: 85,
+    { id: 'servo-chirurgic-claw', name: 'Servo-chirurgic Claw', kind: 'Weapon', holder: 'resource-extraction', value: 85,
       profile: { range: 'E', str: 'S', lethality: 1, traits: ['Unwieldy', 'Rending(6+)'] },
       effect: 'Blessed Augmetic Surgery (Double) \u2014 choose a friendly Seriously Injured fighter within 1". That fighter is no longer Seriously Injured and regains 1 lost Wound.' },
 
@@ -918,7 +927,7 @@ const xs = drawn.map((p) => p[0]), ys = drawn.map((p) => p[1]);
      the validator; the page never shows it. */
   challenges: [
     { id: 'c1-escher-pipe',  cycle: 1, kind: 'challenge',  challenger: 'chymist-cult',      territory: 'the-bonepipe', defender: 'mycelium', status: 'settled', battle: 'b1-bonepipe' },
-    { id: 'c1-bjorn-deep',   cycle: 1, kind: 'expedition', challenger: 'bjorn-prospectors', target: 'i-06',         defender: 'resource-extraction', status: 'open',
+    { id: 'c1-bjorn-deep',   cycle: 1, kind: 'expedition', challenger: 'bjorn-prospectors', target: 'i-06',         defender: 'resource-extraction', status: 'settled', battle: 'b7-blind-magazine',
       notes: 'The two prospecting outfits hold ground that touches at Holestead, and the tunnel they both filed on runs under it. Resource Extraction LLC were already down there, with a survey crew and a prior claim they are happy to read aloud.' },
     { id: 'c1-sumptown-yard', cycle: 1, kind: 'challenge',  challenger: 'sumptown',          territory: 'harvest-yard', defender: 'chymist-cult', status: 'settled', battle: 'b2-harvest-yard' },
     { id: 'c1-archeo-deep',  cycle: 1, kind: 'expedition', challenger: 'archeo-3',          target: 'i-04',         defender: 'mycelium', status: 'settled', battle: 'b6-relumen' },
@@ -1167,7 +1176,47 @@ const xs = drawn.map((p) => p[0]), ys = drawn.map((p) => p[1]);
             { fighter: 'Puffball', xp: 1, xpFor: 'Turning up' }
           ] }
       ],
-      summary: 'Archeo-Acquisitions Team 3 beat Mycelium Section off the approach and then did what Van Saar do: read the fault, cleared it, and brought the stack back up. One rep for the fight and one for the light, twenty credits for the win, twenty for the side job and fifteen for lighting the place at all. The claw came out of a maintenance cradle nobody had opened.' }
+      summary: 'Archeo-Acquisitions Team 3 beat Mycelium Section off the approach and then did what Van Saar do: read the fault, cleared it, and brought the stack back up. One rep for the fight and one for the light, twenty credits for the win, twenty for the side job and fifteen for lighting the place at all. The claw came out of a maintenance cradle nobody had opened.' },
+
+    { id: 'b7-blind-magazine',
+      cycle: 1,
+      scenario: 'Expedition',
+      territory: 'i-06',
+      participants: ['resource-extraction', 'bjorn-prospectors'],
+      winner: 'resource-extraction',
+      played: true,
+      rewards: [
+        /* Off the Resource Extraction player's own note, which covers both
+           sides of the table. Nate and Norn are on the sheet and are not in
+           it: no experience was credited to either, so neither has a line. */
+        { gang: 'resource-extraction', credits: 40, xp: 14, takedowns: 2, outOfAction: 0,
+          gear: [{ piece: 'servo-chirurgic-claw' }],
+          notes: 'Forty credits of scrap off the floor, and a claw out of the sealed stacks.',
+          fighters: [
+            { fighter: 'Karl',   xp: 3, takedowns: 1,
+              xpFor: 'Turning up, and two for putting one of their Drill-Kyn out of action' },
+            { fighter: 'Helga',  xp: 2, xpFor: 'Turning up, and one for seriously injuring one of their gangers' },
+            { fighter: 'Daedra', xp: 2, xpFor: 'Turning up, and one for seriously injuring one of their gangers' },
+            { fighter: 'Alric',  xp: 2, xpFor: 'Turning up, and standing on an objective' },
+            { fighter: 'Bob',    xp: 5, takedowns: 1,
+              xpFor: 'Turning up, one for an objective, and three for putting their Drill Master out of action' }
+          ] },
+        /* Bjorn's side comes second-hand. Every Prospector who turned up took
+           the point for it, but the note does not name the crew, so only the
+           two the opposition could identify have lines and there is no gang
+           total either. The second model that went down is one of the three
+           Drill-Kyn and the note does not say which. */
+        { gang: 'bjorn-prospectors', credits: 40, takedowns: 0, outOfAction: 2,
+          notes: 'Reported from the other end of the table, so this side is short a few names rather than short a few points.',
+          fighters: [
+            { fighter: 'Okri Goldhands',        xp: 1, xpFor: 'Turning up',
+              outOfAction: true, injury: 'Grievous Wound',
+              note: 'Put down by the Exo-Driller and the only lasting damage either company took. The Drill-Kyn who went down beside him made a full recovery; the note does not say which of the three it was.' },
+            { fighter: 'The Iron Bowling Ball', xp: 3,
+              xpFor: 'Turning up, and two for seriously injuring one of their champions' }
+          ] }
+      ],
+      summary: 'Nobody meant to fight this one. Both Ironhead companies had filed on the same shaft and both sent a scouring party down the Deadfall without telling anybody, and in a sealed munitions store with no lamps lit the two crews shot at each other for a while before either worked out it was shooting at an ally. Resource Extraction LLC held the floor when the light came up and Bjorn H.C.L.F agreed to withdraw. Karl put a Drill-Kyn out of action and Bob walked the Exo-Driller into Okri Goldhands, who came up with a Grievous Wound and is the only lasting damage on either side. Forty credits of scrap each, a Bullet Den on the map, and a Servo-chirurgic Claw out of the stacks for the company. The ground itself stays unheld.' }
   ]
 };
 
