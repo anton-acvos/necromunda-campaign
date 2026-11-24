@@ -962,7 +962,14 @@ const xs = drawn.map((p) => p[0]), ys = drawn.map((p) => p[1]);
      came from, not what it was for. */
   ledger: [
     { id: 'l1-sumptown-cache', cycle: 1, gang: 'sumptown', amount: 25,
-      what: 'Starting cache left over \u2014 Sumptown was founded for 1075 of the 1100 they were allowed, and never spent the rest' }
+      what: 'Starting cache left over \u2014 Sumptown was founded for 1075 of the 1100 they were allowed, and never spent the rest' },
+
+    /* The same twenty credits written down twice, because it left one
+       stash and landed in another. */
+    { id: 'l1-magazine-restitution-paid', cycle: 1, gang: 'resource-extraction', amount: -20,
+      what: 'Paid across to Bjorn H.C.L.F after the Blind Magazine \u2014 restitution for a fight neither company meant to start' },
+    { id: 'l1-magazine-restitution-taken', cycle: 1, gang: 'bjorn-prospectors', amount: 20,
+      what: 'Taken from Resource Extraction LLC after the Blind Magazine \u2014 restitution for a fight neither company meant to start' }
   ],
 
   /* What the Reach remembers a fighter for. Experience and takedowns
