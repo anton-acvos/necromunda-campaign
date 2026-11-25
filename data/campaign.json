@@ -2665,8 +2665,9 @@
       "kind": "expedition",
       "challenger": "chymist-cult",
       "target": "i-17",
+      "defender": "mycelium",
       "status": "open",
-      "notes": "The Chymist Cult filed on I-17 off the back of what came out of the Hollowbore: it sits one wall over from the workings Mycelium Section charted, and whatever is breathable down there is of professional interest. Nobody has been paired with them yet."
+      "notes": "The Chymist Cult filed on I-17 off the back of what came out of the Hollowbore: it sits one wall over from the workings Mycelium Section charted, and whatever is breathable down there is of professional interest. Mycelium Section charted that wall, so Mycelium Section are the ones going back down to meet them."
     },
     {
       "id": "c1-resource-stair",
@@ -2695,8 +2696,9 @@
       "kind": "expedition",
       "challenger": "sumptown",
       "target": "i-05",
+      "defender": "chymist-cult",
       "status": "open",
-      "notes": "Sumptown filed on the deep the cycle they lost Rustfall Row to the Enforcers. Ground nobody holds costs nothing to call for, and Sumptown would rather walk a tunnel than knock on the same door twice. Nobody has been paired with them yet."
+      "notes": "Sumptown filed on the deep the cycle they lost Rustfall Row to the Enforcers. Ground nobody holds costs nothing to call for, and Sumptown would rather walk a tunnel than knock on the same door twice. The Chymist Cult go down against them, which points the same two gangs at each other for the second time this cycle: the first was the Harvest Yard, and the Chymists stood down rather than hold the gate."
     }
   ],
   "ledger": [

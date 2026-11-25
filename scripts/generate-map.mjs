@@ -933,13 +933,13 @@ const xs = drawn.map((p) => p[0]), ys = drawn.map((p) => p[1]);
     { id: 'c1-archeo-deep',  cycle: 1, kind: 'expedition', challenger: 'archeo-3',          target: 'i-04',         defender: 'mycelium', status: 'settled', battle: 'b6-relumen' },
     { id: 'c1-precinct-deep', cycle: 1, kind: 'expedition', challenger: 'precinct-22',      target: 'i-03',         defender: 'archeo-3', status: 'open' },
     { id: 'c1-mycelium-deep', cycle: 1, kind: 'expedition', challenger: 'mycelium',         target: 'i-07',         defender: 'bjorn-prospectors', status: 'settled', battle: 'b4-hollowbore' },
-    { id: 'c1-chymist-deep', cycle: 1, kind: 'expedition', challenger: 'chymist-cult',     target: 'i-17',         status: 'open',
-      notes: 'The Chymist Cult filed on I-17 off the back of what came out of the Hollowbore: it sits one wall over from the workings Mycelium Section charted, and whatever is breathable down there is of professional interest. Nobody has been paired with them yet.' },
+    { id: 'c1-chymist-deep', cycle: 1, kind: 'expedition', challenger: 'chymist-cult',     target: 'i-17',         defender: 'mycelium', status: 'open',
+      notes: 'The Chymist Cult filed on I-17 off the back of what came out of the Hollowbore: it sits one wall over from the workings Mycelium Section charted, and whatever is breathable down there is of professional interest. Mycelium Section charted that wall, so Mycelium Section are the ones going back down to meet them.' },
     { id: 'c1-resource-stair', cycle: 1, kind: 'challenge',  challenger: 'resource-extraction', territory: 'brass-stair', defender: 'chymist-cult', status: 'settled', battle: 'b3-brass-stair' },
     { id: 'c1-precinct-rustfall', cycle: 1, kind: 'challenge', challenger: 'precinct-22', territory: 'rustfall-row', defender: 'sumptown', status: 'settled', battle: 'b5-rustfall-row',
       notes: 'A second call from Precinct 22 this cycle, which is one more than the rules allow. Two concessions left half the Reach with nothing to do, so the arbitrator let it stand.' },
-    { id: 'c1-sumptown-deep', cycle: 1, kind: 'expedition', challenger: 'sumptown', target: 'i-05', status: 'open',
-      notes: 'Sumptown filed on the deep the cycle they lost Rustfall Row to the Enforcers. Ground nobody holds costs nothing to call for, and Sumptown would rather walk a tunnel than knock on the same door twice. Nobody has been paired with them yet.' }
+    { id: 'c1-sumptown-deep', cycle: 1, kind: 'expedition', challenger: 'sumptown', target: 'i-05', defender: 'chymist-cult', status: 'open',
+      notes: 'Sumptown filed on the deep the cycle they lost Rustfall Row to the Enforcers. Ground nobody holds costs nothing to call for, and Sumptown would rather walk a tunnel than knock on the same door twice. The Chymist Cult go down against them, which points the same two gangs at each other for the second time this cycle: the first was the Harvest Yard, and the Chymists stood down rather than hold the gate.' }
   ],
 
   /* The log. A challenge that nobody turned up for is still how ground
