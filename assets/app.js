@@ -93,6 +93,38 @@
     return t.name || t.designation || t.id;
   }
 
+  /* The experience ladder out of the book. LEVEL_FLOOR[i] is the lowest
+     total that reaches level i + 1, so the level is the last floor the
+     total has cleared. The bands are uneven on purpose: three points a
+     level at the bottom, twenty-four at the top.
+
+     Titles change every fourth level, and the printed table has a gap
+     between 204 and 208 that has to be somebody's typo, so level 20
+     starts at 205 and nobody falls down the hole.
+
+     A total below the first floor has no level: a fighter the log has
+     never paid and whose sheet says nothing is not a Rookie, they are
+     an unknown. */
+  var LEVEL_FLOOR = [1, 4, 7, 10, 13, 19, 25, 31, 37, 49, 61, 73,
+                     85, 97, 109, 121, 133, 157, 181, 205, 229];
+
+  function levelOf(total) {
+    if (total == null || total < LEVEL_FLOOR[0]) return null;
+    var i = LEVEL_FLOOR.length - 1;
+    while (i > 0 && total < LEVEL_FLOOR[i]) i -= 1;
+    var level = i + 1;
+    var title = level >= 21 ? 'Legend of the Underhive'
+              : level >= 17 ? 'Gang legend'
+              : level >= 13 ? 'Gang hero'
+              : level >= 9  ? 'Gang exemplar'
+              : level >= 5  ? 'Gang member'
+              :               'Rookie';
+    /* What it takes to climb, for the tooltip. The top of the ladder
+       has nothing above it. */
+    var next = level < LEVEL_FLOOR.length ? LEVEL_FLOOR[level] : null;
+    return { level: level, title: title, next: next };
+  }
+
   /* ---------- map ---------- */
 
   function wrapLabel(name) {
@@ -1780,6 +1812,14 @@
       }
       head.appendChild(xpEl);
     }
+    var lv = levelOf(f.xp != null || earned ? total : null);
+    if (lv) {
+      var lvEl = h('span', 'fighter-level', 'L' + lv.level + ' \u00b7 ' + lv.title);
+      lvEl.title = lv.next
+        ? (lv.next - total) + ' more to level ' + (lv.level + 1)
+        : 'The top of the ladder';
+      head.appendChild(lvEl);
+    }
     card.appendChild(head);
     card.appendChild(h('p', 'fighter-role', rosterLine(f)));
     if (f.status) card.appendChild(h('p', 'fighter-status', f.status));
@@ -2234,6 +2274,8 @@
       who.appendChild(name);
 
       var bits = [];
+      var lv = row.start != null ? levelOf(row.total) : null;
+      if (lv) bits.push('L' + lv.level + ' ' + lv.title);
       if (row.archetype) bits.push(row.archetype);
       if (row.gang) bits.push(row.gang.short || row.gang.name);
       bits.push(row.games + (row.games === 1 ? ' game' : ' games'));

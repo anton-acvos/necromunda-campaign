@@ -397,6 +397,40 @@ with no name, and it warns when the fighters' ratings no longer add up to
 the gang's `rating`. The site says the same thing in the fold, so a sheet
 that has drifted is visible without running the validator.
 
+### The experience ladder
+
+A fighter carries `xp` on their sheet: what they had the day the roster was
+written down. Everything the log has credited them with since is added on, so
+the number in the corner of a fighter card is what they are worth **now**.
+Hover it to see the split.
+
+Beside it sits the level that total reaches, and what the book calls somebody
+standing on it. The ladder lives in one place, `LEVEL_FLOOR` in
+`assets/app.js`, and both the fighter card and the Heroes board read it:
+
+| Level | Total XP | Title |
+| --- | --- | --- |
+| 1–4 | 1–12 | Rookie |
+| 5–8 | 13–36 | Gang member |
+| 9–12 | 37–84 | Gang exemplar |
+| 13–16 | 85–132 | Gang hero |
+| 17–20 | 133–228 | Gang legend |
+| 21 | 229+ | Legend of the Underhive |
+
+The bands inside each title are uneven on purpose: three points a level at
+the bottom, twenty-four at the top. The printed table has a gap between 204
+and 208, which has to be a typo, so level 20 starts at **205** here and
+nobody falls down the hole.
+
+A total below 1 has no level at all. The Heroes board only prints one when
+the sheet said where the fighter started, because a level worked out from
+log experience alone would be wrong by sixty for a Leader.
+
+The N26 starting baselines, for a sheet that never recorded them: **Leader
+61, Champion 37, Brute 25, Ganger 13, Prospect 1**. Anything else — a Psyker,
+a pet — comes off the player’s own sheet, because the archetype does not
+give it away.
+
 ### House rule: shared infrastructure
 
 The Reach pays for an unbroken block. A charted holding within **two held
