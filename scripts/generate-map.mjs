@@ -694,6 +694,14 @@ const WALKED = {
     notes: 'A munitions store at the bottom of the Deadfall, stacked and sealed and dark enough that the two Ironhead companies who walked into it from opposite ends shot at each other before either worked out who the other was. Resource Extraction LLC held the floor when the lamps came up. Nobody holds the ground.'
   },
 
+  'I-17': {
+    name: 'The Last Round',
+    type: 'Drinking Hole',
+    owner: null,
+    income: 15,
+    notes: 'The Chymist Cult filed on this one for the air and found a bar: a drinking hole one wall over from the Hollowbore, still stocked, still standing, and nobody behind the counter for a very long time. Mycelium Section held the room and left in a hurry. Nobody holds the ground.'
+  },
+
   'I-07': {
     name: 'Hollowbore',
     type: 'Mine Workings',
@@ -933,7 +941,7 @@ const xs = drawn.map((p) => p[0]), ys = drawn.map((p) => p[1]);
     { id: 'c1-archeo-deep',  cycle: 1, kind: 'expedition', challenger: 'archeo-3',          target: 'i-04',         defender: 'mycelium', status: 'settled', battle: 'b6-relumen' },
     { id: 'c1-precinct-deep', cycle: 1, kind: 'expedition', challenger: 'precinct-22',      target: 'i-03',         defender: 'archeo-3', status: 'open' },
     { id: 'c1-mycelium-deep', cycle: 1, kind: 'expedition', challenger: 'mycelium',         target: 'i-07',         defender: 'bjorn-prospectors', status: 'settled', battle: 'b4-hollowbore' },
-    { id: 'c1-chymist-deep', cycle: 1, kind: 'expedition', challenger: 'chymist-cult',     target: 'i-17',         defender: 'mycelium', status: 'open',
+    { id: 'c1-chymist-deep', cycle: 1, kind: 'expedition', challenger: 'chymist-cult',     target: 'i-17',         defender: 'mycelium', status: 'settled', battle: 'b8-last-round',
       notes: 'The Chymist Cult filed on I-17 off the back of what came out of the Hollowbore: it sits one wall over from the workings Mycelium Section charted, and whatever is breathable down there is of professional interest. Mycelium Section charted that wall, so Mycelium Section are the ones going back down to meet them.' },
     { id: 'c1-resource-stair', cycle: 1, kind: 'challenge',  challenger: 'resource-extraction', territory: 'brass-stair', defender: 'chymist-cult', status: 'settled', battle: 'b3-brass-stair' },
     { id: 'c1-precinct-rustfall', cycle: 1, kind: 'challenge', challenger: 'precinct-22', territory: 'rustfall-row', defender: 'sumptown', status: 'settled', battle: 'b5-rustfall-row',
@@ -1223,7 +1231,34 @@ const xs = drawn.map((p) => p[0]), ys = drawn.map((p) => p[1]);
               xpFor: 'Turning up, and two for seriously injuring one of their champions' }
           ] }
       ],
-      summary: 'Nobody meant to fight this one. Both Ironhead companies had filed on the same shaft and both sent a scouring party down the Deadfall without telling anybody, and in a sealed munitions store with no lamps lit the two crews shot at each other for a while before either worked out it was shooting at an ally. Resource Extraction LLC held the floor when the light came up and Bjorn H.C.L.F agreed to withdraw. Karl put a Drill-Kyn out of action and Bob walked the Exo-Driller into Okri Goldhands, who came up with a Grievous Wound and is the only lasting damage on either side. Forty credits of scrap each, fifteen more and a point of reputation to the company for putting a Bullet Den on the map, and a Servo-chirurgic Claw out of the stacks. The ground itself stays unheld.' }
+      summary: 'Nobody meant to fight this one. Both Ironhead companies had filed on the same shaft and both sent a scouring party down the Deadfall without telling anybody, and in a sealed munitions store with no lamps lit the two crews shot at each other for a while before either worked out it was shooting at an ally. Resource Extraction LLC held the floor when the light came up and Bjorn H.C.L.F agreed to withdraw. Karl put a Drill-Kyn out of action and Bob walked the Exo-Driller into Okri Goldhands, who came up with a Grievous Wound and is the only lasting damage on either side. Forty credits of scrap each, fifteen more and a point of reputation to the company for putting a Bullet Den on the map, and a Servo-chirurgic Claw out of the stacks. The ground itself stays unheld.' },
+
+    { id: 'b8-last-round',
+      cycle: 1,
+      scenario: 'Expedition',
+      territory: 'i-17',
+      participants: ['mycelium', 'chymist-cult'],
+      winner: 'mycelium',
+      played: true,
+      rewards: [
+        { gang: 'mycelium', primary: 40, sidejob: 20, credits: 15, rep: 1, xp: 19, takedowns: 4, outOfAction: 0,
+          notes: 'The fifteen came with putting a drinking hole on the map. Nothing else came up: Mycelium Section were out of the tunnels before anybody searched them, so the archeotech, if there is any, is still down there.',
+          fighters: [
+            { fighter: 'Fly Agaric',       xp: 9, takedowns: 2,
+              xpFor: 'Turning up, one for an objective, two for killing a ganger, two for seriously injuring the leader and three more for finishing the leader' },
+            { fighter: 'Destroying Angel', xp: 4, takedowns: 1,
+              xpFor: 'Turning up, one for an objective, and two for killing a ganger' },
+            { fighter: 'Amanita',          xp: 4, takedowns: 1,
+              xpFor: 'Turning up, one for an objective, and two for killing a ganger' },
+            { fighter: 'Death Cap',        xp: 1, xpFor: 'Turning up' },
+            { fighter: 'Puffball',         xp: 1, xpFor: 'Turning up' }
+          ] },
+        /* The Chymist Cult have reported the money and the bodies and not
+           the crew, so there are no fighter lines and no gang total. */
+        { gang: 'chymist-cult', primary: 30, takedowns: 0, outOfAction: 4,
+          notes: 'Four down, the leader among them, and thirty credits for the mission.' }
+      ],
+      summary: 'The Chymist Cult went down the Deadfall after the air and Mycelium Section were waiting one wall over from the seam they charted last time. What was down there was a drinking hole, still stocked, and the Delaque held the room: four Escher went out of action and Mycelium Section lost nobody. The leader was seriously injured and then finished by the same hand. Fly Agaric did most of it and came back up worth nine experience. Nobody searched the place: the Delaque were out of the tunnels before the idea came up, so whatever archeotech is in there is still in there. Forty for the mission, twenty for the side job, fifteen for the discovery, and the ground stays unheld.' }
   ]
 };
 
