@@ -1,7 +1,7 @@
 {
   "gang": "mycelium",
   "updated": "2026-11-20",
-  "note": "Hand-kept. The generator does not touch this file.",
+  "note": "Hand-kept, off the player’s own sheet. The generator does not touch this file. The xp values are the N26 starting baselines — the sheet never carried them, so they were filled in from the archetype.",
   "fighters": [
     {
       "id": 1,
@@ -65,7 +65,8 @@
         "Master of Whispers"
       ],
       "wargear": [],
-      "status": null
+      "status": null,
+      "xp": 61
     },
     {
       "id": 2,
@@ -140,7 +141,8 @@
         "From the Shadows"
       ],
       "wargear": [],
-      "status": null
+      "status": null,
+      "xp": 37
     },
     {
       "id": 3,
@@ -202,7 +204,8 @@
       "wargear": [
         "Psychoteric Wyrm"
       ],
-      "status": null
+      "status": null,
+      "xp": 1
     },
     {
       "id": 4,
@@ -249,7 +252,8 @@
         "Burrowing"
       ],
       "wargear": [],
-      "status": null
+      "status": null,
+      "xp": 0
     },
     {
       "id": 5,
@@ -296,7 +300,8 @@
       ],
       "rules": [],
       "wargear": [],
-      "status": null
+      "status": null,
+      "xp": 13
     },
     {
       "id": 6,
@@ -350,7 +355,8 @@
       "skills": [],
       "rules": [],
       "wargear": [],
-      "status": null
+      "status": null,
+      "xp": 1
     },
     {
       "id": 7,
@@ -427,7 +433,8 @@
         "Master of Whispers"
       ],
       "wargear": [],
-      "status": null
+      "status": null,
+      "xp": 37
     },
     {
       "id": 8,
@@ -481,7 +488,8 @@
       "skills": [],
       "rules": [],
       "wargear": [],
-      "status": null
+      "status": null,
+      "xp": 1
     }
   ]
 }
