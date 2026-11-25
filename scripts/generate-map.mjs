@@ -1252,7 +1252,7 @@ const xs = drawn.map((p) => p[0]), ys = drawn.map((p) => p[1]);
       winner: 'mycelium',
       played: true,
       rewards: [
-        { gang: 'mycelium', primary: 40, sidejob: 20, credits: 15, rep: 1, xp: 19, takedowns: 4, outOfAction: 0,
+        { gang: 'mycelium', primary: 40, sidejob: 20, credits: 15, rep: 1, xp: 20, takedowns: 4, outOfAction: 0,
           notes: 'The fifteen came with putting a drinking hole on the map. Nothing else came up: Mycelium Section were out of the tunnels before anybody searched them, so the archeotech, if there is any, is still down there.',
           fighters: [
             { fighter: 'Fly Agaric',       xp: 9, takedowns: 2,
@@ -1262,7 +1262,8 @@ const xs = drawn.map((p) => p[0]), ys = drawn.map((p) => p[1]);
             { fighter: 'Amanita',          xp: 4, takedowns: 1,
               xpFor: 'Turning up, one for an objective, and two for killing a ganger' },
             { fighter: 'Death Cap',        xp: 1, xpFor: 'Turning up' },
-            { fighter: 'Puffball',         xp: 1, xpFor: 'Turning up' }
+            { fighter: 'Puffball',         xp: 1, xpFor: 'Turning up' },
+            { fighter: 'Psychoteric Wyrm', xp: 1, xpFor: 'Turning up' }
           ] },
         /* Four Escher went down and three of them came up with something
            lasting. The fourth is Marie or Curie and the report does not
