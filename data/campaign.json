@@ -3095,7 +3095,7 @@
               "xp": 1,
               "xpFor": "Turning up",
               "outOfAction": true,
-              "injury": "Out cold"
+              "note": "Out cold, and came up with nothing lasting."
             },
             {
               "fighter": "Amanita",
@@ -3266,8 +3266,7 @@
               "xp": 2,
               "xpFor": "Turning up, and an objective",
               "outOfAction": true,
-              "injury": "Into recovery",
-              "note": "Went down and got back up twice before the third one stuck, and spent both poisons doing it."
+              "note": "Went down and got back up twice before the third one stuck, and spent both poisons doing it. Into recovery, with nothing lasting."
             },
             {
               "fighter": "Marie",

@@ -1047,7 +1047,10 @@ const xs = drawn.map((p) => p[0]), ys = drawn.map((p) => p[1]);
                     action, which is where a kill rate comes from
        xpFor        what the experience was for, in words
        outOfAction  true if they went out of action
-       injury       what they picked up, if anything lasting
+       injury       a lasting condition off the injury table, and only
+                    that: something that is still on the sheet next
+                    cycle. Out Cold, In Recovery and going down at all
+                    are states, not conditions, and belong in note
        note         anything else worth reading back
 
      The gang's own xp on the record above is the total, not a sum the
@@ -1192,7 +1195,7 @@ const xs = drawn.map((p) => p[0]), ys = drawn.map((p) => p[1]);
             { fighter: 'Slippery Jack', xp: 2, xpFor: 'An objective, and the point for turning up',
               outOfAction: true, injury: 'Enfeebled (-1 Toughness)' },
             { fighter: 'Destroying Angel', xp: 1, xpFor: 'Turning up',
-              outOfAction: true, injury: 'Out cold' },
+              outOfAction: true, note: 'Out cold, and came up with nothing lasting.' },
             { fighter: 'Amanita', xp: 1, xpFor: 'Turning up',
               note: 'Bottled out. No lasting injuries.' },
             { fighter: 'Galerina', xp: 2, xpFor: 'An objective, and the point for turning up' },
@@ -1268,8 +1271,8 @@ const xs = drawn.map((p) => p[0]), ys = drawn.map((p) => p[1]);
           notes: 'Thirty credits for the loss, nothing for the side job and nothing for the ground. The Chem Mother emptied both poisons and two of the Wytches burned a Blood Stimm each getting the crew out.',
           fighters: [
             { fighter: 'Carmine',    xp: 2, xpFor: 'Turning up, and an objective',
-              outOfAction: true, injury: 'Into recovery',
-              note: 'Went down and got back up twice before the third one stuck, and spent both poisons doing it.' },
+              outOfAction: true,
+              note: 'Went down and got back up twice before the third one stuck, and spent both poisons doing it. Into recovery, with nothing lasting.' },
             { fighter: 'Marie',      xp: 2, xpFor: 'Turning up, and an objective',
               note: 'Burned a Blood Stimm.' },
             { fighter: 'Curie',      xp: 1, xpFor: 'Turning up',
