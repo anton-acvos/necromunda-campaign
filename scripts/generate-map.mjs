@@ -1003,7 +1003,15 @@ const xs = drawn.map((p) => p[0]), ys = drawn.map((p) => p[1]);
 
     { id: 'h1-spydr-angel', gang: 'archeo-3', fighter: 'Spydr 17',
       title: 'Felled the Angel', cycle: 1, battle: 'b6-relumen',
-      what: 'Not just a champion. Destroying Angel, who walked out of the Hollowbore the same cycle having put three Squats down and taken nothing back, went out cold in the generatorium to an Arachni-Rig. Whoever is at the top of this board, somebody can reach them.' }
+      what: 'Not just a champion. Destroying Angel, who walked out of the Hollowbore the same cycle having put three Squats down and taken nothing back, went out cold in the generatorium to an Arachni-Rig. Whoever is at the top of this board, somebody can reach them.' },
+
+    { id: 'h1-angel-charge', gang: 'mycelium', fighter: 'Destroying Angel',
+      title: 'Answered the Charge', cycle: 1, battle: 'b8-last-round',
+      what: 'A Blade Maiden came across the floor of the drinking hole at the Delaque and got exactly one answer. Destroying Angel killed her on her own charge, with a single blow, and was standing in the same place when it was over. The Chymist Cult have not said which of the two Maidens it was.' },
+
+    { id: 'h1-carmine-brink', gang: 'chymist-cult', fighter: 'Carmine',
+      title: 'Twice Off the Floor', cycle: 1, battle: 'b8-last-round',
+      what: 'The Chem Mother went down in the drinking hole and got back up. Went down again, and got back up again. It took a third time of asking to finish the job, and by then four of the crew were out of action and the expedition was lost. The Chymist Cult did not win this one. Their leader is the reason it was not quicker.' }
   ],
 
   /* The log. Each battle carries one reward entry per gang that turned up,
@@ -1253,12 +1261,28 @@ const xs = drawn.map((p) => p[0]), ys = drawn.map((p) => p[1]);
             { fighter: 'Death Cap',        xp: 1, xpFor: 'Turning up' },
             { fighter: 'Puffball',         xp: 1, xpFor: 'Turning up' }
           ] },
-        /* The Chymist Cult have reported the money and the bodies and not
-           the crew, so there are no fighter lines and no gang total. */
-        { gang: 'chymist-cult', primary: 30, takedowns: 0, outOfAction: 4,
-          notes: 'Four down, the leader among them, and thirty credits for the mission.' }
+        /* Four Escher went down and three of them came up with something
+           lasting. The fourth is Marie or Curie and the report does not
+           say which, so only three carry the mark. */
+        { gang: 'chymist-cult', primary: 30, sidejob: 0, credits: 0, xp: 7, takedowns: 0, outOfAction: 4,
+          notes: 'Thirty credits for the loss, nothing for the side job and nothing for the ground. The Chem Mother emptied both poisons and two of the Wytches burned a Blood Stimm each getting the crew out.',
+          fighters: [
+            { fighter: 'Carmine',    xp: 2, xpFor: 'Turning up, and an objective',
+              outOfAction: true, injury: 'Into recovery',
+              note: 'Went down and got back up twice before the third one stuck, and spent both poisons doing it.' },
+            { fighter: 'Marie',      xp: 2, xpFor: 'Turning up, and an objective',
+              note: 'Burned a Blood Stimm.' },
+            { fighter: 'Curie',      xp: 1, xpFor: 'Turning up',
+              note: 'Burned a Blood Stimm.' },
+            { fighter: 'Rosalyn',    xp: 1, xpFor: 'Turning up',
+              outOfAction: true, injury: 'Critical injury',
+              note: 'Will not last the week unless the Chymists do something about it.' },
+            { fighter: 'Kizzmekia',  xp: 1, xpFor: 'Turning up',
+              outOfAction: true, injury: 'Hatred (Mycelium Section)',
+              note: 'Came out of the drinking hole hating the Delaque by name, which is now a permanent fixture of the sheet.' }
+          ] }
       ],
-      summary: 'The Chymist Cult went down the Deadfall after the air and Mycelium Section were waiting one wall over from the seam they charted last time. What was down there was a drinking hole, still stocked, and the Delaque held the room: four Escher went out of action and Mycelium Section lost nobody. The leader was seriously injured and then finished by the same hand. Fly Agaric did most of it and came back up worth nine experience. Nobody searched the place: the Delaque were out of the tunnels before the idea came up, so whatever archeotech is in there is still in there. Forty for the mission, twenty for the side job, fifteen for the discovery, and the ground stays unheld.' }
+      summary: 'The Chymist Cult went down the Deadfall after the air and Mycelium Section were waiting one wall over from the seam they charted last time. What was down there was a drinking hole, still stocked, and the Delaque held the room: four Escher went out of action and Mycelium Section lost nobody. The leader was seriously injured and then finished by the same hand. Fly Agaric did most of it and came back up worth nine experience. Nobody searched the place: the Delaque were out of the tunnels before the idea came up, so whatever archeotech is in there is still in there. Forty for the mission, twenty for the side job, fifteen for the discovery, and the ground stays unheld. The Chymist Cult took thirty for the loss and very little else: Rosalyn will not survive the week without a doctor, and Kizzmekia came back up hating Mycelium Section specifically and permanently.' }
   ]
 };
 
