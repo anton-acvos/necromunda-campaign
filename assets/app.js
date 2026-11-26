@@ -2202,6 +2202,7 @@
 
        every experience point the log has paid them     1 each
        every model they have put out of action          3 each
+       every lasting injury they carry out of a game    2 each
        every honour the arbitrator has written down     5 each
 
      The weights are a judgement, not a rule out of the book, so the row
@@ -2209,7 +2210,11 @@
      total and anyone can check it. A takedown is worth more than the
      experience it pays because a gang that fights wins ground, and an
      honour is worth more again because somebody had to decide it was
-     worth remembering.
+     worth remembering. A scar is worth the least of the four and is
+     worth anything at all because the Reach remembers a fighter who
+     came back wrong from somewhere. It counts the lasting injury, not
+     the knockdown: going out of action and getting up again is a bad
+     afternoon, and the board does not pay for bad afternoons.
 
      Experience is counted from the log only, never off the sheet. A
      Leader is written down with sixty-odd before a shot is fired and a
@@ -2219,7 +2224,7 @@
      The board needs every roster at once, which the Gangs tab only ever
      loads one at a time, so the first look fetches the missing ones and
      the cache is shared with the folds. */
-  var RENOWN = { xp: 1, takedown: 3, honour: 5 };
+  var RENOWN = { xp: 1, takedown: 3, scar: 2, honour: 5 };
   var HERO_LIMIT = 10;
 
   function withRosters(then) {
@@ -2298,6 +2303,7 @@
                   row.earned + row.trained;
       row.renown = row.earned * RENOWN.xp +
                    row.kills * RENOWN.takedown +
+                   row.hurt.length * RENOWN.scar +
                    row.honours.length * RENOWN.honour;
     });
 
@@ -2402,6 +2408,10 @@
       if (row.kills) {
         parts.push((row.kills * RENOWN.takedown) + ' for ' + row.kills + ' taken out');
       }
+      if (row.hurt.length) {
+        parts.push((row.hurt.length * RENOWN.scar) + ' for ' + row.hurt.length +
+                   (row.hurt.length === 1 ? ' scar' : ' scars'));
+      }
       if (row.honours.length) {
         parts.push((row.honours.length * RENOWN.honour) + ' for ' + row.honours.length +
                    (row.honours.length === 1 ? ' honour' : ' honours'));
@@ -2418,7 +2428,8 @@
 
     host.appendChild(h('p', 'tally-foot',
       'Renown is one point per experience the log has paid them, ' +
-      RENOWN.takedown + ' per model they have put out of action, and ' +
+      RENOWN.takedown + ' per model they have put out of action, ' +
+      RENOWN.scar + ' per lasting injury they carry out of a game, and ' +
       RENOWN.honour + ' per honour the arbitrator has written down. ' +
       'Experience is counted from the log only \u2014 a Leader starts with ' +
       'sixty of it and a Prospect with one, and neither of them fought ' +

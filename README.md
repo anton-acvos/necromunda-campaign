@@ -347,10 +347,16 @@ Renown is one number made of three:
 | --- | --- |
 | 1 | each experience point **the log** has paid them |
 | 3 | each model they have put out of action |
+| 2 | each lasting injury they carry out of a game |
 | 5 | each honour the arbitrator has written down |
 
 Each row prints that working beside the total, so the board can be
 checked without reading any code.
+
+A scar counts the lasting **injury**, not the knockdown: going out of
+action and getting up again is a bad afternoon, and the board does not pay
+for bad afternoons. It is the cheapest of the four on purpose — a fighter
+should not climb this board by being shot.
 
 Experience is counted from the log only, never off the sheet: a Leader is
 written onto a sheet with sixty-odd before a shot is fired and a Prospect
