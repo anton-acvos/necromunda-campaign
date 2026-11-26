@@ -2838,6 +2838,22 @@
       "xp": 2
     },
     {
+      "id": "e1-mycelium-amanita-advance-1",
+      "cycle": 1,
+      "gang": "mycelium",
+      "fighter": "Amanita",
+      "action": "Advance: Ballistic Skill +1",
+      "notes": "Two levels in one cycle, which nobody else in the Reach managed. This is the first of them: 5+ to 4+."
+    },
+    {
+      "id": "e1-mycelium-amanita-advance-2",
+      "cycle": 1,
+      "gang": "mycelium",
+      "fighter": "Amanita",
+      "action": "Advance: Infiltrate",
+      "notes": "And the second. A Shadow who came up from one experience to nine in a single cycle now starts the game somewhere nobody put her."
+    },
+    {
       "id": "e1-mycelium-galerina",
       "cycle": 1,
       "gang": "mycelium",

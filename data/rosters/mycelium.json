@@ -314,7 +314,7 @@
       "stats": [
         "6\"",
         "5+",
-        "5+",
+        "4+",
         "3",
         "3",
         "1",
@@ -352,7 +352,9 @@
           ]
         }
       ],
-      "skills": [],
+      "skills": [
+        "Infiltrate"
+      ],
       "rules": [],
       "wargear": [],
       "status": null,
