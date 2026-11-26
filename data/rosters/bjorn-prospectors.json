@@ -7,10 +7,26 @@
       "id": 1,
       "name": "The Iron Bowling Ball",
       "archetype": "Vartijan Exo-Driller",
-      "keywords": ["Brute"],
+      "keywords": [
+        "Brute"
+      ],
       "rating": 280,
       "xp": 25,
-      "stats": ["4\"", "4+", "3+", "4", "5", "3", "3", "2", "4+", "7", "7", "6", "6"],
+      "stats": [
+        "4\"",
+        "4+",
+        "3+",
+        "4",
+        "5",
+        "3",
+        "3",
+        "2",
+        "4+",
+        "7",
+        "7",
+        "6",
+        "6"
+      ],
       "weapons": [
         {
           "name": "Heavy flamer*",
@@ -19,7 +35,11 @@
           "str": "5",
           "ap": "-2",
           "l": "1",
-          "traits": ["Ammo (6+)", "Blaze (5+)", "Template"]
+          "traits": [
+            "Ammo (6+)",
+            "Blaze (5+)",
+            "Template"
+          ]
         },
         {
           "name": "Power fist",
@@ -28,7 +48,13 @@
           "str": "S+3",
           "ap": "-3",
           "l": "2",
-          "traits": ["Breaching (6+)", "Concussive (5+)", "Damage (2)", "Melee", "Unwieldy"]
+          "traits": [
+            "Breaching (6+)",
+            "Concussive (5+)",
+            "Damage (2)",
+            "Melee",
+            "Unwieldy"
+          ]
         },
         {
           "name": "Seismic crusher",
@@ -37,11 +63,20 @@
           "str": "2",
           "ap": "-",
           "l": "1",
-          "traits": ["Ammo (6+)", "Breaching (5+)", "Template"]
+          "traits": [
+            "Ammo (6+)",
+            "Breaching (5+)",
+            "Template"
+          ]
         }
       ],
-      "skills": ["Bulging Biceps", "Juggernaut"],
-      "rules": ["Sensor Suite"],
+      "skills": [
+        "Bulging Biceps",
+        "Juggernaut"
+      ],
+      "rules": [
+        "Sensor Suite"
+      ],
       "wargear": [],
       "status": null
     },
@@ -49,10 +84,26 @@
       "id": 2,
       "name": "Bjorn Ironbeard",
       "archetype": "Charter Master",
-      "keywords": ["Leader"],
+      "keywords": [
+        "Leader"
+      ],
       "rating": 200,
       "xp": 61,
-      "stats": ["4\"", "3+", "3+", "3", "4", "3", "2", "3", "5+", "8", "8", "8", "7"],
+      "stats": [
+        "4\"",
+        "3+",
+        "3+",
+        "3",
+        "4",
+        "3",
+        "2",
+        "3",
+        "5+",
+        "8",
+        "8",
+        "8",
+        "7"
+      ],
       "weapons": [
         {
           "name": "Ironhead stub gun",
@@ -61,7 +112,10 @@
           "str": "3",
           "ap": "-",
           "l": "1",
-          "traits": ["Light", "Rapid Fire (1)"]
+          "traits": [
+            "Light",
+            "Rapid Fire (1)"
+          ]
         },
         {
           "name": "Power hammer",
@@ -70,22 +124,47 @@
           "str": "S",
           "ap": "-2",
           "l": "2",
-          "traits": ["Breaching (6+)", "Concussive (6+)", "Melee"]
+          "traits": [
+            "Breaching (6+)",
+            "Concussive (6+)",
+            "Melee"
+          ]
         }
       ],
-      "skills": ["Connected", "Inspiring"],
+      "skills": [
+        "Connected",
+        "Inspiring"
+      ],
       "rules": [],
-      "wargear": ["Photo-lumens"],
+      "wargear": [
+        "Photo-lumens"
+      ],
       "status": null
     },
     {
       "id": 3,
       "name": "Okri Goldhands",
       "archetype": "Drill Master",
-      "keywords": ["Champion"],
+      "keywords": [
+        "Champion"
+      ],
       "rating": 275,
       "xp": 37,
-      "stats": ["4\"", "4+", "3+", "3", "4", "2", "2", "2", "5+", "7", "7", "7", "6"],
+      "stats": [
+        "4\"",
+        "4+",
+        "3+",
+        "3",
+        "4",
+        "2",
+        "2",
+        "2",
+        "5+",
+        "7",
+        "7",
+        "7",
+        "6"
+      ],
       "weapons": [
         {
           "name": "Circular stone saw",
@@ -94,7 +173,12 @@
           "str": "S+1",
           "ap": "-1",
           "l": "1",
-          "traits": ["Additional Attacks (1)", "Melee", "Power Pack", "Shred (6+)"]
+          "traits": [
+            "Additional Attacks (1)",
+            "Melee",
+            "Power Pack",
+            "Shred (6+)"
+          ]
         },
         {
           "name": "Fighting knife",
@@ -103,7 +187,10 @@
           "str": "S",
           "ap": "-",
           "l": "1",
-          "traits": ["Backstab", "Melee"]
+          "traits": [
+            "Backstab",
+            "Melee"
+          ]
         },
         {
           "name": "Mining laser*",
@@ -112,22 +199,50 @@
           "str": "9",
           "ap": "-3",
           "l": "3",
-          "traits": ["Ammo (5+)", "Damage (2)", "Heavy"]
+          "traits": [
+            "Ammo (5+)",
+            "Damage (2)",
+            "Heavy"
+          ]
         }
       ],
-      "skills": ["Bulging Biceps", "Inspiring"],
+      "skills": [
+        "Bulging Biceps",
+        "Fearsome",
+        "Inspiring"
+      ],
       "rules": [],
-      "wargear": ["Photo-lumens"],
+      "wargear": [
+        "Photo-lumens"
+      ],
       "status": null
     },
     {
       "id": 4,
       "name": "Kadri Cromson",
       "archetype": "Drill-Kyn",
-      "keywords": ["Ganger", "Specialist", "Gunner"],
+      "keywords": [
+        "Ganger",
+        "Specialist",
+        "Gunner"
+      ],
       "rating": 110,
       "xp": 13,
-      "stats": ["4\"", "4+", "4+", "3", "4", "1", "2", "1", "6+", "6", "7", "7", "6"],
+      "stats": [
+        "4\"",
+        "4+",
+        "4+",
+        "3",
+        "4",
+        "1",
+        "2",
+        "1",
+        "6+",
+        "6",
+        "7",
+        "7",
+        "6"
+      ],
       "weapons": [
         {
           "name": "Fighting knife",
@@ -136,7 +251,10 @@
           "str": "S",
           "ap": "-",
           "l": "1",
-          "traits": ["Backstab", "Melee"]
+          "traits": [
+            "Backstab",
+            "Melee"
+          ]
         },
         {
           "name": "Ironhead grenade launcher",
@@ -145,22 +263,50 @@
           "str": "3",
           "ap": "-1",
           "l": "1",
-          "traits": ["Ammo (4+)", "Blast (3\")", "Breaching (6+)", "Concussive (5+)", "Knockback (5+)"]
+          "traits": [
+            "Ammo (4+)",
+            "Blast (3\")",
+            "Breaching (6+)",
+            "Concussive (5+)",
+            "Knockback (5+)"
+          ]
         }
       ],
-      "skills": ["Hip-shooting"],
+      "skills": [
+        "Hip-shooting"
+      ],
       "rules": [],
-      "wargear": ["Photo-lumens"],
+      "wargear": [
+        "Photo-lumens"
+      ],
       "status": null
     },
     {
       "id": 5,
       "name": "Sven Silverhorn",
       "archetype": "Drill-Kyn",
-      "keywords": ["Ganger", "Specialist", "Medic"],
+      "keywords": [
+        "Ganger",
+        "Specialist",
+        "Medic"
+      ],
       "rating": 100,
       "xp": 13,
-      "stats": ["4\"", "4+", "4+", "3", "4", "1", "2", "1", "6+", "6", "7", "7", "6"],
+      "stats": [
+        "4\"",
+        "4+",
+        "4+",
+        "3",
+        "4",
+        "1",
+        "2",
+        "1",
+        "6+",
+        "6",
+        "7",
+        "7",
+        "6"
+      ],
       "weapons": [
         {
           "name": "Fighting knife",
@@ -169,7 +315,10 @@
           "str": "S",
           "ap": "-",
           "l": "1",
-          "traits": ["Backstab", "Melee"]
+          "traits": [
+            "Backstab",
+            "Melee"
+          ]
         },
         {
           "name": "Ironhead stub gun",
@@ -178,22 +327,48 @@
           "str": "3",
           "ap": "-",
           "l": "1",
-          "traits": ["Light", "Rapid Fire (1)"]
+          "traits": [
+            "Light",
+            "Rapid Fire (1)"
+          ]
         }
       ],
-      "skills": ["Medicate"],
+      "skills": [
+        "Medicate"
+      ],
       "rules": [],
-      "wargear": ["Medicae kit", "Photo-lumens"],
+      "wargear": [
+        "Medicae kit",
+        "Photo-lumens"
+      ],
       "status": null
     },
     {
       "id": 6,
       "name": "Vikram Azril",
       "archetype": "Drill-Kyn",
-      "keywords": ["Ganger", "Specialist", "Gunner"],
+      "keywords": [
+        "Ganger",
+        "Specialist",
+        "Gunner"
+      ],
       "rating": 65,
       "xp": 13,
-      "stats": ["4\"", "4+", "4+", "3", "4", "1", "2", "1", "6+", "6", "7", "7", "6"],
+      "stats": [
+        "4\"",
+        "4+",
+        "4+",
+        "3",
+        "4",
+        "1",
+        "2",
+        "1",
+        "6+",
+        "6",
+        "7",
+        "7",
+        "6"
+      ],
       "weapons": [
         {
           "name": "Fighting knife",
@@ -202,7 +377,10 @@
           "str": "S",
           "ap": "-",
           "l": "1",
-          "traits": ["Backstab", "Melee"]
+          "traits": [
+            "Backstab",
+            "Melee"
+          ]
         },
         {
           "name": "Ironhead stub gun",
@@ -211,10 +389,15 @@
           "str": "3",
           "ap": "-",
           "l": "1",
-          "traits": ["Light", "Rapid Fire (1)"]
+          "traits": [
+            "Light",
+            "Rapid Fire (1)"
+          ]
         }
       ],
-      "skills": ["Hip-shooting"],
+      "skills": [
+        "Hip-shooting"
+      ],
       "rules": [],
       "wargear": [],
       "status": null
@@ -223,10 +406,26 @@
       "id": 7,
       "name": "Alaric Drenger",
       "archetype": "Digger",
-      "keywords": ["Prospect"],
+      "keywords": [
+        "Prospect"
+      ],
       "rating": 70,
       "xp": 1,
-      "stats": ["5\"", "5+", "5+", "3", "4", "1", "3", "1", "6+", "5", "6", "5", "5"],
+      "stats": [
+        "5\"",
+        "5+",
+        "5+",
+        "3",
+        "4",
+        "1",
+        "3",
+        "1",
+        "6+",
+        "5",
+        "6",
+        "5",
+        "5"
+      ],
       "weapons": [
         {
           "name": "Fighting knife",
@@ -235,7 +434,10 @@
           "str": "S",
           "ap": "-",
           "l": "1",
-          "traits": ["Backstab", "Melee"]
+          "traits": [
+            "Backstab",
+            "Melee"
+          ]
         },
         {
           "name": "Shotgun — scatter ammo",
@@ -244,7 +446,9 @@
           "str": "3",
           "ap": "-",
           "l": "1",
-          "traits": ["Rapid Fire (2)"]
+          "traits": [
+            "Rapid Fire (2)"
+          ]
         },
         {
           "name": "Shotgun — solid ammo",
@@ -253,7 +457,9 @@
           "str": "4",
           "ap": "-",
           "l": "1",
-          "traits": ["Knockback (5+)"]
+          "traits": [
+            "Knockback (5+)"
+          ]
         }
       ],
       "skills": [],
