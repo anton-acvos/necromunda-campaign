@@ -2554,6 +2554,7 @@
     },
     {
       "id": "servo-chirurgic-claw",
+      "roll": 9,
       "name": "Servo-chirurgic Claw",
       "kind": "Weapon",
       "holder": "resource-extraction",

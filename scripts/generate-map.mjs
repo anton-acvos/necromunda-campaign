@@ -912,7 +912,7 @@ const xs = drawn.map((p) => p[0]), ys = drawn.map((p) => p[1]);
     { id: 'servo-arc-claw', name: 'Servo-arc Claw', kind: 'Weapon', holder: 'archeo-3', value: 80,
       profile: { range: 'E', str: 'S+2', ap: '1', lethality: 2, traits: ['Unwieldy', 'Shock(5+)', 'Rending(5+)', 'Damage(2)'] } },
 
-    { id: 'servo-chirurgic-claw', name: 'Servo-chirurgic Claw', kind: 'Weapon', holder: 'resource-extraction', value: 85,
+    { id: 'servo-chirurgic-claw', roll: 9, name: 'Servo-chirurgic Claw', kind: 'Weapon', holder: 'resource-extraction', value: 85,
       profile: { range: 'E', str: 'S', lethality: 1, traits: ['Unwieldy', 'Rending(6+)'] },
       effect: 'Blessed Augmetic Surgery (Double) \u2014 choose a friendly Seriously Injured fighter within 1". That fighter is no longer Seriously Injured and regains 1 lost Wound.' },
 

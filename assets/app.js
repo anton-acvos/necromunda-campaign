@@ -956,7 +956,9 @@
       pool.length + ' pieces catalogued, eleven of them on a 2d6 table \u2014 ' +
       (found ? found + ' recovered, ' + (pool.length - found) + ' still down there'
              : 'none recovered yet') +
-      (worth ? '. ' + worth + ' credits of it in all.' : '')));
+      (worth ? '. ' + worth + ' credits of it in all.' : '') +
+      ' A piece keeps its result once it is taken: roll one that somebody ' +
+      'already holds and you roll again.'));
     host.appendChild(head);
 
     var wrap = h('section', 'relics');
@@ -981,9 +983,10 @@
       var head = h('div', 'relic-head');
       var pip = h('span', 'relic-roll' + (r.roll == null ? ' is-off' : ''),
                    r.roll == null ? '\u2014' : String(r.roll));
-      pip.title = r.roll != null ? 'Rolled on 2d6'
-                 : r.holder ? 'Off the table \u2014 somebody is carrying it'
-                            : 'Not on the table \u2014 the arbitrator\'s to give';
+      pip.title = r.roll == null
+        ? 'Not on the table \u2014 the arbitrator\u2019s to give'
+        : held ? 'Rolled on 2d6, and already held \u2014 roll again'
+               : 'Rolled on 2d6';
       head.appendChild(pip);
       head.appendChild(h('h4', 'relic-name', r.name));
       if (r.kind) head.appendChild(h('span', 'tag relic-kind', r.kind));

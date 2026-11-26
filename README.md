@@ -11,7 +11,9 @@ build step, no framework: a static page that reads one JSON file.
   the cycle's challenges and count, and the battle log
 - **Archeotech tab** — the pool an expedition can come back up with
   (`archeotech` in the data; `holder` names the gang that found a piece, or
-  null while it is still down there)
+  null while it is still down there). Eleven of the twelve sit on a 2d6
+  table and **keep their result once taken**: a roll that lands on a piece
+  somebody already holds is rolled again, so the table never has a hole in it
 - **Gangs tab** — one card per gang: rating, stash, reputation, income a cycle,
   and every holding it owns with that holding's type and boon
 - **Discord** — a GitHub Action announces every change to the campaign channel

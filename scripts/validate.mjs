@@ -274,11 +274,9 @@ for (const [i, r] of (data.archeotech ?? []).entries()) {
     if (seen.has(r.roll)) err(`archeotech: "${r.id}" and "${seen.get(r.roll)}" both sit on a roll of ${r.roll}`);
     else seen.set(r.roll, r.id);
   }
-  for (const r of data.archeotech ?? []) {
-    if (r.holder && r.roll != null) {
-      err(`archeotech: "${r.id}" is held by ${r.holder} but still has a 2d6 result`);
-    }
-  }
+  /* A piece keeps its result after somebody takes it: a roll that lands
+     on one already held is rolled again. Holes in the table would make
+     a roll mean nothing, so nothing is ever removed from it. */
   const missing = [];
   for (let n = 2; n <= 12; n++) if (!seen.has(n)) missing.push(n);
   if (seen.size && missing.length) warn(`archeotech: no piece on 2d6 result ${missing.join(', ')}`);
