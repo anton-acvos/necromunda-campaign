@@ -497,6 +497,16 @@ body {
   font-variant-numeric: tabular-nums;
 }
 
+/* The reputation line is not a holding, so it does not get a holding's
+   border treatment. */
+.holding.is-standing .holding-name.is-plain {
+  color: var(--ink-dim);
+  font-style: italic;
+  cursor: default;
+}
+
+.holding-name.is-plain:hover { color: var(--ink-dim); text-decoration: none; }
+
 .holding-type {
   margin: 1px 0 0;
   color: var(--ink-dim);

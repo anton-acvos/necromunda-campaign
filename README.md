@@ -279,6 +279,17 @@ reputation goes with it, with nothing to remember. A territory carries both
 number that gets added up); the validator rejects a standing that mentions
 reputation without a `rep`, and rejects a `reputation` field on a gang.
 
+Reputation also **pays**. A gang draws ten credits a cycle for every point
+it carries, on top of the income from its ground, so a gang on two holdings
+and a name can out-earn one on four and nothing. The rate lives in one
+place, `REP_RATE` in `assets/app.js`.
+
+The Income stat on a gang card is the two added together, and the holdings
+list underneath carries a **Standing in the Reach** line at the bottom
+showing what the reputation part is worth, so the list adds up to the
+figure in the corner. It is deliberately not a holding: it moves the
+moment the Reach changes its mind about a gang.
+
 ### The stash
 
 A gang's stash is not stored. It is worked out from every line of money that

@@ -1725,10 +1725,25 @@
     });
   }
 
-  function incomeOf(g) {
+  /* Ground is not the only thing that pays. A gang draws ten credits a
+     cycle for every point of reputation it carries, which is why a gang
+     sitting on two holdings and a name can out-earn one sitting on four
+     and nothing. It is kept apart from the holdings because it is not a
+     holding: it moves the moment the Reach changes its mind. */
+  var REP_RATE = 10;
+
+  function groundIncomeOf(g) {
     return holdingsOf(g).concat(surveyedDeepOf(g)).reduce(function (n, t) {
       return n + (incomeOn(t) || 0);
     }, 0);
+  }
+
+  function repIncomeOf(g) {
+    return repOf(g) * REP_RATE;
+  }
+
+  function incomeOf(g) {
+    return groundIncomeOf(g) + repIncomeOf(g);
   }
 
   function deepHoldingsOf(g) {
@@ -2078,6 +2093,22 @@
     if (!held.length && !deep.length) {
       list.appendChild(h('li', 'holding is-empty', 'Holds nothing on the charted map.'));
     }
+
+    /* So the holdings and this one line add up to the figure in the
+       corner, instead of the reader wondering where the rest came from. */
+    var repPay = repIncomeOf(g);
+    if (repPay) {
+      var repLi = h('li', 'holding is-standing');
+      var repRow = h('div', 'holding-row');
+      repRow.appendChild(h('span', 'holding-name is-plain', 'Standing in the Reach'));
+      repRow.appendChild(h('span', 'holding-income', repPay + ' cr'));
+      repLi.appendChild(repRow);
+      repLi.appendChild(h('p', 'holding-type',
+        repOf(g) + ' reputation at ' + REP_RATE + ' credits a cycle. Not ground: it ' +
+        'pays while the Reach thinks well of them and stops when it does not.'));
+      list.appendChild(repLi);
+    }
+
     card.appendChild(list);
 
     card.appendChild(stashFold(g));
