@@ -1010,7 +1010,7 @@ const xs = drawn.map((p) => p[0]), ys = drawn.map((p) => p[1]);
       what: 'A Blade Maiden came across the floor of the drinking hole at the Delaque and got exactly one answer. Destroying Angel killed her on her own charge, with a single blow, and was standing in the same place when it was over. The Chymist Cult have not said which of the two Maidens it was.' },
 
     { id: 'h1-carmine-brink', gang: 'chymist-cult', fighter: 'Carmine',
-      title: 'Twice Off the Floor', cycle: 1, battle: 'b8-last-round',
+      title: 'Unkillable', cycle: 1, battle: 'b8-last-round',
       what: 'The Chem Mother went down in the drinking hole and got back up. Went down again, and got back up again. It took a third time of asking to finish the job, and by then four of the crew were out of action and the expedition was lost. The Chymist Cult did not win this one. Their leader is the reason it was not quicker.' }
   ],
 
