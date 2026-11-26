@@ -1014,6 +1014,43 @@ const xs = drawn.map((p) => p[0]), ys = drawn.map((p) => p[1]);
       what: 'The Chem Mother went down in the drinking hole and got back up. Went down again, and got back up again. It took a third time of asking to finish the job, and by then four of the crew were out of action and the expedition was lost. The Chymist Cult did not win this one. Their leader is the reason it was not quicker.' }
   ],
 
+  /* End-of-cycle actions. Between games a gang spends its fighters on
+     something: training, a trip to the trading post, a visit to a doc.
+     They happen at the end of every cycle, so each entry says which one.
+
+       id       unique, e<cycle>-<gang>-<fighter>
+       cycle    the cycle it closed
+       gang     whose fighter it was
+       fighter  the name on that gang\u2019s sheet
+       action   what they did, in the words the table uses
+       xp       experience the action paid, if it paid any
+       notes    anything worth reading back
+
+     The experience counts towards what a fighter is worth and therefore
+     towards their level, the same as a battle. It does NOT count towards
+     renown on the Heroes board: renown is for what a fighter did to the
+     other gangs, and everybody gets the same actions. A fighter stuck in
+     recovery has no entry, because recovery is not something they did. */
+  endOfCycle: [
+    { id: 'e1-mycelium-death-cap', cycle: 1, gang: 'mycelium', fighter: 'Death Cap',
+      action: 'Training', xp: 2,
+      notes: 'Two points, and the only fighter in the Reach for whom two points were worth a level.' },
+    { id: 'e1-mycelium-wyrm', cycle: 1, gang: 'mycelium', fighter: 'Psychoteric Wyrm',
+      action: 'Training', xp: 2,
+      notes: 'Training is the only end-of-cycle action a beast can take. It took it.' },
+    { id: 'e1-mycelium-destroying-angel', cycle: 1, gang: 'mycelium', fighter: 'Destroying Angel',
+      action: 'Trading post' },
+    { id: 'e1-mycelium-fly-agaric', cycle: 1, gang: 'mycelium', fighter: 'Fly Agaric',
+      action: 'Trading post' },
+    { id: 'e1-mycelium-puffball', cycle: 1, gang: 'mycelium', fighter: 'Puffball',
+      action: 'Training', xp: 2 },
+    { id: 'e1-mycelium-amanita', cycle: 1, gang: 'mycelium', fighter: 'Amanita',
+      action: 'Training', xp: 2 },
+    { id: 'e1-mycelium-galerina', cycle: 1, gang: 'mycelium', fighter: 'Galerina',
+      action: 'Training', xp: 2,
+      notes: 'Five of the six Delaque who could train did. All but one of them finished the cycle a single point short of a level.' }
+  ],
+
   /* The log. Each battle carries one reward entry per gang that turned up,
      win or lose, and that entry is the whole record of the game for them:
 

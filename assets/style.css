@@ -1358,6 +1358,17 @@ body {
 
 .flog.is-down { border-left-color: var(--warn); }
 
+/* An end-of-cycle action is not a game, so it does not get a game's
+   left edge. */
+.flog.is-downtime { border-left-color: var(--line-bright); }
+
+.flog-act {
+  flex: 1;
+  min-width: 0;
+  font-size: 0.74rem;
+  color: var(--ink-dim);
+}
+
 .flog .log-link {
   font-size: 0.74rem;
   color: var(--ink-dim);

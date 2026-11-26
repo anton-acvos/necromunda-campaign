@@ -1417,6 +1417,22 @@
      battles are written. A fighter nobody has written into a record comes
      back empty, which is the ordinary case for a gang whose games have
      not been filled in. */
+  /* What a gang spent this fighter on between games, oldest cycle first.
+     Training pays experience; a trip to the trading post pays none and is
+     here anyway, because what a fighter did with a cycle is worth reading
+     back even when it did not pay. */
+  function endOfCycleOf(gangId, name) {
+    return (state.data.endOfCycle || []).filter(function (e) {
+      return e.gang === gangId && e.fighter === name;
+    }).sort(function (a, b) { return (a.cycle || 0) - (b.cycle || 0); });
+  }
+
+  function downtimeXpOf(gangId, name) {
+    return endOfCycleOf(gangId, name).reduce(function (n, e) {
+      return n + (e.xp || 0);
+    }, 0);
+  }
+
   function logXpOf(gangId, name) {
     var out = [];
     (state.data.battles || []).forEach(function (b) {
@@ -1814,20 +1830,25 @@
        they are worth now rather than what they were worth then. */
     var games = gang ? logXpOf(gang.id, f.name) : [];
     var earned = games.reduce(function (n, g) { return n + g.xp; }, 0);
-    var total = (f.xp || 0) + earned;
+    var acts = gang ? endOfCycleOf(gang.id, f.name) : [];
+    var trained = acts.reduce(function (n, e) { return n + (e.xp || 0); }, 0);
+    var total = (f.xp || 0) + earned + trained;
 
     var head = h('div', 'fighter-head');
     head.appendChild(h('h4', 'fighter-name', f.name));
     if (f.rating != null) head.appendChild(h('span', 'fighter-rating', f.rating + ' rating'));
-    if (f.xp != null || earned) {
-      var xpEl = h('span', 'fighter-xp' + (earned ? ' is-earned' : ''), total + ' XP');
-      if (earned) {
-        xpEl.title = (f.xp != null ? f.xp + ' on the sheet' : 'nothing on the sheet') +
-                     ', ' + earned + ' since, out of the log.';
+    if (f.xp != null || earned || trained) {
+      var xpEl = h('span', 'fighter-xp' + (earned || trained ? ' is-earned' : ''),
+                   total + ' XP');
+      if (earned || trained) {
+        var split = [f.xp != null ? f.xp + ' on the sheet' : 'nothing on the sheet'];
+        if (earned) split.push(earned + ' out of the log');
+        if (trained) split.push(trained + ' between games');
+        xpEl.title = split.join(', ') + '.';
       }
       head.appendChild(xpEl);
     }
-    var lv = levelOf(f.xp != null || earned ? total : null);
+    var lv = levelOf(f.xp != null || earned || trained ? total : null);
     if (lv) {
       var lvEl = h('span', 'fighter-level', 'L' + lv.level + ' \u00b7 ' + lv.title);
       lvEl.title = lv.next
@@ -1920,6 +1941,28 @@
       });
       box.appendChild(list);
       card.appendChild(box);
+    }
+
+    if (acts.length) {
+      var abox = h('div', 'fighter-log');
+      var alead = h('p', 'fighter-extra');
+      alead.appendChild(h('span', 'fighter-extra-label', 'Between games'));
+      alead.appendChild(document.createTextNode(' ' + acts.length +
+        (acts.length === 1 ? ' end-of-cycle action' : ' end-of-cycle actions') +
+        (trained ? ', worth ' + trained + ' XP' : ', none of it worth experience')));
+      abox.appendChild(alead);
+
+      var alist = h('ul', 'flog-list');
+      acts.forEach(function (e) {
+        var li = h('li', 'flog is-downtime');
+        if (e.notes) li.title = e.notes;
+        li.appendChild(h('span', 'flog-act',
+          'Cycle ' + e.cycle + ' \u2014 ' + e.action));
+        li.appendChild(h('span', 'flog-xp', (e.xp || 0) + ' XP'));
+        alist.appendChild(li);
+      });
+      abox.appendChild(alist);
+      card.appendChild(abox);
     }
 
     return card;
@@ -2246,7 +2289,13 @@
       });
       row.archetype = sheet ? sheet.archetype : null;
       row.start = sheet ? sheet.xp : null;
-      row.total = (sheet && sheet.xp != null ? sheet.xp : 0) + row.earned;
+      /* Training raises what a fighter is worth, and therefore their
+         level, but never their renown: everybody gets the same actions
+         and a fighter in recovery gets none, so ranking on them would
+         rank the downtime rather than the campaign. */
+      row.trained = row.gang ? downtimeXpOf(row.gang.id, row.name) : 0;
+      row.total = (sheet && sheet.xp != null ? sheet.xp : 0) +
+                  row.earned + row.trained;
       row.renown = row.earned * RENOWN.xp +
                    row.kills * RENOWN.takedown +
                    row.honours.length * RENOWN.honour;

@@ -315,6 +315,39 @@ function checkHonours(rosterNames) {
   }
 }
 
+/* What a gang did with a fighter between games. One entry per fighter per
+   action: a fighter who trained and shopped in the same cycle has two. */
+function checkEndOfCycle(rosterNames) {
+  const seen = new Set();
+  for (const [i, e] of (data.endOfCycle ?? []).entries()) {
+    const at = `endOfCycle[${i}]`;
+    if (!e.id) err(`${at}.id: required`);
+    else if (seen.has(e.id)) err(`${at}.id: duplicate "${e.id}"`);
+    else seen.add(e.id);
+
+    if (!gangIds.has(e.gang)) err(`${at}.gang: unknown gang id "${e.gang}"`);
+    if (!e.fighter) err(`${at}.fighter: required`);
+    else {
+      const names = rosterNames.get(e.gang);
+      if (names && names.size && !names.has(e.fighter)) {
+        err(`${at}.fighter: "${e.fighter}" is not on ${e.gang}\u2019s sheet`);
+      }
+    }
+    if (!e.action) err(`${at}.action: required \u2014 say what they did`);
+    if (!Number.isInteger(e.cycle) || e.cycle < 1) {
+      err(`${at}.cycle: required \u2014 actions are read in campaign time`);
+    } else if (data.campaign?.cycle != null && e.cycle > data.campaign.cycle) {
+      err(`${at}.cycle: ${e.cycle} is after the campaign\u2019s own cycle ${data.campaign.cycle}`);
+    }
+    if (e.xp != null && (!Number.isInteger(e.xp) || e.xp < 0)) {
+      err(`${at}.xp: expected whole experience, got ${JSON.stringify(e.xp)}`);
+    }
+    if (e.notes != null && typeof e.notes !== 'string') {
+      err(`${at}.notes: expected a line of text`);
+    }
+  }
+}
+
 /* --- gear ---
 
    What a gang came away with that was not money. A line is either a
@@ -599,6 +632,7 @@ for (const [i, b] of (data.battles ?? []).entries()) {
 }
 
 checkHonours(rosterNames);
+checkEndOfCycle(rosterNames);
 
 /* --- campaign shape: a gang with charted ground needs a settlement on it.
    A gang that holds nothing charted is playing by its own rules, so the

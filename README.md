@@ -408,6 +408,36 @@ with no name, and it warns when the fighters' ratings no longer add up to
 the gang's `rating`. The site says the same thing in the fold, so a sheet
 that has drifted is visible without running the validator.
 
+### End-of-cycle actions
+
+Between games a gang spends its fighters on something — training, a trip to
+the trading post, a visit to a doc. These happen at the end of every cycle
+and live in the top-level `endOfCycle` array, one entry per fighter per
+action:
+
+```js
+{ id: 'e1-mycelium-death-cap', cycle: 1, gang: 'mycelium', fighter: 'Death Cap',
+  action: 'Training', xp: 2, notes: 'Two points, and a level with it' }
+```
+
+`id`, `cycle`, `gang`, `fighter` and `action` are required; `xp` and `notes`
+are optional. An action that pays nothing still gets an entry, because what
+a fighter did with a cycle is worth reading back either way. A fighter stuck
+in recovery has no entry: recovery is not something they did.
+
+The experience counts towards what a fighter is worth, and therefore towards
+their level — the fighter card shows a **Between games** block under the
+battles, and the XP in the corner is the sheet plus the log plus this.
+
+It does **not** count towards renown on the Heroes board. Renown is for what
+a fighter did to the other gangs; everybody gets the same actions, and a
+fighter in recovery gets none, so ranking on them would rank the downtime
+rather than the campaign.
+
+`scripts/validate.mjs` rejects a duplicate id, an unknown gang, a fighter who
+is not on that gang’s sheet, a missing action, a cycle that has not happened
+yet, and a negative or fractional `xp`.
+
 ### The experience ladder
 
 A fighter carries `xp` on their sheet: what they had the day the roster was
