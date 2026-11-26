@@ -262,7 +262,7 @@
       "roster": "data/rosters/archeo-3.json"
     },
     {
-      "rating": 1115,
+      "rating": 1125,
       "motto": "",
       "id": "mycelium",
       "name": "Mycelium Section",
@@ -2845,6 +2845,14 @@
       "action": "Training",
       "xp": 2,
       "notes": "Five of the six Delaque who could train did. All but one of them finished the cycle a single point short of a level."
+    },
+    {
+      "id": "e1-mycelium-galerina-advance",
+      "cycle": 1,
+      "gang": "mycelium",
+      "fighter": "Galerina",
+      "action": "Advance: Overwatch",
+      "notes": "Three games of turning up and watching, and the Shadow came back up with the first skill on the sheet. Ten credits on the rating."
     }
   ],
   "battles": [

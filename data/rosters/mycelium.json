@@ -443,7 +443,7 @@
       "keywords": [
         "Prospect"
       ],
-      "rating": 95,
+      "rating": 105,
       "stats": [
         "6\"",
         "5+",
@@ -485,7 +485,9 @@
           ]
         }
       ],
-      "skills": [],
+      "skills": [
+        "Overwatch"
+      ],
       "rules": [],
       "wargear": [],
       "status": null,
