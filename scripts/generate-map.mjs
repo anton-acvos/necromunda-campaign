@@ -1273,13 +1273,13 @@ const xs = drawn.map((p) => p[0]), ys = drawn.map((p) => p[1]);
           notes: 'Reported from the other end of the table, so this side is short a few names rather than short a few points.',
           fighters: [
             { fighter: 'Okri Goldhands',        xp: 1, xpFor: 'Turning up',
-              outOfAction: true, injury: 'Grievous Wound',
-              note: 'Put down by the Exo-Driller and the only lasting damage either company took. The Drill-Kyn who went down beside him made a full recovery; the note does not say which of the three it was.' },
+              outOfAction: true, injury: 'Horrid Scars',
+              note: 'Put down by the Exo-Driller and the only lasting damage either company took. It left him Fearsome, which is on his sheet now. The Drill-Kyn who went down beside him made a full recovery; the note does not say which of the three it was.' },
             { fighter: 'The Iron Bowling Ball', xp: 3,
               xpFor: 'Turning up, and two for seriously injuring one of their champions' }
           ] }
       ],
-      summary: 'Nobody meant to fight this one. Both Ironhead companies had filed on the same shaft and both sent a scouring party down the Deadfall without telling anybody, and in a sealed munitions store with no lamps lit the two crews shot at each other for a while before either worked out it was shooting at an ally. Resource Extraction LLC held the floor when the light came up and Bjorn H.C.L.F agreed to withdraw. Karl put a Drill-Kyn out of action and Bob walked the Exo-Driller into Okri Goldhands, who came up with a Grievous Wound and is the only lasting damage on either side. Forty credits of scrap each, fifteen more and a point of reputation to the company for putting a Bullet Den on the map, and a Servo-chirurgic Claw out of the stacks. The ground itself stays unheld.' },
+      summary: 'Nobody meant to fight this one. Both Ironhead companies had filed on the same shaft and both sent a scouring party down the Deadfall without telling anybody, and in a sealed munitions store with no lamps lit the two crews shot at each other for a while before either worked out it was shooting at an ally. Resource Extraction LLC held the floor when the light came up and Bjorn H.C.L.F agreed to withdraw. Karl put a Drill-Kyn out of action and Bob walked the Exo-Driller into Okri Goldhands, who came up with Horrid Scars and is the only lasting damage on either side \u2014 the Reach walks around him now. Forty credits of scrap each, fifteen more and a point of reputation to the company for putting a Bullet Den on the map, and a Servo-chirurgic Claw out of the stacks. The ground itself stays unheld.' },
 
     { id: 'b8-last-round',
       cycle: 1,
