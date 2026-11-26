@@ -262,7 +262,7 @@
       "roster": "data/rosters/archeo-3.json"
     },
     {
-      "rating": 1110,
+      "rating": 1115,
       "motto": "",
       "id": "mycelium",
       "name": "Mycelium Section",
@@ -2781,6 +2781,14 @@
       "action": "Training",
       "xp": 2,
       "notes": "Two points, and the only fighter in the Reach for whom two points were worth a level."
+    },
+    {
+      "id": "e1-mycelium-death-cap-advance",
+      "cycle": 1,
+      "gang": "mycelium",
+      "fighter": "Death Cap",
+      "action": "Advance: Willpower +1",
+      "notes": "The level the training bought, spent on nerve. Willpower 7 to 8, and five credits on the rating."
     },
     {
       "id": "e1-mycelium-wyrm",
