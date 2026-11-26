@@ -2799,6 +2799,14 @@
       "action": "Trading post"
     },
     {
+      "id": "e1-mycelium-destroying-angel-advance",
+      "cycle": 1,
+      "gang": "mycelium",
+      "fighter": "Destroying Angel",
+      "action": "Advance: Initiative +1",
+      "notes": "Fifteen experience out of three games took the Nacht-Ghul to level ten, and what came back off the roll was speed. Initiative 5 to 6."
+    },
+    {
       "id": "e1-mycelium-fly-agaric",
       "cycle": 1,
       "gang": "mycelium",
