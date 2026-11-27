@@ -1318,6 +1318,25 @@ body {
 .statline th.is-split,
 .statline td.is-split { border-left: 1px solid var(--line-bright); }
 
+/* A characteristic a lasting injury has moved. The colour says which
+   way it went; the dotted rule underneath says that it moved at all,
+   so the card still reads on a screen that eats the colour. */
+.statline td.stat-mod {
+  font-weight: 700;
+  cursor: help;
+  text-decoration: underline dotted currentColor 1px;
+  text-underline-offset: 3px;
+}
+
+.statline td.is-worse { color: var(--warn); }
+.statline td.is-better { color: var(--good); }
+
+.stat-foot {
+  margin: 4px 0 8px;
+  font-size: 0.72rem;
+  color: var(--ink-dim);
+}
+
 .weapons th,
 .weapons td {
   padding: 3px 6px;

@@ -1497,6 +1497,54 @@
     return parts;
   }
 
+  /* What a lasting injury does to a statline.
+
+     The words on the battle record are the ones off the injury table \u2014
+     'Enfeebled (-1 Toughness)' \u2014 so the modifier is read back out of
+     that rather than kept in a second list that could come to disagree
+     with it. An injury with no characteristic in its name, Horrid Scars
+     or Hatred, moves nothing and is passed over here.
+
+     A roster's stats are what the fighter started with plus whatever
+     they have advanced into: the sheet is never written down already
+     wounded. So the card can show both \u2014 the number as it stands, and
+     what it was before somebody broke it. */
+  var STAT_SLOT = {
+    movement: 0, 'weapon skill': 1, 'ballistic skill': 2, strength: 3,
+    toughness: 4, wounds: 5, initiative: 6, attacks: 7, save: 8,
+    leadership: 9, cool: 10, willpower: 11, intelligence: 12
+  };
+
+  /* The three slots that are rolled against rather than counted up.
+     A 3+ fighter is better than a 4+ one, so a penalty on these walks
+     the number the other way. */
+  var TARGET_SLOT = { 1: true, 2: true, 8: true };
+
+  function injuryMods(gangId, name) {
+    var out = {};
+    logXpOf(gangId, name).forEach(function (g) {
+      if (!g.injury) return;
+      var m = /\(\s*([+-]\d+)\s+([A-Za-z ]+?)\s*\)/.exec(g.injury);
+      if (!m) return;
+      var slot = STAT_SLOT[m[2].toLowerCase()];
+      if (slot == null) return;
+      if (!out[slot]) out[slot] = [];
+      out[slot].push({ by: parseInt(m[1], 10), why: g.injury });
+    });
+    return out;
+  }
+
+  /* 4\" and 3+ are numbers with punctuation stuck to them, so the number
+     comes out, moves, and goes back in the shape it was written in. */
+  function shiftStat(value, by, isTarget) {
+    var s = String(value);
+    var m = /-?\d+/.exec(s);
+    if (!m) return null;
+    var n = parseInt(m[0], 10) + (isTarget ? -by : by);
+    if (n < (isTarget ? 2 : 0)) n = isTarget ? 2 : 0;
+    return s.slice(0, m.index) + n + s.slice(m.index + m[0].length);
+  }
+
   function takedownsOf(gang) {
     return (state.data.battles || []).reduce(function (n, b) {
       return n + (b.rewards || []).reduce(function (m, r) {
@@ -1937,14 +1985,41 @@
         hr.appendChild(th);
       });
       var br = h('tr');
+      var mods = gang ? injuryMods(gang.id, f.name) : {};
       f.stats.forEach(function (v, n) {
-        br.appendChild(h('td', n === 9 ? 'is-split' : null, String(v)));
+        var base = n === 9 ? 'is-split' : null;
+        var list = mods[n];
+        var by = (list || []).reduce(function (t, x) { return t + x.by; }, 0);
+        var shown = by ? shiftStat(v, by, !!TARGET_SLOT[n]) : null;
+        if (shown == null || shown === String(v)) {
+          br.appendChild(h('td', base, String(v)));
+          return;
+        }
+        /* The sign on the record is how much good it did them, so a
+           minus is a worse fighter whichever way the number moved. */
+        var td = h('td', (base ? base + ' ' : '') + 'stat-mod ' +
+                         (by < 0 ? 'is-worse' : 'is-better'), shown);
+        td.title = list.map(function (x) { return x.why; }).join('; ') +
+                   '. The sheet says ' + v + '.';
+        br.appendChild(td);
       });
       var thead = h('thead'); thead.appendChild(hr);
       var tbody = h('tbody'); tbody.appendChild(br);
       tbl.appendChild(thead); tbl.appendChild(tbody);
       wrap.appendChild(tbl);
       card.appendChild(wrap);
+      var moved = Object.keys(mods).length;
+      if (moved) {
+        var why = [];
+        Object.keys(mods).forEach(function (k) {
+          mods[k].forEach(function (x) {
+            if (why.indexOf(x.why) < 0) why.push(x.why);
+          });
+        });
+        card.appendChild(h('p', 'stat-foot',
+          'Carrying ' + why.join(' and ') + '. The line above is what they ' +
+          'fight at now; hover a marked number for what the sheet says.'));
+      }
     }
 
     /* weapons */
