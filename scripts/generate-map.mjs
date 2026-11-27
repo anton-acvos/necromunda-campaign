@@ -977,7 +977,10 @@ const xs = drawn.map((p) => p[0]), ys = drawn.map((p) => p[1]);
     { id: 'l1-magazine-restitution-paid', cycle: 1, gang: 'resource-extraction', amount: -20,
       what: 'Paid across to Bjorn H.C.L.F after the Blind Magazine \u2014 restitution for a fight neither company meant to start' },
     { id: 'l1-magazine-restitution-taken', cycle: 1, gang: 'bjorn-prospectors', amount: 20,
-      what: 'Taken from Resource Extraction LLC after the Blind Magazine \u2014 restitution for a fight neither company meant to start' }
+      what: 'Taken from Resource Extraction LLC after the Blind Magazine \u2014 restitution for a fight neither company meant to start' },
+
+    { id: 'l1-bjorn-sven-doc', cycle: 1, gang: 'bjorn-prospectors', amount: -30,
+      what: 'Paid to a doc at the end of the cycle for Sven Silverhorn, who came out of the Hollowbore critically injured and would not have seen the next cycle without it' }
   ],
 
   /* What the Reach remembers a fighter for. Experience and takedowns
@@ -1063,7 +1066,14 @@ const xs = drawn.map((p) => p[0]), ys = drawn.map((p) => p[1]);
       notes: 'Five of the six Delaque who could train did. All but one of them finished the cycle a single point short of a level.' },
     { id: 'e1-mycelium-galerina-advance', cycle: 1, gang: 'mycelium', fighter: 'Galerina',
       action: 'Advance: Overwatch',
-      notes: 'Three games of turning up and watching, and the Shadow came back up with the first skill on the sheet. Ten credits on the rating.' }
+      notes: 'Three games of turning up and watching, and the Shadow came back up with the first skill on the sheet. Ten credits on the rating.' },
+
+    { id: 'e1-bjorn-okri-escort', cycle: 1, gang: 'bjorn-prospectors', fighter: 'Okri Goldhands',
+      action: 'Medical escort: Sven Silverhorn',
+      notes: 'The company champion spent the whole of the downtime carrying the medic to somebody who could do for them what they do for everybody else. Thirty credits out of the stash, and the Hollowbore finally stops costing Bjorn H.C.L.F anything.' },
+    { id: 'e1-bjorn-sven-recovery', cycle: 1, gang: 'bjorn-prospectors', fighter: 'Sven Silverhorn',
+      action: 'Full recovery',
+      notes: 'Carried out of the Hollowbore critically injured and carried to a doc by Okri Goldhands. Came back off the slab with nothing lasting on the sheet at all.' }
   ],
 
   /* The log. Each battle carries one reward entry per gang that turned up,
@@ -1279,22 +1289,27 @@ const xs = drawn.map((p) => p[0]), ys = drawn.map((p) => p[1]);
             { fighter: 'Bob',    xp: 5, takedowns: 1,
               xpFor: 'Turning up, one for an objective, and three for putting their Drill Master out of action' }
           ] },
-        /* Bjorn's side comes second-hand. Every Prospector who turned up took
-           the point for it, but the note does not name the crew, so only the
-           two the opposition could identify have lines and there is no gang
-           total either. The second model that went down is one of the three
-           Drill-Kyn and the note does not say which. */
-        { gang: 'bjorn-prospectors', credits: 40, takedowns: 0, outOfAction: 2,
-          notes: 'Reported from the other end of the table, so this side is short a few names rather than short a few points.',
+        /* Bjorn's side came in second-hand and was filled out afterwards from
+           the Prospectors' own crew list. Four models went down the shaft and
+           every one of them took the point for turning up. Bjorn Ironbeard,
+           Sven Silverhorn and Vikram Azril were all still in recovery from the
+           Hollowbore and none of them were there. */
+        { gang: 'bjorn-prospectors', credits: 40, xp: 6, takedowns: 0, outOfAction: 2,
+          notes: 'A four-model crew, which is what Bjorn H.C.L.F could put underground with half the company still convalescing from the Hollowbore.',
           fighters: [
             { fighter: 'Okri Goldhands',        xp: 1, xpFor: 'Turning up',
               outOfAction: true, injury: 'Horrid Scars',
-              note: 'Put down by the Exo-Driller and the only lasting damage either company took. It left him Fearsome, which is on his sheet now. The Drill-Kyn who went down beside him made a full recovery; the note does not say which of the three it was.' },
+              note: 'Put down by the Exo-Driller and the only lasting damage either company took. The scars left the Drill Master Fearsome, which is on the sheet now, and the Reach gives Okri Goldhands a wider berth for it.' },
             { fighter: 'The Iron Bowling Ball', xp: 3,
-              xpFor: 'Turning up, and two for seriously injuring one of their champions' }
+              xpFor: 'Turning up, and two for seriously injuring one of their champions' },
+            { fighter: 'Kadri Cromson',         xp: 1, xpFor: 'Turning up',
+              outOfAction: true,
+              note: 'The Drill-Kyn Karl put down in the dark, and a full recovery out of it \u2014 nothing lasting on the sheet.' },
+            { fighter: 'Alaric Drenger',        xp: 1, xpFor: 'Turning up',
+              note: 'First game underground for the Digger, and the first point of experience on an otherwise empty sheet.' }
           ] }
       ],
-      summary: 'Nobody meant to fight this one. Both Ironhead companies had filed on the same shaft and both sent a scouring party down the Deadfall without telling anybody, and in a sealed munitions store with no lamps lit the two crews shot at each other for a while before either worked out it was shooting at an ally. Resource Extraction LLC held the floor when the light came up and Bjorn H.C.L.F agreed to withdraw. Karl put a Drill-Kyn out of action and Bob walked the Exo-Driller into Okri Goldhands, who came up with Horrid Scars and is the only lasting damage on either side \u2014 the Reach walks around him now. Forty credits of scrap each, fifteen more and a point of reputation to the company for putting a Bullet Den on the map, and a Servo-chirurgic Claw out of the stacks. The ground itself stays unheld.' },
+      summary: 'Nobody meant to fight this one. Both Ironhead companies had filed on the same shaft and both sent a scouring party down the Deadfall without telling anybody, and in a sealed munitions store with no lamps lit the two crews shot at each other for a while before either worked out it was shooting at an ally. Resource Extraction LLC held the floor when the light came up and Bjorn H.C.L.F agreed to withdraw. Karl put Kadri Cromson out of action and Bob walked the Exo-Driller into Okri Goldhands, who came up with Horrid Scars and is the only lasting damage on either side \u2014 the Reach walks around the Drill Master now. Forty credits of scrap each, fifteen more and a point of reputation to the company for putting a Bullet Den on the map, and a Servo-chirurgic Claw out of the stacks. The ground itself stays unheld.' },
 
     { id: 'b8-last-round',
       cycle: 1,
