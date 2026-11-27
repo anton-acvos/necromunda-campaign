@@ -262,7 +262,7 @@
       "roster": "data/rosters/archeo-3.json"
     },
     {
-      "rating": 1150,
+      "rating": 1425,
       "motto": "",
       "id": "mycelium",
       "name": "Mycelium Section",
@@ -2759,6 +2759,68 @@
       "gang": "bjorn-prospectors",
       "amount": 55,
       "what": "Cycle one income — 45 off Grudgehold and the Cinder Yard, and 10 for the one reputation the company has to its name"
+    },
+    {
+      "id": "l1-mycelium-reishi",
+      "cycle": 1,
+      "gang": "mycelium",
+      "amount": -45,
+      "what": "Spent on Reishi, a Ghost hired out of the post-cycle with Medicate on the sheet — the Section came out of the Hollowbore and the Last Round without anybody who could stop a bleed"
+    },
+    {
+      "id": "l1-mycelium-respirators-out",
+      "cycle": 1,
+      "gang": "mycelium",
+      "gear": [
+        {
+          "item": "Respirator",
+          "qty": -2,
+          "value": 15
+        }
+      ],
+      "what": "Both respirators off the Hollowbore dead taken out of the lockup and strapped on — one to Slippery Jack, one to Reishi, who are the two the Section cannot afford to lose to bad air"
+    },
+    {
+      "id": "l1-mycelium-power-sword",
+      "cycle": 1,
+      "gang": "mycelium",
+      "amount": -40,
+      "gear": [
+        {
+          "item": "Power sword",
+          "qty": -1,
+          "value": 40
+        }
+      ],
+      "what": "A power sword bought at the trading post and handed straight to Fly Agaric — both of the Section’s trading post slots for the cycle went on the one blade"
+    },
+    {
+      "id": "l1-mycelium-claws",
+      "cycle": 1,
+      "gang": "mycelium",
+      "amount": -65,
+      "gear": [
+        {
+          "item": "Psychomantic claws",
+          "qty": -1,
+          "value": 65
+        }
+      ],
+      "what": "Psychomantic claws fitted to Death Cap — the Psy-Gheist went into the Last Round with a flamer and a stub gun and came out of it wanting something closer"
+    },
+    {
+      "id": "l1-mycelium-heavy-flamer",
+      "cycle": 1,
+      "gang": "mycelium",
+      "amount": -95,
+      "gear": [
+        {
+          "item": "Heavy flamer",
+          "qty": -1,
+          "value": 95
+        }
+      ],
+      "what": "A heavy flamer for Galerina, and the last credit the Section had — the web gun it replaces went across to Reishi rather than back into the lockup"
     }
   ],
   "honours": [
@@ -2840,7 +2902,8 @@
       "cycle": 1,
       "gang": "mycelium",
       "fighter": "Destroying Angel",
-      "action": "Trading post"
+      "action": "Trading post",
+      "notes": "One of the Section’s two slots at the post. Both of them went on the same thing: a power sword, which went to Fly Agaric rather than to the Nacht-Ghul who fetched it."
     },
     {
       "id": "e1-mycelium-destroying-angel-advance",
@@ -2855,7 +2918,8 @@
       "cycle": 1,
       "gang": "mycelium",
       "fighter": "Fly Agaric",
-      "action": "Trading post"
+      "action": "Trading post",
+      "notes": "The other slot, and the Phantom came back up with a power sword on the belt. Forty credits, and forty onto the rating."
     },
     {
       "id": "e1-mycelium-puffball",

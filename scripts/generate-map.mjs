@@ -801,7 +801,7 @@ const gangs = [
   { id: 'sumptown',            name: 'Sumptown Industries',               short: 'Sumptown',      house: 'House Goliath',      color: '#e03131', player: 'C0dy', rating: 1075, roster: 'data/rosters/sumptown.json' },
   { id: 'chymist-cult',        name: "'Sola Dosis' Chymist Cult",         short: 'Sola Dosis',    house: 'House Escher',       color: '#9d7ad4', logo: 'assets/gangs/chymist-cult.webp', player: 'AmaraTheSilent', rating: 1190, roster: 'data/rosters/chymist-cult.json' },
   { id: 'archeo-3',            name: 'Archeo-Acquisitions Team 3',        short: 'Archeo-3',      house: 'House Van Saar',     color: '#35a9c0', player: 'Gawarges', rating: 1095, roster: 'data/rosters/archeo-3.json' },
-  { id: 'mycelium',            name: 'Mycelium Section',                  short: 'Mycelium',      house: 'House Delaque',      color: '#7d9683', player: 'Anton', rating: 1150, logo: 'assets/gangs/mycelium.svg', roster: 'data/rosters/mycelium.json' },
+  { id: 'mycelium',            name: 'Mycelium Section',                  short: 'Mycelium',      house: 'House Delaque',      color: '#7d9683', player: 'Anton', rating: 1425, logo: 'assets/gangs/mycelium.svg', roster: 'data/rosters/mycelium.json' },
   { id: 'precinct-22',         name: 'Precinct 22',                       short: 'Precinct 22',   house: 'Palanite Enforcers', color: '#e8c23a', rating: 1100, roster: 'data/rosters/precinct-22.json' },
   { id: 'bjorn-prospectors',   name: 'Bjorn "H.C.L.F" Prospectors Group', short: 'Bjorn H.C.L.F', house: 'Ironhead Squats',    color: '#e8822c', player: 'Maxgame107', rating: 1100, roster: 'data/rosters/bjorn-prospectors.json' },
   { id: 'resource-extraction', name: 'Resource Extraction LLC',           short: 'Resource Ext.', house: 'Ironhead Squats',    color: '#6f9c33', player: 'Almindor', rating: 1100, roster: 'data/rosters/resource-extraction.json' }
@@ -993,7 +993,26 @@ const xs = drawn.map((p) => p[0]), ys = drawn.map((p) => p[1]);
     { id: 'l1-income-resource-extraction', cycle: 1, gang: 'resource-extraction', amount: 95,
       what: 'Cycle one income \u2014 65 off Holestead, the Scrap Shoals and the Brass Stair, and 30 for three reputation' },
     { id: 'l1-income-bjorn', cycle: 1, gang: 'bjorn-prospectors', amount: 55,
-      what: 'Cycle one income \u2014 45 off Grudgehold and the Cinder Yard, and 10 for the one reputation the company has to its name' }
+      what: 'Cycle one income \u2014 45 off Grudgehold and the Cinder Yard, and 10 for the one reputation the company has to its name' },
+
+    { id: 'l1-mycelium-reishi', cycle: 1, gang: 'mycelium', amount: -45,
+      what: 'Spent on Reishi, a Ghost hired out of the post-cycle with Medicate on the sheet \u2014 the Section came out of the Hollowbore and the Last Round without anybody who could stop a bleed' },
+
+    { id: 'l1-mycelium-respirators-out', cycle: 1, gang: 'mycelium',
+      gear: [{ item: 'Respirator', qty: -2, value: 15 }],
+      what: 'Both respirators off the Hollowbore dead taken out of the lockup and strapped on \u2014 one to Slippery Jack, one to Reishi, who are the two the Section cannot afford to lose to bad air' },
+
+    { id: 'l1-mycelium-power-sword', cycle: 1, gang: 'mycelium', amount: -40,
+      gear: [{ item: 'Power sword', qty: -1, value: 40 }],
+      what: 'A power sword bought at the trading post and handed straight to Fly Agaric \u2014 both of the Section\u2019s trading post slots for the cycle went on the one blade' },
+
+    { id: 'l1-mycelium-claws', cycle: 1, gang: 'mycelium', amount: -65,
+      gear: [{ item: 'Psychomantic claws', qty: -1, value: 65 }],
+      what: 'Psychomantic claws fitted to Death Cap \u2014 the Psy-Gheist went into the Last Round with a flamer and a stub gun and came out of it wanting something closer' },
+
+    { id: 'l1-mycelium-heavy-flamer', cycle: 1, gang: 'mycelium', amount: -95,
+      gear: [{ item: 'Heavy flamer', qty: -1, value: 95 }],
+      what: 'A heavy flamer for Galerina, and the last credit the Section had \u2014 the web gun it replaces went across to Reishi rather than back into the lockup' }
   ],
 
   /* What the Reach remembers a fighter for. Experience and takedowns
@@ -1058,12 +1077,14 @@ const xs = drawn.map((p) => p[0]), ys = drawn.map((p) => p[1]);
       action: 'Training', xp: 2,
       notes: 'Training is the only end-of-cycle action a beast can take. It took it.' },
     { id: 'e1-mycelium-destroying-angel', cycle: 1, gang: 'mycelium', fighter: 'Destroying Angel',
-      action: 'Trading post' },
+      action: 'Trading post',
+      notes: 'One of the Section\u2019s two slots at the post. Both of them went on the same thing: a power sword, which went to Fly Agaric rather than to the Nacht-Ghul who fetched it.' },
     { id: 'e1-mycelium-destroying-angel-advance', cycle: 1, gang: 'mycelium', fighter: 'Destroying Angel',
       action: 'Advance: Initiative +1',
       notes: 'Fifteen experience out of three games took the Nacht-Ghul to level ten, and what came back off the roll was speed. Initiative 5 to 6.' },
     { id: 'e1-mycelium-fly-agaric', cycle: 1, gang: 'mycelium', fighter: 'Fly Agaric',
-      action: 'Trading post' },
+      action: 'Trading post',
+      notes: 'The other slot, and the Phantom came back up with a power sword on the belt. Forty credits, and forty onto the rating.' },
     { id: 'e1-mycelium-puffball', cycle: 1, gang: 'mycelium', fighter: 'Puffball',
       action: 'Training', xp: 2 },
     { id: 'e1-mycelium-amanita', cycle: 1, gang: 'mycelium', fighter: 'Amanita',

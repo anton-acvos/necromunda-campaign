@@ -1,6 +1,6 @@
 {
   "gang": "mycelium",
-  "updated": "2026-11-20",
+  "updated": "2026-11-27",
   "note": "Hand-kept, off the player’s own sheet. The generator does not touch this file. The xp values are the N26 starting baselines — the sheet never carried them, so they were filled in from the archetype.",
   "fighters": [
     {
@@ -13,7 +13,7 @@
         "Fighter",
         "Wyrd"
       ],
-      "rating": 235,
+      "rating": 250,
       "stats": [
         "5\"",
         "3+",
@@ -64,7 +64,9 @@
       "rules": [
         "Master of Whispers"
       ],
-      "wargear": [],
+      "wargear": [
+        "Respirator"
+      ],
       "status": null,
       "xp": 61
     },
@@ -153,7 +155,7 @@
         "Prospect",
         "Wyrd"
       ],
-      "rating": 160,
+      "rating": 220,
       "stats": [
         "6\"",
         "5+",
@@ -184,14 +186,15 @@
           ]
         },
         {
-          "name": "Stub gun",
-          "sr": "6\"",
-          "lr": "12\"",
-          "str": "3",
-          "ap": "-",
+          "name": "Psychomantic claws",
+          "sr": "E",
+          "lr": "-",
+          "str": "S+1",
+          "ap": "-3",
           "l": "1",
           "traits": [
-            "Light"
+            "Melee",
+            "Paired (2)"
           ]
         }
       ],
@@ -369,7 +372,7 @@
         "Fighter",
         "Wyrd"
       ],
-      "rating": 210,
+      "rating": 225,
       "stats": [
         "5\"",
         "3+",
@@ -414,15 +417,16 @@
           ]
         },
         {
-          "name": "Stiletto knife",
+          "name": "Power sword",
           "sr": "E",
           "lr": "-",
-          "str": "-",
-          "ap": "-",
+          "str": "S",
+          "ap": "-2",
           "l": "1",
           "traits": [
             "Melee",
-            "Toxin (3+)"
+            "Parry",
+            "Breaching (6+)"
           ]
         }
       ],
@@ -445,7 +449,7 @@
       "keywords": [
         "Prospect"
       ],
-      "rating": 105,
+      "rating": 125,
       "stats": [
         "6\"",
         "5+",
@@ -474,6 +478,77 @@
           ]
         },
         {
+          "name": "Heavy flamer",
+          "sr": "T",
+          "lr": "-",
+          "str": "5",
+          "ap": "-2",
+          "l": "1",
+          "traits": [
+            "Ammo (6+)",
+            "Blaze (5+)",
+            "Template"
+          ]
+        }
+      ],
+      "skills": [
+        "Overwatch"
+      ],
+      "rules": [],
+      "wargear": [],
+      "status": null,
+      "xp": 1
+    },
+    {
+      "id": 9,
+      "name": "Reishi",
+      "archetype": "Ghost",
+      "keywords": [
+        "Ganger",
+        "Specialist",
+        "Medic"
+      ],
+      "rating": 165,
+      "stats": [
+        "5\"",
+        "4+",
+        "4+",
+        "3",
+        "3",
+        "1",
+        "4",
+        "1",
+        "6+",
+        "6",
+        "6",
+        "7",
+        "6"
+      ],
+      "weapons": [
+        {
+          "name": "Stiletto knife",
+          "sr": "E",
+          "lr": "-",
+          "str": "-",
+          "ap": "-",
+          "l": "1",
+          "traits": [
+            "Melee",
+            "Toxin (3+)"
+          ]
+        },
+        {
+          "name": "Stub gun",
+          "sr": "6\"",
+          "lr": "12\"",
+          "str": "3",
+          "ap": "-",
+          "l": "1",
+          "traits": [
+            "Light"
+          ]
+        },
+        {
           "name": "Web gun",
           "sr": "T",
           "lr": "-",
@@ -488,12 +563,14 @@
         }
       ],
       "skills": [
-        "Overwatch"
+        "Medicate"
       ],
       "rules": [],
-      "wargear": [],
+      "wargear": [
+        "Respirator"
+      ],
       "status": null,
-      "xp": 1
+      "xp": 13
     }
   ]
 }
