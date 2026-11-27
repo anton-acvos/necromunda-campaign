@@ -1260,7 +1260,8 @@ body {
 
 /* Where a fighter stands on the experience ladder, printed next to the
    total it is worked out from. */
-.fighter-level {
+.fighter-level,
+.fighter-renown {
   font-family: var(--mono);
   font-size: 0.6rem;
   letter-spacing: 0.07em;
@@ -1271,6 +1272,13 @@ body {
   border-radius: 3px;
   padding: 1px 5px;
   cursor: help;
+}
+
+/* Renown is the one number on the card that was earned off somebody
+   else, so it is the one that gets the ink. */
+.fighter-renown {
+  color: var(--ink);
+  border-color: var(--line-bright);
 }
 
 .fighter-role {

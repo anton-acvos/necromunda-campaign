@@ -347,13 +347,24 @@ Renown is one number made of three:
 
 | worth | for |
 | --- | --- |
-| 1 | each experience point **the log** has paid them |
+| 1 | each experience point **the log** has paid them, bar the objective point |
 | 3 | each model they have put out of action |
 | 2 | each lasting injury they carry out of a game |
 | 5 | each honour the arbitrator has written down |
 
 Each row prints that working beside the total, so the board can be
-checked without reading any code.
+checked without reading any code, and the same number sits on the
+fighter's card in the **Gangs** tab with the same working on hover.
+One function works it out for both, so the two cannot drift apart.
+
+The point a model scores for standing on an objective is the one kind
+of experience that does not pay. The book gives it once per model per
+battle for being in the right square when a turn ends; it buys levels
+like any other point, but nobody did anything to the other gang to get
+it. Mark it with `objective: true` on the fighter's line in the battle
+record — it is part of that line's `xp`, not an addition to it — and
+the board takes it back out before working renown. A row that had one
+reads `3 XP of 4` in its working.
 
 A scar counts the lasting **injury**, not the knockdown: going out of
 action and getting up again is a bad afternoon, and the board does not pay

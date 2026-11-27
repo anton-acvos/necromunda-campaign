@@ -1444,11 +1444,57 @@
         (r.fighters || []).forEach(function (f) {
           if (f.fighter !== name) return;
           out.push({ battle: b, xp: f.xp || 0, xpFor: f.xpFor, note: f.note,
+                     takedowns: f.takedowns || 0, objective: !!f.objective,
                      outOfAction: f.outOfAction, injury: f.injury });
         });
       });
     });
     return out;
+  }
+
+  /* The four things renown is made of, for one fighter. The Heroes board
+     and the roster card both read this, so neither can drift away from
+     the other, and the weights live in RENOWN in one place. */
+  function renownParts(gangId, name) {
+    var p = { earned: 0, parked: 0, kills: 0, hurt: [], honours: [] };
+    logXpOf(gangId, name).forEach(function (g) {
+      p.earned += g.xp || 0;
+      if (g.objective) p.parked += 1;
+      p.kills += g.takedowns || 0;
+      if (g.injury) p.hurt.push(g.injury);
+    });
+    (state.data.honours || []).forEach(function (o) {
+      if (o.gang === gangId && o.fighter === name) p.honours.push(o);
+    });
+    p.fought = p.earned - p.parked;
+    return p;
+  }
+
+  function renownFrom(p) {
+    return p.fought * RENOWN.xp +
+           p.kills * RENOWN.takedown +
+           p.hurt.length * RENOWN.scar +
+           p.honours.length * RENOWN.honour;
+  }
+
+  /* The working, in words, for the chip's tooltip and the board's line. */
+  function renownWorking(p) {
+    var parts = [];
+    if (p.fought) {
+      parts.push(p.fought + ' XP' + (p.parked ? ' of ' + p.earned : ''));
+    }
+    if (p.kills) {
+      parts.push((p.kills * RENOWN.takedown) + ' for ' + p.kills + ' taken out');
+    }
+    if (p.hurt.length) {
+      parts.push((p.hurt.length * RENOWN.scar) + ' for ' + p.hurt.length +
+                 (p.hurt.length === 1 ? ' scar' : ' scars'));
+    }
+    if (p.honours.length) {
+      parts.push((p.honours.length * RENOWN.honour) + ' for ' + p.honours.length +
+                 (p.honours.length === 1 ? ' honour' : ' honours'));
+    }
+    return parts;
   }
 
   function takedownsOf(gang) {
@@ -1859,6 +1905,24 @@
         : 'The top of the ladder';
       head.appendChild(lvEl);
     }
+    /* Renown is the Heroes board's number, and it belongs here too: the
+       card is where somebody looks when they want to know what one
+       fighter has actually done. A fighter who has done nothing yet has
+       no chip rather than a nought. */
+    if (gang) {
+      var rp = renownParts(gang.id, f.name);
+      var ren = renownFrom(rp);
+      if (ren > 0) {
+        var renEl = h('span', 'fighter-renown', ren + ' renown');
+        renEl.title = renownWorking(rp).join(' + ') +
+                      (rp.parked
+                        ? '. The ' + (rp.parked === 1 ? 'point' : rp.parked + ' points') +
+                          ' for standing on an objective ' +
+                          (rp.parked === 1 ? 'does' : 'do') + ' not pay renown.'
+                        : '.');
+        head.appendChild(renEl);
+      }
+    }
     card.appendChild(head);
     card.appendChild(h('p', 'fighter-role', rosterLine(f)));
     if (f.status) card.appendChild(h('p', 'fighter-status', f.status));
@@ -2224,6 +2288,12 @@
      Prospect with one, and neither of them fought for that; ranking on
      the total would rank the roster rather than the campaign.
 
+     The point for standing on an objective comes back out again too.
+     The book pays it once per model per battle for being in the right
+     square when a turn ends, and it buys a level like any other point,
+     but nobody did anything to the other gang to get it. It stays in a
+     fighter's experience and out of their renown.
+
      The board needs every roster at once, which the Gangs tab only ever
      loads one at a time, so the first look fetches the missing ones and
      the cache is shared with the folds. */
@@ -2259,8 +2329,9 @@
     function rowFor(gangId, name) {
       var key = gangId + '|' + name;
       if (!by[key]) {
-        by[key] = { gang: gangOf(gangId), name: name, earned: 0, kills: 0,
-                    games: 0, down: 0, hurt: [], honours: [], best: null };
+        by[key] = { gang: gangOf(gangId), name: name, earned: 0, parked: 0,
+                    kills: 0, games: 0, down: 0, hurt: [], honours: [],
+                    best: null };
         order.push(key);
       }
       return by[key];
@@ -2271,6 +2342,8 @@
         (r.fighters || []).forEach(function (f) {
           var row = rowFor(r.gang, f.fighter);
           row.earned += f.xp || 0;
+          /* Stood on a crate: the point counts, the renown does not. */
+          if (f.objective) row.parked += 1;
           row.kills += f.takedowns || 0;
           row.games += 1;
           if (f.outOfAction) row.down += 1;
@@ -2304,10 +2377,8 @@
       row.trained = row.gang ? downtimeXpOf(row.gang.id, row.name) : 0;
       row.total = (sheet && sheet.xp != null ? sheet.xp : 0) +
                   row.earned + row.trained;
-      row.renown = row.earned * RENOWN.xp +
-                   row.kills * RENOWN.takedown +
-                   row.hurt.length * RENOWN.scar +
-                   row.honours.length * RENOWN.honour;
+      row.fought = row.earned - row.parked;
+      row.renown = renownFrom(row);
     });
 
     /* Most renown first. A tie goes to the one who took more models out,
@@ -2406,20 +2477,7 @@
 
       /* The working: each part is what it contributed and what for, so the
          total adds up on the page without anybody reading the code. */
-      var parts = [];
-      if (row.earned) parts.push(row.earned + ' XP');
-      if (row.kills) {
-        parts.push((row.kills * RENOWN.takedown) + ' for ' + row.kills + ' taken out');
-      }
-      if (row.hurt.length) {
-        parts.push((row.hurt.length * RENOWN.scar) + ' for ' + row.hurt.length +
-                   (row.hurt.length === 1 ? ' scar' : ' scars'));
-      }
-      if (row.honours.length) {
-        parts.push((row.honours.length * RENOWN.honour) + ' for ' + row.honours.length +
-                   (row.honours.length === 1 ? ' honour' : ' honours'));
-      }
-      score.appendChild(h('span', 'hero-sum', parts.join(' + ')));
+      score.appendChild(h('span', 'hero-sum', renownWorking(row).join(' + ')));
       if (row.start != null) {
         score.appendChild(h('span', 'hero-total', row.total + ' XP all told'));
       }
@@ -2436,8 +2494,10 @@
       RENOWN.honour + ' per honour the arbitrator has written down. ' +
       'Experience is counted from the log only \u2014 a Leader starts with ' +
       'sixty of it and a Prospect with one, and neither of them fought ' +
-      'for that. Ties go to the one who took more models out, then to ' +
-      'whoever did it in fewer games.'));
+      'for that, and nor did anybody fight for the point they get for ' +
+      'standing on an objective, which comes back out as well. Ties go ' +
+      'to the one who took more models out, then to whoever did it in ' +
+      'fewer games.'));
   }
 
   /* ---------- tabs ---------- */

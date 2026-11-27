@@ -2731,6 +2731,13 @@
       "gang": "bjorn-prospectors",
       "amount": -30,
       "what": "Paid to a doc at the end of the cycle for Sven Silverhorn, who came out of the Hollowbore critically injured and would not have seen the next cycle without it"
+    },
+    {
+      "id": "l1-bjorn-territory-work",
+      "cycle": 1,
+      "gang": "bjorn-prospectors",
+      "amount": 30,
+      "what": "Worked out of the company ground at the end of the cycle — Kadri Cromson and Alaric Drenger at fifteen credits a head"
     }
   ],
   "honours": [
@@ -2893,6 +2900,31 @@
       "fighter": "Sven Silverhorn",
       "action": "Full recovery",
       "notes": "Carried out of the Hollowbore critically injured and carried to a doc by Okri Goldhands. Came back off the slab with nothing lasting on the sheet at all."
+    },
+    {
+      "id": "e1-bjorn-bowling-ball",
+      "cycle": 1,
+      "gang": "bjorn-prospectors",
+      "fighter": "The Iron Bowling Ball",
+      "action": "Training",
+      "xp": 2,
+      "notes": "The only Prospector who came out of both games standing, and the only one with nothing else to do with the downtime. Two points, and a level out of them."
+    },
+    {
+      "id": "e1-bjorn-kadri",
+      "cycle": 1,
+      "gang": "bjorn-prospectors",
+      "fighter": "Kadri Cromson",
+      "action": "Working a territory",
+      "notes": "Up out of the dark from the Blind Magazine and straight onto the company ground. Fifteen credits for the cycle and no experience in it, which is the trade."
+    },
+    {
+      "id": "e1-bjorn-alaric",
+      "cycle": 1,
+      "gang": "bjorn-prospectors",
+      "fighter": "Alaric Drenger",
+      "action": "Working a territory",
+      "notes": "One game and one point of experience to the Digger’s name, and a cycle spent earning rather than learning. Fifteen credits for it."
     }
   ],
   "battles": [
@@ -3172,12 +3204,14 @@
             {
               "fighter": "Skorgen \"Fixer\" Plasen",
               "xp": 2,
+              "objective": true,
               "xpFor": "Standing on an objective, and the point for turning up"
             },
             {
               "fighter": "Krell \"Crackles\" Rache",
               "xp": 5,
               "takedowns": 1,
+              "objective": true,
               "xpFor": "Three for putting the leader out of action, one for an objective, one for turning up"
             },
             {
@@ -3189,6 +3223,7 @@
             {
               "fighter": "Skarper \"Gofer\" Raleski",
               "xp": 2,
+              "objective": true,
               "xpFor": "Standing on an objective, and the point for turning up"
             },
             {
@@ -3209,6 +3244,7 @@
             {
               "fighter": "Slippery Jack",
               "xp": 2,
+              "objective": true,
               "xpFor": "An objective, and the point for turning up",
               "outOfAction": true,
               "injury": "Enfeebled (-1 Toughness)"
@@ -3229,6 +3265,7 @@
             {
               "fighter": "Galerina",
               "xp": 2,
+              "objective": true,
               "xpFor": "An objective, and the point for turning up"
             },
             {
@@ -3286,12 +3323,14 @@
             {
               "fighter": "Alric",
               "xp": 2,
+              "objective": true,
               "xpFor": "Turning up, and standing on an objective"
             },
             {
               "fighter": "Bob",
               "xp": 5,
               "takedowns": 1,
+              "objective": true,
               "xpFor": "Turning up, one for an objective, and three for putting their Drill Master out of action"
             }
           ]
@@ -3362,18 +3401,21 @@
               "fighter": "Fly Agaric",
               "xp": 9,
               "takedowns": 2,
+              "objective": true,
               "xpFor": "Turning up, one for an objective, two for killing a ganger, two for seriously injuring the leader and three more for finishing the leader"
             },
             {
               "fighter": "Destroying Angel",
               "xp": 4,
               "takedowns": 1,
+              "objective": true,
               "xpFor": "Turning up, one for an objective, and two for killing a ganger"
             },
             {
               "fighter": "Amanita",
               "xp": 4,
               "takedowns": 1,
+              "objective": true,
               "xpFor": "Turning up, one for an objective, and two for killing a ganger"
             },
             {
@@ -3406,6 +3448,7 @@
             {
               "fighter": "Carmine",
               "xp": 2,
+              "objective": true,
               "xpFor": "Turning up, and an objective",
               "outOfAction": true,
               "note": "Went down and got back up twice before the third one stuck, and spent both poisons doing it. Into recovery, with nothing lasting."
@@ -3413,6 +3456,7 @@
             {
               "fighter": "Marie",
               "xp": 2,
+              "objective": true,
               "xpFor": "Turning up, and an objective",
               "note": "Burned a Blood Stimm."
             },

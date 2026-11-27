@@ -980,7 +980,9 @@ const xs = drawn.map((p) => p[0]), ys = drawn.map((p) => p[1]);
       what: 'Taken from Resource Extraction LLC after the Blind Magazine \u2014 restitution for a fight neither company meant to start' },
 
     { id: 'l1-bjorn-sven-doc', cycle: 1, gang: 'bjorn-prospectors', amount: -30,
-      what: 'Paid to a doc at the end of the cycle for Sven Silverhorn, who came out of the Hollowbore critically injured and would not have seen the next cycle without it' }
+      what: 'Paid to a doc at the end of the cycle for Sven Silverhorn, who came out of the Hollowbore critically injured and would not have seen the next cycle without it' },
+    { id: 'l1-bjorn-territory-work', cycle: 1, gang: 'bjorn-prospectors', amount: 30,
+      what: 'Worked out of the company ground at the end of the cycle \u2014 Kadri Cromson and Alaric Drenger at fifteen credits a head' }
   ],
 
   /* What the Reach remembers a fighter for. Experience and takedowns
@@ -1073,7 +1075,16 @@ const xs = drawn.map((p) => p[0]), ys = drawn.map((p) => p[1]);
       notes: 'The company champion spent the whole of the downtime carrying the medic to somebody who could do for them what they do for everybody else. Thirty credits out of the stash, and the Hollowbore finally stops costing Bjorn H.C.L.F anything.' },
     { id: 'e1-bjorn-sven-recovery', cycle: 1, gang: 'bjorn-prospectors', fighter: 'Sven Silverhorn',
       action: 'Full recovery',
-      notes: 'Carried out of the Hollowbore critically injured and carried to a doc by Okri Goldhands. Came back off the slab with nothing lasting on the sheet at all.' }
+      notes: 'Carried out of the Hollowbore critically injured and carried to a doc by Okri Goldhands. Came back off the slab with nothing lasting on the sheet at all.' },
+    { id: 'e1-bjorn-bowling-ball', cycle: 1, gang: 'bjorn-prospectors', fighter: 'The Iron Bowling Ball',
+      action: 'Training', xp: 2,
+      notes: 'The only Prospector who came out of both games standing, and the only one with nothing else to do with the downtime. Two points, and a level out of them.' },
+    { id: 'e1-bjorn-kadri', cycle: 1, gang: 'bjorn-prospectors', fighter: 'Kadri Cromson',
+      action: 'Working a territory',
+      notes: 'Up out of the dark from the Blind Magazine and straight onto the company ground. Fifteen credits for the cycle and no experience in it, which is the trade.' },
+    { id: 'e1-bjorn-alaric', cycle: 1, gang: 'bjorn-prospectors', fighter: 'Alaric Drenger',
+      action: 'Working a territory',
+      notes: 'One game and one point of experience to the Digger\u2019s name, and a cycle spent earning rather than learning. Fifteen credits for it.' }
   ],
 
   /* The log. Each battle carries one reward entry per gang that turned up,
@@ -1108,6 +1119,13 @@ const xs = drawn.map((p) => p[0]), ys = drawn.map((p) => p[1]);
        takedowns    models of the other side this fighter put out of
                     action, which is where a kill rate comes from
        xpFor        what the experience was for, in words
+       objective    true if one of those points was for standing on an
+                    objective at the end of a turn. It is still part of
+                    xp \u2014 it buys levels like any other point \u2014 but the
+                    Heroes board takes it back out before working renown,
+                    because a model that stood on a crate did nothing to
+                    the other gang to earn it. The book pays it once per
+                    model per battle, so it is a flag and not a count
        outOfAction  true if they went out of action
        injury       a lasting condition off the injury table, and only
                     that: something that is still on the sheet next
@@ -1244,23 +1262,23 @@ const xs = drawn.map((p) => p[0]), ys = drawn.map((p) => p[1]);
         { gang: 'archeo-3', primary: 20, sidejob: 20, credits: 15, rep: 2, xp: 14, takedowns: 3, outOfAction: 0, gear: [{ piece: 'servo-arc-claw' }],
           notes: 'The fifteen came with the discovery, along with the point of reputation for lighting the stack.',
           fighters: [
-            { fighter: 'Skorgen "Fixer" Plasen', xp: 2, xpFor: 'Standing on an objective, and the point for turning up' },
-            { fighter: 'Krell "Crackles" Rache', xp: 5, takedowns: 1, xpFor: 'Three for putting the leader out of action, one for an objective, one for turning up' },
+            { fighter: 'Skorgen "Fixer" Plasen', xp: 2, objective: true, xpFor: 'Standing on an objective, and the point for turning up' },
+            { fighter: 'Krell "Crackles" Rache', xp: 5, takedowns: 1, objective: true, xpFor: 'Three for putting the leader out of action, one for an objective, one for turning up' },
             { fighter: 'Spydr 17', xp: 4, takedowns: 1,
               xpFor: 'Three for putting Destroying Angel out of action, one for turning up' },
-            { fighter: 'Skarper "Gofer" Raleski', xp: 2, xpFor: 'Standing on an objective, and the point for turning up' },
+            { fighter: 'Skarper "Gofer" Raleski', xp: 2, objective: true, xpFor: 'Standing on an objective, and the point for turning up' },
             { fighter: 'Kirsche "Deathwish" Pashkel', xp: 1, xpFor: 'Turning up',
               note: 'Ran out of ammunition while missing exclusively.' }
           ] },
         { gang: 'mycelium', primary: 10, xp: 7, takedowns: 0, outOfAction: 3,
           fighters: [
-            { fighter: 'Slippery Jack', xp: 2, xpFor: 'An objective, and the point for turning up',
+            { fighter: 'Slippery Jack', xp: 2, objective: true, xpFor: 'An objective, and the point for turning up',
               outOfAction: true, injury: 'Enfeebled (-1 Toughness)' },
             { fighter: 'Destroying Angel', xp: 1, xpFor: 'Turning up',
               outOfAction: true, note: 'Out cold, and came up with nothing lasting.' },
             { fighter: 'Amanita', xp: 1, xpFor: 'Turning up',
               note: 'Bottled out. No lasting injuries.' },
-            { fighter: 'Galerina', xp: 2, xpFor: 'An objective, and the point for turning up' },
+            { fighter: 'Galerina', xp: 2, objective: true, xpFor: 'An objective, and the point for turning up' },
             { fighter: 'Puffball', xp: 1, xpFor: 'Turning up' }
           ] }
       ],
@@ -1285,8 +1303,8 @@ const xs = drawn.map((p) => p[0]), ys = drawn.map((p) => p[1]);
               xpFor: 'Turning up, and two for putting one of their Drill-Kyn out of action' },
             { fighter: 'Helga',  xp: 2, xpFor: 'Turning up, and one for seriously injuring one of their gangers' },
             { fighter: 'Daedra', xp: 2, xpFor: 'Turning up, and one for seriously injuring one of their gangers' },
-            { fighter: 'Alric',  xp: 2, xpFor: 'Turning up, and standing on an objective' },
-            { fighter: 'Bob',    xp: 5, takedowns: 1,
+            { fighter: 'Alric',  xp: 2, objective: true, xpFor: 'Turning up, and standing on an objective' },
+            { fighter: 'Bob',    xp: 5, takedowns: 1, objective: true,
               xpFor: 'Turning up, one for an objective, and three for putting their Drill Master out of action' }
           ] },
         /* Bjorn's side came in second-hand and was filled out afterwards from
@@ -1322,11 +1340,11 @@ const xs = drawn.map((p) => p[0]), ys = drawn.map((p) => p[1]);
         { gang: 'mycelium', primary: 40, sidejob: 20, credits: 15, rep: 1, xp: 20, takedowns: 4, outOfAction: 0,
           notes: 'The fifteen came with putting a drinking hole on the map. Nothing else came up: Mycelium Section were out of the tunnels before anybody searched them, so the archeotech, if there is any, is still down there.',
           fighters: [
-            { fighter: 'Fly Agaric',       xp: 9, takedowns: 2,
+            { fighter: 'Fly Agaric',       xp: 9, takedowns: 2, objective: true,
               xpFor: 'Turning up, one for an objective, two for killing a ganger, two for seriously injuring the leader and three more for finishing the leader' },
-            { fighter: 'Destroying Angel', xp: 4, takedowns: 1,
+            { fighter: 'Destroying Angel', xp: 4, takedowns: 1, objective: true,
               xpFor: 'Turning up, one for an objective, and two for killing a ganger' },
-            { fighter: 'Amanita',          xp: 4, takedowns: 1,
+            { fighter: 'Amanita',          xp: 4, takedowns: 1, objective: true,
               xpFor: 'Turning up, one for an objective, and two for killing a ganger' },
             { fighter: 'Death Cap',        xp: 1, xpFor: 'Turning up' },
             { fighter: 'Puffball',         xp: 1, xpFor: 'Turning up' },
@@ -1338,10 +1356,10 @@ const xs = drawn.map((p) => p[0]), ys = drawn.map((p) => p[1]);
         { gang: 'chymist-cult', primary: 30, sidejob: 0, credits: 0, xp: 7, takedowns: 0, outOfAction: 4,
           notes: 'Thirty credits for the loss, nothing for the side job and nothing for the ground. The Chem Mother emptied both poisons and two of the Wytches burned a Blood Stimm each getting the crew out.',
           fighters: [
-            { fighter: 'Carmine',    xp: 2, xpFor: 'Turning up, and an objective',
+            { fighter: 'Carmine',    xp: 2, objective: true, xpFor: 'Turning up, and an objective',
               outOfAction: true,
               note: 'Went down and got back up twice before the third one stuck, and spent both poisons doing it. Into recovery, with nothing lasting.' },
-            { fighter: 'Marie',      xp: 2, xpFor: 'Turning up, and an objective',
+            { fighter: 'Marie',      xp: 2, objective: true, xpFor: 'Turning up, and an objective',
               note: 'Burned a Blood Stimm.' },
             { fighter: 'Curie',      xp: 1, xpFor: 'Turning up',
               note: 'Burned a Blood Stimm.' },

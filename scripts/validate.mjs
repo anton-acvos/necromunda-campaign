@@ -538,6 +538,14 @@ function checkRecord(at, b, r) {
     if (f.outOfAction != null && typeof f.outOfAction !== 'boolean') {
       err(`${fat}.outOfAction: true or false — a count belongs on the gang's record`);
     }
+    /* The book pays an objective once per model per battle, so there is
+       nothing a number could say that true does not. */
+    if (f.objective != null && f.objective !== true) {
+      err(`${fat}.objective: true, or leave it off — it is paid once a battle`);
+    }
+    if (f.objective && !(f.xp > 0)) {
+      err(`${fat}.objective: scored an objective but no experience for it`);
+    }
     if (b.played === false && (f.xp || f.outOfAction)) {
       err(`${fat}: "${b.id}" was never played, so nobody did anything in it`);
     }
