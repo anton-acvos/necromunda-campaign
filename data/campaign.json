@@ -2738,6 +2738,27 @@
       "gang": "bjorn-prospectors",
       "amount": 30,
       "what": "Worked out of the company ground at the end of the cycle — Kadri Cromson and Alaric Drenger at fifteen credits a head"
+    },
+    {
+      "id": "l1-income-mycelium",
+      "cycle": 1,
+      "gang": "mycelium",
+      "amount": 80,
+      "what": "Cycle one income — 50 off the Sunken Nave and the Ratgut Tunnels, and 30 for three reputation the Reach is paying them for"
+    },
+    {
+      "id": "l1-income-resource-extraction",
+      "cycle": 1,
+      "gang": "resource-extraction",
+      "amount": 95,
+      "what": "Cycle one income — 65 off Holestead, the Scrap Shoals and the Brass Stair, and 30 for three reputation"
+    },
+    {
+      "id": "l1-income-bjorn",
+      "cycle": 1,
+      "gang": "bjorn-prospectors",
+      "amount": 55,
+      "what": "Cycle one income — 45 off Grudgehold and the Cinder Yard, and 10 for the one reputation the company has to its name"
     }
   ],
   "honours": [

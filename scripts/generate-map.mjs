@@ -982,7 +982,18 @@ const xs = drawn.map((p) => p[0]), ys = drawn.map((p) => p[1]);
     { id: 'l1-bjorn-sven-doc', cycle: 1, gang: 'bjorn-prospectors', amount: -30,
       what: 'Paid to a doc at the end of the cycle for Sven Silverhorn, who came out of the Hollowbore critically injured and would not have seen the next cycle without it' },
     { id: 'l1-bjorn-territory-work', cycle: 1, gang: 'bjorn-prospectors', amount: 30,
-      what: 'Worked out of the company ground at the end of the cycle \u2014 Kadri Cromson and Alaric Drenger at fifteen credits a head' }
+      what: 'Worked out of the company ground at the end of the cycle \u2014 Kadri Cromson and Alaric Drenger at fifteen credits a head' },
+
+    /* The cycle's income, collected. The Income figure on a gang is a
+       rate worked out from the ground they hold and the standing they
+       have; a gang banks it once a cycle and that is one of these. A
+       gang that has not collected yet has no line. */
+    { id: 'l1-income-mycelium', cycle: 1, gang: 'mycelium', amount: 80,
+      what: 'Cycle one income \u2014 50 off the Sunken Nave and the Ratgut Tunnels, and 30 for three reputation the Reach is paying them for' },
+    { id: 'l1-income-resource-extraction', cycle: 1, gang: 'resource-extraction', amount: 95,
+      what: 'Cycle one income \u2014 65 off Holestead, the Scrap Shoals and the Brass Stair, and 30 for three reputation' },
+    { id: 'l1-income-bjorn', cycle: 1, gang: 'bjorn-prospectors', amount: 55,
+      what: 'Cycle one income \u2014 45 off Grudgehold and the Cinder Yard, and 10 for the one reputation the company has to its name' }
   ],
 
   /* What the Reach remembers a fighter for. Experience and takedowns
