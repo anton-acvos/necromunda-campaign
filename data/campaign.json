@@ -284,7 +284,7 @@
       "roster": "data/rosters/precinct-22.json"
     },
     {
-      "rating": 1100,
+      "rating": 1110,
       "motto": "",
       "id": "bjorn-prospectors",
       "name": "Bjorn \"H.C.L.F\" Prospectors Group",
@@ -2994,6 +2994,14 @@
       "action": "Training",
       "xp": 2,
       "notes": "The only Prospector who came out of both games standing, and the only one with nothing else to do with the downtime. Two points, and a level out of them."
+    },
+    {
+      "id": "e1-bjorn-bowling-ball-advance",
+      "cycle": 1,
+      "gang": "bjorn-prospectors",
+      "fighter": "The Iron Bowling Ball",
+      "action": "Advance: Rain of Blows",
+      "notes": "The level the training bought, and what came back off the roll was not a characteristic but a habit. The Exo-Driller already had the arms for it; now it swings twice as often. Ten credits on the rating."
     },
     {
       "id": "e1-bjorn-kadri",

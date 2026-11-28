@@ -803,7 +803,7 @@ const gangs = [
   { id: 'archeo-3',            name: 'Archeo-Acquisitions Team 3',        short: 'Archeo-3',      house: 'House Van Saar',     color: '#35a9c0', player: 'Gawarges', rating: 1095, roster: 'data/rosters/archeo-3.json' },
   { id: 'mycelium',            name: 'Mycelium Section',                  short: 'Mycelium',      house: 'House Delaque',      color: '#7d9683', player: 'Anton', rating: 1425, logo: 'assets/gangs/mycelium.svg', roster: 'data/rosters/mycelium.json' },
   { id: 'precinct-22',         name: 'Precinct 22',                       short: 'Precinct 22',   house: 'Palanite Enforcers', color: '#e8c23a', rating: 1100, roster: 'data/rosters/precinct-22.json' },
-  { id: 'bjorn-prospectors',   name: 'Bjorn "H.C.L.F" Prospectors Group', short: 'Bjorn H.C.L.F', house: 'Ironhead Squats',    color: '#e8822c', player: 'Maxgame107', rating: 1100, roster: 'data/rosters/bjorn-prospectors.json' },
+  { id: 'bjorn-prospectors',   name: 'Bjorn "H.C.L.F" Prospectors Group', short: 'Bjorn H.C.L.F', house: 'Ironhead Squats',    color: '#e8822c', player: 'Maxgame107', rating: 1110, roster: 'data/rosters/bjorn-prospectors.json' },
   { id: 'resource-extraction', name: 'Resource Extraction LLC',           short: 'Resource Ext.', house: 'Ironhead Squats',    color: '#6f9c33', player: 'Almindor', rating: 1100, roster: 'data/rosters/resource-extraction.json' }
 ].map((g) => ({ rating: 1100, motto: '', ...g }));
 
@@ -1111,6 +1111,9 @@ const xs = drawn.map((p) => p[0]), ys = drawn.map((p) => p[1]);
     { id: 'e1-bjorn-bowling-ball', cycle: 1, gang: 'bjorn-prospectors', fighter: 'The Iron Bowling Ball',
       action: 'Training', xp: 2,
       notes: 'The only Prospector who came out of both games standing, and the only one with nothing else to do with the downtime. Two points, and a level out of them.' },
+    { id: 'e1-bjorn-bowling-ball-advance', cycle: 1, gang: 'bjorn-prospectors', fighter: 'The Iron Bowling Ball',
+      action: 'Advance: Rain of Blows',
+      notes: 'The level the training bought, and what came back off the roll was not a characteristic but a habit. The Exo-Driller already had the arms for it; now it swings twice as often. Ten credits on the rating.' },
     { id: 'e1-bjorn-kadri', cycle: 1, gang: 'bjorn-prospectors', fighter: 'Kadri Cromson',
       action: 'Working a territory',
       notes: 'Up out of the dark from the Blind Magazine and straight onto the company ground. Fifteen credits for the cycle and no experience in it, which is the trade.' },

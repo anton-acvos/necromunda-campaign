@@ -1,6 +1,6 @@
 {
   "gang": "bjorn-prospectors",
-  "updated": "2026-10-17",
+  "updated": "2026-11-27",
   "note": "Hand-kept, off the player's own sheet. The generator does not touch this file.",
   "fighters": [
     {
@@ -10,7 +10,7 @@
       "keywords": [
         "Brute"
       ],
-      "rating": 280,
+      "rating": 290,
       "xp": 25,
       "stats": [
         "4\"",
@@ -72,7 +72,8 @@
       ],
       "skills": [
         "Bulging Biceps",
-        "Juggernaut"
+        "Juggernaut",
+        "Rain of Blows"
       ],
       "rules": [
         "Sensor Suite"
