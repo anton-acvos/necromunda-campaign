@@ -1030,8 +1030,8 @@ const xs = drawn.map((p) => p[0]), ys = drawn.map((p) => p[1]);
       gear: [{ item: 'Heavy flamer', qty: -1, value: 95 }],
       what: 'A heavy flamer for Galerina, and the last credit the Section had \u2014 the web gun it replaces went across to Reishi rather than back into the lockup' },
 
-    { id: 'l1-chymist-territory-work', cycle: 1, gang: 'chymist-cult', amount: 60,
-      what: 'Worked out of the Cult\u2019s ground at the end of the cycle \u2014 Jean, Curie, Kizzmekia and Claire at fifteen credits a head, across Quarantine\u2019s End and the Still Rows' },
+    { id: 'l1-chymist-territory-work', cycle: 1, gang: 'chymist-cult', amount: 45,
+      what: 'Worked out of the Cult\u2019s ground at the end of the cycle \u2014 Curie, Kizzmekia and Claire at fifteen credits a head. Jean would have been the fourth and spent the downtime doing surgery instead' },
 
     /* Two of the three holdings paid in kind rather than in credits, so
        the cycle's income is 50 against a rate of 85. The rest of it is on
@@ -1163,8 +1163,8 @@ const xs = drawn.map((p) => p[0]), ys = drawn.map((p) => p[1]);
        Last Round and spent the whole downtime in recovery, which is not
        something they did. */
     { id: 'e1-chymist-jean', cycle: 1, gang: 'chymist-cult', fighter: 'Jean',
-      action: 'Working a territory',
-      notes: 'Out of the Rendering with a hand that no longer closes and straight onto the Cult\u2019s own ground. Fifteen credits, and no experience in them.' },
+      action: 'Totally Legal Zombification: Rosalyn',
+      notes: 'The Clan Chymist is the only one in the Cult who could do it, so the whole downtime went on the table rather than on the ground \u2014 with a hand that no longer closes properly, out of the Rendering. Fifteen credits the Cult did not earn, and a Death Maiden they did.' },
     { id: 'e1-chymist-curie', cycle: 1, gang: 'chymist-cult', fighter: 'Curie',
       action: 'Working a territory' },
     { id: 'e1-chymist-kizzmekia', cycle: 1, gang: 'chymist-cult', fighter: 'Kizzmekia',
@@ -1177,7 +1177,7 @@ const xs = drawn.map((p) => p[0]), ys = drawn.map((p) => p[1]);
       notes: 'The only Escher who spent the cycle learning instead of earning, and the two points were exactly what the Chem Wytch needed: twenty-three to twenty-five, and a level out of it.' },
     { id: 'e1-chymist-rosalyn', cycle: 1, gang: 'chymist-cult', fighter: 'Rosalyn',
       action: 'Died, and raised as a Death Maiden',
-      notes: 'Carried out of the Last Round with a critical injury and nobody got them to a doctor in time. House Escher does not always let that be the end of it: what the Cult brought back out of the downtime is a Death Maiden, and the sheet is not the one they had.' },
+      notes: 'Carried out of the Last Round with a critical injury and nobody got them to a doctor in time. House Escher does not always let that be the end of it: what the Cult brought back out of the downtime is a Death Maiden, and the sheet is not the one they had. Jean did the work.' },
 
     /* Rolled, not yet spent. A nine, a ten, a six and a four each open
        more than one door, and none of these four players has picked one. */

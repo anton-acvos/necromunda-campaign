@@ -2819,8 +2819,8 @@
       "id": "l1-chymist-territory-work",
       "cycle": 1,
       "gang": "chymist-cult",
-      "amount": 60,
-      "what": "Worked out of the Cult’s ground at the end of the cycle — Jean, Curie, Kizzmekia and Claire at fifteen credits a head, across Quarantine’s End and the Still Rows"
+      "amount": 45,
+      "what": "Worked out of the Cult’s ground at the end of the cycle — Curie, Kizzmekia and Claire at fifteen credits a head. Jean would have been the fourth and spent the downtime doing surgery instead"
     },
     {
       "id": "l1-income-chymist",
@@ -3057,8 +3057,8 @@
       "cycle": 1,
       "gang": "chymist-cult",
       "fighter": "Jean",
-      "action": "Working a territory",
-      "notes": "Out of the Rendering with a hand that no longer closes and straight onto the Cult’s own ground. Fifteen credits, and no experience in them."
+      "action": "Totally Legal Zombification: Rosalyn",
+      "notes": "The Clan Chymist is the only one in the Cult who could do it, so the whole downtime went on the table rather than on the ground — with a hand that no longer closes properly, out of the Rendering. Fifteen credits the Cult did not earn, and a Death Maiden they did."
     },
     {
       "id": "e1-chymist-curie",
@@ -3097,7 +3097,7 @@
       "gang": "chymist-cult",
       "fighter": "Rosalyn",
       "action": "Died, and raised as a Death Maiden",
-      "notes": "Carried out of the Last Round with a critical injury and nobody got them to a doctor in time. House Escher does not always let that be the end of it: what the Cult brought back out of the downtime is a Death Maiden, and the sheet is not the one they had."
+      "notes": "Carried out of the Last Round with a critical injury and nobody got them to a doctor in time. House Escher does not always let that be the end of it: what the Cult brought back out of the downtime is a Death Maiden, and the sheet is not the one they had. Jean did the work."
     },
     {
       "id": "e1-chymist-marie-roll",
