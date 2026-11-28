@@ -2571,23 +2571,13 @@
       "effect": "Blessed Augmetic Surgery (Double) — choose a friendly Seriously Injured fighter within 1\". That fighter is no longer Seriously Injured and regains 1 lost Wound."
     },
     {
-      "id": "uncreator-gauntlet",
+      "id": "witchseed",
       "roll": 2,
-      "name": "The Uncreator Gauntlet",
-      "kind": "Weapon",
+      "name": "The Witchseed",
+      "kind": "Implant",
       "holder": null,
       "value": 140,
-      "profile": {
-        "range": "E",
-        "str": "S+1",
-        "ap": "2",
-        "lethality": 2,
-        "traits": [
-          "Unwieldy",
-          "Damage(2)"
-        ]
-      },
-      "effect": "On a hit, one weapon or piece of wargear carried by the target is destroyed outright, chosen by the bearer. The gauntlet does not break things so much as decline to let them have been made."
+      "effect": "Fitted to one fighter, once, and never taken back out. That fighter gains the Wyrd keyword and Wyrd powers as a secondary skill set, and may take powers out of it as advances like any other skill. Nothing is added to them. Something that was always in there is simply no longer shut."
     },
     {
       "id": "archaeotoaster",

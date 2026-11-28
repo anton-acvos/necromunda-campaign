@@ -932,9 +932,8 @@ const xs = drawn.map((p) => p[0]), ys = drawn.map((p) => p[1]);
       profile: { range: 'E', str: 'S', lethality: 1, traits: ['Unwieldy', 'Rending(6+)'] },
       effect: 'Blessed Augmetic Surgery (Double) \u2014 choose a friendly Seriously Injured fighter within 1". That fighter is no longer Seriously Injured and regains 1 lost Wound.' },
 
-    { id: 'uncreator-gauntlet', roll: 2, name: 'The Uncreator Gauntlet', kind: 'Weapon', holder: null, value: 140,
-      profile: { range: 'E', str: 'S+1', ap: '2', lethality: 2, traits: ['Unwieldy', 'Damage(2)'] },
-      effect: 'On a hit, one weapon or piece of wargear carried by the target is destroyed outright, chosen by the bearer. The gauntlet does not break things so much as decline to let them have been made.' },
+    { id: 'witchseed', roll: 2, name: 'The Witchseed', kind: 'Implant', holder: null, value: 140,
+      effect: 'Fitted to one fighter, once, and never taken back out. That fighter gains the Wyrd keyword and Wyrd powers as a secondary skill set, and may take powers out of it as advances like any other skill. Nothing is added to them. Something that was always in there is simply no longer shut.' },
 
     { id: 'archaeotoaster', roll: 7, name: 'Archaeotoaster', kind: 'Curio', holder: null, value: 125,
       effect: 'A genuine bread-toasting machine out of the Dark Age of Technology. It does nothing of any value, and everybody wants one. Gain +1 reputation.' }
