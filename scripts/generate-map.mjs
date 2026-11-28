@@ -815,7 +815,7 @@ const gateways = [
 
 const gangs = [
   { id: 'sumptown',            name: 'Sumptown Industries',               short: 'Sumptown',      house: 'House Goliath',      color: '#e03131', player: 'C0dy', rating: 1075, roster: 'data/rosters/sumptown.json' },
-  { id: 'chymist-cult',        name: "'Sola Dosis' Chymist Cult",         short: 'Sola Dosis',    house: 'House Escher',       color: '#9d7ad4', logo: 'assets/gangs/chymist-cult.webp', player: 'AmaraTheSilent', rating: 1190, roster: 'data/rosters/chymist-cult.json' },
+  { id: 'chymist-cult',        name: "'Sola Dosis' Chymist Cult",         short: 'Sola Dosis',    house: 'House Escher',       color: '#9d7ad4', logo: 'assets/gangs/chymist-cult.webp', player: 'AmaraTheSilent', rating: 1250, roster: 'data/rosters/chymist-cult.json' },
   { id: 'archeo-3',            name: 'Archeo-Acquisitions Team 3',        short: 'Archeo-3',      house: 'House Van Saar',     color: '#35a9c0', player: 'Gawarges', rating: 1035, roster: 'data/rosters/archeo-3.json' },
   { id: 'mycelium',            name: 'Mycelium Section',                  short: 'Mycelium',      house: 'House Delaque',      color: '#7d9683', player: 'Anton', rating: 1425, logo: 'assets/gangs/mycelium.svg', roster: 'data/rosters/mycelium.json' },
   { id: 'precinct-22',         name: 'Precinct 22',                       short: 'Precinct 22',   house: 'Palanite Enforcers', color: '#e8c23a', rating: 1100, roster: 'data/rosters/precinct-22.json' },
@@ -1029,7 +1029,23 @@ const xs = drawn.map((p) => p[0]), ys = drawn.map((p) => p[1]);
 
     { id: 'l1-mycelium-heavy-flamer', cycle: 1, gang: 'mycelium', amount: -95,
       gear: [{ item: 'Heavy flamer', qty: -1, value: 95 }],
-      what: 'A heavy flamer for Galerina, and the last credit the Section had \u2014 the web gun it replaces went across to Reishi rather than back into the lockup' }
+      what: 'A heavy flamer for Galerina, and the last credit the Section had \u2014 the web gun it replaces went across to Reishi rather than back into the lockup' },
+
+    { id: 'l1-chymist-territory-work', cycle: 1, gang: 'chymist-cult', amount: 60,
+      what: 'Worked out of the Cult\u2019s ground at the end of the cycle \u2014 Jean, Curie, Kizzmekia and Claire at fifteen credits a head, across Quarantine\u2019s End and the Still Rows' },
+
+    /* Two of the three holdings paid in kind rather than in credits, so
+       the cycle's income is 50 against a rate of 85. The rest of it is on
+       the two lines below it. */
+    { id: 'l1-income-chymist', cycle: 1, gang: 'chymist-cult', amount: 50,
+      what: 'Cycle one income \u2014 20 off Quarantine\u2019s End, which is 15 on the card and 5 for sitting next to the rest of the block, and 30 for three reputation. The Bonepipe and the Still Rows were both taken as their boon instead of their money' },
+    { id: 'l1-chymist-lasguns', cycle: 1, gang: 'chymist-cult',
+      gear: [{ item: 'Lasgun', qty: 2 }],
+      what: 'Two lasguns out of the Still Rows, which is what a Rogue Las Factoria pays an Escher gang that would rather have guns than twenty credits' },
+    { id: 'l1-chymist-bonepipe', cycle: 1, gang: 'chymist-cult', amount: -60,
+      what: 'Dr. The Bonepipe recruited \u2014 ninety credits of Rogue Doc less the thirty the Bonepipe itself knocks off, which is the whole reason the Cult took the discount over the money' },
+    { id: 'l1-chymist-rosalyn', cycle: 1, gang: 'chymist-cult', amount: -60,
+      what: 'Totally Legal Zombification \u2014 sixty credits spent turning Rosalyn, who died of the Last Round, into a Death Maiden' }
   ],
 
   /* What the Reach remembers a fighter for. Experience and takedowns
@@ -1077,6 +1093,12 @@ const xs = drawn.map((p) => p[0]), ys = drawn.map((p) => p[1]);
        action   what they did, in the words the table uses
        xp       experience the action paid, if it paid any
        notes    anything worth reading back
+
+     A level is spent by rolling on the advancement table, and a roll can
+     pay for several different things. When the dice have been read and
+     the player has not chosen yet, the roll goes down by itself as
+     "Advancement roll: N" and the advance follows later as its own
+     entry. Nothing is owed to the sheet until then.
 
      The experience counts towards what a fighter is worth and therefore
      towards their level, the same as a battle. It does NOT count towards
@@ -1136,7 +1158,45 @@ const xs = drawn.map((p) => p[0]), ys = drawn.map((p) => p[1]);
       notes: 'Up out of the dark from the Blind Magazine and straight onto the company ground. Fifteen credits for the cycle and no experience in it, which is the trade.' },
     { id: 'e1-bjorn-alaric', cycle: 1, gang: 'bjorn-prospectors', fighter: 'Alaric Drenger',
       action: 'Working a territory',
-      notes: 'One game and one point of experience to the Digger\u2019s name, and a cycle spent earning rather than learning. Fifteen credits for it.' }
+      notes: 'One game and one point of experience to the Digger\u2019s name, and a cycle spent earning rather than learning. Fifteen credits for it.' },
+
+    /* Carmine has no entry. The Chem Mother went down three times in the
+       Last Round and spent the whole downtime in recovery, which is not
+       something they did. */
+    { id: 'e1-chymist-jean', cycle: 1, gang: 'chymist-cult', fighter: 'Jean',
+      action: 'Working a territory',
+      notes: 'Out of the Rendering with a hand that no longer closes and straight onto the Cult\u2019s own ground. Fifteen credits, and no experience in them.' },
+    { id: 'e1-chymist-curie', cycle: 1, gang: 'chymist-cult', fighter: 'Curie',
+      action: 'Working a territory' },
+    { id: 'e1-chymist-kizzmekia', cycle: 1, gang: 'chymist-cult', fighter: 'Kizzmekia',
+      action: 'Working a territory',
+      notes: 'Two of Sumptown out of action in the Rendering and then a cycle on the ground for fifteen credits. The Blade Maiden hit the level in the game and spent the downtime earning.' },
+    { id: 'e1-chymist-claire', cycle: 1, gang: 'chymist-cult', fighter: 'Claire',
+      action: 'Working a territory' },
+    { id: 'e1-chymist-marie', cycle: 1, gang: 'chymist-cult', fighter: 'Marie',
+      action: 'Training', xp: 2,
+      notes: 'The only Escher who spent the cycle learning instead of earning, and the two points were exactly what the Chem Wytch needed: twenty-three to twenty-five, and a level out of it.' },
+    { id: 'e1-chymist-rosalyn', cycle: 1, gang: 'chymist-cult', fighter: 'Rosalyn',
+      action: 'Died, and raised as a Death Maiden',
+      notes: 'Carried out of the Last Round with a critical injury and nobody got them to a doctor in time. House Escher does not always let that be the end of it: what the Cult brought back out of the downtime is a Death Maiden, and the sheet is not the one they had.' },
+
+    /* Rolled, not yet spent. A nine, a ten, a six and a four each open
+       more than one door, and none of these four players has picked one. */
+    { id: 'e1-chymist-marie-roll', cycle: 1, gang: 'chymist-cult', fighter: 'Marie',
+      action: 'Advancement roll: 9',
+      notes: 'The level the training bought, and a nine on the table for it. The Cult have not said what the Chem Wytch is taking.' },
+    { id: 'e1-chymist-kizzmekia-roll', cycle: 1, gang: 'chymist-cult', fighter: 'Kizzmekia',
+      action: 'Advancement roll: 9',
+      notes: 'The same number as Marie off the same table, for the level earned the hard way in the Rendering. Also unspent.' },
+    { id: 'e1-archeo-spydr-roll', cycle: 1, gang: 'archeo-3', fighter: 'Spydr 17',
+      action: 'Advancement roll: 6',
+      notes: 'Twenty-nine experience to thirty-two in the Writ Room, which is level eight for the Arachni-Rig, and a six to spend on it.' },
+    { id: 'e1-precinct-azazel-roll', cycle: 1, gang: 'precinct-22', fighter: 'Azazel the Unbroken',
+      action: 'Advancement roll: 10',
+      notes: 'One point for turning up in the Writ Room was all it took, and the best roll of the five came off it.' },
+    { id: 'e1-precinct-jamie-roll', cycle: 1, gang: 'precinct-22', fighter: 'Jamie Burton',
+      action: 'Advancement roll: 4',
+      notes: 'Three experience to five, which is level two for the rookie who planted the evidence at Rustfall Row. A four to spend.' }
   ],
 
   /* The log. Each battle carries one reward entry per gang that turned up,
