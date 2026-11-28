@@ -675,6 +675,14 @@ const territories = outerSeeds.map((s) => {
    any other. "owner" fills in when somebody holds it. Keyed by designation;
    everything not listed here is still a shape with nothing known about it. */
 const WALKED = {
+  'I-03': {
+    name: 'The Writ Room',
+    type: 'Bounty Den',
+    owner: null,
+    income: 25,
+    notes: 'A room at the end of the Theta Run with the writs still nailed to the walls: bounties posted by somebody long gone, on people who are mostly dead, in hands nobody can read any more. Precinct 22 filed on it off their own Pit Market and Archeo-Acquisitions Team 3 came up out of Relumen to meet them. The Enforcers lost the room and left a man in it. Nobody holds the ground.'
+  },
+
   'I-04': {
     name: 'Relumen',
     type: 'Generatorium',
@@ -683,6 +691,14 @@ const WALKED = {
     standing: '+1 Reputation',
     rep: 1,
     notes: 'A generatorium that had been dark long enough for the dust to settle in drifts. Archeo-Acquisitions Team 3 found the fault, cleared it, and the stack came back up on its own governors. It has been lit ever since, and nobody holds it.'
+  },
+
+  'I-05': {
+    name: 'The Rendering',
+    type: 'Corpse Farm',
+    owner: null,
+    income: 25,
+    notes: 'A corpse farm two walls in from the Blind Magazine, still running on whatever the Deadfall feeds it: racks, vats, and a nutrient line going somewhere nobody has followed yet. Sumptown Industries filed on ground they do not touch and the Chymist Cult went down to meet them. The Escher held the floor. Nobody holds the ground.'
   },
 
   'I-06': {
@@ -800,7 +816,7 @@ const gateways = [
 const gangs = [
   { id: 'sumptown',            name: 'Sumptown Industries',               short: 'Sumptown',      house: 'House Goliath',      color: '#e03131', player: 'C0dy', rating: 1075, roster: 'data/rosters/sumptown.json' },
   { id: 'chymist-cult',        name: "'Sola Dosis' Chymist Cult",         short: 'Sola Dosis',    house: 'House Escher',       color: '#9d7ad4', logo: 'assets/gangs/chymist-cult.webp', player: 'AmaraTheSilent', rating: 1190, roster: 'data/rosters/chymist-cult.json' },
-  { id: 'archeo-3',            name: 'Archeo-Acquisitions Team 3',        short: 'Archeo-3',      house: 'House Van Saar',     color: '#35a9c0', player: 'Gawarges', rating: 1095, roster: 'data/rosters/archeo-3.json' },
+  { id: 'archeo-3',            name: 'Archeo-Acquisitions Team 3',        short: 'Archeo-3',      house: 'House Van Saar',     color: '#35a9c0', player: 'Gawarges', rating: 1035, roster: 'data/rosters/archeo-3.json' },
   { id: 'mycelium',            name: 'Mycelium Section',                  short: 'Mycelium',      house: 'House Delaque',      color: '#7d9683', player: 'Anton', rating: 1425, logo: 'assets/gangs/mycelium.svg', roster: 'data/rosters/mycelium.json' },
   { id: 'precinct-22',         name: 'Precinct 22',                       short: 'Precinct 22',   house: 'Palanite Enforcers', color: '#e8c23a', rating: 1100, roster: 'data/rosters/precinct-22.json' },
   { id: 'bjorn-prospectors',   name: 'Bjorn "H.C.L.F" Prospectors Group', short: 'Bjorn H.C.L.F', house: 'Ironhead Squats',    color: '#e8822c', player: 'Maxgame107', rating: 1110, roster: 'data/rosters/bjorn-prospectors.json' },
@@ -939,14 +955,15 @@ const xs = drawn.map((p) => p[0]), ys = drawn.map((p) => p[1]);
       notes: 'The two prospecting outfits hold ground that touches at Holestead, and the tunnel they both filed on runs under it. Resource Extraction LLC were already down there, with a survey crew and a prior claim they are happy to read aloud.' },
     { id: 'c1-sumptown-yard', cycle: 1, kind: 'challenge',  challenger: 'sumptown',          territory: 'harvest-yard', defender: 'chymist-cult', status: 'settled', battle: 'b2-harvest-yard' },
     { id: 'c1-archeo-deep',  cycle: 1, kind: 'expedition', challenger: 'archeo-3',          target: 'i-04',         defender: 'mycelium', status: 'settled', battle: 'b6-relumen' },
-    { id: 'c1-precinct-deep', cycle: 1, kind: 'expedition', challenger: 'precinct-22',      target: 'i-03',         defender: 'archeo-3', status: 'open' },
+    { id: 'c1-precinct-deep', cycle: 1, kind: 'expedition', challenger: 'precinct-22',      target: 'i-03',         defender: 'archeo-3', status: 'settled', battle: 'b9-writ-room',
+      notes: 'I-03 is one wall off the Pit Market, which is Precinct 22\u2019s own ground, and one wall off Relumen, which Archeo-Acquisitions Team 3 lit earlier in the cycle. Both gangs had a reason to be in the same tunnel and the campaign put them in it.' },
     { id: 'c1-mycelium-deep', cycle: 1, kind: 'expedition', challenger: 'mycelium',         target: 'i-07',         defender: 'bjorn-prospectors', status: 'settled', battle: 'b4-hollowbore' },
     { id: 'c1-chymist-deep', cycle: 1, kind: 'expedition', challenger: 'chymist-cult',     target: 'i-17',         defender: 'mycelium', status: 'settled', battle: 'b8-last-round',
       notes: 'The Chymist Cult filed on I-17 off the back of what came out of the Hollowbore: it sits one wall over from the workings Mycelium Section charted, and whatever is breathable down there is of professional interest. Mycelium Section charted that wall, so Mycelium Section are the ones going back down to meet them.' },
     { id: 'c1-resource-stair', cycle: 1, kind: 'challenge',  challenger: 'resource-extraction', territory: 'brass-stair', defender: 'chymist-cult', status: 'settled', battle: 'b3-brass-stair' },
     { id: 'c1-precinct-rustfall', cycle: 1, kind: 'challenge', challenger: 'precinct-22', territory: 'rustfall-row', defender: 'sumptown', status: 'settled', battle: 'b5-rustfall-row',
       notes: 'A second call from Precinct 22 this cycle, which is one more than the rules allow. Two concessions left half the Reach with nothing to do, so the arbitrator let it stand.' },
-    { id: 'c1-sumptown-deep', cycle: 1, kind: 'expedition', challenger: 'sumptown', target: 'i-05', defender: 'chymist-cult', status: 'open',
+    { id: 'c1-sumptown-deep', cycle: 1, kind: 'expedition', challenger: 'sumptown', target: 'i-05', defender: 'chymist-cult', status: 'settled', battle: 'b10-rendering',
       notes: 'Sumptown filed on the deep the cycle they lost Rustfall Row to the Enforcers. Ground nobody holds costs nothing to call for, and Sumptown would rather walk a tunnel than knock on the same door twice. The Chymist Cult go down against them, which points the same two gangs at each other for the second time this cycle: the first was the Harvest Yard, and the Chymists stood down rather than hold the gate.' }
   ],
 
@@ -1406,7 +1423,76 @@ const xs = drawn.map((p) => p[0]), ys = drawn.map((p) => p[1]);
               note: 'Came out of the drinking hole hating the Delaque by name, which is now a permanent fixture of the sheet.' }
           ] }
       ],
-      summary: 'The Chymist Cult went down the Deadfall after the air and Mycelium Section were waiting one wall over from the seam they charted last time. What was down there was a drinking hole, still stocked, and the Delaque held the room: four Escher went out of action and Mycelium Section lost nobody. The leader was seriously injured and then finished by the same hand. Fly Agaric did most of it and came back up worth nine experience. Nobody searched the place: the Delaque were out of the tunnels before the idea came up, so whatever archeotech is in there is still in there. Forty for the mission, twenty for the side job, fifteen for the discovery, and the ground stays unheld. The Chymist Cult took thirty for the loss and very little else: Rosalyn will not survive the week without a doctor, and Kizzmekia came back up hating Mycelium Section specifically and permanently.' }
+      summary: 'The Chymist Cult went down the Deadfall after the air and Mycelium Section were waiting one wall over from the seam they charted last time. What was down there was a drinking hole, still stocked, and the Delaque held the room: four Escher went out of action and Mycelium Section lost nobody. The leader was seriously injured and then finished by the same hand. Fly Agaric did most of it and came back up worth nine experience. Nobody searched the place: the Delaque were out of the tunnels before the idea came up, so whatever archeotech is in there is still in there. Forty for the mission, twenty for the side job, fifteen for the discovery, and the ground stays unheld. The Chymist Cult took thirty for the loss and very little else: Rosalyn will not survive the week without a doctor, and Kizzmekia came back up hating Mycelium Section specifically and permanently.' },
+
+    { id: 'b9-writ-room',
+      cycle: 1,
+      scenario: 'Expedition',
+      territory: 'i-03',
+      participants: ['archeo-3', 'precinct-22'],
+      winner: 'archeo-3',
+      played: true,
+      rewards: [
+        { gang: 'archeo-3', primary: 50, sidejob: 20, credits: 25, rep: 1, xp: 11, takedowns: 0, outOfAction: 1,
+          notes: 'The twenty-five came with putting a Bounty Den on the map, and the point of reputation with holding the room. The team searched the place for archeotech and came up with nothing: if there is any in the Writ Room it is still there.',
+          fighters: [
+            { fighter: 'Skorgen "Fixer" Plasen', xp: 3, objective: true,
+              xpFor: 'Turning up, standing on an objective, and one for getting somebody back on their feet' },
+            { fighter: 'Krell "Crackles" Rache', xp: 2, objective: true,
+              xpFor: 'Turning up, and standing on an objective',
+              note: 'Precinct Captain Uriel planted a quantity of illicit substance on them, which is the second time this cycle Precinct 22 have left evidence on somebody rather than settle for shooting them.' },
+            { fighter: 'Spydr 17', xp: 3, objective: true,
+              xpFor: 'Turning up, standing on an objective, and one for seriously injuring an Enforcer' },
+            { fighter: '0 (Reil Volen)', xp: 2, objective: true,
+              xpFor: 'Turning up, and standing on an objective' },
+            { fighter: 'Skarper "Gofer" Raleski', xp: 1, xpFor: 'Turning up',
+              outOfAction: true,
+              note: 'Took a Palanite shield through the head from Sergeant Marvin Heemeyer and did not get back up. The first fighter the Reach has buried, and off the Archeo-3 sheet \u2014 sixty credits of Tek and a las carbine with it.' }
+          ] },
+        { gang: 'precinct-22', primary: 30, sidejob: 10, xp: 10, takedowns: 1, outOfAction: 0,
+          notes: 'Thirty credits for the fight and ten for the side job. Nobody on the precinct roster came up with anything lasting, and they go back on duty with a Van Saar champion on the books as carrying.',
+          fighters: [
+            { fighter: 'Precinct Captain Uriel', xp: 3, objective: true,
+              xpFor: 'Turning up, standing on an objective, and one for seriously injuring one of theirs',
+              note: 'Put Krell "Crackles" Rache down and planted a quantity of illicit substance on them before moving on. Jamie Burton did the same thing to Sumptown four games ago; this time it was the Captain personally.' },
+            { fighter: 'Sergeant Marvin Heemeyer', xp: 3, takedowns: 1,
+              xpFor: 'Turning up, and two for killing Skarper "Gofer" Raleski',
+              note: 'Shield first, and the Van Saar Tek behind it did not survive the swing. The first kill of the campaign that stayed a kill.' },
+            { fighter: 'Cave Johnson', xp: 1, xpFor: 'Turning up' },
+            { fighter: 'Azazel the Unbroken', xp: 1, xpFor: 'Turning up' },
+            { fighter: 'Jamie Burton', xp: 2, objective: true,
+              xpFor: 'Turning up, and standing on an objective' }
+          ] }
+      ],
+      summary: 'Precinct 22 filed on the deep off the back of the Pit Market and walked the Theta Run into a room full of standing writs \u2014 a Bounty Den, nailed up and unclaimed. Archeo-Acquisitions Team 3 came up out of Relumen to hold it and did. Four of the Van Saar stood on objectives and the fifth died: Sergeant Marvin Heemeyer put a shield through Skarper \u201cGofer\u201d Raleski\u2019s head, which is the first death of the campaign and sixty credits off the Archeo-3 rating. Precinct Captain Uriel put Krell \u201cCrackles\u201d Rache down and planted a quantity of illicit substance on them, which is the second time in a cycle the Enforcers have walked away with paperwork instead of a body. Fifty for the mission, twenty for the side job and twenty-five for the find; no archeotech, and the ground stays unheld.' },
+
+    { id: 'b10-rendering',
+      cycle: 1,
+      scenario: 'Expedition',
+      territory: 'i-05',
+      participants: ['chymist-cult', 'sumptown'],
+      winner: 'chymist-cult',
+      played: true,
+      rewards: [
+        { gang: 'chymist-cult', primary: 20, sidejob: 20, credits: 20, rep: 1, xp: 10, takedowns: 2, outOfAction: 1,
+          notes: 'The last twenty came off the find itself: a working corpse farm, which pays whoever is standing in it. Carmine was still in recovery from the Last Round and Rosalyn was still waiting on a doc, so the Cult went down a leader and a ganger short and won anyway.',
+          fighters: [
+            { fighter: 'Jean', xp: 1, xpFor: 'Turning up',
+              outOfAction: true, injury: 'Hand Injury (-1 Attacks)',
+              note: 'The only Escher to go down, and the only one to come up with something lasting. The hand does not close the way it did.' },
+            { fighter: 'Marie', xp: 2,
+              xpFor: 'Turning up, and one for getting somebody back on their feet' },
+            { fighter: 'Curie', xp: 1, xpFor: 'Turning up' },
+            { fighter: 'Kizzmekia', xp: 5, takedowns: 2,
+              xpFor: 'Turning up, and two apiece for putting two of Sumptown out of action',
+              note: 'Took a charge from a Goliath, was not wounded by it, and answered with a serious wound on the counter. Two out of action by the end of it, and a level with them.' },
+            { fighter: 'Claire', xp: 1, xpFor: 'Turning up' }
+          ] }
+        /* Sumptown Industries have not sent their side of this one in yet:
+           no credits, no crew list and no injuries, so they carry no record
+           here rather than a record of zeroes. */
+      ],
+      summary: 'Sumptown Industries called for ground they do not touch and the Chymist Cult walked down to hold it. What was down there was a corpse farm, still running. The Cult went in without Carmine, who was in recovery, and without Rosalyn, who was waiting on a doctor, and still only lost one fighter: Jean went out of action and came up with a hand that no longer closes properly. Kizzmekia did most of the work \u2014 took a Goliath charge without taking a wound, answered it with a serious one, and put two of Sumptown out of action before the end. Twenty for the mission, twenty for the side job, twenty off the farm, and a point of reputation. The ground stays unheld.' }
   ]
 };
 

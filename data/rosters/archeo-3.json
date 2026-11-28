@@ -1,16 +1,32 @@
 {
   "gang": "archeo-3",
-  "updated": "2026-11-21",
+  "updated": "2026-11-27",
   "note": "Hand-kept, off the player's own sheet. The generator does not touch this file.",
   "fighters": [
     {
       "id": 1,
       "name": "Skorgen \"Fixer\" Plasen",
       "archetype": "Prime",
-      "keywords": ["Leader"],
+      "keywords": [
+        "Leader"
+      ],
       "rating": 255,
       "xp": 61,
-      "stats": ["4\"", "3+", "3+", "3", "3", "3", "3", "2", "5+", "8", "8", "7", "9"],
+      "stats": [
+        "4\"",
+        "3+",
+        "3+",
+        "3",
+        "3",
+        "3",
+        "3",
+        "2",
+        "5+",
+        "8",
+        "8",
+        "7",
+        "9"
+      ],
       "weapons": [
         {
           "name": "'Hystrar' pattern energy shield",
@@ -19,7 +35,12 @@
           "str": "S",
           "ap": "-",
           "l": "1",
-          "traits": ["Knockback (5+)", "Melee", "Parry", "Shield"]
+          "traits": [
+            "Knockback (5+)",
+            "Melee",
+            "Parry",
+            "Shield"
+          ]
         },
         {
           "name": "Las sub-carbine",
@@ -28,7 +49,10 @@
           "str": "3",
           "ap": "-1",
           "l": "1",
-          "traits": ["Light", "Rapid Fire (1)"]
+          "traits": [
+            "Light",
+            "Rapid Fire (1)"
+          ]
         },
         {
           "name": "Plasma gun (Infra-sight)",
@@ -37,22 +61,49 @@
           "str": "5",
           "ap": "-2",
           "l": "2",
-          "traits": ["Ammo (6+)", "Damage (2)", "Rapid Fire (1)", "Unstable"]
+          "traits": [
+            "Ammo (6+)",
+            "Damage (2)",
+            "Rapid Fire (1)",
+            "Unstable"
+          ]
         }
       ],
-      "skills": ["Hip-shooting", "Inspiring"],
+      "skills": [
+        "Hip-shooting",
+        "Inspiring"
+      ],
       "rules": [],
-      "wargear": ["Infra-sight"],
+      "wargear": [
+        "Infra-sight"
+      ],
       "status": null
     },
     {
       "id": 2,
       "name": "Krell \"Crackles\" Rache",
       "archetype": "Archeotek",
-      "keywords": ["Champion", "Loner"],
+      "keywords": [
+        "Champion",
+        "Loner"
+      ],
       "rating": 270,
       "xp": 49,
-      "stats": ["4\"", "4+", "3+", "3", "3", "2", "2", "1", "4+", "7", "8", "6", "8"],
+      "stats": [
+        "4\"",
+        "4+",
+        "3+",
+        "3",
+        "3",
+        "2",
+        "2",
+        "1",
+        "4+",
+        "7",
+        "8",
+        "6",
+        "8"
+      ],
       "weapons": [
         {
           "name": "'Hystrar' pattern energy shield",
@@ -61,7 +112,12 @@
           "str": "S",
           "ap": "-",
           "l": "1",
-          "traits": ["Knockback (5+)", "Melee", "Parry", "Shield"]
+          "traits": [
+            "Knockback (5+)",
+            "Melee",
+            "Parry",
+            "Shield"
+          ]
         },
         {
           "name": "Combi-laspistol (Infra-sight) — laspistol",
@@ -70,7 +126,10 @@
           "str": "3",
           "ap": "-",
           "l": "1",
-          "traits": ["Combi", "Light"]
+          "traits": [
+            "Combi",
+            "Light"
+          ]
         },
         {
           "name": "Combi-laspistol (Infra-sight) — meltagun",
@@ -79,46 +138,49 @@
           "str": "8",
           "ap": "-4",
           "l": "3",
-          "traits": ["Ammo (6+)", "Combi", "Damage (3)"]
+          "traits": [
+            "Ammo (6+)",
+            "Combi",
+            "Damage (3)"
+          ]
         }
       ],
-      "skills": ["Hip-shooting", "Inspiring"],
-      "rules": [],
-      "wargear": ["Infra-sight"],
-      "status": null
-    },
-    {
-      "id": 3,
-      "name": "Skarper \"Gofer\" Raleski",
-      "archetype": "Tek",
-      "keywords": ["Ganger", "Specialist", "Tech"],
-      "rating": 60,
-      "xp": 13,
-      "stats": ["4\"", "4+", "4+", "3", "3", "1", "2", "1", "6+", "6", "6", "5", "7"],
-      "weapons": [
-        {
-          "name": "Las carbine (Infra-sight)",
-          "sr": "10\"",
-          "lr": "24\"",
-          "str": "3",
-          "ap": "-1",
-          "l": "1",
-          "traits": ["Rapid Fire (1)"]
-        }
+      "skills": [
+        "Hip-shooting",
+        "Inspiring"
       ],
-      "skills": ["Munitioneer"],
       "rules": [],
-      "wargear": ["Infra-sight"],
+      "wargear": [
+        "Infra-sight"
+      ],
       "status": null
     },
     {
       "id": 4,
       "name": "Olro \"Needles\" Reval (aka HELP ME)",
       "archetype": "Tek",
-      "keywords": ["Ganger", "Specialist", "Medic"],
+      "keywords": [
+        "Ganger",
+        "Specialist",
+        "Medic"
+      ],
       "rating": 80,
       "xp": 13,
-      "stats": ["4\"", "4+", "4+", "3", "3", "1", "2", "1", "6+", "6", "6", "5", "7"],
+      "stats": [
+        "4\"",
+        "4+",
+        "4+",
+        "3",
+        "3",
+        "1",
+        "2",
+        "1",
+        "6+",
+        "6",
+        "6",
+        "5",
+        "7"
+      ],
       "weapons": [
         {
           "name": "Las carbine",
@@ -127,22 +189,46 @@
           "str": "3",
           "ap": "-1",
           "l": "1",
-          "traits": ["Rapid Fire (1)"]
+          "traits": [
+            "Rapid Fire (1)"
+          ]
         }
       ],
-      "skills": ["Medicate"],
+      "skills": [
+        "Medicate"
+      ],
       "rules": [],
-      "wargear": ["Servo-medicae"],
+      "wargear": [
+        "Servo-medicae"
+      ],
       "status": null
     },
     {
       "id": 5,
       "name": "Kirsche \"Deathwish\" Pashkel",
       "archetype": "Tek",
-      "keywords": ["Ganger", "Specialist", "Gunslinger"],
+      "keywords": [
+        "Ganger",
+        "Specialist",
+        "Gunslinger"
+      ],
       "rating": 50,
       "xp": 13,
-      "stats": ["4\"", "4+", "4+", "3", "3", "1", "2", "1", "6+", "6", "6", "5", "7"],
+      "stats": [
+        "4\"",
+        "4+",
+        "4+",
+        "3",
+        "3",
+        "1",
+        "2",
+        "1",
+        "6+",
+        "6",
+        "6",
+        "5",
+        "7"
+      ],
       "weapons": [
         {
           "name": "Las sub-carbine (x2)",
@@ -151,10 +237,15 @@
           "str": "3",
           "ap": "-1",
           "l": "1",
-          "traits": ["Light", "Rapid Fire (1)"]
+          "traits": [
+            "Light",
+            "Rapid Fire (1)"
+          ]
         }
       ],
-      "skills": ["Gunfighter"],
+      "skills": [
+        "Gunfighter"
+      ],
       "rules": [],
       "wargear": [],
       "status": null
@@ -163,10 +254,29 @@
       "id": 6,
       "name": "Spydr 17",
       "archetype": "Ash Wastes 'Arachni-Rig'",
-      "keywords": ["Hybrid", "Loner", "Skimmer", "Walker"],
+      "keywords": [
+        "Hybrid",
+        "Loner",
+        "Skimmer",
+        "Walker"
+      ],
       "rating": 350,
       "xp": 25,
-      "stats": ["5\"", "4+", "4+", "5", "4", "4", "3", "3", "4+", "7", "7", "6", "7"],
+      "stats": [
+        "5\"",
+        "4+",
+        "4+",
+        "5",
+        "4",
+        "4",
+        "3",
+        "3",
+        "4+",
+        "7",
+        "7",
+        "6",
+        "7"
+      ],
       "weapons": [
         {
           "name": "Plasma gun (Rig)",
@@ -175,7 +285,12 @@
           "str": "5",
           "ap": "-2",
           "l": "2",
-          "traits": ["Ammo (5+)", "Damage (2)", "Rapid Fire (1)", "Unstable"]
+          "traits": [
+            "Ammo (5+)",
+            "Damage (2)",
+            "Rapid Fire (1)",
+            "Unstable"
+          ]
         },
         {
           "name": "Servo-arm array",
@@ -184,7 +299,10 @@
           "str": "S",
           "ap": "-",
           "l": "1",
-          "traits": ["Melee", "Paired (2)"]
+          "traits": [
+            "Melee",
+            "Paired (2)"
+          ]
         },
         {
           "name": "Twin-linked heavy las carbine",
@@ -193,10 +311,15 @@
           "str": "4",
           "ap": "-1",
           "l": "1",
-          "traits": ["Rapid Fire (3)", "Twin-linked"]
+          "traits": [
+            "Rapid Fire (3)",
+            "Twin-linked"
+          ]
         }
       ],
-      "skills": ["Juggernaut"],
+      "skills": [
+        "Juggernaut"
+      ],
       "rules": [],
       "wargear": [],
       "status": null
@@ -205,10 +328,26 @@
       "id": 7,
       "name": "0 (Reil Volen)",
       "archetype": "Subtek",
-      "keywords": ["Prospect"],
+      "keywords": [
+        "Prospect"
+      ],
       "rating": 30,
       "xp": 1,
-      "stats": ["5\"", "5+", "5+", "3", "3", "1", "3", "1", "6+", "5", "5", "4", "6"],
+      "stats": [
+        "5\"",
+        "5+",
+        "5+",
+        "3",
+        "3",
+        "1",
+        "3",
+        "1",
+        "6+",
+        "5",
+        "5",
+        "4",
+        "6"
+      ],
       "weapons": [
         {
           "name": "Las sub-carbine",
@@ -217,7 +356,10 @@
           "str": "3",
           "ap": "-1",
           "l": "1",
-          "traits": ["Light", "Rapid Fire (1)"]
+          "traits": [
+            "Light",
+            "Rapid Fire (1)"
+          ]
         }
       ],
       "skills": [],
