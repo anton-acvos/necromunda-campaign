@@ -274,7 +274,7 @@
       "roster": "data/rosters/mycelium.json"
     },
     {
-      "rating": 1100,
+      "rating": 1115,
       "motto": "",
       "id": "precinct-22",
       "name": "Precinct 22",
@@ -3138,6 +3138,22 @@
       "fighter": "Jamie Burton",
       "action": "Advancement roll: 4",
       "notes": "Three experience to five, which is level two for the rookie who planted the evidence at Rustfall Row. A four to spend."
+    },
+    {
+      "id": "e1-precinct-jamie-advance",
+      "cycle": 1,
+      "gang": "precinct-22",
+      "fighter": "Jamie Burton",
+      "action": "Advance: Marksman",
+      "notes": "The four bought a primary skill, and the first thing on an otherwise empty sheet is the one that makes the shot. Ten credits on the cost: forty-five to fifty-five."
+    },
+    {
+      "id": "e1-precinct-azazel-advance",
+      "cycle": 1,
+      "gang": "precinct-22",
+      "fighter": "Azazel the Unbroken",
+      "action": "Advance: Willpower +1",
+      "notes": "Willpower 7 to 8, which for a Sanctioned Wyrd is the characteristic the whole sheet runs on. Five credits on the cost: fifty-five to sixty."
     }
   ],
   "battles": [

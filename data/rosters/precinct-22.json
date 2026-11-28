@@ -1,16 +1,32 @@
 {
   "gang": "precinct-22",
-  "updated": "2026-11-22",
+  "updated": "2026-11-27",
   "note": "Hand-kept, off the player's own sheet. The generator does not touch this file.",
   "fighters": [
     {
       "id": 1,
       "name": "Precinct Captain Uriel",
       "archetype": "Captain",
-      "keywords": ["Leader"],
+      "keywords": [
+        "Leader"
+      ],
       "rating": 285,
       "xp": 81,
-      "stats": ["5\"", "3+", "3+", "3", "3", "3", "4", "3", "5+", "9", "7", "8", "7"],
+      "stats": [
+        "5\"",
+        "3+",
+        "3+",
+        "3",
+        "3",
+        "3",
+        "4",
+        "3",
+        "5+",
+        "9",
+        "7",
+        "8",
+        "7"
+      ],
       "weapons": [
         {
           "name": "Boltgun",
@@ -19,7 +35,10 @@
           "str": "4",
           "ap": "-1",
           "l": "2",
-          "traits": ["Ammo (3+)", "Rapid Fire (1)"]
+          "traits": [
+            "Ammo (3+)",
+            "Rapid Fire (1)"
+          ]
         },
         {
           "name": "Power sword",
@@ -28,22 +47,51 @@
           "str": "S",
           "ap": "-2",
           "l": "1",
-          "traits": ["Breaching (6+)", "Melee", "Parry"]
+          "traits": [
+            "Breaching (6+)",
+            "Melee",
+            "Parry"
+          ]
         }
       ],
-      "skills": ["Inspiring", "Marksman"],
-      "rules": ["Call for Backup"],
-      "wargear": ["Photo-goggles", "Refractor field", "Stimm-slug stash"],
+      "skills": [
+        "Inspiring",
+        "Marksman"
+      ],
+      "rules": [
+        "Call for Backup"
+      ],
+      "wargear": [
+        "Photo-goggles",
+        "Refractor field",
+        "Stimm-slug stash"
+      ],
       "status": null
     },
     {
       "id": 2,
       "name": "Sergeant Marvin Heemeyer",
       "archetype": "Subjugator Sergeant",
-      "keywords": ["Champion"],
+      "keywords": [
+        "Champion"
+      ],
       "rating": 195,
       "xp": 37,
-      "stats": ["5\"", "3+", "3+", "3", "3", "2", "3", "2", "4+", "7", "8", "7", "6"],
+      "stats": [
+        "5\"",
+        "3+",
+        "3+",
+        "3",
+        "3",
+        "2",
+        "3",
+        "2",
+        "4+",
+        "7",
+        "8",
+        "7",
+        "6"
+      ],
       "weapons": [
         {
           "name": "Subjugator grenade launcher (Infra-sight) — frag grenade",
@@ -52,7 +100,11 @@
           "str": "3",
           "ap": "-",
           "l": "1",
-          "traits": ["Ammo (4+)", "Blast (3\")", "Knockback (5+)"]
+          "traits": [
+            "Ammo (4+)",
+            "Blast (3\")",
+            "Knockback (5+)"
+          ]
         },
         {
           "name": "Subjugator grenade launcher (Infra-sight) — stun grenade",
@@ -61,7 +113,11 @@
           "str": "2",
           "ap": "-1",
           "l": "1",
-          "traits": ["Ammo (3+)", "Concussive (5+)", "Knockback (5+)"]
+          "traits": [
+            "Ammo (3+)",
+            "Concussive (5+)",
+            "Knockback (5+)"
+          ]
         },
         {
           "name": "Subjugator grenade launcher (Infra-sight) — choke gas grenades",
@@ -70,7 +126,12 @@
           "str": "-",
           "ap": "-",
           "l": "1",
-          "traits": ["Ammo (5+)", "Blast (3\")", "Gas", "Toxin (3+)"]
+          "traits": [
+            "Ammo (5+)",
+            "Blast (3\")",
+            "Gas",
+            "Toxin (3+)"
+          ]
         },
         {
           "name": "Vigilance pattern assault shield",
@@ -79,22 +140,51 @@
           "str": "S+1",
           "ap": "-",
           "l": "1",
-          "traits": ["Concussive (6+)", "Knockback (5+)", "Melee", "Parry", "Shield"]
+          "traits": [
+            "Concussive (6+)",
+            "Knockback (5+)",
+            "Melee",
+            "Parry",
+            "Shield"
+          ]
         }
       ],
-      "skills": ["Bull Charge", "Inspiring"],
-      "rules": ["Call for Backup"],
-      "wargear": ["Infra-sight"],
+      "skills": [
+        "Bull Charge",
+        "Inspiring"
+      ],
+      "rules": [
+        "Call for Backup"
+      ],
+      "wargear": [
+        "Infra-sight"
+      ],
       "status": null
     },
     {
       "id": 3,
       "name": "Sergeant Daniel \"Backbreaker\" Jones",
       "archetype": "Subjugator Sergeant",
-      "keywords": ["Champion"],
+      "keywords": [
+        "Champion"
+      ],
       "rating": 195,
       "xp": 37,
-      "stats": ["5\"", "3+", "4+", "3", "3", "2", "3", "2", "4+", "7", "8", "7", "6"],
+      "stats": [
+        "5\"",
+        "3+",
+        "4+",
+        "3",
+        "3",
+        "2",
+        "3",
+        "2",
+        "4+",
+        "7",
+        "8",
+        "7",
+        "6"
+      ],
       "weapons": [
         {
           "name": "Repulsion pattern chem-thrower",
@@ -103,7 +193,11 @@
           "str": "3",
           "ap": "-",
           "l": "2",
-          "traits": ["Ammo (6+)", "Gas", "Template"]
+          "traits": [
+            "Ammo (6+)",
+            "Gas",
+            "Template"
+          ]
         },
         {
           "name": "Stub gun",
@@ -112,22 +206,49 @@
           "str": "3",
           "ap": "-",
           "l": "1",
-          "traits": ["Light"]
+          "traits": [
+            "Light"
+          ]
         }
       ],
-      "skills": ["Fast Shot", "Inspiring"],
-      "rules": ["Call for Backup"],
-      "wargear": ["Respirator"],
+      "skills": [
+        "Fast Shot",
+        "Inspiring"
+      ],
+      "rules": [
+        "Call for Backup"
+      ],
+      "wargear": [
+        "Respirator"
+      ],
       "status": null
     },
     {
       "id": 4,
       "name": "Specialist Hazard",
       "archetype": "Patrol Officer",
-      "keywords": ["Ganger", "Specialist", "Sniper"],
+      "keywords": [
+        "Ganger",
+        "Specialist",
+        "Sniper"
+      ],
       "rating": 115,
       "xp": 13,
-      "stats": ["5\"", "4+", "4+", "3", "3", "1", "4", "1", "6+", "6", "6", "6", "6"],
+      "stats": [
+        "5\"",
+        "4+",
+        "4+",
+        "3",
+        "3",
+        "1",
+        "4",
+        "1",
+        "6+",
+        "6",
+        "6",
+        "6",
+        "6"
+      ],
       "weapons": [
         {
           "name": "Long rifle (Infra-sight)",
@@ -136,22 +257,47 @@
           "str": "4",
           "ap": "-1",
           "l": "1",
-          "traits": ["Knockback (6+)"]
+          "traits": [
+            "Knockback (6+)"
+          ]
         }
       ],
-      "skills": ["Precision Shot"],
+      "skills": [
+        "Precision Shot"
+      ],
       "rules": [],
-      "wargear": ["Drop rig", "Infra-sight"],
+      "wargear": [
+        "Drop rig",
+        "Infra-sight"
+      ],
       "status": null
     },
     {
       "id": 5,
       "name": "Cave Johnson",
       "archetype": "Subjugator Patrol Officer",
-      "keywords": ["Ganger", "Specialist", "Brawler"],
+      "keywords": [
+        "Ganger",
+        "Specialist",
+        "Brawler"
+      ],
       "rating": 105,
       "xp": 13,
-      "stats": ["5\"", "4+", "4+", "3", "3", "1", "4", "2", "5+", "6", "6", "6", "6"],
+      "stats": [
+        "5\"",
+        "4+",
+        "4+",
+        "3",
+        "3",
+        "1",
+        "4",
+        "2",
+        "5+",
+        "6",
+        "6",
+        "6",
+        "6"
+      ],
       "weapons": [
         {
           "name": "Stub gun",
@@ -160,7 +306,9 @@
           "str": "3",
           "ap": "-",
           "l": "1",
-          "traits": ["Light"]
+          "traits": [
+            "Light"
+          ]
         },
         {
           "name": "Vigilance pattern assault shield",
@@ -169,10 +317,18 @@
           "str": "S+1",
           "ap": "-",
           "l": "1",
-          "traits": ["Concussive (6+)", "Knockback (5+)", "Melee", "Parry", "Shield"]
+          "traits": [
+            "Concussive (6+)",
+            "Knockback (5+)",
+            "Melee",
+            "Parry",
+            "Shield"
+          ]
         }
       ],
-      "skills": ["Berserker"],
+      "skills": [
+        "Berserker"
+      ],
       "rules": [],
       "wargear": [],
       "status": null
@@ -181,10 +337,28 @@
       "id": 6,
       "name": "Specialist Ian",
       "archetype": "Patrol Officer",
-      "keywords": ["Ganger", "Specialist", "Gunner"],
+      "keywords": [
+        "Ganger",
+        "Specialist",
+        "Gunner"
+      ],
       "rating": 65,
       "xp": 13,
-      "stats": ["5\"", "4+", "4+", "3", "3", "1", "4", "1", "6+", "6", "6", "6", "6"],
+      "stats": [
+        "5\"",
+        "4+",
+        "4+",
+        "3",
+        "3",
+        "1",
+        "4",
+        "1",
+        "6+",
+        "6",
+        "6",
+        "6",
+        "6"
+      ],
       "weapons": [
         {
           "name": "Concussive carbine",
@@ -193,7 +367,11 @@
           "str": "3",
           "ap": "-",
           "l": "1",
-          "traits": ["Concussive (5+)", "Knockback (6+)", "Rapid Fire (1)"]
+          "traits": [
+            "Concussive (5+)",
+            "Knockback (6+)",
+            "Rapid Fire (1)"
+          ]
         },
         {
           "name": "Shock stave",
@@ -202,10 +380,15 @@
           "str": "S+1",
           "ap": "-",
           "l": "1",
-          "traits": ["Melee", "Shock (5+)"]
+          "traits": [
+            "Melee",
+            "Shock (5+)"
+          ]
         }
       ],
-      "skills": ["Fast Shot"],
+      "skills": [
+        "Fast Shot"
+      ],
       "rules": [],
       "wargear": [],
       "status": null
@@ -214,10 +397,28 @@
       "id": 7,
       "name": "Azazel the Unbroken",
       "archetype": "Haunt",
-      "keywords": ["Prospect", "Wyrd", "Psyrender"],
-      "rating": 55,
+      "keywords": [
+        "Prospect",
+        "Wyrd",
+        "Psyrender"
+      ],
+      "rating": 60,
       "xp": 4,
-      "stats": ["6\"", "5+", "4+", "3", "3", "1", "3", "1", "6+", "5", "5", "7", "5"],
+      "stats": [
+        "6\"",
+        "5+",
+        "4+",
+        "3",
+        "3",
+        "1",
+        "3",
+        "1",
+        "6+",
+        "5",
+        "5",
+        "8",
+        "5"
+      ],
       "weapons": [
         {
           "name": "Laspistol",
@@ -226,11 +427,18 @@
           "str": "3",
           "ap": "-",
           "l": "1",
-          "traits": ["Light"]
+          "traits": [
+            "Light"
+          ]
         }
       ],
-      "skills": ["Mind Control", "Terrify"],
-      "rules": ["Sanctioned Wyrd"],
+      "skills": [
+        "Mind Control",
+        "Terrify"
+      ],
+      "rules": [
+        "Sanctioned Wyrd"
+      ],
       "wargear": [],
       "status": null
     },
@@ -238,10 +446,26 @@
       "id": 8,
       "name": "Jamie Burton",
       "archetype": "Rookie",
-      "keywords": ["Prospect"],
-      "rating": 45,
+      "keywords": [
+        "Prospect"
+      ],
+      "rating": 55,
       "xp": 1,
-      "stats": ["6\"", "5+", "5+", "3", "3", "1", "4", "1", "6+", "5", "5", "5", "5"],
+      "stats": [
+        "6\"",
+        "5+",
+        "5+",
+        "3",
+        "3",
+        "1",
+        "4",
+        "1",
+        "6+",
+        "5",
+        "5",
+        "5",
+        "5"
+      ],
       "weapons": [
         {
           "name": "Concussive carbine",
@@ -250,10 +474,16 @@
           "str": "3",
           "ap": "-",
           "l": "1",
-          "traits": ["Concussive (5+)", "Knockback (6+)", "Rapid Fire (1)"]
+          "traits": [
+            "Concussive (5+)",
+            "Knockback (6+)",
+            "Rapid Fire (1)"
+          ]
         }
       ],
-      "skills": [],
+      "skills": [
+        "Marksman"
+      ],
       "rules": [],
       "wargear": [],
       "status": null
@@ -262,10 +492,26 @@
       "id": 9,
       "name": "daniel",
       "archetype": "Rookie",
-      "keywords": ["Prospect"],
+      "keywords": [
+        "Prospect"
+      ],
       "rating": 40,
       "xp": 1,
-      "stats": ["6\"", "5+", "5+", "3", "3", "1", "4", "1", "6+", "5", "5", "5", "5"],
+      "stats": [
+        "6\"",
+        "5+",
+        "5+",
+        "3",
+        "3",
+        "1",
+        "4",
+        "1",
+        "6+",
+        "5",
+        "5",
+        "5",
+        "5"
+      ],
       "weapons": [
         {
           "name": "Stub gun",
@@ -274,12 +520,16 @@
           "str": "3",
           "ap": "-",
           "l": "1",
-          "traits": ["Light"]
+          "traits": [
+            "Light"
+          ]
         }
       ],
       "skills": [],
       "rules": [],
-      "wargear": ["Photo-lumens"],
+      "wargear": [
+        "Photo-lumens"
+      ],
       "status": null
     }
   ]
