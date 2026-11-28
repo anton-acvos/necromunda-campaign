@@ -63,11 +63,15 @@
     return (state.data.gangs || []).filter(function (g) { return !g.hidden; });
   }
 
-  /* Reputation is what the Reach plays for, so it orders every list of
-     gangs on the site. Name breaks the tie, which keeps the order steady
-     between loads instead of leaving it to the data file. */
-  function byRep(a, b) {
-    return (repOf(b) - repOf(a)) ||
+  /* Gang rating is what the Reach is ranked on, so it orders every list
+     of gangs on the site: the credit value of everything a gang can put
+     on the table. Reputation breaks the tie, because a gang that has
+     done more with the same models is the better gang, and the name
+     breaks that, which keeps the order steady between loads instead of
+     leaving it to the data file. */
+  function byRating(a, b) {
+    return ((b.rating || 0) - (a.rating || 0)) ||
+           (repOf(b) - repOf(a)) ||
            (a.name || '').localeCompare(b.name || '');
   }
 
@@ -663,12 +667,12 @@
       }
     });
 
-    /* Reputation leads; ground held and rating break the tie before the
-       name does. */
+    /* Rating leads, then reputation; ground held breaks a tie between
+       two gangs the same size with the same standing. */
     var sorted = visibleGangs().slice().sort(function (a, b) {
-      return (repOf(b) - repOf(a)) ||
+      return ((b.rating || 0) - (a.rating || 0)) ||
+             (repOf(b) - repOf(a)) ||
              (counts[b.id] - counts[a.id]) ||
-             ((b.rating || 0) - (a.rating || 0)) ||
              (a.name || '').localeCompare(b.name || '');
     });
 
@@ -689,8 +693,8 @@
       td1.appendChild(cell);
       tr.appendChild(td1);
 
-      tr.appendChild(h('td', 'num', String(counts[g.id])));
       tr.appendChild(h('td', 'num', g.rating != null ? String(g.rating) : '—'));
+      tr.appendChild(h('td', 'num', String(counts[g.id])));
       tr.appendChild(h('td', 'num', String(repOf(g))));
       body.appendChild(tr);
     });
@@ -1085,7 +1089,7 @@
       r.gang = gang;
       return r;
     }).sort(function (x, y) {
-      return byRep(x.gang, y.gang) || (y.fights - x.fights) || (y.called - x.called);
+      return byRating(x.gang, y.gang) || (y.fights - x.fights) || (y.called - x.called);
     });
   }
 
@@ -2325,7 +2329,7 @@
 
     var grid = h('div', 'gang-grid');
     players.slice().sort(function (a, b) {
-      return byRep(a, b) || incomeOf(b) - incomeOf(a);
+      return byRating(a, b) || incomeOf(b) - incomeOf(a);
     }).forEach(function (g) { grid.appendChild(gangCard(g)); });
     host.appendChild(grid);
 

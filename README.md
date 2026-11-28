@@ -6,7 +6,9 @@ build step, no framework: a static page that reads one JSON file.
 - **Map** — territories drawn as regions sharing borders, coloured by holder
 - **Two sections** — the charted ring, and an uncharted deep nobody has surveyed
 - **Forty territories** — two starting and three unclaimed per player
-- **Standings** — territories held, gang rating, reputation
+- **Standings** — gang rating, territories held, reputation, ordered on the
+  rating: the credit value of every model a gang can field is what the Reach
+  ranks on, and reputation breaks a tie
 - **Campaign tab** — the phase plan, with past, current and coming cycles marked,
   the cycle's challenges and count, and the battle log
 - **Archeotech tab** — the pool an expedition can come back up with
